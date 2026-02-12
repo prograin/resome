@@ -355,7 +355,7 @@
               <i data-lucide="user" class="h-5 w-5 text-slate-700 dark:text-slate-100"></i>
             </div>
             <p class="text-sm font-semibold">Profile photo</p>
-            <p class="text-xs text-slate-600 dark:text-slate-300">Place image at<br/>./assets/profile.jpg</p>
+            <p class="text-xs text-slate-600 dark:text-slate-300">Place image at<br/>./assets/images/profile.jpg</p>
           </div>
         `;
         refreshIcons();
@@ -586,11 +586,20 @@
             project.id,
           )}"><i data-lucide="images" class="h-4 w-4"></i> View images</button>`,
         );
+      //FIXED
+      // if (hasVideo)
+      //   parts.push(
+      //     `<button class="${buttonSecondaryClass()}" type="button" data-action="watch-video" data-project-id="${escapeHtml(
+      //       project.id,
+      //     )}"><i data-lucide="play" class="h-4 w-4"></i> Watch video</button>`,
+      //   );
       if (hasVideo)
         parts.push(
-          `<button class="${buttonSecondaryClass()}" type="button" data-action="watch-video" data-project-id="${escapeHtml(
-            project.id,
-          )}"><i data-lucide="play" class="h-4 w-4"></i> Watch video</button>`,
+          `<button class="${buttonSecondaryClass()}" type="button"
+      data-action="watch-video"
+      data-video-url="${escapeHtml(videoUrl)}">
+      <i data-lucide="play" class="h-4 w-4"></i> Watch video
+    </button>`,
         );
 
       parts.push(
@@ -837,23 +846,7 @@
       /\.mp4(\?.*)?$/i.test(url) || url.startsWith("./") || url.startsWith("/");
 
     let body = "";
-    if (embed) {
-      body = `
-        <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-black dark:border-slate-800">
-          <div class="aspect-video">
-            <iframe
-              class="h-full w-full"
-              src="${escapeHtml(embed)}"
-              title="${escapeHtml(project.title)} video"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-      `;
-    } else if (isDirectMp4) {
-      body = `
+    body = `
         <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-black dark:border-slate-800">
           <video class="h-full w-full" controls>
             <source src="${escapeHtml(url)}" type="video/mp4" />
@@ -861,14 +854,38 @@
           </video>
         </div>
       `;
-    } else {
-      const safe = safeExternalLink(url);
-      body = safe
-        ? `<a class="${buttonSecondaryClass()}" href="${escapeHtml(
-            safe,
-          )}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link" class="h-4 w-4"></i> Open video</a>`
-        : "";
-    }
+    // if (embed) {
+    //   body = `
+    //     <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-black dark:border-slate-800">
+    //       <div class="aspect-video">
+    //         <iframe
+    //           class="h-full w-full"
+    //           src="${escapeHtml(embed)}"
+    //           title="${escapeHtml(project.title)} video"
+    //           frameborder="0"
+    //           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    //           allowfullscreen
+    //         ></iframe>
+    //       </div>
+    //     </div>
+    //   `;
+    // } else if (isDirectMp4) {
+    //   body = `
+    //     <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-black dark:border-slate-800">
+    //       <video class="h-full w-full" controls>
+    //         <source src="${escapeHtml(url)}" type="video/mp4" />
+    //         Your browser does not support the video tag.
+    //       </video>
+    //     </div>
+    //   `;
+    // } else {
+    //   const safe = safeExternalLink(url);
+    //   body = safe
+    //     ? `<a class="${buttonSecondaryClass()}" href="${escapeHtml(
+    //         safe,
+    //       )}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link" class="h-4 w-4"></i> Open video</a>`
+    //     : "";
+    // }
 
     openModal({ kicker: "Watch video", title: project.title, htmlBody: body });
   }
@@ -964,20 +981,49 @@
     // clear button
     $("#clearRoleBtn")?.addEventListener("click", () => setRole(null));
 
+    //FIXED
     // project actions
+    // $("#projectsGrid")?.addEventListener("click", (e) => {
+    //   const btn = e.target.closest("[data-action]");
+    //   if (!btn) return;
+
+    //   const action = btn.getAttribute("data-action");
+    //   const id = btn.getAttribute("data-project-id");
+    //   if (!action || !id) return;
+
+    //   const project = (DATA.projects || []).find((p) => p.id === id);
+    //   if (!project) return;
+
+    //   if (action === "open-details") openProjectDetails(project);
+    //   if (action === "watch-video") openProjectVideo(project);
+    //   if (action === "view-images") openProjectImages(project);
+    // });
     $("#projectsGrid")?.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-action]");
       if (!btn) return;
 
       const action = btn.getAttribute("data-action");
+      if (!action) return;
+
+      // ✅ Watch video: open external link, no modal
+      if (action === "watch-video") {
+        const rawUrl = btn.getAttribute("data-video-url");
+        const url = safeExternalLink(rawUrl) || rawUrl; // allow relative mp4 like ./videos/x.mp4
+        if (!url) return;
+
+        // open in new tab
+        window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
+
+      // other actions still use project id
       const id = btn.getAttribute("data-project-id");
-      if (!action || !id) return;
+      if (!id) return;
 
       const project = (DATA.projects || []).find((p) => p.id === id);
       if (!project) return;
 
       if (action === "open-details") openProjectDetails(project);
-      if (action === "watch-video") openProjectVideo(project);
       if (action === "view-images") openProjectImages(project);
     });
   }

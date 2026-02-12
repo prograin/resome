@@ -211,7 +211,7 @@ window.PORTFOLIO_DATA = {
       id: "oildb",
       title: "Oil-DB",
       shortDescription:
-        "Nuxt full-stack app with Cloudflare D1, authentication, and Tailwind-based UI.",
+        "A private full-stack Nuxt app deployed on Cloudflare, built around a D1 (SQLite) database with evolving migrations and a modular Vue/Tailwind UI.",
       roles: [
         "Data Engineering & Analytics",
         "Backend",
@@ -220,26 +220,35 @@ window.PORTFOLIO_DATA = {
       ],
       tags: [
         "Nuxt.js",
+        "Vue",
         "Cloudflare",
         "Cloudflare D1",
+        "SQLite",
+        "Database Migrations",
         "Authentication",
         "Tailwind CSS",
+        "Composables",
+        "Full-Stack",
       ],
       highlights: [
-        "Nuxt full-stack development",
-        "Cloudflare D1 database usage",
-        "Authentication & session handling",
-        "Cloudflare deployment",
+        "Private, client-commissioned full-stack application (not publicly released)",
+        "Built on Cloudflare infrastructure with Cloudflare D1 (SQLite) as the primary database",
+        "Implemented multiple database migrations to evolve schema safely over time",
+        "Nuxt + Vue UI with Tailwind CSS for a clean, responsive user experience",
+        "Modular architecture using reusable components and composables",
+        "Handled non-trivial relational modeling and data consistency challenges",
       ],
       details: [
-        "Built end-to-end flows from persistence to UI with a focus on developer ergonomics.",
+        "Oil-DB is a private, client-commissioned full-stack application designed for a specific group of users and not intended for public release.",
+        "I used Cloudflare for deployment and infrastructure, with Cloudflare D1 as the database layer (built on SQLite).",
+        "A key part of the work was designing the database schema and implementing multiple migrations to safely evolve tables, relationships, and constraints as requirements changed.",
+        "The UI was built with Nuxt and Vue, styled with Tailwind CSS, focusing on clarity, responsiveness, and maintainability.",
+        "On the engineering side, the project follows a modular structure: composables encapsulate reusable business logic while components keep the interface clean and scalable.",
+        "The main technical challenges centered around relational data modeling and ensuring data integrity across entities—solved through careful schema design, iterative migrations, and robust full-stack integration in Nuxt.",
       ],
-      links: {
-        github: "https://github.com/prograin/oil-trade",
-        liveDemo: null,
-      },
-      media: { videoUrl: "./assets/videos/oildb.mp4", images: [] },
-      isPrivate: false,
+      links: { github: null, liveDemo: null },
+      media: { videoUrl: "", images: [] },
+      isPrivate: true,
     },
 
     // -------------------
@@ -389,7 +398,11 @@ window.PORTFOLIO_DATA = {
         "Ensured scalability, reliability, and secure interaction with Telegram and backend services.",
       ],
       links: { github: null, liveDemo: null },
-      media: { videoUrl: "./assets/videos/Report_bot.mp4", images: [] },
+      media: {
+        videoUrl:
+          "https://drive.google.com/file/d/1nUgbwAzzEU3B5acAwckE_pqG8-rjVuNP/view?usp=drive_link",
+        images: [],
+      },
       isPrivate: false,
     },
     // -------------------
@@ -400,10 +413,28 @@ window.PORTFOLIO_DATA = {
         "Confidential desktop document system with XML/HTML storage and hierarchical tree visualization.",
       roles: ["Data Engineering & Analytics", "Desktop Applications"],
       tags: ["PyQt", "Qt Creator", "XML", "HTML", "Desktop UI"],
-      highlights: ["Document model", "XML/HTML storage", "Tree visualization"],
-      details: ["Private / NDA project. Details available upon request."],
+      highlights: [
+        "Rich text editing + autosave",
+        "XML/HTML document storage",
+        "Hierarchical folder/tree management",
+        "Header indexing & quick in-document navigation",
+        "Desktop UI built with PyQt/Qt Creator",
+      ],
+      details: [
+        "vDoc is a private/NDA desktop application built to manage and organize documents with a structured, scalable approach.",
+        "It includes a full text management layer: creating, editing, and maintaining documents with an autosave workflow to prevent data loss and keep edits continuously synced.",
+        "Documents are stored using XML/HTML formats to preserve structure and enable reliable persistence, searchability, and future extensibility.",
+        "The app provides hierarchical (tree-based) folder management, making it easy to categorize large collections of files and navigate them like a lightweight knowledge base.",
+        "For long documents, vDoc supports header indexing and smooth navigation—users can jump between sections quickly and move through content with minimal friction.",
+        "Built with PyQt and Qt Creator, the UI focuses on speed, clarity, and an editor-first workflow designed for daily, intensive usage.",
+        "Private / NDA project. Additional technical details can be shared upon request.",
+      ],
       links: { github: null, liveDemo: null },
-      media: { videoUrl: "./assets/videos/vDoc.mp4", images: [] }, // ✅ video added
+      media: {
+        videoUrl:
+          "https://drive.google.com/file/d/1ogetJtmWDpi-1iOFq9u6PaLGCmRzEHjb/view?usp=sharing",
+        images: [],
+      }, // ✅ video added
       isPrivate: false,
     },
     // -------------------
@@ -411,7 +442,7 @@ window.PORTFOLIO_DATA = {
       id: "bmc",
       title: "BMC",
       shortDescription:
-        "Confidential Excel-like system with formula parsing, persistence, and tab-based data management.",
+        "A confidential Excel-like desktop system focused on structured persistence, database-backed workbooks, and a formula engine for dynamic, editable tables.",
       roles: ["Data Engineering & Analytics"],
       tags: [
         "XML",
@@ -419,15 +450,29 @@ window.PORTFOLIO_DATA = {
         "Formula Parsing",
         "Data Modeling",
         "Desktop UI",
+        "File I/O",
       ],
       highlights: [
-        "Formula engine",
-        "Persistence",
-        "Tab-based data management",
+        "Excel-like workbook management with save/load",
+        "Database-backed (.db) file persistence",
+        "Formula engine (parse, evaluate, display)",
+        "Editable tables with sheet (tab) add/remove",
+        "Text and cell editing with structured data modeling",
       ],
-      details: ["Private / NDA project."],
+      details: [
+        "BMC is a private/NDA Excel-like desktop application designed for managing structured tabular data with reliable persistence and a smooth editing experience.",
+        "It supports saving and loading workbook files in a database-backed (.db) format—enabling consistent storage, fast reloads, and scalable data organization.",
+        "Users can create and manage multiple sheets (tabs), add/remove sheets as needed, and work with editable tables that behave similarly to spreadsheets.",
+        "A built-in formula engine allows users to write formulas, parse and evaluate expressions, and display computed results while keeping the original formulas accessible and editable.",
+        "The system includes full table editing capabilities—editing cell text, updating values, and maintaining structured data integrity across sheets and persisted files.",
+        "Private / NDA project. Additional implementation details can be shared upon request.",
+      ],
       links: { github: null, liveDemo: null },
-      media: { videoUrl: "./assets/videos/BMC.mp4", images: [] }, // ✅ video added
+      media: {
+        videoUrl:
+          "https://drive.google.com/file/d/1lakH1BSma0JWRzMAMTDgBFkS1u2JA3Kf/view?usp=drive_link",
+        images: [],
+      },
       isPrivate: false,
     },
     // -------------------
@@ -435,22 +480,41 @@ window.PORTFOLIO_DATA = {
       id: "mgv",
       title: "Matrix Graphical Visualization (MGV)",
       shortDescription:
-        "Python + Qt desktop app for interactive matrix visualization with embedded code editing.",
+        "PyQt6 desktop app for interactive matrix visualization, formula-driven tables, and Python-powered animations with an embedded code editor.",
       roles: ["Desktop Applications"],
-      tags: ["PyQt", "Qt Creator", "Python", "Desktop UI", "Linear Algebra"],
+      tags: [
+        "PyQt6",
+        "Qt Creator",
+        "Python",
+        "Desktop UI",
+        "Linear Algebra",
+        "2D Graphics",
+        "Formula Parsing",
+      ],
       highlights: [
-        "Interactive matrix visualization",
-        "Embedded Python code editor",
-        "Educational simulation tooling",
+        "2D Graphics View (row-space / column-space visualization)",
+        "Customizable color management for matrix items",
+        "Table-based matrix editing with formula support",
+        "Matrix-to-graphics conversion (values → 2D items)",
+        "Embedded Python editor with improved autocompletion + syntax highlighting",
+        "Python-driven animation of matrix visualizations (2D + colorized)",
       ],
       details: [
-        "Designed a responsive UI and clear workflows for exploring matrix operations.",
+        "MGV (Matrix Graphical Visualization) is a PyQt6-based desktop application built to make matrix exploration more visual, interactive, and programmable.",
+        "It introduces a dedicated 2D Graphics View that can visualize matrices in row space or column space, with flexible color controls to improve readability and separation of elements.",
+        "The Table View supports end-to-end matrix value management: editing values, converting table data into 2D graphical items, and writing formulas directly in cells for faster manipulation and experimentation.",
+        "MGV includes an advanced embedded Python editor with stronger autocompletion and a syntax highlighter, enabling users to write clean scripts to control behavior and workflows inside the app.",
+        "A key capability is animation: users can generate animated matrix visualizations using Python code—both as 2D graphics sequences and colorized transitions—making it useful for demos, teaching, and simulation-style exploration.",
       ],
       links: {
         github: "https://github.com/prograin/Matrix_repre_py",
         liveDemo: null,
       },
-      media: { videoUrl: "./assets/videos/MGV.mkv", images: [] },
+      media: {
+        videoUrl:
+          "https://drive.google.com/file/d/1Zkx_dxIfF9TCKFLTbI0GZcuxtdLTlwxh/view?usp=drive_link",
+        images: [],
+      },
       isPrivate: false,
     },
     // -------------------
@@ -458,24 +522,33 @@ window.PORTFOLIO_DATA = {
       id: "steel-defect-detection",
       title: "Steel Defect Detection",
       shortDescription:
-        "Industrial computer vision: fine-tuned deep learning models for defect detection and classification.",
+        "Industrial computer vision system for defect detection and localization using TensorFlow + EfficientNetB0, mask-driven training, and a custom loss for bbox/confidence/classification.",
       roles: ["Machine Learning"],
       tags: [
-        "PyTorch",
         "TensorFlow",
-        "CNN",
+        "EfficientNetB0",
+        "Computer Vision",
+        "Object Detection",
         "Image Processing",
+        "Albumentations",
         "Data Augmentation",
         "Custom Loss",
+        "CNN",
       ],
       highlights: [
-        "Fine-tuning pretrained backbones",
-        "Custom CNN architectures",
-        "Custom loss function design",
-        "Augmentation + evaluation",
+        "Defect detection + localization in industrial images",
+        "EfficientNetB0 backbone with custom conv/dense heads",
+        "Grid-based output (7×7) for location-aware predictions",
+        "Custom loss for bounding boxes, confidence, and classification",
+        "Mask-based dataset preprocessing + strong augmentations (Albumentations)",
+        "Trained for 100 epochs and evaluated on diverse test images",
       ],
       details: [
-        "Compared multiple candidates and training strategies under industrial constraints.",
+        "This project focuses on automated defect detection in industrial steel manufacturing, aiming to improve quality control by accurately detecting and localizing defects in images.",
+        "I used a public dataset containing defect masks and built a preprocessing pipeline to prepare training targets and improve robustness. Data diversity was increased using Albumentations-based augmentations to help the model generalize to real-world variations.",
+        "The model is built with TensorFlow and uses EfficientNetB0 as the feature extractor, followed by a custom head. Outputs are produced as a 7×7 grid to enable location-aware predictions and more precise defect localization.",
+        "To optimize detection quality, I implemented a custom loss function that jointly learns bounding box regression, confidence estimation, and defect classification—improving convergence and feature learning under challenging defect patterns.",
+        "The network was trained for 100 epochs and tested across multiple scenarios. The results demonstrate reliable defect detection and localization, with example outputs provided in the project media and repository.",
       ],
       links: {
         github: "https://github.com/prograin/Steel-defect-detection",
@@ -490,6 +563,7 @@ window.PORTFOLIO_DATA = {
       },
       isPrivate: false,
     },
+
     // -------------------
     {
       id: "flooded-area-segmentation",
@@ -520,7 +594,7 @@ window.PORTFOLIO_DATA = {
         "Project code and further details are available on GitHub for reference and replication.",
       ],
       links: {
-        github: "https://github.com/your-repo-link", // replace with actual link if desired
+        github: "https://lnkd.in/du2Xe3jV", // replace with actual link if desired
         liveDemo: null,
       },
       media: {
@@ -566,9 +640,9 @@ window.PORTFOLIO_DATA = {
       media: {
         videoUrl: null,
         images: [
-          "rect_predict_3.png",
-          "rect_predict_2.png",
-          "rect_predict_1.png",
+          "./assets/images/rect_predict_3.png",
+          "./assets/images/rect_predict_2.png",
+          "./assets/images/rect_predict_1.png",
         ],
       },
       isPrivate: false,
@@ -607,7 +681,8 @@ window.PORTFOLIO_DATA = {
         liveDemo: null,
       },
       media: {
-        videoUrl: "./assets/video/Mnist_Predict.mp4",
+        videoUrl:
+          "https://drive.google.com/file/d/1LdBkhb8vczB2nLgRt6KQdUpeZrnfd-Xt/view?usp=sharing",
         images: [],
       },
       isPrivate: false,
@@ -644,7 +719,8 @@ window.PORTFOLIO_DATA = {
         liveDemo: null,
       },
       media: {
-        videoUrl: "./assets/videos/IMDB-sentiment.mp4",
+        videoUrl:
+          "https://drive.google.com/file/d/1XS8i8TK-3Nb9ZLL_JLHv2IA9Pgy9U3FD/view?usp=drive_link",
         images: [],
       },
       isPrivate: false,

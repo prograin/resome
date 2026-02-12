@@ -1,5 +1,5 @@
 <!-- index.html (UPDATED) -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -26,6 +26,7 @@
     </script>
 
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="./assets/icons/favicon.ico" />
   </head>
 
   <body class="min-h-screen text-slate-900 dark:text-slate-50">
@@ -54,8 +55,13 @@
     <header
       class="sticky top-0 z-50 border-b border-slate-200/60 bg-white/65 backdrop-blur-xl dark:border-slate-800/60 dark:bg-slate-950/55"
     >
-      <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <a href="#home" class="flex items-center gap-2 font-semibold tracking-tight">
+      <nav
+        class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3"
+      >
+        <a
+          href="#home"
+          class="flex items-center gap-2 font-semibold tracking-tight"
+        >
           <span
             class="hidden h-9 w-9 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-sm dark:bg-slate-100 dark:text-slate-900"
             >AR</span
@@ -63,14 +69,32 @@
           <span id="navName" class="sm:block">Portfolio</span>
         </a>
 
-        <div class="hidden items-center gap-5 text-sm text-slate-600 dark:text-slate-300 md:flex">
+        <div
+          class="hidden items-center gap-5 text-sm text-slate-600 dark:text-slate-300 md:flex"
+        >
           <!-- <a class="hover:text-slate-900 dark:hover:text-white" href="#about">About</a> -->
-          <a class="hover:text-slate-900 dark:hover:text-white" href="#filters">Roles</a>
-          <a class="hover:text-slate-900 dark:hover:text-white" href="#skills">Skills</a>
-          <a class="hover:text-slate-900 dark:hover:text-white" href="#projects">Projects</a>
-          <a class="hover:text-slate-900 dark:hover:text-white" href="#experience">Experience</a>
-          <a class="hover:text-slate-900 dark:hover:text-white" href="#education">Education</a>
-          <a class="hover:text-slate-900 dark:hover:text-white" href="#contact">Contact</a>
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#filters"
+            >Roles</a
+          >
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#skills"
+            >Skills</a
+          >
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#projects"
+            >Projects</a
+          >
+          <a
+            class="hover:text-slate-900 dark:hover:text-white"
+            href="#experience"
+            >Experience</a
+          >
+          <a
+            class="hover:text-slate-900 dark:hover:text-white"
+            href="#education"
+            >Education</a
+          >
+          <a class="hover:text-slate-900 dark:hover:text-white" href="#contact"
+            >Contact</a
+          >
         </div>
 
         <div class="flex items-center gap-2">
@@ -100,14 +124,44 @@
         id="mobileMenu"
         class="hidden border-t border-slate-200 bg-white/80 px-4 py-3 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/70 md:hidden"
       >
-        <div class="grid grid-cols-2 gap-2 text-sm text-slate-700 dark:text-slate-200">
-          <a class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#about">About</a>
-          <a class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#filters">Roles</a>
-          <a class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#skills">Skills</a>
-          <a class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#projects">Projects</a>
-          <a class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#experience">Experience</a>
-          <a class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#education">Education</a>
-          <a class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#contact">Contact</a>
+        <div
+          class="grid grid-cols-2 gap-2 text-sm text-slate-700 dark:text-slate-200"
+        >
+          <a
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="#about"
+            >About</a
+          >
+          <a
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="#filters"
+            >Roles</a
+          >
+          <a
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="#skills"
+            >Skills</a
+          >
+          <a
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="#projects"
+            >Projects</a
+          >
+          <a
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="#experience"
+            >Experience</a
+          >
+          <a
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="#education"
+            >Education</a
+          >
+          <a
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="#contact"
+            >Contact</a
+          >
         </div>
       </div>
     </header>
@@ -126,13 +180,15 @@
               >
                 <img
                   id="profileImg"
-                  src="./assets/profile.jpg"
+                  src="./assets/images/profile.jpg"
                   alt="Profile picture"
                   class="h-full w-full object-cover"
                 />
               </div>
 
-              <div class="mt-4 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+              <div
+                class="mt-4 space-y-2 text-sm text-slate-700 dark:text-slate-200"
+              >
                 <div class="flex items-center gap-2">
                   <i data-lucide="map-pin" class="h-4 w-4 text-slate-500"></i>
                   <span id="heroLocation"></span>
@@ -147,16 +203,32 @@
                 </div> -->
                 <div class="flex items-center gap-2">
                   <i data-lucide="mail" class="h-4 w-4 text-slate-500"></i>
-                  <a id="heroEmail" class="underline underline-offset-4 hover:no-underline" href="#"></a>
+                  <a
+                    id="heroEmail"
+                    class="underline underline-offset-4 hover:no-underline"
+                    href="#"
+                  ></a>
                 </div>
               </div>
             </div>
           </div>
           <div>
-            <p id="heroKicker" class="text-sm font-semibold text-slate-600 dark:text-slate-300"></p>
-            <h1 id="heroName" class="mt-2 text-3xl font-semibold tracking-tight sm:text-5xl"></h1>
-            <p id="heroTitle" class="mt-3 text-base font-medium text-slate-700 dark:text-slate-200 sm:text-lg"></p>
-            <p id="heroSummary" class="mt-4 max-w-2xl text-slate-600 dark:text-slate-300"></p>
+            <p
+              id="heroKicker"
+              class="text-sm font-semibold text-slate-600 dark:text-slate-300"
+            ></p>
+            <h1
+              id="heroName"
+              class="mt-2 text-3xl font-semibold tracking-tight sm:text-5xl"
+            ></h1>
+            <p
+              id="heroTitle"
+              class="mt-3 text-base font-medium text-slate-700 dark:text-slate-200 sm:text-lg"
+            ></p>
+            <p
+              id="heroSummary"
+              class="mt-4 max-w-2xl text-slate-600 dark:text-slate-300"
+            ></p>
             <!-- 
             <div class="mt-6 flex flex-wrap gap-3">
               <a
@@ -177,7 +249,10 @@
               </a>
             </div> -->
 
-            <div id="heroLinks" class="mt-6 flex flex-wrap items-center justify-start gap-3"></div>
+            <div
+              id="heroLinks"
+              class="mt-6 flex flex-wrap items-center justify-start gap-3"
+            ></div>
           </div>
         </div>
       </section>
@@ -204,7 +279,9 @@
         <div
           class="rounded-5xl border border-slate-200 bg-white/75 p-6 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 sm:p-8"
         >
-          <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div
+            class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+          >
             <div>
               <div class="flex items-center gap-3">
                 <div
@@ -214,7 +291,10 @@
                 </div>
                 <div>
                   <h2 class="text-xl font-semibold tracking-tight">Roles</h2>
-                  <p id="rolesHint" class="mt-1 text-sm text-slate-600 dark:text-slate-300"></p>
+                  <p
+                    id="rolesHint"
+                    class="mt-1 text-sm text-slate-600 dark:text-slate-300"
+                  ></p>
                 </div>
               </div>
 
@@ -245,7 +325,10 @@
           <h2 class="text-xl font-semibold tracking-tight">Skills</h2>
         </div>
 
-        <div id="skillsGrid" class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+        <div
+          id="skillsGrid"
+          class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        ></div>
       </section>
 
       <!-- Projects -->
@@ -261,14 +344,19 @@
 
         <div id="activeRolePill" class="mt-4 hidden"></div>
 
-        <div id="projectsGrid" class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+        <div
+          id="projectsGrid"
+          class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        ></div>
 
         <div
           id="projectsEmptyState"
           class="mt-6 hidden rounded-5xl border border-slate-200 bg-white/75 p-8 text-center text-slate-700 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 dark:text-slate-200"
         >
           <p class="text-base font-semibold">No projects match this role.</p>
-          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Clear the selection to view all projects.</p>
+          <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
+            Clear the selection to view all projects.
+          </p>
         </div>
       </section>
 
@@ -314,7 +402,10 @@
             <h2 class="text-xl font-semibold tracking-tight">Contact</h2>
           </div>
 
-          <p id="contactHint" class="mt-2 text-sm text-slate-600 dark:text-slate-300"></p>
+          <p
+            id="contactHint"
+            class="mt-2 text-sm text-slate-600 dark:text-slate-300"
+          ></p>
 
           <div id="contactLinks" class="mt-6 flex flex-wrap gap-3"></div>
         </div>
@@ -334,13 +425,18 @@
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <div class="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-800">
+        <div
+          class="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-800"
+        >
           <div class="min-w-0">
             <p
               id="modalKicker"
               class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
             ></p>
-            <h3 id="modalTitle" class="truncate text-base font-semibold text-slate-900 dark:text-slate-50"></h3>
+            <h3
+              id="modalTitle"
+              class="truncate text-base font-semibold text-slate-900 dark:text-slate-50"
+            ></h3>
           </div>
           <button
             id="modalCloseBtn"
