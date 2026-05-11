@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./output.css" />
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -182,7 +182,7 @@
         <div class="grid items-center gap-10 lg:grid-cols-[.65fr_1.35fr]">
           <div class="flex justify-center lg:justify-start">
             <div
-              class="w-full max-w-xs rounded-5xl border border-slate-200 bg-white/75 p-4 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55"
+              class="w-full max-w-xs rounded-xl border border-slate-200 bg-white/75 p-4 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55"
             >
               <div
                 id="profileFrame"
@@ -203,9 +203,14 @@
                   <i data-lucide="map-pin" class="h-4 w-4 text-slate-500"></i>
                   <span id="heroLocation"></span>
                 </div>
+
                 <div class="flex items-center gap-2">
                   <i data-lucide="briefcase" class="h-4 w-4 text-slate-500"></i>
                   <span id="heroWorkModes"></span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i data-lucide="phone" class="h-4 w-4 text-slate-500"></i>
+                  <span id="heroNumber"></span>
                 </div>
                 <!-- <div class="flex items-center gap-2">
                   <i data-lucide="clock" class="h-4 w-4 text-slate-500"></i>
@@ -287,7 +292,7 @@
       <!-- Roles / Stacks (SIMPLIFIED: Quick filter + clear only) -->
       <section id="filters" class="py-10">
         <div
-          class="rounded-5xl border border-slate-200 bg-white/75 p-6 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 sm:p-8"
+          class="rounded-xl border border-slate-200 bg-white/75 p-6 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 sm:p-8"
         >
           <div
             class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"

@@ -1,2 +1,6 @@
 src/assets/videos
 .backup
+package.json
+package-lock.json
+input.css
+node_modules

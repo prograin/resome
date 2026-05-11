@@ -303,6 +303,7 @@
     $("#heroTitle").textContent = DATA.personal.title || "";
     $("#heroSummary").textContent = DATA.personal.about || "";
 
+    $("#heroNumber").textContent = DATA.personal.number || "";
     $("#heroLocation").textContent = DATA.personal.location || "";
 
     const emailEl = $("#heroEmail");
@@ -501,6 +502,7 @@
 
     const github = !isPrivate ? safeExternalLink(project.links?.github) : null;
     const live = !isPrivate ? safeExternalLink(project.links?.liveDemo) : null;
+    const url = safeExternalLink(project.links?.url);
 
     const videoUrl = project.media?.videoUrl || null;
     const hasVideo = !!videoUrl;
@@ -554,6 +556,11 @@
             `<a class="${buttonSecondaryClass()}" href="${escapeHtml(live)}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link" class="h-4 w-4"></i> ${escapeHtml(btns.liveDemo || "Live demo")}</a>`,
           );
       }
+
+      if (url)
+        parts.push(
+          `<a class="${buttonSecondaryClass()}" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link" class="h-4 w-4"></i> ${escapeHtml(btns.url || "URL")}</a>`,
+        );
 
       if (hasImages)
         parts.push(
