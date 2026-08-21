@@ -42,6 +42,20 @@
     }
   }
 
+  function iconMarkup(name, className = "h-4 w-4") {
+    const svgClass = escapeHtml(className);
+
+    if (name === "github") {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="${svgClass}"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.426 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.866-.013-1.699-2.782.605-3.369-1.343-3.369-1.343-.455-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.004.071 1.532 1.033 1.532 1.033.892 1.53 2.341 1.088 2.91.832.091-.647.349-1.088.635-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>`;
+    }
+
+    if (name === "linkedin") {
+      return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="${svgClass}"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.5 9.75h2.88V19H5.5V9.75Zm4.69 0h2.76v1.26h.04c.38-.73 1.32-1.5 2.71-1.5 2.9 0 3.43 1.9 3.43 4.38V19h-2.88v-4.53c0-1.08-.02-2.47-1.5-2.47-1.51 0-1.74 1.18-1.74 2.39V19H10.2V9.75Z"/></svg>`;
+    }
+
+    return `<i data-lucide="${escapeHtml(name)}" class="${svgClass}"></i>`;
+  }
+
   // -----------------------------
   // Theme
   // -----------------------------
@@ -60,7 +74,7 @@
     else root.classList.remove("dark");
     localStorage.setItem(THEME_KEY, theme);
 
-    const icon = $("#themeToggle i");
+    const icon = $("#themeToggle [data-lucide]");
     if (icon)
       icon.setAttribute("data-lucide", theme === "dark" ? "sun" : "moon");
     refreshIcons();
@@ -106,24 +120,24 @@
   // UI helpers
   // -----------------------------
   function badgeClass() {
-    return "inline-flex items-center rounded-full border border-slate-200 bg-white/70 px-2 py-1 text-xs font-semibold text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200";
+    return "inline-flex items-center rounded-md border border-cyan-200/70 bg-cyan-50/80 px-2 py-1 text-xs font-semibold text-cyan-950 dark:border-cyan-800/60 dark:bg-cyan-950/35 dark:text-cyan-100";
   }
   function cardClass() {
-    return "rounded-[2.5rem] border border-slate-200 bg-white/75 p-5 shadow-soft transition hover:-translate-y-0.5 hover:shadow-md backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55";
+    return "rounded-lg border border-slate-200/80 bg-white/90 p-5 shadow-softer transition hover:-translate-y-0.5 hover:border-cyan-200 hover:shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/70 dark:hover:border-cyan-800";
   }
   function buttonPrimaryClass() {
-    return "inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white";
+    return "inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-800 dark:bg-cyan-400 dark:text-slate-950 dark:hover:bg-cyan-300";
   }
   function buttonSecondaryClass() {
-    return "inline-flex items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white/70 px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:bg-white dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-100 dark:hover:bg-slate-900/70";
+    return "inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white/85 px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:border-rose-200 hover:bg-rose-50 dark:border-slate-800 dark:bg-slate-950/45 dark:text-slate-100 dark:hover:border-rose-800 dark:hover:bg-rose-950/30";
   }
 
   function chipClass(active) {
     return [
-      "inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold transition shadow-sm",
+      "group inline-flex min-h-[58px] items-center gap-3 rounded-lg border px-3 py-2 text-start text-sm font-semibold transition shadow-sm",
       active
-        ? "border-slate-900 bg-slate-900 text-white dark:border-slate-100 dark:bg-slate-100 dark:text-slate-900"
-        : "border-slate-200 bg-white/70 text-slate-800 hover:bg-white dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-100 dark:hover:bg-slate-900/70",
+        ? "border-cyan-700 bg-cyan-700 text-white dark:border-cyan-300 dark:bg-cyan-300 dark:text-slate-950"
+        : "border-slate-200 bg-white/85 text-slate-800 hover:border-cyan-200 hover:bg-cyan-50/70 dark:border-slate-800 dark:bg-slate-950/45 dark:text-slate-100 dark:hover:border-cyan-800 dark:hover:bg-cyan-950/25",
     ].join(" ");
   }
 
@@ -132,6 +146,68 @@
     const d = getData();
     const r = (d.roles || []).find((x) => x.key === key);
     return r?.name || key;
+  }
+
+  function getProjectFilters() {
+    const d = getData();
+    const configured = d.ui?.projectFilters;
+    if (Array.isArray(configured) && configured.length) return configured;
+
+    return [
+      {
+        key: "all",
+        name: state.locale === "fa" ? "همه" : "All work",
+        hint: state.locale === "fa" ? "تمام نمونه‌کارها" : "Everything",
+        icon: "layout-grid",
+        roles: null,
+      },
+      ...(d.roles || []).map((role) => ({
+        key: role.key,
+        name: role.name,
+        hint: role.blurb || "",
+        icon: role.icon || "circle",
+        roles: [role.key],
+      })),
+    ];
+  }
+
+  function filterByKey(key) {
+    return getProjectFilters().find((filter) => filter.key === key) || null;
+  }
+
+  function selectedFilterRoles() {
+    if (!state.selectedRole) return null;
+    const roles = filterByKey(state.selectedRole)?.roles;
+    return Array.isArray(roles) && roles.length ? roles : null;
+  }
+
+  function filterNameByKey(key) {
+    return filterByKey(key)?.name || roleNameByKey(key);
+  }
+
+  function projectMatchesRoles(project, roles) {
+    if (!roles || !roles.length) return true;
+    return (project.roles || []).some((role) => roles.includes(role));
+  }
+
+  function projectMatchesFilter(project, filter) {
+    if (!filter || filter.key === "all") return true;
+    if (Array.isArray(filter.projectIds) && filter.projectIds.length) {
+      return filter.projectIds.includes(project.id);
+    }
+    return projectMatchesRoles(project, filter.roles);
+  }
+
+  function orderProjectsForFilter(projects, filter) {
+    if (!filter || !Array.isArray(filter.projectIds) || !filter.projectIds.length) {
+      return projects;
+    }
+    const order = new Map(filter.projectIds.map((id, index) => [id, index]));
+    return [...projects].sort(
+      (a, b) =>
+        (order.get(a.id) ?? Number.MAX_SAFE_INTEGER) -
+        (order.get(b.id) ?? Number.MAX_SAFE_INTEGER),
+    );
   }
 
   // -----------------------------
@@ -219,15 +295,26 @@
     const safeHref = url || "#";
     const disabled = safeHref === "#";
 
+    const activeByIcon = {
+      github:
+        "border-slate-300 bg-slate-950 text-white hover:bg-slate-800 dark:border-slate-700 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200",
+      linkedin:
+        "border-sky-200 bg-sky-600 text-white hover:bg-sky-700 dark:border-sky-800 dark:bg-sky-400 dark:text-slate-950 dark:hover:bg-sky-300",
+      youtube:
+        "border-red-200 bg-red-600 text-white hover:bg-red-700 dark:border-red-900 dark:bg-red-500 dark:text-white dark:hover:bg-red-400",
+      mail: "border-cyan-200 bg-white/95 text-cyan-900 hover:bg-cyan-50 dark:border-cyan-800 dark:bg-slate-950/60 dark:text-cyan-100 dark:hover:bg-cyan-950/40",
+    };
+
     const cls = disabled
       ? "border-slate-200 bg-slate-100 text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400"
-      : "border-slate-200 bg-white/70 text-slate-800 hover:bg-white dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-100 dark:hover:bg-slate-900/70";
+      : activeByIcon[icon] ||
+        "border-slate-200 bg-white/90 text-slate-800 hover:bg-white dark:border-slate-800 dark:bg-slate-950/50 dark:text-slate-100 dark:hover:bg-slate-900/70";
 
-    return `<a class="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold shadow-sm transition ${cls}"
+    return `<a class="inline-flex min-h-11 items-center gap-2.5 rounded-lg border px-4 py-2.5 text-sm font-semibold shadow-softer transition hover:-translate-y-0.5 ${cls}"
       href="${escapeHtml(safeHref)}"
       ${safeHref.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}
       aria-label="${escapeHtml(label)}">
-      <i data-lucide="${escapeHtml(icon)}" class="h-4 w-4"></i>
+      ${iconMarkup(icon, "h-5 w-5 shrink-0")}
       <span>${escapeHtml(label)}</span>
     </a>`;
   }
@@ -239,15 +326,15 @@
     const safeHref = url || "#";
 
     return `<a href="${escapeHtml(safeHref)}"
-      class="group flex min-w-[220px] flex-1 items-start gap-3 rounded-[2rem] border border-slate-200 bg-white/75 p-4 shadow-softer backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white dark:border-slate-800 dark:bg-slate-950/35 dark:hover:bg-slate-900/65"
+      class="group flex min-w-[220px] flex-1 items-start gap-3 rounded-lg border border-slate-200 bg-white/90 p-4 shadow-softer backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-cyan-200 hover:bg-cyan-50/60 dark:border-slate-800 dark:bg-slate-950/45 dark:hover:border-cyan-800 dark:hover:bg-cyan-950/25"
       ${safeHref.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}
       aria-label="${escapeHtml(title)}"
     >
-      <div class="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50">
-        <i data-lucide="${escapeHtml(icon)}" class="h-5 w-5"></i>
+      <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200">
+        ${iconMarkup(icon, "h-6 w-6")}
       </div>
       <div class="min-w-0">
-        <p class="text-sm font-semibold">${escapeHtml(title)}</p>
+        <p class="text-sm font-semibold text-slate-950 dark:text-white">${escapeHtml(title)}</p>
         <p class="mt-1 truncate text-xs text-slate-600 dark:text-slate-300">${escapeHtml(subtitle)}</p>
       </div>
       <div class="ml-auto mt-1 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-slate-700 dark:group-hover:text-slate-200">
@@ -276,6 +363,7 @@
     setText("navContact", nav.contact || "Contact");
 
     setText("mNavRoles", nav.roles || "Roles");
+    setText("mNavAbout", nav.about || "About");
     setText("mNavSkills", nav.skills || "Skills");
     setText("mNavProjects", nav.projects || "Projects");
     setText("mNavExperience", nav.experience || "Experience");
@@ -299,6 +387,7 @@
     const DATA = getData();
 
     $("#navName").textContent = DATA.personal.name || "Portfolio";
+    $("#heroKicker").textContent = DATA.ui?.heroKicker || "";
     $("#heroName").textContent = DATA.personal.name || "";
     $("#heroTitle").textContent = DATA.personal.title || "";
     $("#heroSummary").textContent = DATA.personal.about || "";
@@ -318,10 +407,15 @@
       const modes = Array.isArray(DATA.personal.workModes)
         ? DATA.personal.workModes.join(" / ")
         : "";
-      modesEl.textContent = [type, modes].filter(Boolean).join(" • ");
+      modesEl.textContent = [type, modes].filter(Boolean).join(" / ");
     }
 
-    $("#rolesHint").textContent = DATA.ui?.rolesHint || "";
+    const rolesHint = $("#rolesHint");
+    if (rolesHint) {
+      const hint = DATA.ui?.rolesHint || "";
+      rolesHint.textContent = hint;
+      rolesHint.classList.toggle("hidden", !hint);
+    }
     $("#contactHint").textContent = DATA.ui?.contactHint || "";
 
     const cvBtn = $("#cvBtn");
@@ -330,6 +424,7 @@
     $("#heroLinks").innerHTML = [
       linkPill("GitHub", DATA.personal.links?.github, "github"),
       linkPill("LinkedIn", DATA.personal.links?.linkedin, "linkedin"),
+      linkPill("YouTube", DATA.personal.links?.youtube, "youtube"),
       linkPill(
         "Email",
         DATA.personal.email ? `mailto:${DATA.personal.email}` : "#",
@@ -356,6 +451,12 @@
         "linkedin.com",
         "linkedin",
       ),
+      contactCard(
+        "YouTube",
+        DATA.personal.links?.youtube || "#",
+        "@Prograin_ARR",
+        "youtube",
+      ),
     ].join("");
 
     refreshIcons();
@@ -367,24 +468,19 @@
   function renderChips() {
     const DATA = getData();
     const wrap = $("#roleChips");
+    const projects = DATA.projects || [];
+    const filters = getProjectFilters();
 
-    const ROLE_META = (DATA.roles || []).map((r) => ({
-      key: r.key,
-      name: r.name,
-      icon: r.icon || "layers",
-    }));
-
-    // all role keys (from roles + projects roles)
-    const ALL_ROLE_KEYS = uniq([
-      ...ROLE_META.map((r) => r.key),
-      ...(DATA.projects || []).flatMap((p) => p.roles || []),
-    ]).sort((a, b) => a.localeCompare(b));
-
-    wrap.innerHTML = ALL_ROLE_KEYS.map((key) => {
-      const active = state.selectedRole === key;
-      const meta = ROLE_META.find((x) => x.key === key);
-      const icon = meta?.icon || "circle";
-      const label = meta?.name || key;
+    wrap.innerHTML = filters.map((filter) => {
+      const key = filter.key;
+      const active =
+        (!state.selectedRole && key === "all") || state.selectedRole === key;
+      const count = projects.filter((project) =>
+        projectMatchesFilter(project, filter),
+      ).length;
+      const icon = active ? "check-circle-2" : filter.icon || "circle";
+      const label = filter.name || key;
+      const hint = filter.hint || "";
 
       return `<button type="button"
           class="${chipClass(active)}"
@@ -392,8 +488,18 @@
           data-chip-value="${escapeHtml(key)}"
           aria-pressed="${active ? "true" : "false"}"
         >
-          <i data-lucide="${active ? "check-circle-2" : icon}" class="h-4 w-4"></i>
-          <span>${escapeHtml(label)}</span>
+          <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md ${active ? "bg-white/15 dark:bg-slate-900/10" : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200"}">
+            <i data-lucide="${escapeHtml(icon)}" class="h-4 w-4"></i>
+          </span>
+          <span class="min-w-0">
+            <span class="block leading-5">${escapeHtml(label)}</span>
+            ${
+              hint
+                ? `<span class="mt-0.5 block text-xs font-medium leading-4 ${active ? "text-white/75 dark:text-slate-900/65" : "text-slate-500 dark:text-slate-400"}">${escapeHtml(hint)}</span>`
+                : ""
+            }
+          </span>
+          <span class="ms-auto inline-flex min-w-7 justify-center rounded-md border px-1.5 py-0.5 text-xs ${active ? "border-white/20 bg-white/10 dark:border-slate-900/10 dark:bg-slate-900/5" : "border-slate-200 bg-white/70 text-slate-500 dark:border-slate-800 dark:bg-slate-950/30 dark:text-slate-400"}">${count}</span>
         </button>`;
     }).join("");
 
@@ -401,8 +507,7 @@
   }
 
   function matchesRole(project) {
-    if (!state.selectedRole) return true;
-    return (project.roles || []).includes(state.selectedRole);
+    return projectMatchesFilter(project, filterByKey(state.selectedRole));
   }
 
   function renderActiveRolePill() {
@@ -420,7 +525,7 @@
     wrap.innerHTML = `
       <div class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/75 px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-100">
         <i data-lucide="filter" class="h-4 w-4 text-slate-500"></i>
-        <span>${escapeHtml(roleNameByKey(state.selectedRole))}</span>
+        <span>${escapeHtml(filterNameByKey(state.selectedRole))}</span>
         <button type="button"
           class="ml-1 inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-2 py-1 text-xs font-semibold hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:hover:bg-slate-800"
           aria-label="${escapeHtml(DATA.ui?.buttons?.clearRole || "Clear")}"
@@ -449,13 +554,13 @@
   function renderSkills() {
     const DATA = getData();
     const wrap = $("#skillsGrid");
-    const selected = state.selectedRole;
+    const selected = selectedFilterRoles();
 
     wrap.innerHTML = (DATA.skills || [])
       .map((s) => {
         const isRelevant = !selected
           ? true
-          : (s.roles || []).includes(selected);
+          : (s.roles || []).some((role) => selected.includes(role));
         const dim = selected && !isRelevant;
 
         const pills = (s.items || [])
@@ -477,7 +582,7 @@
                 }">
                 <i data-lucide="${selected && isRelevant ? "sparkles" : "tag"}" class="h-4 w-4"></i>
               </div>
-              <p class="text-base font-semibold">${escapeHtml(s.category)}</p>
+              <p class="text-base font-semibold text-slate-950 dark:text-white">${escapeHtml(s.category)}</p>
             </div>
             <div class="mt-4 flex flex-wrap gap-2">${pills}</div>
           </div>
@@ -537,7 +642,7 @@
       .slice(0, 4)
       .map(
         (h) =>
-          `<li class="flex gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 text-slate-500"></i><span>${escapeHtml(
+          `<li class="flex gap-2 leading-6"><i data-lucide="check-circle-2" class="mt-1 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-300"></i><span>${escapeHtml(
             h,
           )}</span></li>`,
       )
@@ -549,7 +654,7 @@
       if (!isPrivate) {
         if (github)
           parts.push(
-            `<a class="${buttonSecondaryClass()}" href="${escapeHtml(github)}" target="_blank" rel="noopener noreferrer"><i data-lucide="github" class="h-4 w-4"></i> ${escapeHtml(btns.github || "GitHub")}</a>`,
+            `<a class="${buttonSecondaryClass()}" href="${escapeHtml(github)}" target="_blank" rel="noopener noreferrer">${iconMarkup("github", "h-4 w-4")} ${escapeHtml(btns.github || "GitHub")}</a>`,
           );
         if (live)
           parts.push(
@@ -580,7 +685,7 @@
     })();
 
     const privateNote = isPrivate
-      ? `<p class="mt-4 text-sm text-slate-600 dark:text-slate-300"><span class="font-semibold">${escapeHtml(
+      ? `<p class="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-300"><span class="font-semibold">${escapeHtml(
           pills.detailsUponRequest || "Details available upon request.",
         )}</span></p>`
       : "";
@@ -589,8 +694,8 @@
       <article class="${cardClass()}">
         <div class="flex items-start justify-between gap-3">
           <div class="min-w-0">
-            <h3 class="text-base font-semibold tracking-tight">${escapeHtml(project.title)}</h3>
-            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">${escapeHtml(project.shortDescription)}</p>
+            <h3 class="text-base font-semibold tracking-tight text-slate-950 dark:text-white">${escapeHtml(project.title)}</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">${escapeHtml(project.shortDescription)}</p>
           </div>
           ${privacyPill}
         </div>
@@ -621,7 +726,10 @@
     const grid = $("#projectsGrid");
     const empty = $("#projectsEmptyState");
 
-    const items = (DATA.projects || []).filter(matchesRole);
+    const items = orderProjectsForFilter(
+      (DATA.projects || []).filter(matchesRole),
+      filterByKey(state.selectedRole),
+    );
     grid.innerHTML = items.map(projectCard).join("");
 
     // empty state localized
@@ -650,10 +758,14 @@
 
     wrap.innerHTML = (DATA.experience || [])
       .map((e) => {
+        const companyUrl = safeExternalLink(e.url);
+        const companyName = companyUrl
+          ? `<a class="inline-flex items-center gap-1 hover:text-cyan-700 dark:hover:text-cyan-300" href="${escapeHtml(companyUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(e.company)}<i data-lucide="external-link" class="h-3.5 w-3.5"></i></a>`
+          : escapeHtml(e.company);
         const bullets = (e.bullets || [])
           .map(
             (b) =>
-              `<li class="flex gap-2"><i data-lucide="dot" class="mt-1 h-4 w-4 text-slate-500"></i><span>${escapeHtml(
+              `<li class="flex gap-2 leading-6"><i data-lucide="check-circle-2" class="mt-1 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-300"></i><span>${escapeHtml(
                 b,
               )}</span></li>`,
           )
@@ -663,11 +775,11 @@
           <div class="${cardClass()}">
             <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <p class="text-base font-semibold">${escapeHtml(e.company)}</p>
-                <p class="mt-1 text-sm font-medium text-slate-700 dark:text-slate-200">${escapeHtml(e.role)}</p>
+                <p class="text-base font-semibold text-slate-950 dark:text-white">${companyName}</p>
+                <p class="mt-1 text-sm font-medium text-cyan-800 dark:text-cyan-200">${escapeHtml(e.role)}</p>
               </div>
-              <div class="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
-                <i data-lucide="calendar" class="h-4 w-4 text-slate-500"></i>
+              <div class="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-sm font-medium text-slate-600 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-300">
+                <i data-lucide="calendar" class="h-4 w-4 text-rose-500"></i>
                 <span>${escapeHtml(e.dates)}</span>
               </div>
             </div>
@@ -747,7 +859,7 @@
     const details = (project.details || [])
       .map(
         (d) =>
-          `<li class="flex gap-2"><i data-lucide="chevron-right" class="mt-0.5 h-4 w-4 text-slate-500"></i><span>${escapeHtml(
+          `<li class="flex gap-2 leading-6"><i data-lucide="chevron-right" class="mt-1 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-300"></i><span>${escapeHtml(
             d,
           )}</span></li>`,
       )
@@ -761,7 +873,7 @@
       title: project.title,
       htmlBody: `
         <div class="space-y-5">
-          <p class="text-sm text-slate-600 dark:text-slate-300">${escapeHtml(project.shortDescription)}</p>
+          <p class="text-sm leading-6 text-slate-600 dark:text-slate-300">${escapeHtml(project.shortDescription)}</p>
 
           <div>
             <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.roles || "Roles")}</p>
@@ -785,7 +897,7 @@
 
           ${
             isPrivate
-              ? `<div class="rounded-[2rem] border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200">
+              ? `<div class="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200">
                    <div class="flex items-start gap-2">
                      <i data-lucide="lock" class="mt-0.5 h-4 w-4 text-slate-500"></i>
                      <div>
@@ -807,7 +919,7 @@
                     github
                       ? `<a class="${buttonSecondaryClass()}" href="${escapeHtml(
                           github,
-                        )}" target="_blank" rel="noopener noreferrer"><i data-lucide="github" class="h-4 w-4"></i> GitHub</a>`
+                        )}" target="_blank" rel="noopener noreferrer">${iconMarkup("github", "h-4 w-4")} GitHub</a>`
                       : ""
                   }
                   ${
@@ -838,7 +950,7 @@
         kicker: modalText.images || "Images",
         title: project.title,
         htmlBody: `
-          <div class="rounded-[2rem] border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200">
+          <div class="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200">
             <div class="flex items-start gap-2">
               <i data-lucide="lock" class="mt-0.5 h-4 w-4 text-slate-500"></i>
               <div>
@@ -921,7 +1033,8 @@
       const key = chip.getAttribute("data-chip-value");
       if (!key) return;
 
-      state.selectedRole = state.selectedRole === key ? null : key;
+      state.selectedRole =
+        key === "all" || state.selectedRole === key ? null : key;
       renderChips();
       renderActiveRolePill();
       renderSkills();
@@ -980,12 +1093,23 @@
     refreshIcons();
   }
 
-  if (document.readyState === "loading")
-    document.addEventListener("DOMContentLoaded", init);
-  const pf = document.getElementById("profileFrame");
-  if (pf)
+  function animateProfileFrame() {
+    const profileFrame = document.getElementById("profileFrame");
+    if (!profileFrame) return;
+
     requestAnimationFrame(() =>
-      pf.classList.add("opacity-100", "translate-y-0"),
+      profileFrame.classList.add("opacity-100", "translate-y-0"),
     );
-  else init();
+  }
+
+  function boot() {
+    init();
+    animateProfileFrame();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
 })();
