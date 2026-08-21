@@ -88,6 +88,7 @@
   const state = {
     selectedRole: null, // role key
     locale: localStorage.getItem(LOCALE_KEY) === "fa" ? "fa" : "en",
+    heroExpanded: false,
   };
 
   function getData() {
@@ -130,6 +131,15 @@
   }
   function buttonSecondaryClass() {
     return "inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white/85 px-3 py-2 text-sm font-semibold text-slate-800 shadow-sm hover:border-rose-200 hover:bg-rose-50 dark:border-slate-800 dark:bg-slate-950/45 dark:text-slate-100 dark:hover:border-rose-800 dark:hover:bg-rose-950/30";
+  }
+  function buttonWebsiteClass() {
+    return "inline-flex items-center justify-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-semibold text-emerald-900 shadow-sm hover:border-emerald-300 hover:bg-emerald-100 dark:border-emerald-800 dark:bg-emerald-950/35 dark:text-emerald-100 dark:hover:border-emerald-700 dark:hover:bg-emerald-950/55";
+  }
+  function buttonImagesClass() {
+    return "inline-flex items-center justify-center gap-2 rounded-lg border border-violet-200 bg-violet-50 px-3 py-2 text-sm font-semibold text-violet-900 shadow-sm hover:border-violet-300 hover:bg-violet-100 dark:border-violet-800 dark:bg-violet-950/35 dark:text-violet-100 dark:hover:border-violet-700 dark:hover:bg-violet-950/55";
+  }
+  function buttonVideoClass() {
+    return "inline-flex items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm font-semibold text-rose-900 shadow-sm hover:border-rose-300 hover:bg-rose-100 dark:border-rose-800 dark:bg-rose-950/35 dark:text-rose-100 dark:hover:border-rose-700 dark:hover:bg-rose-950/55";
   }
 
   function chipClass(active) {
@@ -206,8 +216,52 @@
     return [...projects].sort(
       (a, b) =>
         (order.get(a.id) ?? Number.MAX_SAFE_INTEGER) -
-        (order.get(b.id) ?? Number.MAX_SAFE_INTEGER),
+      (order.get(b.id) ?? Number.MAX_SAFE_INTEGER),
     );
+  }
+
+  function privateShareBullets(project) {
+    if (Array.isArray(project.shareableDetails) && project.shareableDetails.length) {
+      return project.shareableDetails.slice(0, 6);
+    }
+
+    const roles = project.roles || [];
+
+    if (state.locale === "fa") {
+      const bullets = [
+        "این پروژه در محیط واقعی و برای نیاز عملیاتی یک تیم انجام شده است؛ فقط نام ابزارها، ساختار داخلی و اطلاعات حساس نمایش داده نمی‌شود.",
+      ];
+      if (roles.includes("DataEng")) {
+        bullets.push("داده‌های خام را به خروجی قابل استفاده برای گزارش‌گیری، پیگیری وضعیت و تصمیم‌گیری مدیریتی تبدیل کردم.");
+      }
+      if (roles.includes("Backend")) {
+        bullets.push("جریان‌های سمت سرور، منطق دسترسی، اعتبارسنجی و رفتار قابل اتکا برای استفاده روزمره کاربران را طراحی و پیاده‌سازی کردم.");
+      }
+      if (roles.includes("Frontend") || roles.includes("Fullstack")) {
+        bullets.push("در بخش محصول، مسیرهای کاری را ساده‌تر کردم تا کاربر سریع‌تر به اطلاعات یا عملیات مورد نیاز برسد.");
+      }
+      if (roles.includes("Desktop")) {
+        bullets.push("خروجی کار یک ابزار داخلی برای کاهش کارهای دستی، نظم دادن به اطلاعات و سریع‌تر کردن کارهای تکراری بود.");
+      }
+      return bullets.slice(0, 5);
+    }
+
+    const bullets = [
+      "Real production work for an operational team; tool names, internal structure, and sensitive details are intentionally hidden.",
+    ];
+    if (roles.includes("DataEng")) {
+      bullets.push("Turned raw operational data into usable reporting, status tracking, and management-facing insight.");
+    }
+    if (roles.includes("Backend")) {
+      bullets.push("Designed and implemented server-side flows, access logic, validation, and reliable day-to-day behavior.");
+    }
+    if (roles.includes("Frontend") || roles.includes("Fullstack")) {
+      bullets.push("Simplified product workflows so users could reach the right information or action faster.");
+    }
+    if (roles.includes("Desktop")) {
+      bullets.push("Delivered an internal tool that reduced manual work, organized information, and sped up repeated tasks.");
+    }
+    return bullets.slice(0, 5);
   }
 
   // -----------------------------
@@ -294,6 +348,8 @@
       (href && href.startsWith("mailto:") ? href : null);
     const safeHref = url || "#";
     const disabled = safeHref === "#";
+    const isRtl = state.locale === "fa";
+    const dir = isRtl ? "rtl" : "ltr";
 
     const activeByIcon = {
       github:
@@ -310,12 +366,16 @@
       : activeByIcon[icon] ||
         "border-slate-200 bg-white/90 text-slate-800 hover:bg-white dark:border-slate-800 dark:bg-slate-950/50 dark:text-slate-100 dark:hover:bg-slate-900/70";
 
+    const iconHtml = iconMarkup(icon, "h-5 w-5 shrink-0");
+    const labelHtml = `<span dir="${dir}">${escapeHtml(label)}</span>`;
+    const content = isRtl ? `${labelHtml}${iconHtml}` : `${iconHtml}${labelHtml}`;
+
     return `<a class="inline-flex min-h-11 items-center gap-2.5 rounded-lg border px-4 py-2.5 text-sm font-semibold shadow-softer transition hover:-translate-y-0.5 ${cls}"
+      dir="ltr"
       href="${escapeHtml(safeHref)}"
       ${safeHref.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}
       aria-label="${escapeHtml(label)}">
-      ${iconMarkup(icon, "h-5 w-5 shrink-0")}
-      <span>${escapeHtml(label)}</span>
+      ${content}
     </a>`;
   }
 
@@ -324,22 +384,35 @@
       safeExternalLink(href) ||
       (href && href.startsWith("mailto:") ? href : null);
     const safeHref = url || "#";
+    const isRtl = state.locale === "fa";
+    const dir = isRtl ? "rtl" : "ltr";
+    const arrowIcon = isRtl ? "arrow-left" : "arrow-right";
+    const arrowClass =
+      "mt-1 shrink-0 text-slate-400 transition group-hover:text-slate-700 dark:group-hover:text-slate-200";
+    const arrowMoveClass = isRtl
+      ? "group-hover:-translate-x-0.5"
+      : "group-hover:translate-x-0.5";
+    const iconHtml = `<div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200">
+        ${iconMarkup(icon, "h-6 w-6")}
+      </div>`;
+    const textHtml = `<div class="min-w-0 flex-1 ${isRtl ? "text-right" : ""}" dir="${dir}">
+        <p class="text-sm font-semibold text-slate-950 dark:text-white">${escapeHtml(title)}</p>
+        <p class="mt-1 truncate text-xs text-slate-600 dark:text-slate-300">${escapeHtml(subtitle)}</p>
+      </div>`;
+    const arrowHtml = `<div class="${arrowClass} ${arrowMoveClass}">
+        <i data-lucide="${arrowIcon}" class="h-4 w-4"></i>
+      </div>`;
+    const content = isRtl
+      ? `${arrowHtml}${textHtml}${iconHtml}`
+      : `${iconHtml}${textHtml}${arrowHtml}`;
 
     return `<a href="${escapeHtml(safeHref)}"
       class="group flex min-w-[220px] flex-1 items-start gap-3 rounded-lg border border-slate-200 bg-white/90 p-4 shadow-softer backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-cyan-200 hover:bg-cyan-50/60 dark:border-slate-800 dark:bg-slate-950/45 dark:hover:border-cyan-800 dark:hover:bg-cyan-950/25"
+      dir="ltr"
       ${safeHref.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}
       aria-label="${escapeHtml(title)}"
     >
-      <div class="mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200">
-        ${iconMarkup(icon, "h-6 w-6")}
-      </div>
-      <div class="min-w-0">
-        <p class="text-sm font-semibold text-slate-950 dark:text-white">${escapeHtml(title)}</p>
-        <p class="mt-1 truncate text-xs text-slate-600 dark:text-slate-300">${escapeHtml(subtitle)}</p>
-      </div>
-      <div class="ml-auto mt-1 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-slate-700 dark:group-hover:text-slate-200">
-        <i data-lucide="arrow-right" class="h-4 w-4"></i>
-      </div>
+      ${content}
     </a>`;
   }
 
@@ -391,23 +464,63 @@
     $("#heroName").textContent = DATA.personal.name || "";
     $("#heroTitle").textContent = DATA.personal.title || "";
     $("#heroSummary").textContent = DATA.personal.about || "";
+    const heroSummaryMobile = $("#heroSummaryMobile");
+    if (heroSummaryMobile) {
+      heroSummaryMobile.textContent =
+        state.heroExpanded
+          ? DATA.personal.about || ""
+          : DATA.personal.mobileAbout || DATA.personal.about || "";
+    }
 
-    $("#heroNumber").textContent = DATA.personal.number || "";
+    const heroSummaryToggle = $("#heroSummaryToggle");
+    const heroSummaryToggleText = $("#heroSummaryToggleText");
+    if (heroSummaryToggle && heroSummaryToggleText) {
+      heroSummaryToggleText.textContent = state.heroExpanded
+        ? DATA.ui?.buttons?.showLess || "Show less"
+        : DATA.ui?.buttons?.showMore || "Show more";
+      heroSummaryToggle.setAttribute(
+        "aria-expanded",
+        state.heroExpanded ? "true" : "false",
+      );
+    }
+
+    const availabilityTitle = $("#heroAvailabilityTitle");
+    const availabilityText = $("#heroAvailabilityText");
+    if (availabilityTitle) {
+      availabilityTitle.textContent =
+        DATA.ui?.heroAvailabilityTitle ||
+        (state.locale === "fa" ? "آماده همکاری" : "Available for work");
+    }
+    if (availabilityText) {
+      availabilityText.textContent =
+        DATA.ui?.heroAvailabilityText ||
+        (state.locale === "fa"
+          ? "بک‌اند، داده، فول‌استک و یادگیری ماشین"
+          : "Backend, data, full-stack, and ML");
+    }
+
+    const heroNumber = $("#heroNumber");
+    if (heroNumber) heroNumber.textContent = DATA.personal.number || "";
+    const heroPhone = $("#heroPhone");
+    if (heroPhone) {
+      heroPhone.href = DATA.personal.number ? `tel:${DATA.personal.number}` : "#";
+    }
     $("#heroLocation").textContent = DATA.personal.location || "";
 
     const emailEl = $("#heroEmail");
-    emailEl.textContent = DATA.personal.email || "";
-    emailEl.href = DATA.personal.email ? `mailto:${DATA.personal.email}` : "#";
+    const emailTextEl = $("#heroEmailText");
+    if (emailEl) {
+      if (emailTextEl) emailTextEl.textContent = DATA.personal.email || "";
+      else emailEl.textContent = DATA.personal.email || "";
+      emailEl.href = DATA.personal.email ? `mailto:${DATA.personal.email}` : "#";
+    }
 
     const modesEl = document.getElementById("heroWorkModes");
     if (modesEl) {
-      const type = DATA.personal.employmentType
-        ? `${DATA.personal.employmentType}`
-        : "";
       const modes = Array.isArray(DATA.personal.workModes)
         ? DATA.personal.workModes.join(" / ")
         : "";
-      modesEl.textContent = [type, modes].filter(Boolean).join(" / ");
+      modesEl.textContent = modes || DATA.personal.employmentType || "";
     }
 
     const rolesHint = $("#rolesHint");
@@ -465,6 +578,20 @@
   // -----------------------------
   // Roles chips
   // -----------------------------
+  function setSelectedProjectFilter(key, options = {}) {
+    const normalized = key && key !== "all" && filterByKey(key) ? key : null;
+    state.selectedRole =
+      options.toggle && normalized && state.selectedRole === normalized
+        ? null
+        : normalized;
+
+    renderChips();
+    renderProjectFilterSelect();
+    renderActiveRolePill();
+    renderSkills();
+    renderProjects();
+  }
+
   function renderChips() {
     const DATA = getData();
     const wrap = $("#roleChips");
@@ -506,6 +633,28 @@
     refreshIcons();
   }
 
+  function renderProjectFilterSelect() {
+    const DATA = getData();
+    const select = $("#projectFilterSelect");
+    if (!select) return;
+
+    const filters = getProjectFilters();
+    const labelText =
+      DATA.ui?.sections?.roles ||
+      (state.locale === "fa" ? "فیلتر پروژه‌ها" : "Project filter");
+
+    select.setAttribute("aria-label", labelText);
+
+    select.innerHTML = filters
+      .map((filter) => {
+        const label = filter.name || filter.key;
+        return `<option value="${escapeHtml(filter.key)}">${escapeHtml(label)}</option>`;
+      })
+      .join("");
+
+    select.value = state.selectedRole || "all";
+  }
+
   function matchesRole(project) {
     return projectMatchesFilter(project, filterByKey(state.selectedRole));
   }
@@ -538,11 +687,7 @@
     document.getElementById("pillClearBtn")?.addEventListener(
       "click",
       () => {
-        state.selectedRole = null;
-        renderChips();
-        renderActiveRolePill();
-        renderSkills();
-        renderProjects();
+        setSelectedProjectFilter("all");
       },
       { once: true },
     );
@@ -556,31 +701,31 @@
     const wrap = $("#skillsGrid");
     const selected = selectedFilterRoles();
 
-    wrap.innerHTML = (DATA.skills || [])
-      .map((s) => {
-        const isRelevant = !selected
-          ? true
-          : (s.roles || []).some((role) => selected.includes(role));
-        const dim = selected && !isRelevant;
+    const visibleSkills = (DATA.skills || []).filter((s) => {
+      if (!selected) return true;
+      return (s.roles || []).some((role) => selected.includes(role));
+    });
 
+    wrap.innerHTML = visibleSkills
+      .map((s) => {
         const pills = (s.items || [])
           .map((it) => `<span class="${badgeClass()}">${escapeHtml(it)}</span>`)
           .join("");
 
         return `
-          <div class="${cardClass()} ${dim ? "opacity-55" : ""} ${
-            selected && isRelevant
+          <div class="${cardClass()} ${
+            selected
               ? "ring-2 ring-slate-900/10 dark:ring-slate-100/10"
               : ""
           }">
             <div class="flex items-center gap-2">
               <div class="inline-flex h-9 w-9 items-center justify-center rounded-2xl
                 ${
-                  selected && isRelevant
+                  selected
                     ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900"
                     : "bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50"
                 }">
-                <i data-lucide="${selected && isRelevant ? "sparkles" : "tag"}" class="h-4 w-4"></i>
+                <i data-lucide="${selected ? "sparkles" : "tag"}" class="h-4 w-4"></i>
               </div>
               <p class="text-base font-semibold text-slate-950 dark:text-white">${escapeHtml(s.category)}</p>
             </div>
@@ -616,8 +761,8 @@
     const hasImages = images.length > 0;
 
     const privacyPill = isPrivate
-      ? `<span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-xs font-semibold text-slate-700 dark:border-slate-800 dark:bg-slate-950/50 dark:text-slate-200">
-          <i data-lucide="lock" class="h-3.5 w-3.5"></i> ${escapeHtml(pills.privateNda || "Private / NDA")}
+      ? `<span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:bg-slate-800/70 dark:text-slate-400">
+          ${escapeHtml(state.locale === "fa" ? "خصوصی" : "Private")}
         </span>`
       : "";
 
@@ -628,25 +773,28 @@
       )
       .join("");
 
-    const tags = (project.tags || [])
-      .slice(0, 8)
-      .map((t) => `<span class="${badgeClass()}">${escapeHtml(t)}</span>`)
-      .join("");
+    const stackBlock = (() => {
+      if (isPrivate) return "";
 
-    const extra = Math.max(0, (project.tags || []).length - 8);
-    const extraTags = extra
-      ? `<span class="${badgeClass()}">+${extra}</span>`
-      : "";
+      const tags = (project.tags || [])
+        .slice(0, 6)
+        .map((t) => `<span class="${badgeClass()}">${escapeHtml(t)}</span>`)
+        .join("");
 
-    const highlights = (project.highlights || [])
-      .slice(0, 4)
-      .map(
-        (h) =>
-          `<li class="flex gap-2 leading-6"><i data-lucide="check-circle-2" class="mt-1 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-300"></i><span>${escapeHtml(
-            h,
-          )}</span></li>`,
-      )
-      .join("");
+      const extra = Math.max(0, (project.tags || []).length - 6);
+      const extraTags = extra
+        ? `<span class="${badgeClass()}">+${extra}</span>`
+        : "";
+
+      if (!tags && !extraTags) return "";
+
+      return `
+        <div class="mt-4">
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.stack || "Stack")}</p>
+          <div class="mt-2 flex flex-wrap gap-2">${tags}${extraTags}</div>
+        </div>
+      `;
+    })();
 
     const actions = (() => {
       const parts = [];
@@ -664,17 +812,17 @@
 
       if (url)
         parts.push(
-          `<a class="${buttonSecondaryClass()}" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link" class="h-4 w-4"></i> ${escapeHtml(btns.url || "URL")}</a>`,
+          `<a class="${buttonWebsiteClass()}" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer"><i data-lucide="globe-2" class="h-4 w-4"></i> ${escapeHtml(btns.url || "URL")}</a>`,
         );
 
       if (hasImages)
         parts.push(
-          `<button class="${buttonSecondaryClass()}" type="button" data-action="view-images" data-project-id="${escapeHtml(project.id)}"><i data-lucide="images" class="h-4 w-4"></i> ${escapeHtml(btns.viewImages || "View images")}</button>`,
+          `<button class="${buttonImagesClass()}" type="button" data-action="view-images" data-project-id="${escapeHtml(project.id)}"><i data-lucide="images" class="h-4 w-4"></i> ${escapeHtml(btns.viewImages || "View images")}</button>`,
         );
 
       if (hasVideo)
         parts.push(
-          `<button class="${buttonSecondaryClass()}" type="button" data-action="watch-video" data-video-url="${escapeHtml(videoUrl)}"><i data-lucide="play" class="h-4 w-4"></i> ${escapeHtml(btns.watchVideo || "Watch video")}</button>`,
+          `<button class="${buttonVideoClass()}" type="button" data-action="watch-video" data-video-url="${escapeHtml(videoUrl)}"><i data-lucide="play" class="h-4 w-4"></i> ${escapeHtml(btns.watchVideo || "Watch video")}</button>`,
         );
 
       parts.push(
@@ -705,15 +853,7 @@
           <div class="mt-2 flex flex-wrap gap-2">${roles}</div>
         </div>
 
-        <div class="mt-4">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.stack || "Stack")}</p>
-          <div class="mt-2 flex flex-wrap gap-2">${tags}${extraTags}</div>
-        </div>
-
-        <div class="mt-4">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.highlights || "Highlights")}</p>
-          <ul class="mt-2 space-y-1 text-sm text-slate-700 dark:text-slate-200">${highlights}</ul>
-        </div>
+        ${stackBlock}
 
         ${privateNote}
         ${actions}
@@ -757,33 +897,48 @@
     const wrap = $("#experienceList");
 
     wrap.innerHTML = (DATA.experience || [])
-      .map((e) => {
+      .map((e, experienceIndex) => {
         const companyUrl = safeExternalLink(e.url);
         const companyName = companyUrl
           ? `<a class="inline-flex items-center gap-1 hover:text-cyan-700 dark:hover:text-cyan-300" href="${escapeHtml(companyUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(e.company)}<i data-lucide="external-link" class="h-3.5 w-3.5"></i></a>`
           : escapeHtml(e.company);
         const bullets = (e.bullets || [])
           .map(
-            (b) =>
-              `<li class="flex gap-2 leading-6"><i data-lucide="check-circle-2" class="mt-1 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-300"></i><span>${escapeHtml(
+            (b, index) =>
+              `<li class="${index > 1 ? "hidden sm:flex" : "flex"} gap-2 leading-6" data-experience-extra="${index > 1 ? "1" : "0"}"><i data-lucide="check-circle-2" class="mt-1 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-300"></i><span>${escapeHtml(
                 b,
               )}</span></li>`,
           )
           .join("");
 
+        const moreButton =
+          (e.bullets || []).length > 2
+            ? `<button
+                class="mt-3 text-sm font-semibold text-cyan-700 underline underline-offset-4 hover:text-cyan-900 dark:text-cyan-300 dark:hover:text-cyan-100 sm:hidden"
+                type="button"
+                data-action="toggle-experience"
+                data-expanded="false"
+                data-experience-index="${experienceIndex}"
+                aria-expanded="false"
+              >
+                <span>${escapeHtml(DATA.ui?.buttons?.experienceMore || "Details")}</span>
+              </button>`
+            : "";
+
         return `
-          <div class="${cardClass()}">
+          <div class="${cardClass()}" data-experience-card="${experienceIndex}">
             <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div>
                 <p class="text-base font-semibold text-slate-950 dark:text-white">${companyName}</p>
                 <p class="mt-1 text-sm font-medium text-cyan-800 dark:text-cyan-200">${escapeHtml(e.role)}</p>
               </div>
-              <div class="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-sm font-medium text-slate-600 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-300">
+              <div class="inline-flex w-fit self-start items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 text-sm font-medium text-slate-600 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-300">
                 <i data-lucide="calendar" class="h-4 w-4 text-rose-500"></i>
                 <span>${escapeHtml(e.dates)}</span>
               </div>
             </div>
             <ul class="mt-4 space-y-2 text-sm text-slate-700 dark:text-slate-200">${bullets}</ul>
+            ${moreButton}
           </div>
         `;
       })
@@ -831,7 +986,6 @@
     const DATA = getData();
     const ui = DATA.ui || {};
     const labels = ui.labels || {};
-    const pills = ui.pills || {};
     const modalText = ui.modal || {};
 
     const isPrivate = !!project.isPrivate;
@@ -843,30 +997,90 @@
       )
       .join("");
 
-    const tags = (project.tags || [])
-      .map((t) => `<span class="${badgeClass()}">${escapeHtml(t)}</span>`)
-      .join("");
+    const stackBlock = (() => {
+      if (isPrivate) return "";
 
-    const highlights = (project.highlights || [])
-      .map(
-        (h) =>
-          `<li class="flex gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 text-slate-500"></i><span>${escapeHtml(
-            h,
-          )}</span></li>`,
-      )
-      .join("");
+      const tags = (project.tags || [])
+        .map((t) => `<span class="${badgeClass()}">${escapeHtml(t)}</span>`)
+        .join("");
 
-    const details = (project.details || [])
-      .map(
-        (d) =>
-          `<li class="flex gap-2 leading-6"><i data-lucide="chevron-right" class="mt-1 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-300"></i><span>${escapeHtml(
-            d,
-          )}</span></li>`,
-      )
-      .join("");
+      if (!tags) return "";
+
+      return `
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.stack || "Stack")}</p>
+            <div class="mt-2 flex flex-wrap gap-2">${tags}</div>
+          </div>
+      `;
+    })();
+
+    const detailsBlock = (() => {
+      if (isPrivate) return "";
+
+      const details = (project.details || [])
+        .map(
+          (d) =>
+            `<li class="flex gap-2 leading-6"><i data-lucide="chevron-right" class="mt-1 h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-300"></i><span>${escapeHtml(
+              d,
+            )}</span></li>`,
+        )
+        .join("");
+
+      if (!details) return "";
+
+      return `
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.notes || "Notes")}</p>
+            <ul class="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-200">${details}</ul>
+          </div>
+      `;
+    })();
+
+    const privateShareBlock = (() => {
+      if (!isPrivate) return "";
+
+      const bullets = privateShareBullets(project)
+        .map(
+          (item) =>
+            `<li class="flex gap-2 leading-6"><i data-lucide="check-circle-2" class="mt-1 h-4 w-4 shrink-0 text-cyan-700 dark:text-cyan-300"></i><span>${escapeHtml(item)}</span></li>`,
+        )
+        .join("");
+
+      return `
+          <div class="rounded-lg border border-cyan-100 bg-cyan-50/70 p-4 text-sm text-slate-700 dark:border-cyan-900/70 dark:bg-cyan-950/25 dark:text-slate-200">
+            <p class="font-semibold text-slate-950 dark:text-white">${escapeHtml(
+              labels.privateShare || (state.locale === "fa" ? "قابل نمایش" : "Shareable summary"),
+            )}</p>
+            <ul class="mt-3 space-y-2">${bullets}</ul>
+          </div>
+      `;
+    })();
 
     const github = !isPrivate ? safeExternalLink(project.links?.github) : null;
     const live = !isPrivate ? safeExternalLink(project.links?.liveDemo) : null;
+    const url = safeExternalLink(project.links?.url);
+
+    const modalActions = (() => {
+      const parts = [];
+      if (!isPrivate) {
+        if (github) {
+          parts.push(
+            `<a class="${buttonSecondaryClass()}" href="${escapeHtml(github)}" target="_blank" rel="noopener noreferrer">${iconMarkup("github", "h-4 w-4")} GitHub</a>`,
+          );
+        }
+        if (live) {
+          parts.push(
+            `<a class="${buttonSecondaryClass()}" href="${escapeHtml(live)}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link" class="h-4 w-4"></i> Live demo</a>`,
+          );
+        }
+      }
+      if (url) {
+        parts.push(
+          `<a class="${buttonWebsiteClass()}" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer"><i data-lucide="globe-2" class="h-4 w-4"></i> ${escapeHtml(ui.buttons?.url || "Website")}</a>`,
+        );
+      }
+      return parts.length ? `<div class="flex flex-wrap gap-2">${parts.join("")}</div>` : "";
+    })();
 
     openModal({
       kicker: modalText.projectDetails || "Project details",
@@ -880,58 +1094,11 @@
             <div class="mt-2 flex flex-wrap gap-2">${roles}</div>
           </div>
 
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.stack || "Stack")}</p>
-            <div class="mt-2 flex flex-wrap gap-2">${tags}</div>
-          </div>
+          ${stackBlock}
+          ${detailsBlock}
+          ${privateShareBlock}
 
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.highlights || "Highlights")}</p>
-            <ul class="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-200">${highlights}</ul>
-          </div>
-
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(labels.notes || "Notes")}</p>
-            <ul class="mt-2 space-y-2 text-sm text-slate-700 dark:text-slate-200">${details}</ul>
-          </div>
-
-          ${
-            isPrivate
-              ? `<div class="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200">
-                   <div class="flex items-start gap-2">
-                     <i data-lucide="lock" class="mt-0.5 h-4 w-4 text-slate-500"></i>
-                     <div>
-                       <p class="font-semibold">${escapeHtml(pills.privateNda || "Private / NDA")}</p>
-                       <p class="mt-1 text-slate-600 dark:text-slate-300">${escapeHtml(
-                         pills.detailsUponRequest ||
-                           "Details available upon request.",
-                       )}</p>
-                     </div>
-                   </div>
-                 </div>`
-              : ""
-          }
-
-          ${
-            !isPrivate
-              ? `<div class="flex flex-wrap gap-2">
-                  ${
-                    github
-                      ? `<a class="${buttonSecondaryClass()}" href="${escapeHtml(
-                          github,
-                        )}" target="_blank" rel="noopener noreferrer">${iconMarkup("github", "h-4 w-4")} GitHub</a>`
-                      : ""
-                  }
-                  ${
-                    live
-                      ? `<a class="${buttonSecondaryClass()}" href="${escapeHtml(
-                          live,
-                        )}" target="_blank" rel="noopener noreferrer"><i data-lucide="external-link" class="h-4 w-4"></i> Live demo</a>`
-                      : ""
-                  }
-                </div>`
-              : ""
-          }
+          ${modalActions}
         </div>
       `,
     });
@@ -950,14 +1117,11 @@
         kicker: modalText.images || "Images",
         title: project.title,
         htmlBody: `
-          <div class="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200">
-            <div class="flex items-start gap-2">
-              <i data-lucide="lock" class="mt-0.5 h-4 w-4 text-slate-500"></i>
-              <div>
-                <p class="font-semibold">${escapeHtml(pills.privateNda || "Private / NDA")}</p>
-                <p class="mt-1 text-slate-600 dark:text-slate-300">${escapeHtml(pills.detailsUponRequest || "Details available upon request.")}</p>
-              </div>
-            </div>
+          <div class="rounded-lg bg-slate-50 p-4 text-sm leading-6 text-slate-600 dark:bg-slate-900/45 dark:text-slate-300">
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${escapeHtml(
+              state.locale === "fa" ? "پروژه خصوصی" : "Private project",
+            )}</p>
+            <p class="mt-2">${escapeHtml(pills.detailsUponRequest || "Details available upon request.")}</p>
           </div>
         `,
       });
@@ -1026,6 +1190,12 @@
       applyLocale(state.locale === "fa" ? "en" : "fa");
     });
 
+    document.getElementById("heroSummaryToggle")?.addEventListener("click", () => {
+      state.heroExpanded = !state.heroExpanded;
+      renderTop();
+      refreshIcons();
+    });
+
     // role filter chips
     $("#filters")?.addEventListener("click", (e) => {
       const chip = e.target.closest("[data-chip-type='role']");
@@ -1033,12 +1203,11 @@
       const key = chip.getAttribute("data-chip-value");
       if (!key) return;
 
-      state.selectedRole =
-        key === "all" || state.selectedRole === key ? null : key;
-      renderChips();
-      renderActiveRolePill();
-      renderSkills();
-      renderProjects();
+      setSelectedProjectFilter(key, { toggle: true });
+    });
+
+    $("#projectFilterSelect")?.addEventListener("change", (e) => {
+      setSelectedProjectFilter(e.target.value);
     });
 
     // project actions
@@ -1068,6 +1237,32 @@
       if (action === "open-details") openProjectDetails(project);
       if (action === "view-images") openProjectImages(project);
     });
+
+    $("#experienceList")?.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-action='toggle-experience']");
+      if (!btn) return;
+
+      const card = btn.closest("[data-experience-card]");
+      if (!card) return;
+
+      const expanded = btn.getAttribute("data-expanded") === "true";
+      const nextExpanded = !expanded;
+      const DATA = getData();
+      const label = nextExpanded
+        ? DATA.ui?.buttons?.experienceLess || "Hide responsibilities"
+        : DATA.ui?.buttons?.experienceMore || "View responsibilities";
+
+      card.querySelectorAll("[data-experience-extra='1']").forEach((item) => {
+        item.classList.toggle("hidden", !nextExpanded);
+        item.classList.toggle("flex", nextExpanded);
+      });
+
+      btn.setAttribute("data-expanded", nextExpanded ? "true" : "false");
+      btn.setAttribute("aria-expanded", nextExpanded ? "true" : "false");
+      const labelEl = btn.querySelector("span");
+      if (labelEl) labelEl.textContent = label;
+      refreshIcons();
+    });
   }
 
   // -----------------------------
@@ -1077,6 +1272,7 @@
     renderStaticTexts();
     renderTop();
     renderChips();
+    renderProjectFilterSelect();
     renderActiveRolePill();
     renderSkills();
     renderProjects();

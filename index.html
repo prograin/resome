@@ -177,55 +177,10 @@
 
     <main class="mx-auto max-w-6xl px-4">
       <!-- Hero -->
-      <section id="home" class="py-10 sm:py-14">
-        <div class="grid items-center gap-10 lg:grid-cols-[.65fr_1.35fr]">
-          <div class="flex justify-center lg:justify-start">
-            <div
-              class="w-full max-w-xs rounded-lg border border-cyan-100 bg-white/90 p-4 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/70"
-            >
-              <div
-                id="profileFrame"
-                class="aspect-square overflow-hidden rounded-lg bg-slate-100 opacity-0 translate-y-2 transition duration-700 ease-out dark:bg-slate-800"
-              >
-                <img
-                  id="profileImg"
-                  src="./assets/images/profile.jpg"
-                  alt="Profile picture"
-                  class="h-full w-full object-cover"
-                />
-              </div>
-
-              <div
-                class="mt-4 space-y-2 text-sm text-slate-700 dark:text-slate-200"
-              >
-                <div class="flex items-center gap-2">
-                  <i data-lucide="map-pin" class="h-4 w-4 text-slate-500"></i>
-                  <span id="heroLocation"></span>
-                </div>
-
-                <div class="flex items-center gap-2">
-                  <i data-lucide="briefcase" class="h-4 w-4 text-slate-500"></i>
-                  <span id="heroWorkModes"></span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <i data-lucide="phone" class="h-4 w-4 text-slate-500"></i>
-                  <span id="heroNumber"></span>
-                </div>
-                <!-- <div class="flex items-center gap-2">
-                  <i data-lucide="clock" class="h-4 w-4 text-slate-500"></i>
-                  <span id="heroTimezone"></span>
-                </div> -->
-                <div class="flex items-center gap-2">
-                  <i data-lucide="mail" class="h-4 w-4 text-slate-500"></i>
-                  <a
-                    id="heroEmail"
-                    class="underline underline-offset-4 hover:no-underline"
-                    href="#"
-                  ></a>
-                </div>
-              </div>
-            </div>
-          </div>
+      <section id="home" class="pb-4 pt-10 sm:pb-5 sm:pt-14">
+        <div
+          class="rounded-lg border border-cyan-100/80 bg-white/70 p-5 shadow-soft backdrop-blur-xl dark:border-cyan-950/70 dark:bg-slate-950/45 sm:p-8 lg:p-10"
+        >
           <div>
             <p
               id="heroKicker"
@@ -233,40 +188,65 @@
             ></p>
             <h1
               id="heroName"
-              class="mt-2 text-3xl font-semibold tracking-tight text-slate-950 sm:text-5xl dark:text-white"
+              class="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white sm:text-6xl"
             ></h1>
             <p
               id="heroTitle"
-              class="mt-3 max-w-3xl text-base font-medium leading-7 text-cyan-900 dark:text-cyan-100 sm:text-lg"
+              class="mt-4 max-w-4xl text-base font-semibold leading-7 text-cyan-900 dark:text-cyan-100 sm:text-xl"
             ></p>
             <p
               id="heroSummary"
-              class="mt-4 max-w-3xl whitespace-pre-line text-[15px] leading-7 text-slate-700 dark:text-slate-300"
+              class="mt-5 hidden max-w-4xl whitespace-pre-line text-[15px] leading-7 text-slate-700 dark:text-slate-300 sm:block"
             ></p>
-            <!-- 
-            <div class="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#contact"
-                class="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-soft hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
-              >
-                <i data-lucide="send" class="h-4 w-4"></i>
-                Contact
-              </a>
-              <a
-                id="cvBtn"
-                href="#"
-                class="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 shadow-sm hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
-                aria-label="Download CV"
-              >
-                <i data-lucide="download" class="h-4 w-4"></i>
-                Download CV
-              </a>
-            </div> -->
+            <p
+              id="heroSummaryMobile"
+              class="mt-5 max-w-4xl text-[15px] leading-7 text-slate-700 dark:text-slate-300 sm:hidden"
+            ></p>
+            <button
+              id="heroSummaryToggle"
+              class="mt-2 text-sm font-semibold text-cyan-700 underline underline-offset-4 hover:text-cyan-900 dark:text-cyan-300 dark:hover:text-cyan-100 sm:hidden"
+              type="button"
+              aria-expanded="false"
+            >
+              <span id="heroSummaryToggleText"></span>
+            </button>
 
             <div
               id="heroLinks"
               class="mt-6 flex flex-wrap items-center justify-start gap-3"
             ></div>
+
+            <div
+              class="mt-4 rounded-lg border border-slate-200 bg-white/70 p-3 shadow-sm dark:border-slate-800 dark:bg-slate-900/45"
+              aria-label="Contact quick details"
+            >
+              <div class="flex flex-wrap gap-2 text-sm text-slate-700 dark:text-slate-200">
+                <span class="inline-flex min-h-9 items-center gap-2 rounded-lg bg-cyan-50/80 px-3 py-2 font-medium dark:bg-cyan-950/25">
+                  <i data-lucide="map-pin" class="h-4 w-4 shrink-0 text-cyan-700 dark:text-cyan-300"></i>
+                  <span id="heroLocation"></span>
+                </span>
+                <span class="inline-flex min-h-9 items-center gap-2 rounded-lg bg-rose-50/80 px-3 py-2 font-medium dark:bg-rose-950/25">
+                  <i data-lucide="briefcase" class="h-4 w-4 shrink-0 text-rose-600 dark:text-rose-300"></i>
+                  <span id="heroWorkModes"></span>
+                </span>
+                <a
+                  id="heroPhone"
+                  class="inline-flex min-h-9 items-center gap-2 rounded-lg bg-emerald-50/80 px-3 py-2 font-medium hover:bg-emerald-100 dark:bg-emerald-950/25 dark:hover:bg-emerald-950/45"
+                  href="#"
+                >
+                  <i data-lucide="phone" class="h-4 w-4 shrink-0 text-emerald-700 dark:text-emerald-300"></i>
+                  <span id="heroNumber"></span>
+                </a>
+                <a
+                  id="heroEmail"
+                  class="inline-flex min-h-9 min-w-0 items-center gap-2 rounded-lg bg-violet-50/80 px-3 py-2 font-medium underline underline-offset-4 hover:bg-violet-100 hover:no-underline dark:bg-violet-950/25 dark:hover:bg-violet-950/45"
+                  href="#"
+                >
+                  <i data-lucide="mail" class="h-4 w-4 shrink-0 text-violet-700 dark:text-violet-300"></i>
+                  <span id="heroEmailText" class="min-w-0 break-all"></span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -289,7 +269,7 @@
       </section> -->
 
       <!-- Project filters -->
-      <section id="filters" class="my-8 rounded-lg border border-cyan-100/80 bg-cyan-50/45 p-4 dark:border-cyan-950/70 dark:bg-cyan-950/15 sm:p-5">
+      <section id="filters" class="mb-8 mt-3 rounded-lg border border-cyan-100/80 bg-cyan-50/45 p-4 dark:border-cyan-950/70 dark:bg-cyan-950/15 sm:mt-4 sm:p-5">
         <div
           class="rounded-lg border border-slate-200 bg-white/85 p-5 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/60 sm:p-6"
         >
@@ -348,15 +328,31 @@
 
       <!-- Projects -->
       <section id="projects" class="my-8 rounded-lg border border-cyan-100/80 bg-white/60 p-5 dark:border-cyan-950/70 dark:bg-cyan-950/10 sm:p-6">
-        <div class="flex items-center gap-3">
-          <div
-            class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200"
-          >
-            <i data-lucide="folder-kanban" class="h-5 w-5"></i>
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div class="flex items-center gap-3">
+            <div
+              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200"
+            >
+              <i data-lucide="folder-kanban" class="h-5 w-5"></i>
+            </div>
+            <h2 id="titleProjects" class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
+              Projects
+            </h2>
           </div>
-          <h2 id="titleProjects" class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white">
-            Projects
-          </h2>
+
+          <div class="relative w-full max-w-52 sm:w-52">
+            <select
+              id="projectFilterSelect"
+              class="min-h-10 w-full appearance-none rounded-lg border border-cyan-200 bg-white/90 px-3 py-2 pe-10 text-sm font-semibold text-slate-800 shadow-sm outline-none transition hover:border-cyan-300 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-500/20 dark:border-cyan-900 dark:bg-slate-950/55 dark:text-slate-100 dark:hover:border-cyan-700 dark:focus:border-cyan-400"
+              aria-label="Project filter"
+              aria-controls="roleChips projectsGrid skillsGrid"
+            ></select>
+            <span class="pointer-events-none absolute end-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200" aria-hidden="true">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </span>
+          </div>
         </div>
 
         <div id="activeRolePill" class="mt-4 hidden"></div>
