@@ -65,7 +65,7 @@
     };
 
     return `
-      <a href="${href}" data-page-link="${href.replace("#", "")}" dir="${dir}" class="group flex w-full max-w-none items-center gap-4 rounded-lg border ${tones[tone]} bg-white/86 p-4 shadow-softer transition hover:bg-white dark:bg-slate-900/68 dark:hover:bg-slate-900 sm:w-[86%] sm:p-5 ${floatClass} ${position}">
+      <a href="${href}" data-page-link="${href.replace("#", "")}" dir="${dir}" class="group flex w-[92%] max-w-md items-center gap-4 rounded-lg border ${tones[tone]} bg-white/86 p-4 shadow-softer transition hover:bg-white dark:bg-slate-900/68 dark:hover:bg-slate-900 sm:w-[86%] sm:p-5 ${floatClass} ${position}">
         <span class="icon-tile ${iconTones[tone]}">${window.PAGE_SHARED.icon(iconName)}</span>
         <span class="min-w-0">
           <span class="block text-sm font-semibold text-slate-950 dark:text-white">${label}</span>
@@ -92,20 +92,18 @@
             <div class="mt-7 hidden flex-wrap gap-3 sm:flex">
               ${cta(`https://t.me/${contact.telegram}`, t.telegram, "send", "cyan", 'target="_blank" rel="noopener noreferrer"')}
               ${cta(`tel:${contact.phone}`, t.phone, "phone", "emerald")}
-              ${cta(`mailto:${contact.email}`, t.email, "mail", "ghost")}
             </div>
           </div>
 
-          <div class="relative -mx-4 w-[calc(100%+2rem)] min-w-0 self-center sm:mx-0 sm:w-full">
+          <div class="relative w-full min-w-0 self-center">
             <nav class="relative flex w-full flex-col items-center justify-center gap-3 overflow-visible sm:min-h-[320px] sm:gap-6" dir="ltr" aria-label="Main sections">
               ${pathCard({ href: "#resume", label: t.resume, text: t.cards.resume, iconName: "user-round", tone: "cyan", position: "sm:self-start", floatClass: "float-card float-card-a", dir })}
               ${pathCard({ href: "#order", label: t.order, text: t.cards.order, iconName: "send", tone: "emerald", position: "sm:self-end", floatClass: "float-card float-card-b", dir })}
               ${pathCard({ href: "#academy", label: t.academy, text: t.cards.academy, iconName: "graduation-cap", tone: "rose", position: "sm:self-start sm:ml-8", floatClass: "float-card float-card-c", dir })}
             </nav>
-            <div class="mx-auto mt-4 grid w-full max-w-none grid-cols-2 gap-3 sm:hidden">
+            <div class="mx-auto mt-4 grid w-[92%] max-w-md grid-cols-2 gap-3 sm:hidden">
               ${contactButton({ href: `https://t.me/${contact.telegram}`, label: t.telegram, iconName: "send", tone: "cyan", attrs: 'target="_blank" rel="noopener noreferrer"' })}
               ${contactButton({ href: `tel:${contact.phone}`, label: t.phone, iconName: "phone", tone: "emerald" })}
-              ${contactButton({ href: `mailto:${contact.email}`, label: t.email, iconName: "mail", tone: "ghost" })}
             </div>
           </div>
         </section>
