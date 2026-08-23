@@ -45,9 +45,9 @@
     const positions = ["sm:self-end", "sm:self-start", "sm:self-end", "sm:self-start sm:ms-8"];
     const floats = ["float-card-a", "float-card-b", "float-card-c", "float-card-a"];
 
-    return `<div class="float-card ${floats[index]} w-[92%] max-w-md rounded-lg border border-slate-200 bg-white/85 p-4 shadow-softer backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 sm:w-[86%] ${positions[index]}">
+    return `<div class="float-card ${floats[index]} w-full max-w-none rounded-lg border border-slate-200 bg-white/85 p-4 shadow-softer backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 sm:w-[86%] sm:max-w-md ${positions[index]}">
       <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg ${tones[tone]}">${icon(iconName)}</span>
-      <p class="mt-4 text-sm font-semibold text-slate-950 dark:text-white">${title}</p>
+      <p class="mt-4 text-base font-semibold text-slate-950 dark:text-white sm:text-sm">${title}</p>
       <p class="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-300">${text}</p>
     </div>`;
   };

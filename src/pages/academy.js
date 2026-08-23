@@ -103,9 +103,9 @@
     const t = copy[locale] || copy.fa;
     const dir = locale === "fa" ? "rtl" : "ltr";
     const textAlignClass =
-      locale === "fa" ? "text-right" : "text-left";
-    const mxClass = locale === "fa" ? "ms-auto" : "me-auto";
-    const ctaAlignClass = "justify-start";
+      locale === "fa" ? "text-center lg:text-right" : "text-center lg:text-left";
+    const mxClass = locale === "fa" ? "mx-auto lg:ms-auto" : "mx-auto lg:me-auto";
+    const ctaAlignClass = "justify-center lg:justify-start";
     const textOrderClass = locale === "fa" ? "lg:order-2" : "lg:order-1";
     const featuresOrderClass = locale === "fa" ? "lg:order-1" : "lg:order-2";
 
