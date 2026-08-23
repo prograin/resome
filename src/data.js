@@ -76,7 +76,7 @@ window.PORTFOLIO_DATA_I18N = {
           hint: "Sites, panels, payments",
           icon: "globe-2",
           roles: ["Frontend", "Fullstack"],
-          projectIds: ["portfolio-site", "oildb", "rokesh-mehdi", "heychat"],
+          projectIds: ["oildb", "rokesh-mehdi", "heychat"],
         },
         {
           key: "backend",
@@ -127,15 +127,16 @@ window.PORTFOLIO_DATA_I18N = {
         github: "https://github.com/prograin",
         linkedin: "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
         youtube: "https://www.youtube.com/@Prograin_ARR",
+        instagram: "https://www.instagram.com/prograin_/",
       },
       about: `
 Developer and researcher in Deep Learning and Backend Engineering, with experience designing and implementing RESTful APIs and working with modular, microservice, and event-driven architectures. Familiar with the Pub/Sub communication pattern and proficient in JavaScript, Python, and TypeScript.
 
 Experienced in deploying projects to servers; working with Docker and Docker Compose; using Linux environments (Ubuntu, Debian); and designing software architecture.
 
-Skilled in deep learning models, computer vision, and the mathematical foundations of artificial intelligence.
-
 Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch, ClickHouse, PostgreSQL, and BigQuery across both OLTP and OLAP projects. Interested in R&D roles focused on intelligent modeling and scalable systems, with a strong ability to solve complex problems.
+
+Skilled in deep learning models, computer vision, and the mathematical foundations of artificial intelligence.
 `,
       mobileAbout:
         "Backend, data, and full-stack engineer with hands-on experience designing REST APIs, data pipelines, dashboards, deployments, and scalable services. Comfortable with SQL/NoSQL databases, Linux/Docker environments, and intelligent systems, with a focus on solving real operational problems.",
@@ -377,46 +378,10 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
       },
 
       {
-        id: "portfolio-site",
-        title: "Personal Portfolio & Resume",
-        shortDescription:
-          "A bilingual, responsive portfolio and resume website with project filtering, private-project summaries, theme switching, and mobile-friendly content controls.",
-        roles: ["Frontend", "Fullstack"],
-        tags: [
-          "HTML",
-          "JavaScript",
-          "Tailwind CSS",
-          "Responsive UI",
-          "RTL / LTR",
-          "Bilingual Content",
-          "Project Filtering",
-          "Dark Mode",
-        ],
-        highlights: [
-          "Built a bilingual portfolio with English and Persian content switching",
-          "Connected project filters to both project cards and skill visibility",
-          "Designed mobile-friendly summary toggles for hero and experience content",
-          "Handled private project presentation with shareable, non-sensitive summaries",
-        ],
-        details: [
-          "Implemented the site as a lightweight static portfolio with all content driven from a structured data file.",
-          "Added role-based project filtering so visitors can quickly review relevant work across frontend, backend, data, AI, and desktop categories.",
-          "Supported both RTL and LTR layouts so Persian and English versions feel native instead of just translated.",
-          "Refined mobile content density with compact summaries and expandable details for a cleaner browsing experience.",
-        ],
-        links: {
-          github: "https://github.com/prograin",
-          liveDemo: null,
-        },
-        media: { videoUrl: null, images: [] },
-        isPrivate: false,
-      },
-
-      {
         id: "oildb",
         title: "Black Wall",
         shortDescription:
-          "A production business website with a public contact flow plus a private internal management panel.",
+          "An international oil and raw-material trading platform for listing and selling petroleum products, with authentication, secure media storage, push notifications, workers, and private operational workflows.",
         roles: ["DataEng", "Backend", "Frontend", "Fullstack"],
         tags: [
           "Ecommerce Website",
@@ -434,28 +399,28 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           "Production Deployment",
         ],
         highlights: [
-          "Built and maintained the Black Wall production website and its related private internal panel",
-          "Structured the public contact path so visitors can reach the business quickly",
-          "Built on Cloudflare infrastructure with Cloudflare D1 (SQLite) as the primary database",
-          "Implemented multiple database migrations to evolve schema safely over time",
-          "Nuxt + Vue UI with Tailwind CSS for a clean, responsive user experience",
-          "Modular architecture using reusable components and composables",
+          "Built an international marketplace-style platform for petroleum products and industrial raw materials",
+          "Implemented authentication flows for protected access and controlled operational actions",
+          "Designed secure image handling so product media and uploaded assets are stored safely",
+          "Added push notification flows and background worker logic for operational updates",
+          "Built on Cloudflare infrastructure with D1 storage, migrations, workers, and production deployment",
+          "Nuxt + Vue UI with Tailwind CSS for a clean, responsive, multilingual-ready trading experience",
         ],
         details: [
-          "The public Black Wall website focuses on a clear business/contact journey, while the private internal side covers operational workflows.",
-          "I used Cloudflare for deployment and infrastructure, with Cloudflare D1 as the database layer for the private panel.",
-          "A key part of the work was designing the database schema and implementing multiple migrations to safely evolve tables, relationships, and constraints as requirements changed.",
-          "The UI was built with Nuxt and Vue, styled with Tailwind CSS, focusing on clarity, responsiveness, and maintainability.",
-          "On the engineering side, the project follows a modular structure: composables encapsulate reusable business logic while components keep the interface clean and scalable.",
-          "The main technical challenges centered around relational data modeling and ensuring data integrity across entities—solved through careful schema design, iterative migrations, and robust full-stack integration in Nuxt.",
+          "Black Wall is positioned as an international platform for buying and selling oil-related products and industrial raw materials, not just a simple company website.",
+          "The product side supports structured presentation of petroleum products, product media, and business-facing information for buyers and sellers.",
+          "Authentication and protected flows were designed so sensitive actions stay behind controlled access instead of being exposed publicly.",
+          "Media handling was built around safer storage patterns, keeping product images and uploaded files managed through the application rather than loose public assets.",
+          "Push notification and worker-based flows were added to support operational updates and background processing without blocking the main user experience.",
+          "The implementation uses Nuxt/Vue with Cloudflare infrastructure, including D1, migrations, worker logic, and modular composables for maintainability.",
         ],
         shareableDetails: [
-          "Built and maintained the public business website so visitors can understand the company and reach out quickly.",
-          "Designed the contact path around a simple visitor journey instead of a heavy marketing flow.",
-          "Worked on the private internal side for managing business data and operational records.",
-          "Handled evolving requirements by planning data structures carefully and keeping changes controlled over time.",
-          "Improved the UI flow so day-to-day internal actions were easier to scan, use, and maintain.",
-          "Kept implementation details private while preserving a public website link for review.",
+          "Built Black Wall as an international trading platform for oil products and industrial raw materials.",
+          "Implemented protected authentication flows so operational features are not exposed to public users.",
+          "Designed safer storage and handling for product images and uploaded media.",
+          "Added push notification and worker-based flows for background updates and operational events.",
+          "Structured product and business data so petroleum products and raw materials can be presented clearly.",
+          "Kept sensitive implementation details private while preserving the public website link for review.",
         ],
         links: {
           url: "https://black-wall.org/",
@@ -470,7 +435,7 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
         id: "rokesh-mehdi",
         title: "Rokesh Mehdi",
         shortDescription:
-          "A production PHP website for Rokesh Mehdi with custom-built backend, payment flow, Enamad trust setup, ZarinPal integration, SMS notifications, and an articles section.",
+          "A production e-commerce website for Rokesh Mehdi with authentication, admin dashboard, product/content management, payment flow, SMS notifications, Enamad setup, and ZarinPal integration.",
         roles: ["Backend", "Frontend", "Fullstack"],
         tags: [
           "PHP",
@@ -487,18 +452,19 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           "Articles",
         ],
         highlights: [
-          "Built the website and backend flow from scratch with PHP",
-          "Integrated ZarinPal for online payments and handled transaction flow",
-          "Prepared and connected Enamad requirements for trust and sales readiness",
-          "Connected Melipayamak for SMS-based notifications and operational messages",
-          "Added an articles section to support site content and SEO",
+          "Built a full e-commerce website with custom PHP backend logic",
+          "Implemented authentication and an admin dashboard for managing site operations",
+          "Enabled admin-side management of products, content, orders, and key website data",
+          "Integrated ZarinPal, Enamad requirements, and SMS notifications for commerce workflows",
+          "Added articles/content management to support SEO and ongoing site updates",
         ],
         details: [
-          "Designed and implemented the website as a complete production project, covering both the public pages and backend logic.",
-          "Implemented payment handling with ZarinPal and connected the website to the required trust and verification setup for Enamad.",
-          "Integrated Melipayamak so the site can send important SMS messages for user and business workflows.",
-          "Created a simple content/articles section so non-technical visitors can browse useful site content without needing to understand the underlying stack.",
-          "Focused on practical deployment, maintainability, and a clear user journey for visitors who just want to move through the site quickly.",
+          "Designed and implemented the website as a complete production e-commerce system, covering public pages, backend logic, and admin workflows.",
+          "Built authentication and dashboard flows so the admin can manage products, website content, operational data, and commerce-related actions from one place.",
+          "Implemented payment handling with ZarinPal and connected the website to trust and verification requirements such as Enamad.",
+          "Integrated SMS notifications so important user and order-related events can be sent through the site workflow.",
+          "Added content/articles management to support SEO, product education, and regular website updates.",
+          "Focused on a maintainable admin experience so the owner can control the important parts of the shop without direct code changes.",
         ],
         links: {
           url: "https://rokesh-mehdi.ir",
@@ -684,9 +650,9 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
 
       {
         id: "vdoc",
-        title: "vDoc",
+        title: "Documentation",
         shortDescription:
-          "Confidential desktop document system with XML/HTML storage and hierarchical tree visualization.",
+          "Desktop documentation system with XML/HTML storage, autosave, rich text editing, and hierarchical tree visualization.",
         roles: ["DataEng", "Desktop"],
         tags: ["PyQt", "Qt Creator", "XML", "HTML", "Desktop UI"],
         highlights: [
@@ -697,13 +663,13 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           "Desktop UI built with PyQt/Qt Creator",
         ],
         details: [
-          "vDoc is a private/NDA desktop application built to manage and organize documents with a structured, scalable approach.",
+          "Documentation is a desktop application built to manage and organize documents with a structured, scalable approach.",
           "It includes a full text management layer: creating, editing, and maintaining documents with an autosave workflow to prevent data loss and keep edits continuously synced.",
           "Documents are stored using XML/HTML formats to preserve structure and enable reliable persistence, searchability, and future extensibility.",
           "The app provides hierarchical (tree-based) folder management, making it easy to categorize large collections of files and navigate them like a lightweight knowledge base.",
           "For long documents, vDoc supports header indexing and smooth navigation—users can jump between sections quickly and move through content with minimal friction.",
           "Built with PyQt and Qt Creator, the UI focuses on speed, clarity, and an editor-first workflow designed for daily, intensive usage.",
-          "Private / NDA project. Additional technical details can be shared upon request.",
+          "Additional technical details can be shared upon request.",
         ],
         links: { github: null, liveDemo: null },
         media: {
@@ -718,7 +684,7 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
         id: "bmc",
         title: "BMC",
         shortDescription:
-          "A confidential Excel-like desktop system focused on structured persistence, database-backed workbooks, and a formula engine for dynamic, editable tables.",
+          "An Excel-like desktop system focused on structured persistence, database-backed workbooks, and a formula engine for dynamic, editable tables.",
         roles: ["DataEng"],
         tags: [
           "XML",
@@ -736,12 +702,12 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           "Text and cell editing with structured data modeling",
         ],
         details: [
-          "BMC is a private/NDA Excel-like desktop application designed for managing structured tabular data with reliable persistence and a smooth editing experience.",
+          "BMC is an Excel-like desktop application designed for managing structured tabular data with reliable persistence and a smooth editing experience.",
           "It supports saving and loading workbook files in a database-backed (.db) format—enabling consistent storage, fast reloads, and scalable data organization.",
           "Users can create and manage multiple sheets (tabs), add/remove sheets as needed, and work with editable tables that behave similarly to spreadsheets.",
           "A built-in formula engine allows users to write formulas, parse and evaluate expressions, and display computed results while keeping the original formulas accessible and editable.",
           "The system includes full table editing capabilities—editing cell text, updating values, and maintaining structured data integrity across sheets and persisted files.",
-          "Private / NDA project. Additional implementation details can be shared upon request.",
+          "Additional implementation details can be shared upon request.",
         ],
         links: { github: null, liveDemo: null },
         media: {
@@ -1069,7 +1035,7 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           hint: "سایت، پنل، پرداخت",
           icon: "globe-2",
           roles: ["Frontend", "Fullstack"],
-          projectIds: ["portfolio-site", "oildb", "rokesh-mehdi", "heychat"],
+          projectIds: ["oildb", "rokesh-mehdi", "heychat"],
         },
         {
           key: "backend",
@@ -1120,15 +1086,16 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
         github: "https://github.com/prograin",
         linkedin: "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
         youtube: "https://www.youtube.com/@Prograin_ARR",
+        instagram: "https://www.instagram.com/prograin_/",
       },
       about: `
-توسعه‌دهنده و پژوهشگر در حوزه‌ی یادگیری عمیق و مهندسی بک‌اند، با تجربه‌ی طراحی و پیاده‌سازی APIهای RESTful و کار با معماری‌های ماژولار، میکروسرویس و رویدادمحور. آشنا با الگوی ارتباطی Pub/Sub و مسلط به JavaScript، Python و TypeScript.
+توسعه‌دهنده و پژوهشگر در حوزه‌ی یادگیری عمیق و مهندسی بک‌اند، با تجربه‌ی طراحی و پیاده‌سازی APIهای RESTful و کار با معماری‌های ماژولار، میکروسرویس و Event-Driven. آشنا با الگوی ارتباطی Pub/Sub و مسلط به JavaScript، Python و TypeScript.
 
 دارای تجربه‌ی استقرار پروژه‌ها روی سرور، کار با Docker و Docker Compose، استفاده از محیط‌های لینوکسی (Ubuntu، Debian) و طراحی معماری نرم‌افزار.
 
-مسلط به مدل‌های یادگیری عمیق، بینایی ماشین و مبانی ریاضی هوش مصنوعی.
-
 تجربه عملی کار با پایگاه‌داده‌های SQL و NoSQL مانند MongoDB، Elasticsearch، ClickHouse، PostgreSQL و BigQuery در پروژه‌های OLTP و OLAP. علاقه‌مند به نقش‌های R&D با تمرکز بر مدل‌سازی هوشمند و سیستم‌های مقیاس‌پذیر، با توانایی بالا در حل مسائل پیچیده.
+
+مسلط به مدل‌های یادگیری عمیق، بینایی ماشین و مبانی ریاضی هوش مصنوعی.
 `,
       mobileAbout:
         "مهندس بک‌اند، داده و فول‌استک با تجربه عملی در طراحی APIهای REST، پایپ‌لاین داده، داشبورد، استقرار و سرویس‌های مقیاس‌پذیر. با دیتابیس‌های SQL/NoSQL، محیط‌های Linux/Docker و سیستم‌های هوشمند کار کرده‌ام و تمرکزم حل مسئله‌های واقعی عملیاتی است.",
@@ -1373,45 +1340,10 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
         isPrivate: false,
       },
       {
-        id: "portfolio-site",
-        title: "وب‌سایت رزومه و نمونه‌کار",
-        shortDescription:
-          "وب‌سایت دو زبانه و ریسپانسیو برای نمایش رزومه، پروژه‌ها، مهارت‌ها و سوابق کاری با فیلتر پروژه‌ها، حالت تاریک و خلاصه‌های مناسب موبایل.",
-        roles: ["Frontend", "Fullstack"],
-        tags: [
-          "HTML",
-          "JavaScript",
-          "Tailwind CSS",
-          "Responsive UI",
-          "RTL / LTR",
-          "محتوای دو زبانه",
-          "فیلتر پروژه",
-          "Dark Mode",
-        ],
-        highlights: [
-          "پیاده‌سازی رزومه و نمونه‌کار دو زبانه با پشتیبانی از فارسی و انگلیسی",
-          "اتصال فیلتر پروژه‌ها به نمایش پروژه‌ها و مهارت‌های مرتبط",
-          "طراحی نمایش خلاصه‌تر برای موبایل همراه با امکان مشاهده جزئیات بیشتر",
-          "نمایش حرفه‌ای‌تر پروژه‌های خصوصی با خلاصه قابل انتشار و بدون اطلاعات حساس",
-        ],
-        details: [
-          "ساختار سایت سبک و داده‌محور است و محتوای اصلی از فایل داده ساختاریافته خوانده می‌شود.",
-          "فیلترهای پروژه به کاربر کمک می‌کنند نمونه‌کارهای مرتبط با بک‌اند، فرانت‌اند، داده، هوش مصنوعی و ابزارهای دسکتاپ را سریع‌تر پیدا کند.",
-          "چینش فارسی و انگلیسی با RTL و LTR جداگانه مدیریت شده تا تجربه کاربر در هر زبان طبیعی باشد.",
-          "برای موبایل، متن‌های طولانی خلاصه‌تر نمایش داده می‌شوند و کاربر می‌تواند در صورت نیاز جزئیات کامل را باز کند.",
-        ],
-        links: {
-          github: "https://github.com/prograin",
-          liveDemo: null,
-        },
-        media: { videoUrl: null, images: [] },
-        isPrivate: false,
-      },
-      {
         id: "oildb",
         title: "Black Wall",
         shortDescription:
-          "سایت عملیاتی Black Wall برای معرفی کسب‌وکار و مسیر تماس عمومی، همراه با بخش داخلی خصوصی برای مدیریت اطلاعات و جریان‌های کاری.",
+          "پلتفرم بین‌المللی خرید و فروش نفت، محصولات نفتی و مواد اولیه صنعتی با احراز هویت، مدیریت امن تصاویر، Storage، Push Notification، Worker و جریان‌های عملیاتی خصوصی.",
         roles: ["DataEng", "Backend", "Frontend", "Fullstack"],
         tags: [
           "سایت فروشگاهی",
@@ -1429,28 +1361,28 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           "Production Deployment",
         ],
         highlights: [
-          "ساخت و نگهداری سایت عملیاتی Black Wall و پنل خصوصی داخلی مرتبط با پروژه",
-          "چیدمان مسیر تماس عمومی برای ارتباط سریع‌تر بازدیدکننده با کسب‌وکار",
-          "زیرساخت Cloudflare و دیتابیس Cloudflare D1 (SQLite)",
-          "اجرای چندین migration برای تکامل امنِ اسکیمای دیتابیس",
-          "UI با Nuxt + Vue و Tailwind برای تجربه کاربری تمیز و ریسپانسیو",
-          "معماری ماژولار با کامپوننت‌ها و composableهای قابل‌استفاده مجدد",
+          "ساخت پلتفرم بین‌المللی برای عرضه و فروش محصولات نفتی و مواد اولیه صنعتی",
+          "پیاده‌سازی احراز هویت و مسیرهای محافظت‌شده برای عملیات حساس",
+          "طراحی مدیریت امن تصاویر و فایل‌های محصول با Storage کنترل‌شده",
+          "اضافه‌کردن Push Notification و Worker برای رویدادها و پردازش‌های پس‌زمینه",
+          "استفاده از Cloudflare، D1، migrationها و Worker برای زیرساخت عملیاتی",
+          "رابط کاربری Nuxt/Vue با Tailwind برای تجربه تمیز، سریع و قابل توسعه",
         ],
         details: [
-          "بخش عمومی Black Wall روی مسیر ساده معرفی کسب‌وکار و تماس تمرکز دارد و بخش خصوصی داخلی جریان‌های عملیاتی پروژه را پوشش می‌دهد.",
-          "برای استقرار و زیرساخت پنل خصوصی از Cloudflare استفاده شد و لایه دیتابیس Cloudflare D1 (بر پایه SQLite) بود.",
-          "بخش مهم پروژه طراحی اسکیمای دیتابیس و اجرای migrationهای متعدد برای تکامل امن جداول، روابط و محدودیت‌ها با تغییر نیازمندی‌ها بود.",
-          "رابط کاربری با Nuxt و Vue ساخته شد و با Tailwind CSS استایل‌دهی شد؛ با تمرکز روی خوانایی، ریسپانسیو بودن و نگهداری‌پذیری.",
-          "پروژه ساختار ماژولار دارد: composableها منطق کسب‌وکار قابل استفاده مجدد را پوشش می‌دهند و کامپوننت‌ها UI را تمیز و مقیاس‌پذیر نگه می‌دارند.",
-          "چالش اصلی: مدل‌سازی رابطه‌ای و تضمین یکپارچگی بین موجودیت‌ها؛ حل‌شده با طراحی دقیق اسکیمـا، مهاجرت‌های مرحله‌ای و یکپارچه‌سازی کامل فول‌استک در Nuxt.",
+          "Black Wall یک سایت ساده معرفی کسب‌وکار نیست؛ به‌عنوان پلتفرم بین‌المللی برای خرید و فروش محصولات نفتی، مواد اولیه و آیتم‌های صنعتی طراحی شد.",
+          "برای بخش‌های حساس، احراز هویت و مسیرهای محافظت‌شده پیاده‌سازی شد تا عملیات مدیریتی و داده‌های عملیاتی در دسترس عمومی نباشند.",
+          "تصاویر و فایل‌های محصول با رویکرد امن‌تر مدیریت شدند تا رسانه‌های مربوط به محصولات و مدارک از مسیر کنترل‌شده ذخیره و استفاده شوند.",
+          "Push Notification و Worker برای اطلاع‌رسانی، رویدادهای عملیاتی و پردازش‌های پس‌زمینه اضافه شد تا تجربه کاربر و مدیریت عملیات روان‌تر باشد.",
+          "زیرساخت با Cloudflare، D1، migrationها و Workerها پیاده‌سازی شد و ساختار داده‌ها برای رشد تدریجی محصولات و نیازمندی‌ها آماده ماند.",
+          "رابط کاربری با Nuxt/Vue و Tailwind ساخته شد و ساختار ماژولار با composableها و کامپوننت‌های قابل نگهداری طراحی شد.",
         ],
         shareableDetails: [
-          "سایت عمومی Black Wall را برای معرفی کسب‌وکار و ارتباط سریع‌تر بازدیدکننده با تیم ساختم و نگهداری کردم.",
-          "مسیر تماس را ساده و مستقیم طراحی کردم تا کاربر بدون سردرگمی به راه ارتباطی برسد.",
-          "روی بخش داخلی خصوصی برای مدیریت داده‌ها، رکوردهای عملیاتی و جریان‌های کاری کسب‌وکار کار کردم.",
-          "با تغییر نیازمندی‌ها، ساختار داده و مسیرهای کاری را مرحله‌به‌مرحله تکامل دادم تا سیستم قابل نگهداری بماند.",
-          "جریان‌های UI را طوری مرتب کردم که کارهای روزمره داخلی سریع‌تر قابل اسکن و انجام باشند.",
-          "جزئیات فنی و ابزارها خصوصی هستند، اما لینک سایت عمومی برای بررسی خروجی قابل مشاهده است.",
+          "Black Wall را به‌عنوان پلتفرم بین‌المللی خرید و فروش محصولات نفتی و مواد اولیه صنعتی توسعه دادم.",
+          "برای بخش‌های حساس، احراز هویت و مسیرهای دسترسی محافظت‌شده پیاده‌سازی شد.",
+          "مدیریت امن تصاویر و فایل‌های محصول با Storage کنترل‌شده در جریان پروژه قرار گرفت.",
+          "Push Notification و Worker برای رویدادهای عملیاتی و پردازش‌های پس‌زمینه اضافه شد.",
+          "داده‌های محصول و ساختار سایت طوری طراحی شدند که عرضه محصولات نفتی و مواد اولیه واضح و قابل توسعه باشد.",
+          "جزئیات پیاده‌سازی خصوصی هستند، اما لینک عمومی سایت برای بررسی خروجی قابل مشاهده است.",
         ],
         links: {
           url: "https://black-wall.org/",
@@ -1465,7 +1397,7 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
         id: "rokesh-mehdi",
         title: "Rokesh Mehdi",
         shortDescription:
-          "سایت عملیاتی rokesh-mehdi.ir با PHP، پیاده‌سازی اختصاصی، اتصال زرین‌پال، دریافت اینماد، پیامک‌های ملی‌پیامک و بخش مقالات سایت.",
+          "سایت فروشگاهی Rokesh Mehdi با احراز هویت، داشبورد ادمین، مدیریت محصولات و محتوا، پرداخت آنلاین، پیامک‌های عملیاتی، اینماد و اتصال زرین‌پال.",
         roles: ["Backend", "Frontend", "Fullstack"],
         tags: [
           "PHP",
@@ -1482,18 +1414,19 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           "مقالات سایت",
         ],
         highlights: [
-          "طراحی و پیاده‌سازی سایت و منطق بک‌اند با PHP از پایه",
-          "اتصال زرین‌پال و پیاده‌سازی جریان پرداخت آنلاین",
-          "آماده‌سازی و اتصال الزامات اینماد برای اعتماد و فروش آنلاین",
-          "اتصال ملی‌پیامک برای پیامک‌های اطلاع‌رسانی و عملیاتی",
-          "اضافه شدن بخش مقالات سایت برای محتوا و بهبود SEO",
+          "طراحی و پیاده‌سازی سایت فروشگاهی با بک‌اند اختصاصی PHP",
+          "پیاده‌سازی احراز هویت و داشبورد ادمین برای مدیریت عملیات سایت",
+          "امکان مدیریت محصولات، محتوا، سفارش‌ها و بخش‌های کلیدی سایت توسط ادمین",
+          "اتصال زرین‌پال، اینماد و پیامک‌های عملیاتی برای جریان فروش",
+          "اضافه شدن بخش مقالات و مدیریت محتوا برای SEO و به‌روزرسانی سایت",
         ],
         details: [
-          "این پروژه به‌صورت یک سایت کامل و قابل استفاده پیاده‌سازی شد؛ هم صفحات عمومی سایت و هم منطق سمت سرور را پوشش می‌دهد.",
+          "این پروژه به‌صورت یک سایت فروشگاهی کامل پیاده‌سازی شد؛ هم صفحات عمومی، هم منطق سمت سرور و هم جریان‌های مدیریتی ادمین را پوشش می‌دهد.",
+          "احراز هویت و داشبورد ادمین طراحی شد تا مدیریت محصولات، محتوای سایت، سفارش‌ها و داده‌های اصلی از یک پنل قابل انجام باشد.",
           "فرآیند پرداخت با زرین‌پال پیاده‌سازی شد و سایت برای الزامات اعتمادسازی و فروش آنلاین، از جمله اینماد، آماده و متصل شد.",
-          "ملی‌پیامک به سایت وصل شد تا پیام‌های مهم برای کاربر و روندهای کاری سایت ارسال شوند.",
-          "بخش مقالات سایت اضافه شد تا بازدیدکننده‌های غیرتخصصی هم بتوانند محتوای سایت را راحت دنبال کنند و سایت از نظر محتوایی و SEO کامل‌تر باشد.",
-          "تمرکز اصلی روی سادگی مسیر کاربر، پایداری در اجرا، و قابل نگهداری بودن پروژه در محیط واقعی بود.",
+          "سیستم پیامک برای اطلاع‌رسانی‌های مهم کاربر و عملیات فروش به سایت متصل شد.",
+          "بخش مقالات و مدیریت محتوا اضافه شد تا سایت از نظر SEO و به‌روزرسانی محتوایی کامل‌تر باشد.",
+          "تمرکز اصلی روی تجربه فروشگاهی قابل نگهداری بود تا ادمین بتواند بخش‌های مهم سایت را بدون تغییر مستقیم کد مدیریت کند.",
         ],
         links: {
           url: "https://rokesh-mehdi.ir",
@@ -1676,9 +1609,9 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
 
       {
         id: "vdoc",
-        title: "vDoc",
+        title: "Documentation",
         shortDescription:
-          "سیستم دسکتاپ مدیریت اسناد (محرمانه) با ذخیره‌سازی XML/HTML و نمایش درختی سلسله‌مراتبی.",
+          "سیستم دسکتاپ مدیریت مستندات با ذخیره‌سازی XML/HTML، ویرایش متن غنی، ذخیره خودکار و نمایش درختی سلسله‌مراتبی.",
         roles: ["DataEng", "Desktop"],
         tags: ["PyQt", "Qt Creator", "XML", "HTML", "Desktop UI"],
         highlights: [
@@ -1689,13 +1622,13 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           "UI دسکتاپ با PyQt/Qt Creator",
         ],
         details: [
-          "vDoc یک اپلیکیشن دسکتاپ خصوصی/NDA برای مدیریت و سازمان‌دهی اسناد با ساختار مقیاس‌پذیر است.",
+          "Documentation یک اپلیکیشن دسکتاپ برای مدیریت و سازمان‌دهی اسناد با ساختار مقیاس‌پذیر است.",
           "دارای لایه کامل مدیریت متن: ایجاد، ویرایش و نگهداری اسناد با workflow ذخیره خودکار برای جلوگیری از از دست رفتن داده.",
           "ذخیره‌سازی با XML/HTML برای حفظ ساختار، جستجوپذیری و توسعه‌پذیری آینده.",
           "مدیریت پوشه‌ای درختی برای دسته‌بندی مجموعه‌های بزرگ و ناوبری ساده مثل یک Knowledge Base سبک.",
           "پشتیبانی از ایندکس تیترها و ناوبری روان در اسناد طولانی.",
           "UI با تمرکز بر سرعت و وضوح و تجربه editor-first برای استفاده روزانه.",
-          "پروژه خصوصی / NDA. جزئیات فنی بیشتر در صورت درخواست قابل ارائه است.",
+          "جزئیات فنی بیشتر در صورت درخواست قابل ارائه است.",
         ],
         links: { github: null, liveDemo: null },
         media: {
@@ -1710,7 +1643,7 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
         id: "bmc",
         title: "BMC",
         shortDescription:
-          "سیستم دسکتاپ شبیه اکسل (محرمانه) با ذخیره‌سازی ساختاریافته، ورک‌بوک‌های مبتنی بر دیتابیس و موتور فرمول برای جدول‌های داینامیک.",
+          "سیستم دسکتاپ شبیه اکسل با ذخیره‌سازی ساختاریافته، ورک‌بوک‌های مبتنی بر دیتابیس و موتور فرمول برای جدول‌های داینامیک.",
         roles: ["DataEng"],
         tags: [
           "XML",
@@ -1728,12 +1661,12 @@ Hands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch,
           "ویرایش متن/سلول‌ها با مدل‌سازی داده ساختاریافته",
         ],
         details: [
-          "BMC یک اپلیکیشن دسکتاپ خصوصی/NDA شبیه اکسل برای مدیریت داده‌های جدولی با ذخیره‌سازی قابل اطمینان و تجربه ویرایش روان است.",
+          "BMC یک اپلیکیشن دسکتاپ شبیه اکسل برای مدیریت داده‌های جدولی با ذخیره‌سازی قابل اطمینان و تجربه ویرایش روان است.",
           "پشتیبانی از ذخیره و بارگذاری ورک‌بوک‌ها در قالب دیتابیس (.db) برای ذخیره‌سازی پایدار و بارگذاری سریع.",
           "امکان ساخت/مدیریت چندین شیت (Tab)، افزودن/حذف شیت‌ها و کار با جدول‌های قابل ویرایش مشابه اسپردشیت.",
           "موتور فرمول داخلی برای نوشتن فرمول، پارس و ارزیابی و نمایش خروجی، همراه با نگهداری فرمول اصلی برای ویرایش.",
           "ویرایش کامل جدول: تغییر متن سلول‌ها، بروزرسانی مقادیر و حفظ یکپارچگی داده بین شیت‌ها و فایل‌ها.",
-          "پروژه خصوصی / NDA. جزئیات بیشتر در صورت درخواست قابل ارائه است.",
+          "جزئیات بیشتر در صورت درخواست قابل ارائه است.",
         ],
         links: { github: null, liveDemo: null },
         media: {

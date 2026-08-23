@@ -1,6 +1,6 @@
 <!-- index.html (UPDATED) -->
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="fa" dir="rtl" class="dark scroll-smooth overflow-x-hidden">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -28,7 +28,7 @@
     <link rel="icon" href="./assets/icons/favicon.ico" />
   </head>
 
-  <body class="min-h-screen bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50">
+  <body class="min-h-screen overflow-x-hidden bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50">
     <!-- Background -->
     <div aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden">
       <div
@@ -50,6 +50,7 @@
       >
         <a
           href="#home"
+          data-page-link="home"
           class="flex items-center gap-2 font-semibold tracking-tight"
         >
           <span
@@ -62,31 +63,10 @@
         <div
           class="hidden items-center gap-5 text-sm font-medium text-slate-600 dark:text-slate-300 md:flex"
         >
-          <!-- <a class="hover:text-slate-900 dark:hover:text-white" href="#about">About</a> -->
-          <a id="navRoles" class="hover:text-slate-900 dark:hover:text-white" href="#filters"
-            >Roles</a
-          >
-          <a id="navSkills" class="hover:text-slate-900 dark:hover:text-white" href="#skills"
-            >Skills</a
-          >
-          <a id="navProjects" class="hover:text-slate-900 dark:hover:text-white" href="#projects"
-            >Projects</a
-          >
-          <a
-            id="navExperience"
-            class="hover:text-slate-900 dark:hover:text-white"
-            href="#experience"
-            >Experience</a
-          >
-          <a
-            id="navEducation"
-            class="hover:text-slate-900 dark:hover:text-white"
-            href="#education"
-            >Education</a
-          >
-          <a id="navContact" class="hover:text-slate-900 dark:hover:text-white" href="#contact"
-            >Contact</a
-          >
+          <a id="navHomePage" class="hover:text-slate-900 dark:hover:text-white" href="#home" data-page-link="home">Home</a>
+          <a id="navResumePage" class="hover:text-slate-900 dark:hover:text-white" href="#resume" data-page-link="resume">Resume</a>
+          <a id="navOrderPage" class="hover:text-slate-900 dark:hover:text-white" href="#order" data-page-link="order">Order project</a>
+          <a id="navAcademyPage" class="hover:text-slate-900 dark:hover:text-white" href="#academy" data-page-link="academy">Academy</a>
         </div>
 
         <div class="flex items-center gap-2">
@@ -129,55 +109,27 @@
         <div
           class="grid grid-cols-2 gap-2 text-sm text-slate-700 dark:text-slate-200"
         >
-          <a
-            id="mNavAbout"
-            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="#about"
-            >About</a
-          >
-          <a
-            id="mNavRoles"
-            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="#filters"
-            >Roles</a
-          >
-          <a
-            id="mNavSkills"
-            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="#skills"
-            >Skills</a
-          >
-          <a
-            id="mNavProjects"
-            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="#projects"
-            >Projects</a
-          >
-          <a
-            id="mNavExperience"
-            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="#experience"
-            >Experience</a
-          >
-          <a
-            id="mNavEducation"
-            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="#education"
-            >Education</a
-          >
-          <a
-            id="mNavContact"
-            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="#contact"
-            >Contact</a
-          >
+          <a id="mNavHomePage" class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#home" data-page-link="home">Home</a>
+          <a id="mNavResumePage" class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#resume" data-page-link="resume">Resume</a>
+          <a id="mNavOrderPage" class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#order" data-page-link="order">Order project</a>
+          <a id="mNavAcademyPage" class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900" href="#academy" data-page-link="academy">Academy</a>
         </div>
       </div>
     </header>
 
-    <main class="mx-auto max-w-6xl px-4">
+    <main class="mx-auto w-full max-w-6xl overflow-x-hidden px-4">
+      <!-- Main gateway -->
+      <section id="homePage" class="page-view" data-page="home"></section>
+
+      <!-- Project order -->
+      <section id="orderPage" class="page-view hidden" data-page="order"></section>
+
+      <!-- Academy -->
+      <section id="academyPage" class="page-view hidden" data-page="academy"></section>
+
+      <div id="resumePage" class="page-view hidden" data-page="resume">
       <!-- Hero -->
-      <section id="home" class="pb-4 pt-10 sm:pb-5 sm:pt-14">
+      <section id="resumeHome" class="pb-4 pt-10 sm:pb-5 sm:pt-14">
         <div
           class="rounded-lg border border-cyan-100/80 bg-white/70 p-5 shadow-soft backdrop-blur-xl dark:border-cyan-950/70 dark:bg-slate-950/45 sm:p-8 lg:p-10"
         >
@@ -429,6 +381,7 @@
           <div id="contactLinks" class="mt-6 flex flex-wrap gap-3"></div>
         </div>
       </section>
+      </div>
     </main>
 
     <!-- Modal -->
@@ -473,6 +426,11 @@
 
     <script src="./src/data.js"></script>
     <script src="./src/local-icons.js"></script>
+    <script src="./src/pages/shared.js"></script>
+    <script src="./src/pages/home.js"></script>
+    <script src="./src/pages/order.js"></script>
+    <script src="./src/pages/academy.js"></script>
+    <script src="./src/pages/index.js"></script>
     <script src="./src/script.js"></script>
   </body>
 </html>

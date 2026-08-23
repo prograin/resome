@@ -53,6 +53,10 @@
       return `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="${svgClass}"><path d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.38a1.56 1.56 0 0 1 0 3.12ZM5.5 9.75h2.88V19H5.5V9.75Zm4.69 0h2.76v1.26h.04c.38-.73 1.32-1.5 2.71-1.5 2.9 0 3.43 1.9 3.43 4.38V19h-2.88v-4.53c0-1.08-.02-2.47-1.5-2.47-1.51 0-1.74 1.18-1.74 2.39V19H10.2V9.75Z"/></svg>`;
     }
 
+    if (name === "instagram") {
+      return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="${svgClass}"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>`;
+    }
+
     return `<i data-lucide="${escapeHtml(name)}" class="${svgClass}"></i>`;
   }
 
@@ -63,10 +67,7 @@
   function getPreferredTheme() {
     const saved = localStorage.getItem(THEME_KEY);
     if (saved === "dark" || saved === "light") return saved;
-    return window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+    return "dark";
   }
   function applyTheme(theme) {
     const root = document.documentElement;
@@ -87,9 +88,75 @@
 
   const state = {
     selectedRole: null, // role key
-    locale: localStorage.getItem(LOCALE_KEY) === "fa" ? "fa" : "en",
+    locale: localStorage.getItem(LOCALE_KEY) === "en" ? "en" : "fa",
     heroExpanded: false,
+    currentPage: "home",
   };
+
+  const PAGE_KEYS = ["home", "resume", "order", "academy"];
+  const RESUME_HASHES = new Set([
+    "resumeHome",
+    "filters",
+    "skills",
+    "projects",
+    "experience",
+    "education",
+    "contact",
+  ]);
+
+  function routeFromHost() {
+    const subdomain = window.location.hostname.split(".")[0]?.toLowerCase();
+    const hostRoutes = {
+      academy: "academy",
+      order: "order",
+      project: "order",
+      projects: "order",
+      resume: "resume",
+    };
+
+    return hostRoutes[subdomain] || "home";
+  }
+
+  function routeFromHash() {
+    const hash = window.location.hash.replace("#", "");
+    if (PAGE_KEYS.includes(hash)) return hash;
+    if (RESUME_HASHES.has(hash)) return "resume";
+    return routeFromHost();
+  }
+
+  function showPage(page = routeFromHash(), options = {}) {
+    const nextPage = PAGE_KEYS.includes(page) ? page : "home";
+    state.currentPage = nextPage;
+    document.body.classList.toggle("page-home-active", nextPage === "home");
+    document.body.classList.toggle("page-order-active", nextPage === "order");
+    document.body.classList.toggle("page-academy-active", nextPage === "academy");
+
+    document.querySelectorAll("[data-page]").forEach((view) => {
+      view.classList.toggle("hidden", view.getAttribute("data-page") !== nextPage);
+    });
+
+    document.querySelectorAll("[data-page-link]").forEach((link) => {
+      const active = link.getAttribute("data-page-link") === nextPage;
+      link.classList.toggle("text-cyan-700", active);
+      link.classList.toggle("dark:text-cyan-300", active);
+    });
+
+    if (options.scrollTop) {
+      window.scrollTo({ top: 0, behavior: options.smooth ? "smooth" : "auto" });
+    }
+
+    const hash = window.location.hash.replace("#", "");
+    if (nextPage === "resume" && RESUME_HASHES.has(hash)) {
+      window.setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({
+          behavior: options.smooth ? "smooth" : "auto",
+          block: "start",
+        });
+      }, 0);
+    }
+
+    refreshIcons();
+  }
 
   function getData() {
     return I18N[state.locale];
@@ -356,6 +423,8 @@
         "border-slate-300 bg-slate-950 text-white hover:bg-slate-800 dark:border-slate-700 dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200",
       linkedin:
         "border-sky-200 bg-sky-600 text-white hover:bg-sky-700 dark:border-sky-800 dark:bg-sky-400 dark:text-slate-950 dark:hover:bg-sky-300",
+      instagram:
+        "border-pink-200 bg-pink-600 text-white hover:bg-pink-700 dark:border-pink-900 dark:bg-pink-500 dark:text-white dark:hover:bg-pink-400",
       youtube:
         "border-red-200 bg-red-600 text-white hover:bg-red-700 dark:border-red-900 dark:bg-red-500 dark:text-white dark:hover:bg-red-400",
       mail: "border-cyan-200 bg-white/95 text-cyan-900 hover:bg-cyan-50 dark:border-cyan-800 dark:bg-slate-950/60 dark:text-cyan-100 dark:hover:bg-cyan-950/40",
@@ -427,6 +496,22 @@
       const el = document.getElementById(id);
       if (el) el.textContent = text;
     };
+
+    const pageNav = {
+      home: "Home",
+      resume: "Resume",
+      order: "Order project",
+      academy: "Academy",
+    };
+
+    setText("navHomePage", pageNav.home);
+    setText("navResumePage", pageNav.resume);
+    setText("navOrderPage", pageNav.order);
+    setText("navAcademyPage", pageNav.academy);
+    setText("mNavHomePage", pageNav.home);
+    setText("mNavResumePage", pageNav.resume);
+    setText("mNavOrderPage", pageNav.order);
+    setText("mNavAcademyPage", pageNav.academy);
 
     setText("navRoles", nav.roles || "Roles");
     setText("navSkills", nav.skills || "Skills");
@@ -537,6 +622,7 @@
     $("#heroLinks").innerHTML = [
       linkPill("GitHub", DATA.personal.links?.github, "github"),
       linkPill("LinkedIn", DATA.personal.links?.linkedin, "linkedin"),
+      linkPill("Instagram", DATA.personal.links?.instagram, "instagram"),
       linkPill("YouTube", DATA.personal.links?.youtube, "youtube"),
       linkPill(
         "Email",
@@ -565,6 +651,12 @@
         "linkedin",
       ),
       contactCard(
+        "Instagram",
+        DATA.personal.links?.instagram || "#",
+        "prograin_",
+        "instagram",
+      ),
+      contactCard(
         "YouTube",
         DATA.personal.links?.youtube || "#",
         "@Prograin_ARR",
@@ -590,6 +682,13 @@
     renderActiveRolePill();
     renderSkills();
     renderProjects();
+
+    if (options.scroll) {
+      document.getElementById("projects")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   }
 
   function renderChips() {
@@ -687,7 +786,7 @@
     document.getElementById("pillClearBtn")?.addEventListener(
       "click",
       () => {
-        setSelectedProjectFilter("all");
+        setSelectedProjectFilter("all", { scroll: true });
       },
       { once: true },
     );
@@ -1190,6 +1289,10 @@
       applyLocale(state.locale === "fa" ? "en" : "fa");
     });
 
+    window.addEventListener("hashchange", () => {
+      showPage(routeFromHash(), { scrollTop: true, smooth: true });
+    });
+
     document.getElementById("heroSummaryToggle")?.addEventListener("click", () => {
       state.heroExpanded = !state.heroExpanded;
       renderTop();
@@ -1203,11 +1306,11 @@
       const key = chip.getAttribute("data-chip-value");
       if (!key) return;
 
-      setSelectedProjectFilter(key, { toggle: true });
+      setSelectedProjectFilter(key, { toggle: true, scroll: true });
     });
 
     $("#projectFilterSelect")?.addEventListener("change", (e) => {
-      setSelectedProjectFilter(e.target.value);
+      setSelectedProjectFilter(e.target.value, { scroll: true });
     });
 
     // project actions
@@ -1269,6 +1372,7 @@
   // Init
   // -----------------------------
   function renderAll() {
+    window.STATIC_PAGES?.render?.();
     renderStaticTexts();
     renderTop();
     renderChips();
@@ -1278,6 +1382,7 @@
     renderProjects();
     renderExperience();
     renderEducation();
+    showPage(routeFromHash());
     refreshIcons();
   }
 
