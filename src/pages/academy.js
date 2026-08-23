@@ -68,7 +68,7 @@
     const floats = ["float-card-a", "float-card-b", "float-card-c", "float-card-a", "float-card-b", "float-card-c", "float-card-a"];
 
     return `
-    <li class="float-card ${floats[index]} flex w-[92%] max-w-md items-start gap-2 rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-sm leading-7 text-slate-700 shadow-softer backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-300 sm:w-[88%] ${positions[index]}">
+    <li class="float-card ${floats[index]} flex w-full max-w-none items-start gap-2 rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-sm leading-7 text-slate-700 shadow-softer backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-300 sm:w-[88%] sm:max-w-md ${positions[index]}">
       <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-600 dark:bg-cyan-300"></span>
       <span>${text}</span>
     </li>`;
@@ -105,7 +105,6 @@
     const textAlignClass =
       locale === "fa" ? "text-center lg:text-right" : "text-center lg:text-left";
     const mxClass = locale === "fa" ? "mx-auto lg:ms-auto" : "mx-auto lg:me-auto";
-    const ctaAlignClass = "justify-center lg:justify-start";
     const textOrderClass = locale === "fa" ? "lg:order-2" : "lg:order-1";
     const featuresOrderClass = locale === "fa" ? "lg:order-1" : "lg:order-2";
 
@@ -123,7 +122,7 @@
                 ${t.lead}
               </p>
 
-              <div class="mt-6 flex flex-wrap ${ctaAlignClass} gap-3">
+              <div class="${mxClass} mt-6 grid w-full max-w-md grid-cols-2 gap-3">
                 ${cta(`https://t.me/${contact.telegram}`, t.telegram, "send", "cyan", 'target="_blank" rel="noopener noreferrer"')}
                 ${cta(`tel:${contact.phone}`, t.phone, "phone", "emerald")}
               </div>

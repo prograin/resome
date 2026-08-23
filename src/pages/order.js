@@ -69,7 +69,7 @@
               <p class="mx-auto mt-4 max-w-3xl text-sm leading-7 text-slate-700 dark:text-slate-300 sm:text-base lg:mx-0">
                 ${t.lead}
               </p>
-              <div class="mt-5 flex flex-wrap justify-center gap-3 lg:justify-start">
+              <div class="mx-auto mt-5 grid w-full max-w-md grid-cols-2 gap-3 lg:mx-0">
                 ${cta(`tel:${contact.phone}`, t.phone, "phone", "emerald")}
                 ${cta(`https://t.me/${contact.telegram}`, t.telegram, "send", "cyan", 'target="_blank" rel="noopener noreferrer"')}
               </div>
