@@ -35,20 +35,12 @@
     },
   };
 
-  const contactButton = ({ href, label, iconName, tone, attrs = "" }) => {
-    const tones = {
-      cyan: "bg-cyan-700 text-white hover:bg-cyan-800 dark:bg-cyan-300 dark:text-slate-950 dark:hover:bg-cyan-200",
-      emerald:
-        "bg-emerald-700 text-white hover:bg-emerald-800 dark:bg-emerald-300 dark:text-slate-950 dark:hover:bg-emerald-200",
-      ghost:
-        "border border-slate-200 bg-white/90 text-slate-800 hover:border-cyan-200 hover:bg-cyan-50 dark:border-slate-800 dark:bg-slate-950/55 dark:text-slate-100 dark:hover:border-cyan-800 dark:hover:bg-cyan-950/35",
-    };
-
-    return `<a class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold shadow-sm transition hover:-translate-y-0.5 ${tones[tone]}" href="${href}" ${attrs}>
-      ${window.PAGE_SHARED.icon(iconName, "h-4 w-4")}
-      ${label}
-    </a>`;
-  };
+  copy.fa.contactPage = "تماس با ما";
+  copy.fa.cards.contactPage =
+    "پیام برای پروژه، آموزش، مشاوره یا همکاری.";
+  copy.en.contactPage = "Contact us";
+  copy.en.cards.contactPage =
+    "Message me for projects, training, consulting, or collaboration.";
 
   const pathCard = ({ href, label, text, iconName, tone, position, floatClass, dir }) => {
     const tones = {
@@ -75,7 +67,6 @@
   };
 
   window.PAGE_HOME = function renderHomePage(locale = "fa") {
-    const { contact, cta } = window.PAGE_SHARED;
     const t = copy[locale] || copy.fa;
     const dir = locale === "fa" ? "rtl" : "ltr";
 
@@ -89,22 +80,15 @@
             <p class="mx-auto mt-3 w-[92%] max-w-md break-words text-base leading-7 text-slate-700 dark:text-slate-300 sm:mt-5 sm:w-auto sm:max-w-2xl sm:leading-8 lg:mx-0">
               ${t.lead}
             </p>
-            <div class="mt-7 hidden flex-wrap gap-3 sm:flex">
-              ${cta(`https://t.me/${contact.telegram}`, t.telegram, "send", "cyan", 'target="_blank" rel="noopener noreferrer"')}
-              ${cta(`tel:${contact.phone}`, t.phone, "phone", "emerald")}
-            </div>
           </div>
 
           <div class="relative w-full min-w-0 self-center">
-            <nav class="relative flex w-full flex-col items-center justify-center gap-3 overflow-visible sm:min-h-[320px] sm:gap-6" dir="ltr" aria-label="Main sections">
+            <nav class="relative flex w-full flex-col items-center justify-center gap-3 overflow-visible sm:min-h-[410px] sm:gap-5" dir="ltr" aria-label="Main sections">
               ${pathCard({ href: "#resume", label: t.resume, text: t.cards.resume, iconName: "user-round", tone: "cyan", position: "sm:self-start", floatClass: "float-card float-card-a", dir })}
-              ${pathCard({ href: "#order", label: t.order, text: t.cards.order, iconName: "send", tone: "emerald", position: "sm:self-end", floatClass: "float-card float-card-b", dir })}
+              ${pathCard({ href: "#order", label: t.order, text: t.cards.order, iconName: "folder-kanban", tone: "emerald", position: "sm:self-end", floatClass: "float-card float-card-b", dir })}
               ${pathCard({ href: "#academy", label: t.academy, text: t.cards.academy, iconName: "graduation-cap", tone: "rose", position: "sm:self-start sm:ml-8", floatClass: "float-card float-card-c", dir })}
+              ${pathCard({ href: "#contact-page", label: t.contactPage, text: t.cards.contactPage, iconName: "send", tone: "cyan", position: "sm:self-end sm:mr-8", floatClass: "float-card float-card-a", dir })}
             </nav>
-            <div class="mx-auto mt-4 grid w-[92%] max-w-md grid-cols-2 gap-3 sm:hidden">
-              ${contactButton({ href: `https://t.me/${contact.telegram}`, label: t.telegram, iconName: "send", tone: "cyan", attrs: 'target="_blank" rel="noopener noreferrer"' })}
-              ${contactButton({ href: `tel:${contact.phone}`, label: t.phone, iconName: "phone", tone: "emerald" })}
-            </div>
           </div>
         </section>
       </div>`;

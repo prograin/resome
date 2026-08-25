@@ -93,7 +93,7 @@
     currentPage: "home",
   };
 
-  const PAGE_KEYS = ["home", "resume", "order", "academy"];
+  const PAGE_KEYS = ["home", "resume", "order", "academy", "contact-page"];
   const RESUME_HASHES = new Set([
     "resumeHome",
     "filters",
@@ -108,6 +108,7 @@
     const subdomain = window.location.hostname.split(".")[0]?.toLowerCase();
     const hostRoutes = {
       academy: "academy",
+      contact: "contact-page",
       order: "order",
       project: "order",
       projects: "order",
@@ -130,6 +131,10 @@
     document.body.classList.toggle("page-home-active", nextPage === "home");
     document.body.classList.toggle("page-order-active", nextPage === "order");
     document.body.classList.toggle("page-academy-active", nextPage === "academy");
+    document.body.classList.toggle(
+      "page-contact-active",
+      nextPage === "contact-page",
+    );
 
     document.querySelectorAll("[data-page]").forEach((view) => {
       view.classList.toggle("hidden", view.getAttribute("data-page") !== nextPage);
@@ -152,6 +157,20 @@
           behavior: options.smooth ? "smooth" : "auto",
           block: "start",
         });
+      }, 0);
+    }
+
+    if (nextPage === "order") {
+      window.setTimeout(() => {
+        window.PAGE_ORDER_INIT?.(document.getElementById("orderPage") || document);
+      }, 0);
+    }
+
+    if (nextPage === "academy") {
+      window.setTimeout(() => {
+        window.PAGE_ACADEMY_INIT?.(
+          document.getElementById("academyPage") || document,
+        );
       }, 0);
     }
 
@@ -412,7 +431,12 @@
   function linkPill(label, href, icon) {
     const url =
       safeExternalLink(href) ||
-      (href && href.startsWith("mailto:") ? href : null);
+      (href &&
+      (href.startsWith("mailto:") ||
+        href.startsWith("tel:") ||
+        href.startsWith("#"))
+        ? href
+        : null);
     const safeHref = url || "#";
     const disabled = safeHref === "#";
     const isRtl = state.locale === "fa";
@@ -427,7 +451,10 @@
         "border-pink-200 bg-pink-600 text-white hover:bg-pink-700 dark:border-pink-900 dark:bg-pink-500 dark:text-white dark:hover:bg-pink-400",
       youtube:
         "border-red-200 bg-red-600 text-white hover:bg-red-700 dark:border-red-900 dark:bg-red-500 dark:text-white dark:hover:bg-red-400",
-      mail: "border-cyan-200 bg-white/95 text-cyan-900 hover:bg-cyan-50 dark:border-cyan-800 dark:bg-slate-950/60 dark:text-cyan-100 dark:hover:bg-cyan-950/40",
+      mail: "border-red-900/70 bg-red-950 text-white hover:bg-red-900 dark:border-red-800 dark:bg-red-950 dark:text-red-50 dark:hover:bg-red-900",
+      phone:
+        "border-emerald-200 bg-emerald-600 text-white hover:bg-emerald-700 dark:border-emerald-800 dark:bg-emerald-400 dark:text-slate-950 dark:hover:bg-emerald-300",
+      send: "border-teal-200 bg-teal-600 text-white hover:bg-teal-700 dark:border-teal-800 dark:bg-teal-400 dark:text-slate-950 dark:hover:bg-teal-300",
     };
 
     const cls = disabled
@@ -499,19 +526,23 @@
 
     const pageNav = {
       home: "Home",
-      resume: "Resume",
+      resume: "Portfolio",
       order: "Order project",
       academy: "Academy",
+      contact: state.locale === "fa" ? "تماس با ما" : "Contact",
     };
+    pageNav.contact = "Contact";
 
     setText("navHomePage", pageNav.home);
     setText("navResumePage", pageNav.resume);
     setText("navOrderPage", pageNav.order);
     setText("navAcademyPage", pageNav.academy);
+    setText("navContactPage", pageNav.contact);
     setText("mNavHomePage", pageNav.home);
     setText("mNavResumePage", pageNav.resume);
     setText("mNavOrderPage", pageNav.order);
     setText("mNavAcademyPage", pageNav.academy);
+    setText("mNavContactPage", pageNav.contact);
 
     setText("navRoles", nav.roles || "Roles");
     setText("navSkills", nav.skills || "Skills");
@@ -544,8 +575,16 @@
   function renderTop() {
     const DATA = getData();
 
-    $("#navName").textContent = DATA.personal.name || "Portfolio";
-    $("#heroKicker").textContent = DATA.ui?.heroKicker || "";
+    const navName = $("#navName");
+    if (navName && navName.tagName !== "IMG") {
+      navName.textContent = "Ahmadreza Rezaei";
+    }
+    const heroKicker = $("#heroKicker");
+    if (heroKicker) {
+      const kickerText = DATA.ui?.heroKicker || "";
+      heroKicker.textContent = kickerText;
+      heroKicker.classList.toggle("hidden", !kickerText);
+    }
     $("#heroName").textContent = DATA.personal.name || "";
     $("#heroTitle").textContent = DATA.personal.title || "";
     $("#heroSummary").textContent = DATA.personal.about || "";
@@ -590,7 +629,8 @@
     if (heroPhone) {
       heroPhone.href = DATA.personal.number ? `tel:${DATA.personal.number}` : "#";
     }
-    $("#heroLocation").textContent = DATA.personal.location || "";
+    const heroLocation = $("#heroLocation");
+    if (heroLocation) heroLocation.textContent = DATA.personal.location || "";
 
     const emailEl = $("#heroEmail");
     const emailTextEl = $("#heroEmailText");
@@ -614,12 +654,17 @@
       rolesHint.textContent = hint;
       rolesHint.classList.toggle("hidden", !hint);
     }
-    $("#contactHint").textContent = DATA.ui?.contactHint || "";
+    const contactHint = $("#contactHint");
+    if (contactHint) {
+      const hint = DATA.ui?.contactHint || "";
+      contactHint.textContent = hint;
+      contactHint.classList.toggle("hidden", !hint);
+    }
 
     const cvBtn = $("#cvBtn");
     if (cvBtn) cvBtn.href = DATA.ui?.cvUrl || "#";
 
-    $("#heroLinks").innerHTML = [
+    const socialLinks = [
       linkPill("GitHub", DATA.personal.links?.github, "github"),
       linkPill("LinkedIn", DATA.personal.links?.linkedin, "linkedin"),
       linkPill("Instagram", DATA.personal.links?.instagram, "instagram"),
@@ -629,40 +674,81 @@
         DATA.personal.email ? `mailto:${DATA.personal.email}` : "#",
         "mail",
       ),
+      linkPill(
+        state.locale === "fa" ? "تماس مستقیم" : "Direct call",
+        DATA.personal.number ? `tel:${DATA.personal.number}` : "#",
+        "phone",
+      ),
+      linkPill("Contact", "#contact-page", "send"),
     ].join("");
 
+    const heroLinks = $("#heroLinks");
+    if (heroLinks) {
+      heroLinks.innerHTML = "";
+      heroLinks.classList.add("hidden");
+    }
+
+    const contactLinks = $("#contactLinks");
+    if (contactLinks) contactLinks.innerHTML = socialLinks;
+
+    /*
     $("#contactLinks").innerHTML = [
       contactCard(
         state.locale === "fa" ? "ایمیل" : "Email",
         DATA.personal.email ? `mailto:${DATA.personal.email}` : "#",
-        DATA.personal.email || "",
+        state.locale === "fa" ? "ارسال ایمیل" : "Send email",
         "mail",
+      ),
+      contactCard(
+        state.locale === "fa" ? "موقعیت" : "Location",
+        "#",
+        DATA.personal.location || "",
+        "map-pin",
+      ),
+      contactCard(
+        state.locale === "fa" ? "نوع همکاری" : "Work modes",
+        "#",
+        Array.isArray(DATA.personal.workModes)
+          ? DATA.personal.workModes.join(" / ")
+          : DATA.personal.employmentType || "",
+        "briefcase-business",
+      ),
+      contactCard(
+        state.locale === "fa" ? "شماره تماس" : "Phone",
+        DATA.personal.number ? `tel:${DATA.personal.number}` : "#",
+        state.locale === "fa" ? "تماس مستقیم" : "Direct call",
+        "phone",
       ),
       contactCard(
         "GitHub",
         DATA.personal.links?.github || "#",
-        "github.com",
+        state.locale === "fa" ? "مشاهده کدها" : "View code",
         "github",
       ),
       contactCard(
         "LinkedIn",
         DATA.personal.links?.linkedin || "#",
-        "linkedin.com",
+        state.locale === "fa" ? "پروفایل کاری" : "Professional profile",
         "linkedin",
       ),
       contactCard(
         "Instagram",
         DATA.personal.links?.instagram || "#",
-        "prograin_",
+        state.locale === "fa" ? "پیام در اینستاگرام" : "Message on Instagram",
         "instagram",
       ),
       contactCard(
         "YouTube",
         DATA.personal.links?.youtube || "#",
-        "@Prograin_ARR",
+        state.locale === "fa" ? "مشاهده ویدیوها" : "Watch videos",
         "youtube",
       ),
     ].join("");
+
+    $("#contactLinks")
+      ?.querySelectorAll('[data-lucide="map-pin"], [data-lucide="briefcase-business"]')
+      .forEach((icon) => icon.closest("a")?.remove());
+    */
 
     refreshIcons();
   }
@@ -936,12 +1022,15 @@
           pills.detailsUponRequest || "Details available upon request.",
         )}</span></p>`
       : "";
+    const projectTitle = url
+      ? `<a class="inline-flex w-fit text-cyan-700 underline decoration-cyan-300/70 underline-offset-4 transition hover:text-cyan-900 hover:decoration-cyan-600 dark:text-cyan-300 dark:decoration-cyan-500/60 dark:hover:text-cyan-100 dark:hover:decoration-cyan-200" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(project.title)}</a>`
+      : escapeHtml(project.title);
 
     return `
       <article class="${cardClass()}">
         <div class="flex items-start justify-between gap-3">
           <div class="min-w-0">
-            <h3 class="text-base font-semibold tracking-tight text-slate-950 dark:text-white">${escapeHtml(project.title)}</h3>
+            <h3 class="text-base font-semibold tracking-tight text-slate-950 dark:text-white">${projectTitle}</h3>
             <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">${escapeHtml(project.shortDescription)}</p>
           </div>
           ${privacyPill}
@@ -999,7 +1088,7 @@
       .map((e, experienceIndex) => {
         const companyUrl = safeExternalLink(e.url);
         const companyName = companyUrl
-          ? `<a class="inline-flex items-center gap-1 hover:text-cyan-700 dark:hover:text-cyan-300" href="${escapeHtml(companyUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(e.company)}<i data-lucide="external-link" class="h-3.5 w-3.5"></i></a>`
+          ? `<a class="inline-flex w-fit items-center gap-1.5 text-cyan-700 underline decoration-cyan-300/70 underline-offset-4 transition hover:text-cyan-900 hover:decoration-cyan-600 dark:text-cyan-300 dark:decoration-cyan-500/60 dark:hover:text-cyan-100 dark:hover:decoration-cyan-200" href="${escapeHtml(companyUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(e.company)}<i data-lucide="external-link" class="h-3.5 w-3.5"></i></a>`
           : escapeHtml(e.company);
         const bullets = (e.bullets || [])
           .map(

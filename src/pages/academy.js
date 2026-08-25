@@ -4,146 +4,308 @@
 
   const copy = {
     fa: {
-      kicker: "Academy",
       title: "آموزش پایتون",
-      lead: "این مسیر فقط یادگیری Python نیست؛ از فهم مفاهیم و تمرین اصولی شروع می‌شود و تا ساخت پروژه واقعی، استقرار روی سرور، آماده‌سازی Portfolio و ورود حرفه‌ای به بازار کار ادامه پیدا می‌کند. برای ارتباط و اطلاع از قیمت‌ها پیام بدهید.",
-      telegram: "پیام در تلگرام",
-      phone: "تماس مستقیم",
-      pathTitle: "مسیر یادگیری",
-      path: "Python → کتابخانه‌ها → Web → Database → Deployment → انتشار → Portfolio → بازار کار",
-      features: [
-        "آموزش با مفاهیم، ابزارها و استانداردهای روز برنامه‌نویسی",
-        "آماده‌سازی برای آینده شغلی و ورود حرفه‌ای به بازار کار",
-        "ساخت پروژه‌های واقعی برای رزومه و Portfolio قوی",
-        "آموزش ارائه و معرفی پروژه برای مصاحبه و شرکت‌های حرفه‌ای",
-        "مشاوره و همراهی در مسیر یادگیری و ورود به بازار کار",
-        "استقرار پروژه روی سرور و آماده‌سازی برای استفاده عمومی",
-        "تبدیل پروژه به سرویس یا محصول قابل استفاده و درآمدزا",
-        "استفاده از Git و GitHub در طول دوره برای مدیریت و ارائه پروژه‌ها",
+      lead: "مسیر یادگیری را براساس نیاز خودتان انتخاب کنید؛ کلاس عمومی برای شروع اقتصادی و منظم، آموزش خصوصی برای پیشرفت سریع‌تر و تمرکز روی هدف شخصی شما.",
+      selectorTitle: "نوع آموزش را انتخاب کنید",
+      comparisonTitle: "برای تصمیم‌گیری بهتر",
+      youtubeTitle: "آموزش‌های رایگان یوتیوب",
+      youtubeLead:
+        "ما برای شما عزیزان، بخشی از آموزش‌های خود را به صورت رایگان در یوتیوب قرار داده‌ایم تا بتوانید با هر شرایطی یادگیری را شروع کنید. این آموزش‌ها برای افرادی آماده شده‌اند که می‌خواهند به صورت خودآموز یاد بگیرند یا قبل از شرکت در دوره‌های تخصصی با سبک آموزش‌ها آشنا شوند.",
+      youtubeCta: "مشاهده کانال یوتیوب",
+      tabs: {
+        group: "آموزش عمومی",
+        private: "آموزش خصوصی",
+      },
+      plans: [
+        {
+          key: "group",
+          icon: "graduation-cap",
+          badge: "Best Value",
+          title: "آموزش عمومی",
+          price: "4,500,000 تومان",
+          fit: "مناسب برای شروع یادگیری",
+          cta: "پیام یا تماس با مدرس",
+          tone: "group",
+          features: [
+            "کلاس گروهی",
+            "سرفصل مشخص",
+            "پروژه عملی",
+            "تمرین دوره‌ای",
+            "هزینه اقتصادی",
+          ],
+        },
+        {
+          key: "private",
+          icon: "sparkles",
+          badge: "پیشنهاد ویژه",
+          title: "آموزش خصوصی",
+          price: "800,000 تومان",
+          suffix: "/ ساعت",
+          fit: "یادگیری کاملاً اختصاصی با تمرکز روی پروژه و هدف شما",
+          cta: "پیام یا تماس با مدرس",
+          tone: "private",
+          featured: true,
+          features: [
+            "کلاس یک به یک",
+            "مسیر اختصاصی",
+            "بررسی پروژه",
+            "رفع مشکل مستقیم",
+            "مشاوره شغلی",
+          ],
+        },
       ],
-      stats: [
-        ["+۱۰", "کلاس برگزارشده"],
-        ["+۵", "شاگرد خصوصی"],
-        ["+۵۰", "شاگرد عمومی"],
+      comparison: [
+        ["نوع کلاس", "گروهی", "اختصاصی"],
+        ["مسیر یادگیری", "سرفصل آماده", "Roadmap اختصاصی"],
+        ["زمان‌بندی", "طبق برنامه دوره", "هماهنگ با شما"],
+        ["برنامه آموزشی", "برنامه از پیش طراحی‌شده", "کاملاً متناسب با نیاز شما"],
+        ["سرعت یادگیری", "طبق ریتم کلاس", "یادگیری با ریتم و نیاز شخصی شما"],
+        ["انتخاب موضوع", "سرفصل ثابت", "تمرکز روی مهارت‌ها و پروژه‌های موردنیاز شما"],
+        ["رفع اشکال", "محدود در زمان مشخص", "رفع اشکال مستقیم و کامل با مدرس"],
+        ["بررسی کد", "محدود", "Code Review کامل"],
+        ["بررسی پروژه", "بررسی کلی پروژه‌ها", "بررسی دقیق پروژه شخصی"],
+        ["پروژه نهایی", "پروژه دوره", "پروژه واقعی شما"],
+        ["تمرین و تکلیف", "تمرین‌های استاندارد", "تمرین اختصاصی برای شما"],
+        ["ارتباط با مدرس", "محدود", "ارتباط مستقیم با مدرس و دریافت بازخورد تخصصی"],
+        ["مشاوره شغلی", "ندارد", "دارد"],
+        ["رفع باگ پروژه", "محدود", "مستقیم با مدرس"],
+        [
+          "مناسب برای",
+          "شروع یادگیری",
+          "رشد سریع و ورود بازار کار",
+        ],
+        ["پشتیبانی بعد از کلاس", "طبق قوانین دوره", "قابل تنظیم"],
+        ["تغییر مسیر آموزشی", "ندارد یا محدود", "کاملاً امکان‌پذیر"],
       ],
-      visualTitle: "Python Learning Path",
-      visualText: "از مبانی زبان تا پروژه، رزومه و آماده‌سازی برای مسیر کاری.",
     },
     en: {
-      kicker: "Academy",
       title: "Python training",
-      lead: "This path is not only about learning Python. It starts with real understanding and guided practice, then moves into real projects, deployment, portfolio building, and professional career readiness. Message me for details and pricing.",
-      telegram: "Message on Telegram",
-      phone: "Direct call",
-      pathTitle: "Learning path",
-      path: "Python → Libraries → Web → Database → Deployment → Release → Portfolio → Job market",
-      features: [
-        "Training with modern programming concepts, tools, and standards",
-        "Preparation for professional career entry and future work",
-        "Real projects for a stronger resume and portfolio",
-        "Project presentation practice for interviews and companies",
-        "Guidance through learning, portfolio building, and job readiness",
-        "Deployment on servers and preparation for public use",
-        "Turning projects into useful services, products, and income paths",
-        "Using Git and GitHub throughout the course to manage and present projects",
+      lead: "Choose the learning path that fits your goal: group training for a structured and affordable start, or private mentoring for faster, focused progress.",
+      selectorTitle: "Choose your training type",
+      comparisonTitle: "For a better decision",
+      youtubeTitle: "Free YouTube Training",
+      youtubeLead:
+        "I have made part of my training content available for free on YouTube so you can start learning in any situation.\n\nThese lessons are useful for self-paced learning or for getting familiar with the teaching style before joining focused courses.",
+      youtubeCta: "View YouTube channel",
+      tabs: {
+        group: "Group training",
+        private: "Private mentoring",
+      },
+      plans: [
+        {
+          key: "group",
+          icon: "graduation-cap",
+          badge: "Best Value",
+          title: "Group training",
+          price: "4,500,000 Toman",
+          fit: "Best for starting your learning path",
+          cta: "Contact or message instructor",
+          tone: "group",
+          features: [
+            "Group class",
+            "Defined syllabus",
+            "Practical project",
+            "Regular exercises",
+            "Affordable price",
+          ],
+        },
+        {
+          key: "private",
+          icon: "sparkles",
+          badge: "Personal Mentoring",
+          title: "Private mentoring",
+          price: "800,000 Toman",
+          suffix: "/ hour",
+          fit: "Fully personalized learning focused on your project and goal",
+          cta: "Contact or message instructor",
+          tone: "private",
+          featured: true,
+          features: [
+            "One-to-one class",
+            "Custom roadmap",
+            "Project review",
+            "Direct troubleshooting",
+            "Career guidance",
+          ],
+        },
       ],
-      stats: [
-        ["+10", "Classes held"],
-        ["+5", "Private students"],
-        ["+50", "Group students"],
+      comparison: [
+        ["Class type", "Group", "One-to-one"],
+        ["Learning path", "Prepared syllabus", "Custom roadmap"],
+        ["Scheduling", "Based on course schedule", "Coordinated with you"],
+        ["Learning plan", "Pre-designed program", "Fully tailored to your needs"],
+        ["Learning speed", "Class-paced", "Based on your personal rhythm and needs"],
+        ["Topic selection", "Fixed syllabus", "Focused on the skills and projects you need"],
+        ["Troubleshooting", "Limited scheduled support", "Direct, complete troubleshooting with the mentor"],
+        ["Code review", "Limited", "Complete code review"],
+        ["Project review", "General project review", "Detailed personal project review"],
+        ["Final project", "Course project", "Your real project"],
+        ["Exercises", "Standard exercises", "Custom exercises for you"],
+        ["Mentor access", "Limited", "Direct mentor access and expert feedback"],
+        ["Career guidance", "Not included", "Included"],
+        ["Project bug fixing", "Limited", "Directly with the mentor"],
+        ["Best for", "Starting the learning path", "Fast growth and entering the job market"],
+        ["After-class support", "Based on course rules", "Adjustable"],
+        ["Path changes", "None or limited", "Fully possible"],
       ],
-      visualTitle: "Python Learning Path",
-      visualText: "From language fundamentals to projects, resume work, and career preparation.",
     },
   };
 
-  const statCard = ([value, label]) => `
-    <div class="rounded-lg border border-slate-200/80 bg-white/55 px-4 py-3 text-center shadow-sm dark:border-slate-800/80 dark:bg-slate-900/35">
-      <span class="block text-2xl font-bold text-cyan-700 dark:text-cyan-300">${value}</span>
-      <span class="mt-1 block text-xs font-semibold text-slate-600 dark:text-slate-300">${label}</span>
-    </div>`;
+  const planCard = (plan, icon) => `
+    <article class="academy-plan ${plan.featured ? "is-featured" : ""}" data-academy-plan="${plan.key}" data-tone="${plan.tone}">
+      <div class="academy-plan__top">
+        <span class="academy-plan__icon">${icon(plan.icon, "h-5 w-5")}</span>
+        <span class="academy-plan__badge">${plan.badge}</span>
+      </div>
+      <h3>${plan.title}</h3>
+      <p class="academy-plan__price">
+        ${plan.price}
+        ${plan.suffix ? `<span>${plan.suffix}</span>` : ""}
+      </p>
+      <p class="academy-plan__fit">${plan.fit}</p>
+      <ul>
+        ${plan.features.map((feature) => `<li>${icon("check-circle-2", "h-4 w-4")}<span>${feature}</span></li>`).join("")}
+      </ul>
+      <a class="academy-plan__cta" href="#contact-page" data-page-link="contact-page">${plan.cta}</a>
+    </article>`;
 
-  const featureItem = (text, index) => {
-    const positions = ["sm:self-end", "sm:self-start", "sm:self-end", "sm:self-start", "sm:self-end", "sm:self-start", "sm:self-end"];
-    const floats = ["float-card-a", "float-card-b", "float-card-c", "float-card-a", "float-card-b", "float-card-c", "float-card-a"];
-
-    return `
-    <li class="float-card ${floats[index]} flex w-full max-w-none items-start gap-2 rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-sm leading-7 text-slate-700 shadow-softer backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-300 sm:w-[88%] sm:max-w-md ${positions[index]}">
-      <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-600 dark:bg-cyan-300"></span>
-      <span>${text}</span>
-    </li>`;
-  };
-
-  const pathMap = (path) => {
-    const tones = [
-      "border-cyan-200 bg-cyan-50 text-cyan-900 dark:border-cyan-900 dark:bg-cyan-950/45 dark:text-cyan-100",
-      "border-emerald-200 bg-emerald-50 text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950/45 dark:text-emerald-100",
-      "border-rose-200 bg-rose-50 text-rose-900 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-100",
-      "border-violet-200 bg-violet-50 text-violet-900 dark:border-violet-900 dark:bg-violet-950/40 dark:text-violet-100",
-    ];
-
-    const steps = path
-      .split("→")
-      .map((step) => step.trim())
-      .filter(Boolean);
-
-    return steps
+  const comparisonRows = (rows, locale) =>
+    rows
       .map(
-        (step, index) => `
-          <span class="inline-flex items-center gap-2">
-            <span class="rounded-lg border px-2.5 py-1 text-xs font-semibold shadow-sm ${tones[index % tones.length]}">${step}</span>
-            ${index < steps.length - 1 ? '<span class="text-slate-400 dark:text-slate-500">→</span>' : ""}
-          </span>`,
+        ([label, group, privatePlan]) =>
+          locale === "fa"
+            ? `
+          <tr>
+            <th>${label}</th>
+            <td class="academy-table__premium" data-academy-column="private">${privatePlan}</td>
+            <td data-academy-column="group">${group}</td>
+          </tr>`
+            : `
+          <tr>
+            <th>${label}</th>
+            <td class="academy-table__premium" data-academy-column="private">${privatePlan}</td>
+            <td data-academy-column="group">${group}</td>
+          </tr>`,
       )
       .join("");
-  };
+
+  function activateAcademyPlan(root, key) {
+    const page = root.closest(".academy-page");
+    if (page) page.dataset.activePlan = key;
+
+    root.querySelectorAll("[data-academy-tab]").forEach((tab) => {
+      const isActive = tab.dataset.academyTab === key;
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+
+    root.querySelectorAll("[data-academy-plan]").forEach((plan) => {
+      const isActive = plan.dataset.academyPlan === key;
+      plan.classList.toggle("is-active", isActive);
+      plan.setAttribute("aria-current", isActive ? "true" : "false");
+    });
+  }
+
+  function initAcademyPlans(root = document) {
+    root
+      .querySelectorAll('.academy-page[dir="ltr"] .academy-table thead tr')
+      .forEach((row) => {
+        const cells = Array.from(row.children);
+        if (cells.length === 3 && cells[0]?.dataset.academyColumn === "group") {
+          row.append(cells[1], cells[2], cells[0]);
+        }
+      });
+
+    root.querySelectorAll("[data-academy-plans]").forEach((section) => {
+      if (section.dataset.academyReady === "true") {
+        const active =
+          section.querySelector("[data-academy-tab].is-active")?.dataset
+            .academyTab || "private";
+        activateAcademyPlan(section, active);
+        return;
+      }
+
+      section.dataset.academyReady = "true";
+      section.querySelectorAll("[data-academy-tab]").forEach((tab) => {
+        tab.addEventListener("click", () =>
+          activateAcademyPlan(section, tab.dataset.academyTab),
+        );
+      });
+      activateAcademyPlan(section, "private");
+    });
+  }
+
+  window.PAGE_ACADEMY_INIT = initAcademyPlans;
 
   window.PAGE_ACADEMY = function renderAcademyPage(locale = "fa") {
-    const { contact, cta } = window.PAGE_SHARED;
+    const { icon } = window.PAGE_SHARED;
     const t = copy[locale] || copy.fa;
     const dir = locale === "fa" ? "rtl" : "ltr";
-    const textAlignClass =
-      locale === "fa" ? "text-center lg:text-right" : "text-center lg:text-left";
-    const mxClass = locale === "fa" ? "mx-auto lg:ms-auto" : "mx-auto lg:me-auto";
-    const textOrderClass = locale === "fa" ? "lg:order-2" : "lg:order-1";
-    const featuresOrderClass = locale === "fa" ? "lg:order-1" : "lg:order-2";
+    const titleClass =
+      locale === "fa" ? "font-[Tahoma] tracking-normal" : "tracking-tight";
+    const displayPlans =
+      locale === "fa" ? [t.plans[1], t.plans[0]] : [t.plans[0], t.plans[1]];
 
     return `
-      <div class="box-border min-h-[calc(100svh-4rem)] w-full overflow-x-hidden py-4 sm:py-6" dir="${dir}">
-        <section class="motion-rise flex min-h-[calc(100svh-7rem)] w-full flex-col justify-center gap-6 sm:gap-8">
-          <div class="w-full px-4 sm:px-6 lg:px-8">
-          <div class="grid w-full items-center gap-6 lg:grid-cols-[.95fr_1.05fr] lg:gap-10 lg:[direction:ltr]">
-            <div class="order-1 ${textAlignClass} ${textOrderClass}" dir="${dir}">
-              <h1 class="${mxClass} max-w-3xl text-3xl font-semibold leading-tight tracking-normal text-slate-950 dark:text-white sm:text-4xl lg:text-5xl">
-                ${t.title}
-              </h1>
-
-              <p class="${mxClass} mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-slate-300 sm:text-base sm:leading-8">
-                ${t.lead}
-              </p>
-
-              <div class="${mxClass} mt-6 grid w-full max-w-md grid-cols-2 gap-3">
-                ${cta(`https://t.me/${contact.telegram}`, t.telegram, "send", "cyan", 'target="_blank" rel="noopener noreferrer"')}
-                ${cta(`tel:${contact.phone}`, t.phone, "phone", "emerald")}
-              </div>
-            </div>
-
-            <ul class="order-2 flex w-full flex-col items-center gap-2 sm:gap-3 ${featuresOrderClass}" dir="${dir}">
-              ${t.features.map(featureItem).join("")}
-            </ul>
-          </div>
+      <div class="academy-page" dir="${dir}" data-active-plan="private">
+        <section class="academy-hero motion-rise">
+          <div class="academy-hero__copy">
+            <h1 class="${titleClass}">${t.title}</h1>
+            <p>${t.lead}</p>
           </div>
 
-          <div class="w-full px-4 sm:px-6 lg:px-8">
-            <div class="mb-3 rounded-lg border border-cyan-100/80 bg-cyan-50/45 p-3 text-center text-sm text-cyan-950 shadow-sm backdrop-blur-xl dark:border-cyan-950/70 dark:bg-cyan-950/18 dark:text-cyan-100">
-              <p class="font-semibold">${t.pathTitle}</p>
-              <div class="mt-2 flex flex-wrap items-center justify-center gap-2 [unicode-bidi:plaintext]" dir="ltr">
-                ${pathMap(t.path)}
-              </div>
+          <div class="academy-picker" data-academy-plans>
+            <p class="academy-picker__label">${t.selectorTitle}</p>
+            <div class="academy-tabs" role="tablist" aria-label="${t.selectorTitle}">
+              <button class="academy-tab is-active" type="button" data-academy-tab="private" aria-selected="true">
+                ${icon("sparkles", "h-4 w-4")}
+                ${t.tabs.private}
+              </button>
+              <button class="academy-tab" type="button" data-academy-tab="group" aria-selected="false">
+                ${icon("graduation-cap", "h-4 w-4")}
+                ${t.tabs.group}
+              </button>
             </div>
-            <div class="grid grid-cols-3 gap-3">
-              ${t.stats.map(statCard).join("")}
+
+            <div class="academy-comparison" aria-label="${t.comparisonTitle}">
+              ${displayPlans.map((plan) => planCard(plan, icon)).join("")}
             </div>
+          </div>
+        </section>
+
+        <section class="academy-table-section">
+          <div class="academy-table-heading">
+            <h2>${t.comparisonTitle}</h2>
+          </div>
+          <div class="academy-table-wrap">
+            <table class="academy-table">
+              <thead>
+                <tr>
+                  ${
+                    locale === "fa"
+                      ? `<th>ویژگی</th><th data-academy-column="private">${t.tabs.private} ✨</th><th data-academy-column="group">${t.tabs.group}</th>`
+                      : `<th data-academy-column="group">${t.tabs.group}</th><th>Feature</th><th data-academy-column="private">${t.tabs.private} ✨</th>`
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                ${comparisonRows(t.comparison, locale)}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="academy-youtube-section">
+          <div class="academy-youtube-card">
+            <span class="academy-youtube-card__icon">${icon("youtube", "h-5 w-5")}<span>YouTube</span></span>
+            <div>
+              <h2>${t.youtubeTitle}</h2>
+              <p>${t.youtubeLead}</p>
+            </div>
+            <a href="https://www.youtube.com/@Prograin_ARR/playlists" target="_blank" rel="noopener noreferrer">
+              ${icon("external-link", "h-4 w-4")}
+              <span>${t.youtubeCta}</span>
+            </a>
           </div>
         </section>
       </div>`;

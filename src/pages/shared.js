@@ -4,7 +4,7 @@
 
   const contact = {
     email: "ahmadreza.pcg1377@gmail.com",
-    phone: "+989185240247",
+    phone: "09914663783",
     telegram: "prograin_arr",
     linkedin: "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
   };

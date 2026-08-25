@@ -37,6 +37,8 @@
       '<rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 21h12a2 2 0 0 0 2-2V7"/><path d="m8 13 2-2 3 3 2-2 2 2"/>',
     instagram:
       '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/>',
+    linkedin:
+      '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v6"/><path d="M8 8h.01"/><path d="M12 17v-6"/><path d="M12 14a3 3 0 0 1 6 0v3"/>',
     languages:
       '<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>',
     layers:
@@ -44,6 +46,8 @@
     layout: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
     "layout-grid":
       '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+    lightbulb:
+      '<path d="M15 14c.2-1.1.9-1.8 1.7-2.7A6 6 0 1 0 7.3 11.3C8.1 12.2 8.8 12.9 9 14"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M9 14h6v4H9Z"/>',
     lock:
       '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
@@ -55,7 +59,11 @@
     phone:
       '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9Z"/>',
     play: '<path d="m8 5 12 7-12 7Z"/>',
+    rocket:
+      '<path d="M4.5 16.5c-1.5 1.3-2 3.1-2 5 1.9 0 3.7-.5 5-2"/><path d="M9 15 4 10l2-5 5 5"/><path d="m14 9 5 5-5 2-5-5 2-5Z"/><path d="M15 4c2.8-1.1 5-1 5-1s.1 2.2-1 5c-1.4 3.5-4.7 7-8 9l-4-4c2-3.3 5.5-6.6 9-8Z"/><circle cx="15" cy="9" r="1"/>',
     send: '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+    telegram:
+      '<path d="M21.5 4.5 3.4 11.6c-1 .4-1 1.8.1 2.1l4.4 1.3 1.7 5c.3.9 1.4 1.1 2 .4l2.6-2.5 4.6 3.4c.9.7 2.2.2 2.4-1L23 6.1c.1-1.1-.7-1.9-1.5-1.6Z"/><path d="m8 15 10-7-7.7 9.4"/>',
     server:
       '<rect x="3" y="4" width="18" height="8" rx="2"/><rect x="3" y="12" width="18" height="8" rx="2"/><path d="M7 8h.01"/><path d="M7 16h.01"/>',
     sparkles:

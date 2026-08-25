@@ -122,7 +122,7 @@ window.PORTFOLIO_DATA_I18N = {
       employmentType: "Full-time",
       workModes: ["On-site", "Remote", "Hybrid"],
       email: "ahmadreza.pcg1377@gmail.com",
-      number: "+989185240247",
+      number: "09914663783",
       links: {
         github: "https://github.com/prograin",
         linkedin: "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
@@ -962,10 +962,9 @@ Skilled in deep learning models, computer vision, and the mathematical foundatio
 
   fa: {
     ui: {
-      heroKicker: "نمونه‌کارها",
+      heroKicker: "",
       rolesHint: "یکی از فیلترهای زیر را انتخاب کنید؛ پروژه‌ها و مهارت‌ها با هم تغییر می‌کنند.",
-      contactHint:
-        "برای همکاری، مشاوره یا موقعیت تمام‌وقت پیام بدهید. از هر کدام از راه‌های زیر می‌توانید ارتباط بگیرید.",
+      contactHint: "",
       cvUrl: "#",
 
       nav: {
@@ -1074,14 +1073,14 @@ Skilled in deep learning models, computer vision, and the mathematical foundatio
     },
 
     personal: {
-      name: "Ahmadreza Rezaei",
+      name: "احمدرضا رضایی",
       title: "مهندس داده | مهندس بک‌اند | توسعه‌دهنده فول‌استک",
       location: "تهران، ایران",
       timezone: "GMT+3:30 (تهران)",
       employmentType: "تمام‌وقت",
       workModes: ["حضوری", "دورکاری", "هیبرید"],
       email: "ahmadreza.pcg1377@gmail.com",
-      number: "+989185240247",
+      number: "09914663783",
       links: {
         github: "https://github.com/prograin",
         linkedin: "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
