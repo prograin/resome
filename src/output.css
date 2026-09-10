@@ -6494,7 +6494,16 @@
 }
 
 @media (width < 56rem) {
+
   .site-footer__inner {
     grid-template-columns: 1fr;
   }
+
+  .site-footer__socials {
+    display: flex !important;
+    flex-direction: row;
+    gap: 0.65rem !important;
+    width: fit-content;
+  }
+
 }

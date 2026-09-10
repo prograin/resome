@@ -4,7 +4,7 @@
 
   const copy = {
     fa: {
-      title: "آموزش برنامه نویسی و پایتون در اراک",
+      title: "آموزش برنامه نویسی پایتون در اراک",
       lead: "مسیر یادگیری را براساس نیاز خودتان انتخاب کنید؛ آموزش برنامه نویسی در اراک، کلاس نیمه‌خصوصی برای شروع اقتصادی و منظم، و آموزش خصوصی برای پیشرفت سریع‌تر و تمرکز روی هدف شخصی شما.",
       selectorTitle: "نوع آموزش را انتخاب کنید",
       comparisonTitle: "برای تصمیم‌گیری بهتر",
@@ -60,22 +60,30 @@
         ["تعداد جلسات", "۱۶ جلسه", "هماهنگ با شما"],
         ["مسیر یادگیری", "سرفصل آماده", "Roadmap اختصاصی"],
         ["زمان‌بندی", "طبق برنامه دوره", "هماهنگ با شما"],
-        ["برنامه آموزشی", "برنامه از پیش طراحی‌شده", "کاملاً متناسب با نیاز شما"],
+        [
+          "برنامه آموزشی",
+          "برنامه از پیش طراحی‌شده",
+          "کاملاً متناسب با نیاز شما",
+        ],
         ["سرعت یادگیری", "طبق ریتم کلاس", "یادگیری با ریتم و نیاز شخصی شما"],
-        ["انتخاب موضوع", "سرفصل ثابت", "تمرکز روی مهارت‌ها و پروژه‌های موردنیاز شما"],
+        [
+          "انتخاب موضوع",
+          "سرفصل ثابت",
+          "تمرکز روی مهارت‌ها و پروژه‌های موردنیاز شما",
+        ],
         ["رفع اشکال", "محدود در زمان مشخص", "رفع اشکال مستقیم و کامل با مدرس"],
         ["بررسی کد", "محدود", "Code Review کامل"],
         ["بررسی پروژه", "بررسی کلی پروژه‌ها", "بررسی دقیق پروژه شخصی"],
         ["پروژه نهایی", "پروژه دوره", "پروژه واقعی شما"],
         ["تمرین و تکلیف", "تمرین‌های استاندارد", "تمرین اختصاصی برای شما"],
-        ["ارتباط با مدرس", "محدود", "ارتباط مستقیم با مدرس و دریافت بازخورد تخصصی"],
+        [
+          "ارتباط با مدرس",
+          "محدود",
+          "ارتباط مستقیم با مدرس و دریافت بازخورد تخصصی",
+        ],
         ["مشاوره شغلی", "ندارد", "دارد"],
         ["رفع باگ پروژه", "محدود", "مستقیم با مدرس"],
-        [
-          "مناسب برای",
-          "شروع یادگیری",
-          "رشد سریع و ورود بازار کار",
-        ],
+        ["مناسب برای", "شروع یادگیری", "رشد سریع و ورود بازار کار"],
         ["پشتیبانی بعد از کلاس", "طبق قوانین دوره", "قابل تنظیم"],
         ["تغییر مسیر آموزشی", "ندارد یا محدود", "کاملاً امکان‌پذیر"],
       ],
@@ -137,18 +145,46 @@
         ["Session count", "16 sessions", "Coordinated with you"],
         ["Learning path", "Prepared syllabus", "Custom roadmap"],
         ["Scheduling", "Based on course schedule", "Coordinated with you"],
-        ["Learning plan", "Pre-designed program", "Fully tailored to your needs"],
-        ["Learning speed", "Class-paced", "Based on your personal rhythm and needs"],
-        ["Topic selection", "Fixed syllabus", "Focused on the skills and projects you need"],
-        ["Troubleshooting", "Limited scheduled support", "Direct, complete troubleshooting with the mentor"],
+        [
+          "Learning plan",
+          "Pre-designed program",
+          "Fully tailored to your needs",
+        ],
+        [
+          "Learning speed",
+          "Class-paced",
+          "Based on your personal rhythm and needs",
+        ],
+        [
+          "Topic selection",
+          "Fixed syllabus",
+          "Focused on the skills and projects you need",
+        ],
+        [
+          "Troubleshooting",
+          "Limited scheduled support",
+          "Direct, complete troubleshooting with the mentor",
+        ],
         ["Code review", "Limited", "Complete code review"],
-        ["Project review", "General project review", "Detailed personal project review"],
+        [
+          "Project review",
+          "General project review",
+          "Detailed personal project review",
+        ],
         ["Final project", "Course project", "Your real project"],
         ["Exercises", "Standard exercises", "Custom exercises for you"],
-        ["Mentor access", "Limited", "Direct mentor access and expert feedback"],
+        [
+          "Mentor access",
+          "Limited",
+          "Direct mentor access and expert feedback",
+        ],
         ["Career guidance", "Not included", "Included"],
         ["Project bug fixing", "Limited", "Directly with the mentor"],
-        ["Best for", "Starting the learning path", "Fast growth and entering the job market"],
+        [
+          "Best for",
+          "Starting the learning path",
+          "Fast growth and entering the job market",
+        ],
         ["After-class support", "Based on course rules", "Adjustable"],
         ["Path changes", "None or limited", "Fully possible"],
       ],
@@ -182,13 +218,21 @@
       locale === "fa"
         ? [
             { key: "features", title: featureTitle, items: labels },
-            { key: "private", title: `${tabs.private} ✨`, items: privateItems },
+            {
+              key: "private",
+              title: `${tabs.private} ✨`,
+              items: privateItems,
+            },
             { key: "group", title: tabs.group, items: groupItems },
           ]
         : [
             { key: "group", title: tabs.group, items: groupItems },
             { key: "features", title: featureTitle, items: labels },
-            { key: "private", title: `${tabs.private} ✨`, items: privateItems },
+            {
+              key: "private",
+              title: `${tabs.private} ✨`,
+              items: privateItems,
+            },
           ];
 
     return columns
