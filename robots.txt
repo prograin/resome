@@ -4,5 +4,7 @@ Disallow: /resume
 Disallow: /resume/
 Disallow: /portfolio
 Disallow: /portfolio/
+Disallow: /portfoilio
+Disallow: /portfoilio/
 
 Sitemap: https://prograin.ir/sitemap.xml

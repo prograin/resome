@@ -12,6 +12,7 @@
       phone: "تماس مستقیم",
       contactPage: "تماس با ما",
       pricingTitle: "انتخاب پکیج",
+      clientsTitle: "مشتری‌ها",
       activeLabel: "پکیج فعال",
       showMore: "نمایش همه امکانات",
       showLess: "نمایش کمتر",
@@ -138,6 +139,29 @@
           ],
         },
       ],
+      clients: [
+        {
+          name: "Black Wall",
+          mark: "BW",
+          href: "https://black-wall.org/",
+          icon: "./assets/images/clients/black-wall.png",
+          status: "در حال توسعه",
+        },
+        {
+          name: "Rokesh Mehdi",
+          mark: "RM",
+          href: "https://rokesh-mehdi.ir/",
+          icon: "./assets/images/clients/rokesh-mehdi.png",
+          status: "در حال توسعه",
+        },
+        {
+          name: "Dr Bajelani",
+          mark: "DB",
+          href: "https://dr-bajelani.prograin.workers.dev/",
+          icon: "./assets/images/clients/dr-bajelani.svg",
+          status: "در حال توسعه",
+        },
+      ],
       cards: [
         [
           "server",
@@ -174,6 +198,7 @@
       phone: "Direct call",
       contactPage: "Contact us",
       pricingTitle: "Packages",
+      clientsTitle: "Clients",
       activeLabel: "Active package",
       showMore: "Show all features",
       showLess: "Show less",
@@ -300,6 +325,29 @@
           ],
         },
       ],
+      clients: [
+        {
+          name: "Black Wall",
+          mark: "BW",
+          href: "https://black-wall.org/",
+          icon: "./assets/images/clients/black-wall.png",
+          status: "In development",
+        },
+        {
+          name: "Rokesh Mehdi",
+          mark: "RM",
+          href: "https://rokesh-mehdi.ir/",
+          icon: "./assets/images/clients/rokesh-mehdi.png",
+          status: "In development",
+        },
+        {
+          name: "Dr Bajelani",
+          mark: "DB",
+          href: "https://dr-bajelani.prograin.workers.dev/",
+          icon: "./assets/images/clients/dr-bajelani.svg",
+          status: "In development",
+        },
+      ],
       cards: [
         [
           "server",
@@ -384,7 +432,7 @@
         hasMoreFeatures
           ? `<button class="pricing-card__toggle" type="button" data-pricing-toggle aria-expanded="false">
               <span data-pricing-toggle-label>${t.showMore}</span>
-              ${icon(locale === "fa" ? "chevron-left" : "chevron-right", "h-4 w-4")}
+              ${icon("chevron-right", "h-4 w-4")}
             </button>`
           : ""
       }
@@ -398,6 +446,18 @@
       ${pkg.title}
     </button>`;
   };
+
+  const clientCard = (client, index) => `
+    <a class="order-client" href="${client.href}" target="_blank" rel="noopener noreferrer" aria-label="${client.name}" data-client-index="${index}">
+      <span class="order-client__icon" aria-hidden="true">
+        <img src="${client.icon}" alt="" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false;" />
+        <span class="order-client__mark" hidden>${client.mark}</span>
+      </span>
+      <span class="order-client__body">
+        <strong>${client.name}</strong>
+        <small>${client.status}</small>
+      </span>
+    </a>`;
 
   function updatePricingNav(panel, index, total) {
     panel.querySelectorAll("[data-pricing-nav]").forEach((button) => {
@@ -569,7 +629,16 @@
             </div>
           </div>
 
-            <div class="pricing-panel" dir="${dir}">
+          <section class="order-clients" aria-label="${t.clientsTitle}">
+            <div class="order-clients__header">
+              <h2>${t.clientsTitle}</h2>
+            </div>
+            <div class="order-clients__list">
+              ${t.clients.map(clientCard).join("")}
+            </div>
+          </section>
+
+          <div class="pricing-panel" dir="${dir}">
             <div class="pricing-panel__header">
               <div>
                 <h2>${t.pricingTitle}</h2>
