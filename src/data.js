@@ -974,7 +974,6 @@ Skilled in deep learning models, computer vision, and the mathematical foundatio
         experience: "سوابق کاری",
         education: "تحصیلات",
         contact: "تماس",
-        about: "درباره من",
       },
 
       sections: {

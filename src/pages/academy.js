@@ -4,8 +4,8 @@
 
   const copy = {
     fa: {
-      title: "آموزش پایتون",
-      lead: "مسیر یادگیری را براساس نیاز خودتان انتخاب کنید؛ دوره نیمه‌خصوصی آنلاین برای شروع اقتصادی و منظم، آموزش خصوصی برای پیشرفت سریع‌تر و تمرکز روی هدف شخصی شما.",
+      title: "آموزش برنامه نویسی و پایتون در اراک",
+      lead: "مسیر یادگیری را براساس نیاز خودتان انتخاب کنید؛ آموزش برنامه نویسی در اراک، کلاس نیمه‌خصوصی برای شروع اقتصادی و منظم، و آموزش خصوصی برای پیشرفت سریع‌تر و تمرکز روی هدف شخصی شما.",
       selectorTitle: "نوع آموزش را انتخاب کنید",
       comparisonTitle: "برای تصمیم‌گیری بهتر",
       youtubeTitle: "آموزش‌های رایگان یوتیوب",
@@ -170,7 +170,7 @@
       <ul>
         ${plan.features.map((feature) => `<li>${icon("check-circle-2", "h-4 w-4")}<span>${feature}</span></li>`).join("")}
       </ul>
-      <a class="academy-plan__cta" href="#contact-page" data-page-link="contact-page">${plan.cta}</a>
+      <a class="academy-plan__cta" href="/contact" data-page-link="contact-page">${plan.cta}</a>
     </article>`;
 
   const comparisonColumns = (rows, locale, tabs) => {

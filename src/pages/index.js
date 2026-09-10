@@ -8,6 +8,7 @@
       const order = document.getElementById("orderPage");
       const academy = document.getElementById("academyPage");
       const contact = document.getElementById("contactPage");
+      const footer = document.getElementById("siteFooter");
 
       const locale =
         document.documentElement.getAttribute("lang") === "fa" ? "fa" : "en";
@@ -19,6 +20,9 @@
       }
       if (contact && window.PAGE_CONTACT) {
         contact.innerHTML = window.PAGE_CONTACT(locale);
+      }
+      if (footer && window.PAGE_SHARED?.footer) {
+        footer.innerHTML = window.PAGE_SHARED.footer(locale);
       }
     },
   };

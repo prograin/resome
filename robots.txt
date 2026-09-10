@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /resume
+Disallow: /resume/
+Disallow: /portfolio
+Disallow: /portfolio/
+
+Sitemap: https://prograin.ir/sitemap.xml

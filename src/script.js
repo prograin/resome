@@ -103,6 +103,83 @@
     "education",
     "contact",
   ]);
+  const PAGE_PATHS = {
+    home: "/",
+    resume: "/resume",
+    order: "/order",
+    academy: "/academy",
+    "contact-page": "/contact",
+  };
+  const PATH_PAGES = {
+    "": "home",
+    home: "home",
+    resume: "resume",
+    portfolio: "resume",
+    portfoilio: "resume",
+    order: "order",
+    project: "order",
+    projects: "order",
+    academy: "academy",
+    contact: "contact-page",
+    "contact-page": "contact-page",
+  };
+  const BLOCKED_INDEX_PATHS = new Set(["resume", "portfolio", "portfoilio"]);
+  const SEO_COPY = {
+    fa: {
+      home: {
+        title: "آموزش برنامه نویسی اراک | prograin",
+        description:
+          "prograin برای آموزش برنامه نویسی در اراک، آموزش پایتون خصوصی و نیمه‌خصوصی، سفارش پروژه برنامه‌نویسی و مشاوره نرم‌افزار.",
+      },
+      order: {
+        title: "سفارش پروژه برنامه‌نویسی | احمدرضا رضایی",
+        description:
+          "ثبت سفارش پروژه اختصاصی برنامه‌نویسی، وب، بک‌اند، اتوماسیون، تحلیل داده و نرم‌افزار با احمدرضا رضایی.",
+      },
+      academy: {
+        title: "آموزش برنامه نویسی اراک | آموزش پایتون | prograin",
+        description:
+          "آموزش برنامه نویسی در اراک و آموزش پایتون خصوصی و نیمه‌خصوصی با دوره ۱۶ جلسه‌ای، رفع اشکال، بررسی کد و مسیر یادگیری پروژه‌محور.",
+      },
+      "contact-page": {
+        title: "تماس با احمدرضا رضایی | سفارش پروژه و آموزش پایتون",
+        description:
+          "راه‌های تماس با prograin برای آموزش برنامه نویسی اراک، سفارش پروژه برنامه‌نویسی، آموزش پایتون، مشاوره و همکاری.",
+      },
+      resume: {
+        title: "Portfolio | Ahmadreza Rezaei",
+        description: "Portfolio and selected software projects by Ahmadreza Rezaei.",
+        robots: "noindex, nofollow, noarchive",
+      },
+    },
+    en: {
+      home: {
+        title: "Ahmadreza Rezaei | Python Developer and Instructor",
+        description:
+          "Ahmadreza Rezaei, Python developer and instructor based in Arak, offering custom programming projects, online private training, semi-private training, and software consulting.",
+      },
+      order: {
+        title: "Order Custom Programming Projects | Ahmadreza Rezaei",
+        description:
+          "Order custom web, backend, automation, data, and software development projects with Ahmadreza Rezaei.",
+      },
+      academy: {
+        title: "Online Private and Semi-Private Python Training | Ahmadreza Rezaei",
+        description:
+          "Online private and semi-private Python training with project-based learning, debugging, code review, and a structured 16-session course.",
+      },
+      "contact-page": {
+        title: "Contact Ahmadreza Rezaei | Projects and Python Training",
+        description:
+          "Contact Ahmadreza Rezaei for programming projects, online Python training, software consulting, and collaboration.",
+      },
+      resume: {
+        title: "Portfolio | Ahmadreza Rezaei",
+        description: "Portfolio and selected software projects by Ahmadreza Rezaei.",
+        robots: "noindex, nofollow, noarchive",
+      },
+    },
+  };
 
   function routeFromHost() {
     const subdomain = window.location.hostname.split(".")[0]?.toLowerCase();
@@ -112,7 +189,6 @@
       order: "order",
       project: "order",
       projects: "order",
-      resume: "resume",
     };
 
     return hostRoutes[subdomain] || "home";
@@ -125,12 +201,144 @@
     return routeFromHost();
   }
 
-  function showPage(page = routeFromHash(), options = {}) {
+  function routeFromPath() {
+    const firstSegment = window.location.pathname
+      .replace(/^\/+|\/+$/g, "")
+      .split("/")[0]
+      ?.toLowerCase();
+    return PATH_PAGES[firstSegment] || routeFromHash();
+  }
+
+  function pagePath(page) {
+    return PAGE_PATHS[page] || PAGE_PATHS.home;
+  }
+
+  function isBlockedIndexPath() {
+    const firstSegment = window.location.pathname
+      .replace(/^\/+|\/+$/g, "")
+      .split("/")[0]
+      ?.toLowerCase();
+    return BLOCKED_INDEX_PATHS.has(firstSegment);
+  }
+
+  function updateSeo(page) {
+    const seo = SEO_COPY[state.locale]?.[page] || SEO_COPY.fa.home;
+    document.title = seo.title;
+
+    let metaDescription = document.querySelector("meta[name='description']");
+    if (!metaDescription) {
+      metaDescription = document.createElement("meta");
+      metaDescription.setAttribute("name", "description");
+      document.head.append(metaDescription);
+    }
+    metaDescription.setAttribute("content", seo.description);
+
+    let metaRobots = document.querySelector("meta[name='robots']");
+    if (!metaRobots) {
+      metaRobots = document.createElement("meta");
+      metaRobots.setAttribute("name", "robots");
+      document.head.append(metaRobots);
+    }
+    metaRobots.setAttribute(
+      "content",
+      isBlockedIndexPath()
+        ? "noindex, nofollow, noarchive"
+        : seo.robots || "index, follow",
+    );
+
+    let canonical = document.querySelector("link[rel='canonical']");
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.append(canonical);
+    }
+    canonical.setAttribute(
+      "href",
+      `${window.location.origin}${isBlockedIndexPath() ? "/" : pagePath(page)}`,
+    );
+    updateStructuredData(page);
+  }
+
+  function updateStructuredData(page) {
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Ahmadreza Rezaei",
+      alternateName: "prograin",
+      url: `${window.location.origin}${pagePath(page)}`,
+      image: `${window.location.origin}/assets/images/profile.jpg`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Arak",
+        addressCountry: "IR",
+      },
+      areaServed: [
+        { "@type": "City", name: "Arak" },
+        { "@type": "Country", name: "Iran" },
+      ],
+      email: "ahmadreza.pcg1377@gmail.com",
+      telephone: "09914663783",
+      sameAs: [
+        "https://t.me/prograin_arr",
+        "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
+        "https://www.youtube.com/@Prograin_ARR/playlists",
+      ],
+      knowsAbout: [
+        "آموزش برنامه نویسی اراک",
+        "آموزش پایتون",
+        "سفارش پروژه برنامه‌نویسی",
+        "توسعه وب",
+        "بک‌اند",
+        "اتوماسیون",
+        "تحلیل داده",
+      ],
+      makesOffer: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "آموزش برنامه نویسی در اراک",
+            serviceType: "Programming training",
+            areaServed: { "@type": "City", name: "Arak" },
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "آموزش پایتون خصوصی و نیمه‌خصوصی",
+            serviceType: "Python training",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "سفارش پروژه برنامه‌نویسی",
+            serviceType: "Software development",
+          },
+        },
+      ],
+    };
+
+    let script = document.getElementById("localSeoSchema");
+    if (!script) {
+      script = document.createElement("script");
+      script.id = "localSeoSchema";
+      script.type = "application/ld+json";
+      document.head.append(script);
+    }
+    script.textContent = JSON.stringify(data);
+  }
+
+  function showPage(page = routeFromPath(), options = {}) {
     const nextPage = PAGE_KEYS.includes(page) ? page : "home";
     state.currentPage = nextPage;
+    updateSeo(nextPage);
     document.body.classList.toggle("page-home-active", nextPage === "home");
     document.body.classList.toggle("page-order-active", nextPage === "order");
     document.body.classList.toggle("page-academy-active", nextPage === "academy");
+    document.body.classList.toggle("page-resume-active", nextPage === "resume");
     document.body.classList.toggle(
       "page-contact-active",
       nextPage === "contact-page",
@@ -175,6 +383,15 @@
     }
 
     refreshIcons();
+  }
+
+  function navigateToPage(page, options = {}) {
+    const nextPage = PAGE_KEYS.includes(page) ? page : "home";
+    const nextPath = pagePath(nextPage);
+    if (window.location.pathname !== nextPath || window.location.hash) {
+      window.history.pushState({ page: nextPage }, "", nextPath);
+    }
+    showPage(nextPage, { scrollTop: true, smooth: options.smooth ?? true });
   }
 
   function getData() {
@@ -429,16 +646,25 @@
   // Rendering
   // -----------------------------
   function linkPill(label, href, icon) {
+    const pageKeyByPath = {
+      "/": "home",
+      "/home": "home",
+      "/order": "order",
+      "/academy": "academy",
+      "/contact": "contact-page",
+    };
     const url =
       safeExternalLink(href) ||
       (href &&
       (href.startsWith("mailto:") ||
         href.startsWith("tel:") ||
-        href.startsWith("#"))
+        href.startsWith("#") ||
+        href.startsWith("/"))
         ? href
         : null);
     const safeHref = url || "#";
     const disabled = safeHref === "#";
+    const pageKey = pageKeyByPath[safeHref] || null;
     const isRtl = state.locale === "fa";
     const dir = isRtl ? "rtl" : "ltr";
 
@@ -469,6 +695,7 @@
     return `<a class="inline-flex min-h-11 items-center gap-2.5 rounded-lg border px-4 py-2.5 text-sm font-semibold shadow-softer transition hover:-translate-y-0.5 ${cls}"
       dir="ltr"
       href="${escapeHtml(safeHref)}"
+      ${pageKey ? `data-page-link="${pageKey}"` : ""}
       ${safeHref.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}
       aria-label="${escapeHtml(label)}">
       ${content}
@@ -524,22 +751,26 @@
       if (el) el.textContent = text;
     };
 
-    const pageNav = {
-      home: "Home",
-      resume: "Portfolio",
+    const pageNav =
+      state.locale === "fa"
+        ? {
+            home: "خانه",
+            resume: "نمونه‌کارها",
+            order: "سفارش پروژه",
+            academy: "آکادمی",
+            contact: "تماس با ما",
+          }
+        : {
+            home: "Home",
       order: "Order project",
-      academy: "Academy",
-      contact: state.locale === "fa" ? "تماس با ما" : "Contact",
-    };
-    pageNav.contact = "Contact";
-
+            academy: "Academy",
+            contact: "Contact",
+          };
     setText("navHomePage", pageNav.home);
-    setText("navResumePage", pageNav.resume);
     setText("navOrderPage", pageNav.order);
     setText("navAcademyPage", pageNav.academy);
     setText("navContactPage", pageNav.contact);
     setText("mNavHomePage", pageNav.home);
-    setText("mNavResumePage", pageNav.resume);
     setText("mNavOrderPage", pageNav.order);
     setText("mNavAcademyPage", pageNav.academy);
     setText("mNavContactPage", pageNav.contact);
@@ -679,7 +910,7 @@
         DATA.personal.number ? `tel:${DATA.personal.number}` : "#",
         "phone",
       ),
-      linkPill("Contact", "#contact-page", "send"),
+      linkPill("Contact", "/contact", "send"),
     ].join("");
 
     const heroLinks = $("#heroLinks");
@@ -1382,6 +1613,26 @@
       showPage(routeFromHash(), { scrollTop: true, smooth: true });
     });
 
+    window.addEventListener("popstate", () => {
+      showPage(routeFromPath(), { scrollTop: true, smooth: false });
+    });
+
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest("a[data-page-link]");
+      if (!link) return;
+
+      const page = link.getAttribute("data-page-link");
+      if (!PAGE_KEYS.includes(page)) return;
+
+      event.preventDefault();
+      navigateToPage(page);
+
+      const menu = $("#mobileMenu");
+      const btn = $("#mobileMenuBtn");
+      menu?.classList.add("hidden");
+      btn?.setAttribute("aria-expanded", "false");
+    });
+
     document.getElementById("heroSummaryToggle")?.addEventListener("click", () => {
       state.heroExpanded = !state.heroExpanded;
       renderTop();
@@ -1471,7 +1722,7 @@
     renderProjects();
     renderExperience();
     renderEducation();
-    showPage(routeFromHash());
+    showPage(routeFromPath());
     refreshIcons();
   }
 

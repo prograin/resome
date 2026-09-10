@@ -508,7 +508,7 @@
                 ${t.lead}
               </p>
               <div class="order-contact-cta mx-auto mt-5 flex w-full max-w-md lg:mx-0 lg:max-w-xs">
-                ${cta("#contact-page", t.contactPage, "send", "cyan")}
+                ${cta("/contact", t.contactPage, "send", "cyan")}
               </div>
             </div>
 

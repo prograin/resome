@@ -5,8 +5,7 @@
   const copy = {
     fa: {
       title: "خوش آمدید",
-      lead: "برای دیدن رزومه، سفارش پروژه یا ورود به آکادمی، روی کارت مربوطه کلیک کنید. برای مشاوره یا سوال هم از تلگرام یا ایمیل پیام بدهید.",
-      resume: "مشاهده رزومه",
+      lead: "برای سفارش پروژه، ورود به آکادمی یا تماس مستقیم، روی کارت مربوطه کلیک کنید. برای مشاوره یا سوال هم از تلگرام یا ایمیل پیام بدهید.",
       order: "ثبت سفارش پروژه",
       academy: "ورود به آکادمی",
       telegram: "پیام در تلگرام",
@@ -14,15 +13,13 @@
       phone: "تماس مستقیم",
       stats: ["+۲۰ پروژه", "+۳ استارتاپ"],
       cards: {
-        resume: "نمونه‌کارها، مهارت‌ها و سوابق کاری.",
         order: "طراحی و پیاده‌سازی پروژه اختصاصی.",
         academy: "آموزش پایتون از صفر تا انجام پروژه.",
       },
     },
     en: {
       title: "Welcome",
-      lead: "Open the right card to view my resume, order a project, or enter the academy. For consultation or questions, message me on Telegram or email.",
-      resume: "View resume",
+      lead: "Open the right card to order a project, enter the academy, or contact me directly. For consultation or questions, message me on Telegram or email.",
       order: "Order a project",
       academy: "Enter academy",
       telegram: "Message on Telegram",
@@ -30,7 +27,6 @@
       phone: "Direct call",
       stats: ["+20 projects", "-3 startups"],
       cards: {
-        resume: "Portfolio projects, skills, and work experience.",
         order: "Custom software design and development.",
         academy: "Python training from zero to real projects.",
       },
@@ -45,6 +41,12 @@
     "Message me for projects, training, consulting, or collaboration.";
 
   const pathCard = ({ href, label, text, iconName, tone, position, floatClass, dir }) => {
+    const pageKeyByHref = {
+      "/": "home",
+      "/order": "order",
+      "/academy": "academy",
+      "/contact": "contact-page",
+    };
     const tones = {
       cyan: "border-cyan-100 hover:border-cyan-300 dark:border-cyan-950 dark:hover:border-cyan-700",
       emerald:
@@ -59,7 +61,7 @@
     };
 
     return `
-      <a href="${href}" data-page-link="${href.replace("#", "")}" dir="${dir}" class="group flex w-[92%] max-w-md items-center gap-4 rounded-lg border ${tones[tone]} bg-white/86 p-4 shadow-softer transition hover:bg-white dark:bg-slate-900/68 dark:hover:bg-slate-900 sm:w-[86%] sm:p-5 ${floatClass} ${position}">
+      <a href="${href}" data-page-link="${pageKeyByHref[href] || "home"}" dir="${dir}" class="group flex w-[92%] max-w-md items-center gap-4 rounded-lg border ${tones[tone]} bg-white/86 p-4 shadow-softer transition hover:bg-white dark:bg-slate-900/68 dark:hover:bg-slate-900 sm:w-[86%] sm:p-5 ${floatClass} ${position}">
         <span class="icon-tile ${iconTones[tone]}">${window.PAGE_SHARED.icon(iconName)}</span>
         <span class="min-w-0">
           <span class="block text-sm font-semibold text-slate-950 dark:text-white">${label}</span>
@@ -74,8 +76,8 @@
     const dir = locale === "fa" ? "rtl" : "ltr";
 
     return `
-      <div class="box-border min-h-[calc(100svh-4rem)] w-full overflow-x-hidden py-6 sm:h-[calc(100svh-4rem)] sm:min-h-0 sm:overflow-hidden sm:py-6" dir="${dir}">
-        <section class="motion-rise mx-auto flex min-h-[calc(100svh-7rem)] w-full max-w-6xl min-w-0 flex-col justify-center gap-5 sm:grid sm:h-full sm:min-h-0 sm:items-center lg:grid-cols-[1fr_.95fr] lg:gap-10">
+      <div class="box-border min-h-[calc(100svh-4.25rem)] w-full overflow-x-hidden py-0 sm:h-[calc(100svh-4.25rem)] sm:min-h-0 sm:overflow-hidden" dir="${dir}">
+        <section class="motion-rise mx-auto flex min-h-[calc(100svh-4.25rem)] w-full max-w-6xl min-w-0 flex-col justify-center gap-5 sm:grid sm:h-full sm:min-h-0 sm:items-center lg:grid-cols-[1fr_.95fr] lg:gap-10">
           <div class="min-w-0 text-center lg:text-start">
             <div class="home-stats mx-auto mb-3 flex w-fit flex-wrap items-center justify-center gap-2 lg:mx-0">
               ${t.stats.map((stat) => `<span>${stat}</span>`).join("")}
@@ -90,10 +92,9 @@
 
           <div class="relative w-full min-w-0 self-center">
             <nav class="relative flex w-full flex-col items-center justify-center gap-3 overflow-visible sm:min-h-[410px] sm:gap-5" dir="ltr" aria-label="Main sections">
-              ${pathCard({ href: "#resume", label: t.resume, text: t.cards.resume, iconName: "user-round", tone: "cyan", position: "sm:self-start", floatClass: "float-card float-card-a", dir })}
-              ${pathCard({ href: "#order", label: t.order, text: t.cards.order, iconName: "folder-kanban", tone: "emerald", position: "sm:self-end", floatClass: "float-card float-card-b", dir })}
-              ${pathCard({ href: "#academy", label: t.academy, text: t.cards.academy, iconName: "graduation-cap", tone: "rose", position: "sm:self-start sm:ml-8", floatClass: "float-card float-card-c", dir })}
-              ${pathCard({ href: "#contact-page", label: t.contactPage, text: t.cards.contactPage, iconName: "send", tone: "cyan", position: "sm:self-end sm:mr-8", floatClass: "float-card float-card-a", dir })}
+              ${pathCard({ href: "/order", label: t.order, text: t.cards.order, iconName: "folder-kanban", tone: "emerald", position: "sm:self-end", floatClass: "float-card float-card-b", dir })}
+              ${pathCard({ href: "/academy", label: t.academy, text: t.cards.academy, iconName: "graduation-cap", tone: "rose", position: "sm:self-start sm:ml-8", floatClass: "float-card float-card-c", dir })}
+              ${pathCard({ href: "/contact", label: t.contactPage, text: t.cards.contactPage, iconName: "send", tone: "cyan", position: "sm:self-end sm:mr-8", floatClass: "float-card float-card-a", dir })}
             </nav>
           </div>
         </section>
