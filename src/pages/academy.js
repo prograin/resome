@@ -5,7 +5,7 @@
   const copy = {
     fa: {
       title: "آموزش پایتون",
-      lead: "مسیر یادگیری را براساس نیاز خودتان انتخاب کنید؛ کلاس عمومی برای شروع اقتصادی و منظم، آموزش خصوصی برای پیشرفت سریع‌تر و تمرکز روی هدف شخصی شما.",
+      lead: "مسیر یادگیری را براساس نیاز خودتان انتخاب کنید؛ دوره نیمه‌خصوصی آنلاین برای شروع اقتصادی و منظم، آموزش خصوصی برای پیشرفت سریع‌تر و تمرکز روی هدف شخصی شما.",
       selectorTitle: "نوع آموزش را انتخاب کنید",
       comparisonTitle: "برای تصمیم‌گیری بهتر",
       youtubeTitle: "آموزش‌های رایگان یوتیوب",
@@ -13,7 +13,7 @@
         "ما برای شما عزیزان، بخشی از آموزش‌های خود را به صورت رایگان در یوتیوب قرار داده‌ایم تا بتوانید با هر شرایطی یادگیری را شروع کنید. این آموزش‌ها برای افرادی آماده شده‌اند که می‌خواهند به صورت خودآموز یاد بگیرند یا قبل از شرکت در دوره‌های تخصصی با سبک آموزش‌ها آشنا شوند.",
       youtubeCta: "مشاهده کانال یوتیوب",
       tabs: {
-        group: "آموزش عمومی",
+        group: "نیمه‌خصوصی آنلاین",
         private: "آموزش خصوصی",
       },
       plans: [
@@ -21,17 +21,18 @@
           key: "group",
           icon: "graduation-cap",
           badge: "Best Value",
-          title: "آموزش عمومی",
-          price: "4,500,000 تومان",
+          title: "نیمه‌خصوصی آنلاین",
+          price: "2,500,000 تومان",
+          suffix: "/ دوره",
           fit: "مناسب برای شروع یادگیری",
           cta: "پیام یا تماس با مدرس",
           tone: "group",
           features: [
-            "کلاس گروهی",
+            "کلاس نیمه‌خصوصی آنلاین",
+            "۱۶ جلسه آموزشی",
             "سرفصل مشخص",
             "پروژه عملی",
             "تمرین دوره‌ای",
-            "هزینه اقتصادی",
           ],
         },
         {
@@ -39,14 +40,14 @@
           icon: "sparkles",
           badge: "پیشنهاد ویژه",
           title: "آموزش خصوصی",
-          price: "800,000 تومان",
+          price: "650,000 تومان",
           suffix: "/ ساعت",
           fit: "یادگیری کاملاً اختصاصی با تمرکز روی پروژه و هدف شما",
           cta: "پیام یا تماس با مدرس",
           tone: "private",
           featured: true,
           features: [
-            "کلاس یک به یک",
+            "تمرکز کامل روی هدف آموزشی شما",
             "مسیر اختصاصی",
             "بررسی پروژه",
             "رفع مشکل مستقیم",
@@ -55,7 +56,8 @@
         },
       ],
       comparison: [
-        ["نوع کلاس", "گروهی", "اختصاصی"],
+        ["نوع کلاس", "نیمه‌خصوصی آنلاین", "اختصاصی"],
+        ["تعداد جلسات", "۱۶ جلسه", "هماهنگ با شما"],
         ["مسیر یادگیری", "سرفصل آماده", "Roadmap اختصاصی"],
         ["زمان‌بندی", "طبق برنامه دوره", "هماهنگ با شما"],
         ["برنامه آموزشی", "برنامه از پیش طراحی‌شده", "کاملاً متناسب با نیاز شما"],
@@ -80,7 +82,7 @@
     },
     en: {
       title: "Python training",
-      lead: "Choose the learning path that fits your goal: group training for a structured and affordable start, or private mentoring for faster, focused progress.",
+      lead: "Choose the learning path that fits your goal: online semi-private training for a structured and affordable start, or private mentoring for faster, focused progress.",
       selectorTitle: "Choose your training type",
       comparisonTitle: "For a better decision",
       youtubeTitle: "Free YouTube Training",
@@ -88,7 +90,7 @@
         "I have made part of my training content available for free on YouTube so you can start learning in any situation.\n\nThese lessons are useful for self-paced learning or for getting familiar with the teaching style before joining focused courses.",
       youtubeCta: "View YouTube channel",
       tabs: {
-        group: "Group training",
+        group: "Online semi-private",
         private: "Private mentoring",
       },
       plans: [
@@ -96,17 +98,18 @@
           key: "group",
           icon: "graduation-cap",
           badge: "Best Value",
-          title: "Group training",
-          price: "4,500,000 Toman",
+          title: "Online semi-private",
+          price: "2,500,000 Toman",
+          suffix: "/ course",
           fit: "Best for starting your learning path",
           cta: "Contact or message instructor",
           tone: "group",
           features: [
-            "Group class",
+            "Online semi-private class",
+            "16 training sessions",
             "Defined syllabus",
             "Practical project",
             "Regular exercises",
-            "Affordable price",
           ],
         },
         {
@@ -114,14 +117,14 @@
           icon: "sparkles",
           badge: "Personal Mentoring",
           title: "Private mentoring",
-          price: "800,000 Toman",
+          price: "650,000 Toman",
           suffix: "/ hour",
           fit: "Fully personalized learning focused on your project and goal",
           cta: "Contact or message instructor",
           tone: "private",
           featured: true,
           features: [
-            "One-to-one class",
+            "Full focus on your learning goal",
             "Custom roadmap",
             "Project review",
             "Direct troubleshooting",
@@ -130,7 +133,8 @@
         },
       ],
       comparison: [
-        ["Class type", "Group", "One-to-one"],
+        ["Class type", "Online semi-private", "One-to-one"],
+        ["Session count", "16 sessions", "Coordinated with you"],
         ["Learning path", "Prepared syllabus", "Custom roadmap"],
         ["Scheduling", "Based on course schedule", "Coordinated with you"],
         ["Learning plan", "Pre-designed program", "Fully tailored to your needs"],
@@ -169,25 +173,36 @@
       <a class="academy-plan__cta" href="#contact-page" data-page-link="contact-page">${plan.cta}</a>
     </article>`;
 
-  const comparisonRows = (rows, locale) =>
-    rows
+  const comparisonColumns = (rows, locale, tabs) => {
+    const labels = rows.map(([label]) => label);
+    const groupItems = rows.map(([, group]) => group);
+    const privateItems = rows.map(([, , privatePlan]) => privatePlan);
+    const featureTitle = locale === "fa" ? "ویژگی" : "Feature";
+    const columns =
+      locale === "fa"
+        ? [
+            { key: "features", title: featureTitle, items: labels },
+            { key: "private", title: `${tabs.private} ✨`, items: privateItems },
+            { key: "group", title: tabs.group, items: groupItems },
+          ]
+        : [
+            { key: "group", title: tabs.group, items: groupItems },
+            { key: "features", title: featureTitle, items: labels },
+            { key: "private", title: `${tabs.private} ✨`, items: privateItems },
+          ];
+
+    return columns
       .map(
-        ([label, group, privatePlan]) =>
-          locale === "fa"
-            ? `
-          <tr>
-            <th>${label}</th>
-            <td class="academy-table__premium" data-academy-column="private">${privatePlan}</td>
-            <td data-academy-column="group">${group}</td>
-          </tr>`
-            : `
-          <tr>
-            <th>${label}</th>
-            <td class="academy-table__premium" data-academy-column="private">${privatePlan}</td>
-            <td data-academy-column="group">${group}</td>
-          </tr>`,
+        (column) => `
+          <section class="academy-compare-column" data-academy-column="${column.key}">
+            <h3>${column.title}</h3>
+            <ul>
+              ${column.items.map((item) => `<li>${item}</li>`).join("")}
+            </ul>
+          </section>`,
       )
       .join("");
+  };
 
   function activateAcademyPlan(root, key) {
     const page = root.closest(".academy-page");
@@ -207,15 +222,6 @@
   }
 
   function initAcademyPlans(root = document) {
-    root
-      .querySelectorAll('.academy-page[dir="ltr"] .academy-table thead tr')
-      .forEach((row) => {
-        const cells = Array.from(row.children);
-        if (cells.length === 3 && cells[0]?.dataset.academyColumn === "group") {
-          row.append(cells[1], cells[2], cells[0]);
-        }
-      });
-
     root.querySelectorAll("[data-academy-plans]").forEach((section) => {
       if (section.dataset.academyReady === "true") {
         const active =
@@ -253,23 +259,23 @@
             <h1 class="${titleClass}">${t.title}</h1>
             <p>${t.lead}</p>
           </div>
+        </section>
 
-          <div class="academy-picker" data-academy-plans>
-            <p class="academy-picker__label">${t.selectorTitle}</p>
-            <div class="academy-tabs" role="tablist" aria-label="${t.selectorTitle}">
-              <button class="academy-tab is-active" type="button" data-academy-tab="private" aria-selected="true">
-                ${icon("sparkles", "h-4 w-4")}
-                ${t.tabs.private}
-              </button>
-              <button class="academy-tab" type="button" data-academy-tab="group" aria-selected="false">
-                ${icon("graduation-cap", "h-4 w-4")}
-                ${t.tabs.group}
-              </button>
-            </div>
+        <section class="academy-picker" data-academy-plans>
+          <p class="academy-picker__label">${t.selectorTitle}</p>
+          <div class="academy-tabs" role="tablist" aria-label="${t.selectorTitle}">
+            <button class="academy-tab is-active" type="button" data-academy-tab="private" aria-selected="true">
+              ${icon("sparkles", "h-4 w-4")}
+              ${t.tabs.private}
+            </button>
+            <button class="academy-tab" type="button" data-academy-tab="group" aria-selected="false">
+              ${icon("graduation-cap", "h-4 w-4")}
+              ${t.tabs.group}
+            </button>
+          </div>
 
-            <div class="academy-comparison" aria-label="${t.comparisonTitle}">
-              ${displayPlans.map((plan) => planCard(plan, icon)).join("")}
-            </div>
+          <div class="academy-comparison" aria-label="${t.comparisonTitle}">
+            ${displayPlans.map((plan) => planCard(plan, icon)).join("")}
           </div>
         </section>
 
@@ -277,21 +283,8 @@
           <div class="academy-table-heading">
             <h2>${t.comparisonTitle}</h2>
           </div>
-          <div class="academy-table-wrap">
-            <table class="academy-table">
-              <thead>
-                <tr>
-                  ${
-                    locale === "fa"
-                      ? `<th>ویژگی</th><th data-academy-column="private">${t.tabs.private} ✨</th><th data-academy-column="group">${t.tabs.group}</th>`
-                      : `<th data-academy-column="group">${t.tabs.group}</th><th>Feature</th><th data-academy-column="private">${t.tabs.private} ✨</th>`
-                  }
-                </tr>
-              </thead>
-              <tbody>
-                ${comparisonRows(t.comparison, locale)}
-              </tbody>
-            </table>
+          <div class="academy-compare-grid">
+            ${comparisonColumns(t.comparison, locale, t.tabs)}
           </div>
         </section>
 

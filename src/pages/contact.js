@@ -33,6 +33,7 @@
     <a class="contact-action contact-action--${tone}" href="${href}" ${attrs}>
       ${icon(iconName, "h-4 w-4")}
       <span>${label}</span>
+      <span class="contact-action__cue">${icon("arrow-left", "h-4 w-4")}</span>
     </a>`;
 
   window.PAGE_CONTACT = function renderContactPage(locale = "fa") {
@@ -44,30 +45,20 @@
 
     return `
       <div class="contact-page" dir="${dir}">
-        <section class="contact-shell motion-rise">
-          <div class="contact-visual" aria-hidden="true">
-            ${Array.from({ length: 18 }, (_, index) => `<span style="--i:${index}"></span>`).join("")}
-          </div>
-
+        <section class="contact-shell contact-shell--centered">
           <div class="contact-hero">
             <h1 class="${titleClass}">${t.title}</h1>
             <p>${t.lead}</p>
           </div>
 
-          <div class="contact-geo" aria-hidden="true">
-            ${Array.from({ length: 9 }, (_, index) => `<span style="--i:${index}"></span>`).join("")}
-          </div>
-
           <div class="contact-link-grid">
             <div class="contact-actions">
-              ${action(`tel:${contact.phone}`, t.phone, "phone", "secondary", icon)}
               ${action(`https://t.me/${contact.telegram}`, t.telegram, "telegram", "primary", icon, 'target="_blank" rel="noopener noreferrer"')}
-              ${action(contact.linkedin, t.linkedin, "linkedin", "linkedin", icon, 'target="_blank" rel="noopener noreferrer"')}
+              ${action(`tel:${contact.phone}`, t.phone, "phone", "secondary", icon)}
               ${action(`mailto:${contact.email}`, t.email, "mail", "email", icon)}
+              ${action(contact.linkedin, t.linkedin, "linkedin", "linkedin", icon, 'target="_blank" rel="noopener noreferrer"')}
             </div>
           </div>
-
-          <div class="contact-orbit" aria-hidden="true"></div>
 
           <div class="contact-final-stack">
             <span class="contact-final-stack__mark">${icon("lightbulb", "h-12 w-12")}</span>

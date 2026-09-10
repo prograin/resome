@@ -12,6 +12,7 @@
       telegram: "پیام در تلگرام",
       email: "ارسال ایمیل",
       phone: "تماس مستقیم",
+      stats: ["+۲۰ پروژه", "+۳ استارتاپ"],
       cards: {
         resume: "نمونه‌کارها، مهارت‌ها و سوابق کاری.",
         order: "طراحی و پیاده‌سازی پروژه اختصاصی.",
@@ -27,6 +28,7 @@
       telegram: "Message on Telegram",
       email: "Send email",
       phone: "Direct call",
+      stats: ["+20 projects", "-3 startups"],
       cards: {
         resume: "Portfolio projects, skills, and work experience.",
         order: "Custom software design and development.",
@@ -63,6 +65,7 @@
           <span class="block text-sm font-semibold text-slate-950 dark:text-white">${label}</span>
           <span class="mt-1 block text-base leading-6 text-slate-600 dark:text-slate-300">${text}</span>
         </span>
+        <span class="home-card-cue">${window.PAGE_SHARED.icon("arrow-left", "h-4 w-4")}</span>
       </a>`;
   };
 
@@ -74,6 +77,9 @@
       <div class="box-border min-h-[calc(100svh-4rem)] w-full overflow-x-hidden py-6 sm:h-[calc(100svh-4rem)] sm:min-h-0 sm:overflow-hidden sm:py-6" dir="${dir}">
         <section class="motion-rise mx-auto flex min-h-[calc(100svh-7rem)] w-full max-w-6xl min-w-0 flex-col justify-center gap-5 sm:grid sm:h-full sm:min-h-0 sm:items-center lg:grid-cols-[1fr_.95fr] lg:gap-10">
           <div class="min-w-0 text-center lg:text-start">
+            <div class="home-stats mx-auto mb-3 flex w-fit flex-wrap items-center justify-center gap-2 lg:mx-0">
+              ${t.stats.map((stat) => `<span>${stat}</span>`).join("")}
+            </div>
             <h1 class="mx-auto w-[92%] max-w-md text-4xl font-semibold leading-tight tracking-normal text-cyan-950 dark:text-cyan-50 sm:w-auto sm:max-w-3xl sm:text-5xl lg:mx-0 lg:text-6xl">
               ${t.title}
             </h1>

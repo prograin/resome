@@ -13,6 +13,8 @@
       contactPage: "تماس با ما",
       pricingTitle: "انتخاب پکیج",
       activeLabel: "پکیج فعال",
+      showMore: "نمایش همه امکانات",
+      showLess: "نمایش کمتر",
       packages: [
         {
           title: "سایت شرکتی",
@@ -153,6 +155,8 @@
       contactPage: "Contact us",
       pricingTitle: "Packages",
       activeLabel: "Active package",
+      showMore: "Show all features",
+      showLess: "Show less",
       packages: [
         {
           title: "Corporate website",
@@ -306,6 +310,15 @@
 
   const packageCard = (pkg, index, t, icon) => {
     const active = pkg.featured ? " is-active" : "";
+    const visibleFeatureCount = 6;
+    const hasMoreFeatures = pkg.features.length > visibleFeatureCount;
+    const features = pkg.features
+      .map((feature, featureIndex) => {
+        const isExtra = featureIndex >= visibleFeatureCount;
+        return `<li ${isExtra ? 'class="pricing-card__feature-extra" hidden' : ""}>${icon("check-circle-2", "h-4 w-4")}<span>${feature}</span></li>`;
+      })
+      .join("");
+
     return `<article class="pricing-card${active}" data-pricing-card="${index}" data-tone="${pkg.tone || "cyan"}" aria-label="${pkg.title}">
       <div class="pricing-card__top">
         <span class="pricing-card__icon">${icon(pkg.icon, "h-5 w-5")}</span>
@@ -315,8 +328,16 @@
       <p class="pricing-card__price">${pkg.price}</p>
       <p class="pricing-card__fit">${pkg.fit}</p>
       <ul class="pricing-card__features">
-        ${pkg.features.map((feature) => `<li>${icon("check-circle-2", "h-4 w-4")}<span>${feature}</span></li>`).join("")}
+        ${features}
       </ul>
+      ${
+        hasMoreFeatures
+          ? `<button class="pricing-card__toggle" type="button" data-pricing-toggle aria-expanded="false">
+              <span data-pricing-toggle-label>${t.showMore}</span>
+              ${icon("chevron-right", "h-4 w-4")}
+            </button>`
+          : ""
+      }
     </article>`;
   };
 
@@ -420,6 +441,30 @@
             activatePricingCard(carousel, nextIndex, true);
           });
         });
+
+      carousel.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-pricing-toggle]");
+        if (!button) return;
+
+        const card = button.closest("[data-pricing-card]");
+        if (!card) return;
+
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        const nextExpanded = !expanded;
+        const panelLocale =
+          document.documentElement.getAttribute("lang") === "fa" ? "fa" : "en";
+        const labels = copy[panelLocale] || copy.fa;
+
+        card
+          .querySelectorAll(".pricing-card__feature-extra")
+          .forEach((item) => {
+            item.hidden = !nextExpanded;
+          });
+
+        button.setAttribute("aria-expanded", nextExpanded ? "true" : "false");
+        const label = button.querySelector("[data-pricing-toggle-label]");
+        if (label) label.textContent = nextExpanded ? labels.showLess : labels.showMore;
+      });
 
       const preferred = carousel.querySelector(".pricing-card.is-active");
       if (preferred) {

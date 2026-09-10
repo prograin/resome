@@ -6,6 +6,7 @@
   const ICONS = {
     "arrow-left": '<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>',
     "arrow-right": '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+    "arrow-up-left": '<path d="M7 7h10"/><path d="M7 17V7"/><path d="m17 17-10-10"/>',
     brain:
       '<path d="M9.5 2A3.5 3.5 0 0 0 6 5.5v.2A3.5 3.5 0 0 0 4 12a3.5 3.5 0 0 0 2 6.3v.2A3.5 3.5 0 0 0 12 21"/><path d="M14.5 2A3.5 3.5 0 0 1 18 5.5v.2A3.5 3.5 0 0 1 20 12a3.5 3.5 0 0 1-2 6.3v.2A3.5 3.5 0 0 1 12 21"/><path d="M12 2v19"/>',
     briefcase:
