@@ -145,21 +145,18 @@
           mark: "BW",
           href: "https://black-wall.org/",
           icon: "./assets/images/clients/black-wall.png",
-          status: "در حال توسعه",
         },
         {
           name: "Rokesh Mehdi",
           mark: "RM",
           href: "https://rokesh-mehdi.ir/",
           icon: "./assets/images/clients/rokesh-mehdi.png",
-          status: "در حال توسعه",
         },
         {
           name: "Dr Bajelani",
           mark: "DB",
           href: "https://dr-bajelani.prograin.workers.dev/",
           icon: "./assets/images/clients/dr-bajelani.svg",
-          status: "در حال توسعه",
         },
       ],
       cards: [
@@ -331,21 +328,18 @@
           mark: "BW",
           href: "https://black-wall.org/",
           icon: "./assets/images/clients/black-wall.png",
-          status: "In development",
         },
         {
           name: "Rokesh Mehdi",
           mark: "RM",
           href: "https://rokesh-mehdi.ir/",
           icon: "./assets/images/clients/rokesh-mehdi.png",
-          status: "In development",
         },
         {
           name: "Dr Bajelani",
           mark: "DB",
           href: "https://dr-bajelani.prograin.workers.dev/",
           icon: "./assets/images/clients/dr-bajelani.svg",
-          status: "In development",
         },
       ],
       cards: [
@@ -455,7 +449,6 @@
       </span>
       <span class="order-client__body">
         <strong>${client.name}</strong>
-        <small>${client.status}</small>
       </span>
     </a>`;
 

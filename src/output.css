@@ -1,9 +1,10 @@
 /*! tailwindcss v4.3.0 | MIT License | https://tailwindcss.com */
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap");
 @layer properties;
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
-    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    --font-sans: "Vazirmatn", "Segoe UI", Tahoma, Arial, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
@@ -1036,7 +1037,7 @@
     text-align: start;
   }
   .font-\[Tahoma\] {
-    font-family: Tahoma;
+    font-family: "Vazirmatn", "Segoe UI", Tahoma, Arial, sans-serif;
   }
   .text-2xl {
     font-size: var(--text-2xl);
@@ -2892,7 +2893,7 @@
     overflow-x: hidden;
   }
   [dir="rtl"] {
-    font-family: Tahoma, Arial, sans-serif;
+    font-family: "Vazirmatn", "Segoe UI", Tahoma, Arial, sans-serif;
   }
   .motion-rise {
     animation: motion-rise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
