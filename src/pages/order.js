@@ -139,10 +139,30 @@
         },
       ],
       cards: [
-        ["server", "کدنویسی اختصاصی", "پنل، فروشگاه، API، داشبورد، بک‌اند و فرانت‌اند با ساختاری ساخته می‌شود که دقیقاً به فرآیند شما بخورد.", "emerald"],
-        ["lock", "امن‌سازی و پایداری", "احراز هویت، سطح دسترسی، محافظت مسیرها، ذخیره امن داده‌ها، بکاپ و سیو کار از ابتدا در طراحی دیده می‌شود.", "emerald"],
-        ["layers", "اتصال سرویس‌ها", "زرین‌پال، اینماد، ملی‌پیامک، اعلان‌ها، Storage، پنل ادمین و سرویس‌های جانبی در صورت نیاز به محصول وصل می‌شوند.", "cyan"],
-        ["sparkles", "رابط کاربری مطابق سلیقه", "UI فقط زیبا نیست؛ براساس برند، رفتار کاربر و سلیقه مشتری طراحی می‌شود تا استفاده از محصول راحت و حرفه‌ای باشد.", "violet"],
+        [
+          "server",
+          "کدنویسی اختصاصی",
+          "پنل، فروشگاه، API، داشبورد، بک‌اند و فرانت‌اند با ساختاری ساخته می‌شود که دقیقاً به فرآیند شما بخورد.",
+          "emerald",
+        ],
+        [
+          "lock",
+          "امن‌سازی و پایداری",
+          "احراز هویت، سطح دسترسی، محافظت مسیرها، ذخیره امن داده‌ها، بکاپ و سیو کار از ابتدا در طراحی دیده می‌شود.",
+          "emerald",
+        ],
+        [
+          "layers",
+          "اتصال سرویس‌ها",
+          "زرین‌پال، اینماد، ملی‌پیامک، اعلان‌ها، Storage، پنل ادمین و سرویس‌های جانبی در صورت نیاز به محصول وصل می‌شوند.",
+          "cyan",
+        ],
+        [
+          "sparkles",
+          "رابط کاربری مطابق سلیقه",
+          "UI فقط زیبا نیست؛ براساس برند، رفتار کاربر و سلیقه مشتری طراحی می‌شود تا استفاده از محصول راحت و حرفه‌ای باشد.",
+          "violet",
+        ],
       ],
     },
     en: {
@@ -281,10 +301,30 @@
         },
       ],
       cards: [
-        ["server", "Custom implementation", "Admin panels, shops, APIs, dashboards, backend and frontend are designed around your real workflow.", "emerald"],
-        ["lock", "Security and continuity", "Authentication, permissions, protected routes, safer data handling, backups, and progress preservation are planned from the beginning.", "emerald"],
-        ["layers", "Service integrations", "ZarinPal, Enamad, SMS providers, notifications, storage, admin panels, and external services can be connected when needed.", "cyan"],
-        ["sparkles", "UI shaped around taste", "The interface follows your brand, customer expectations, and product behavior so it feels polished and usable.", "violet"],
+        [
+          "server",
+          "Custom implementation",
+          "Admin panels, shops, APIs, dashboards, backend and frontend are designed around your real workflow.",
+          "emerald",
+        ],
+        [
+          "lock",
+          "Security and continuity",
+          "Authentication, permissions, protected routes, safer data handling, backups, and progress preservation are planned from the beginning.",
+          "emerald",
+        ],
+        [
+          "layers",
+          "Service integrations",
+          "ZarinPal, Enamad, SMS providers, notifications, storage, admin panels, and external services can be connected when needed.",
+          "cyan",
+        ],
+        [
+          "sparkles",
+          "UI shaped around taste",
+          "The interface follows your brand, customer expectations, and product behavior so it feels polished and usable.",
+          "violet",
+        ],
       ],
     },
   };
@@ -298,8 +338,18 @@
       violet:
         "bg-violet-100 text-violet-800 dark:bg-violet-950 dark:text-violet-200",
     };
-    const positions = ["sm:self-end", "sm:self-start", "sm:self-end", "sm:self-start sm:ms-8"];
-    const floats = ["float-card-a", "float-card-b", "float-card-c", "float-card-a"];
+    const positions = [
+      "sm:self-end",
+      "sm:self-start",
+      "sm:self-end",
+      "sm:self-start sm:ms-8",
+    ];
+    const floats = [
+      "float-card-a",
+      "float-card-b",
+      "float-card-c",
+      "float-card-a",
+    ];
 
     return `<div class="float-card ${floats[index]} w-full max-w-none rounded-lg border border-slate-200 bg-white/85 p-4 shadow-softer backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 sm:w-[86%] sm:max-w-md ${positions[index]}">
       <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg ${tones[tone]}">${icon(iconName)}</span>
@@ -308,7 +358,7 @@
     </div>`;
   };
 
-  const packageCard = (pkg, index, t, icon) => {
+  const packageCard = (pkg, index, t, icon, locale) => {
     const active = pkg.featured ? " is-active" : "";
     const visibleFeatureCount = 6;
     const hasMoreFeatures = pkg.features.length > visibleFeatureCount;
@@ -334,7 +384,7 @@
         hasMoreFeatures
           ? `<button class="pricing-card__toggle" type="button" data-pricing-toggle aria-expanded="false">
               <span data-pricing-toggle-label>${t.showMore}</span>
-              ${icon("chevron-right", "h-4 w-4")}
+              ${icon(locale === "fa" ? "chevron-left" : "chevron-right", "h-4 w-4")}
             </button>`
           : ""
       }
@@ -463,7 +513,8 @@
 
         button.setAttribute("aria-expanded", nextExpanded ? "true" : "false");
         const label = button.querySelector("[data-pricing-toggle-label]");
-        if (label) label.textContent = nextExpanded ? labels.showLess : labels.showMore;
+        if (label)
+          label.textContent = nextExpanded ? labels.showLess : labels.showMore;
       });
 
       const preferred = carousel.querySelector(".pricing-card.is-active");
@@ -490,7 +541,8 @@
     const { icon, cta } = window.PAGE_SHARED;
     const t = copy[locale] || copy.fa;
     const dir = locale === "fa" ? "rtl" : "ltr";
-    const titleClass = locale === "fa" ? "font-[Tahoma] tracking-normal" : "tracking-tight";
+    const titleClass =
+      locale === "fa" ? "font-[Tahoma] tracking-normal" : "tracking-tight";
     const rightNavStep = dir === "rtl" ? -1 : 1;
     const leftNavStep = dir === "rtl" ? 1 : -1;
     const rightNavLabel = dir === "rtl" ? "Previous package" : "Next package";
@@ -525,7 +577,7 @@
             </div>
 
             <div class="pricing-tabs" role="tablist" aria-label="Packages">
-              ${t.packages.map((pkg, index) => packageTab(pkg, index)).join("")}
+              ${t.packages.map((pkg, index) => packageCard(pkg, index, t, icon, locale)).join("")}
             </div>
 
             <div class="pricing-carousel-shell">
@@ -533,7 +585,7 @@
                 ${icon("arrow-right", "h-5 w-5")}
               </button>
               <div class="pricing-carousel" data-pricing-carousel>
-                ${t.packages.map((pkg, index) => packageCard(pkg, index, t, icon)).join("")}
+                ${t.packages.map((pkg, index) => packageCard(pkg, index, t, icon, locale)).join("")}
               </div>
               <button class="pricing-nav pricing-nav--left" type="button" data-pricing-nav="${leftNavStep}" aria-label="${leftNavLabel}">
                 ${icon("arrow-left", "h-5 w-5")}

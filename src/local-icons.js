@@ -6,7 +6,8 @@
   const ICONS = {
     "arrow-left": '<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>',
     "arrow-right": '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
-    "arrow-up-left": '<path d="M7 7h10"/><path d="M7 17V7"/><path d="m17 17-10-10"/>',
+    "arrow-up-left":
+      '<path d="M7 7h10"/><path d="M7 17V7"/><path d="m17 17-10-10"/>',
     brain:
       '<path d="M9.5 2A3.5 3.5 0 0 0 6 5.5v.2A3.5 3.5 0 0 0 4 12a3.5 3.5 0 0 0 2 6.3v.2A3.5 3.5 0 0 0 12 21"/><path d="M14.5 2A3.5 3.5 0 0 1 18 5.5v.2A3.5 3.5 0 0 1 20 12a3.5 3.5 0 0 1-2 6.3v.2A3.5 3.5 0 0 1 12 21"/><path d="M12 2v19"/>',
     briefcase:
@@ -17,12 +18,14 @@
     "check-circle-2":
       '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-5"/>',
     "chevron-right": '<path d="m9 18 6-6-6-6"/>',
+    "chevron-left": '<path d="m15 18-6-6 6-6"/>',
     circle: '<circle cx="12" cy="12" r="9"/>',
     clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
     database:
       '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>',
     dot: '<circle cx="12" cy="12" r="2"/>',
-    download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
+    download:
+      '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
     "external-link":
       '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
     "file-text":
@@ -44,15 +47,16 @@
       '<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>',
     layers:
       '<path d="m12 2 9 5-9 5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
-    layout: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
+    layout:
+      '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
     "layout-grid":
       '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
     lightbulb:
       '<path d="M15 14c.2-1.1.9-1.8 1.7-2.7A6 6 0 1 0 7.3 11.3C8.1 12.2 8.8 12.9 9 14"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M9 14h6v4H9Z"/>',
-    lock:
-      '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+    lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
-    "map-pin": '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+    "map-pin":
+      '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
     menu: '<path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>',
     monitor:
       '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/>',
