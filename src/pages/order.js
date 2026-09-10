@@ -426,7 +426,7 @@
         hasMoreFeatures
           ? `<button class="pricing-card__toggle" type="button" data-pricing-toggle aria-expanded="false">
               <span data-pricing-toggle-label>${t.showMore}</span>
-              ${icon("chevron-right", "h-4 w-4")}
+              ${icon(locale === "fa" ? "chevron-left" : "chevron-right", "h-4 w-4")}
             </button>`
           : ""
       }
