@@ -59,6 +59,7 @@ try {
         assert.equal(await page.locator(".order-clients").count(), 0);
         assert.equal(await page.locator(".project-showcase__item").count(), 4);
         await page.locator(".project-showcase").scrollIntoViewIfNeeded();
+        for (const image of await page.locator(".project-showcase__logo img").all()) await image.scrollIntoViewIfNeeded();
         await page.waitForFunction(() => [...document.querySelectorAll(".project-showcase__logo img")].every((image) => image.complete && image.naturalWidth > 0));
         assert.equal(await page.locator('.project-showcase__item[href="https://drbajelani.ir/"]').count(), 1);
         assert.equal(await page.locator('.project-showcase__item[href="https://parkping.site/"]').count(), 1);

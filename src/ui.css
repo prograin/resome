@@ -161,6 +161,10 @@ svg { flex-shrink: 0; }
 .project-showcase__item p { min-height: 3.2rem; color: var(--ui-muted); font-size: .78rem; line-height: 1.9; }
 .project-showcase__visit { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; color: var(--ui-accent); font-size: .75rem; font-weight: 600; }
 .project-showcase__item:hover .project-showcase__visit { text-decoration: underline; text-underline-offset: .3rem; }
+@media (width < 48rem), (pointer: coarse) {
+  .site-header, #mobileMenu, .academy-plan, .academy-youtube-card, .home-path, .order-service, .pricing-panel { backdrop-filter: none; }
+  .academy-plan, .home-path, .order-service { animation: none !important; }
+}
 @media (width < 48rem) {
   .project-showcase { padding: 1.75rem 1rem; }
   .project-showcase__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem .75rem; }
@@ -338,7 +342,16 @@ svg { flex-shrink: 0; }
 .error-page nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
 .error-page nav a { color: #8ce4d6; text-decoration: underline; text-underline-offset: .35rem; }
 
-html.modal-open, body.modal-open { overflow: hidden !important; }
+html.modal-open, body.modal-open, html.site-update-open, body.site-update-open { overflow: hidden !important; }
+.site-update-dialog { width: min(28rem, calc(100% - 2rem)); margin: auto; padding: 2rem; border: 1px solid var(--ui-line); border-radius: var(--ui-radius); background: var(--ui-surface); color: var(--ui-text); box-shadow: 0 24px 80px rgb(0 0 0 / 30%); text-align: center; }
+.site-update-dialog::backdrop { background: rgb(2 6 23 / 70%); }
+.site-update__symbol { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; margin: 0 auto 1rem; border-radius: 1rem; background: rgb(13 148 136 / 12%); color: var(--ui-accent); }
+.site-update-dialog h2 { font-size: 1.3rem; font-weight: 750; line-height: 1.8; }
+.site-update-dialog p { margin: .75rem 0 1.5rem; color: var(--ui-muted); font-size: .9rem; line-height: 2; }
+.site-update__actions { display: flex; justify-content: center; gap: .75rem; }
+.site-update__actions button { min-height: 2.8rem; padding: .65rem 1.25rem; border-radius: var(--ui-control-radius); font-size: .88rem; font-weight: 650; }
+#siteUpdateApply { background: #087b72; color: white; }
+#siteUpdateLater { background: var(--ui-surface); color: var(--ui-muted); border: 1px solid var(--ui-line); }
 #modalOverlay[data-kind="package"] #modalDialog { border: 1px solid var(--ui-line); border-radius: 1.25rem; background: var(--ui-surface); box-shadow: 0 24px 80px rgb(0 0 0 / 30%); }
 #modalOverlay[data-kind="package"] #modalDialog > div:first-child { border-color: var(--ui-line); }
 #modalOverlay[data-kind="package"] #modalTitle { white-space: normal; line-height: 1.8; font-size: 1.2rem; font-weight: 750; }

@@ -6,14 +6,14 @@
     <base href="/" />
     {{SEO_HEAD}}
 
-    <link rel="stylesheet" href="./src/output.css?v={{ASSET_VERSION}}" />
-    <link rel="preload" href="./assets/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" data-page-style="{{STYLE_KEY}}" href="{{PAGE_STYLESHEET}}?v={{ASSET_VERSION}}" />
+    <link rel="preload" href="./assets/fonts/Vazirmatn-fa-latin.woff2" as="font" type="font/woff2" crossorigin />
     {{PAGE_PRELOAD}}
 
-    <link rel="icon" href="./assets/icons/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="./assets/icons/favicon-48.png" sizes="48x48" />
     <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
     <link rel="manifest" href="./site.webmanifest" />
+    <script defer fetchpriority="low" data-asset-version="{{ASSET_VERSION}}" src="./src/app.js?v={{ASSET_VERSION}}"></script>
     <noscript>
       <style>
         .academy-picker, .academy-table-section, .academy-youtube-section { background: #081523 !important; }
@@ -479,17 +479,15 @@
       </div>
     </div>
 
-    <script src="./src/site-config.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/seo.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/data.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/local-icons.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/pages/shared.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/pages/home.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/pages/projects.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/pages/order.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/pages/academy.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/pages/contact.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/pages/index.js?v={{ASSET_VERSION}}"></script>
-    <script src="./src/script.js?v={{ASSET_VERSION}}"></script>
+    <dialog id="siteUpdateDialog" class="site-update-dialog" aria-labelledby="siteUpdateTitle" aria-describedby="siteUpdateDescription">
+      <span class="site-update__symbol" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6 7a7 7 0 0 1 12-2l2 2M18 17a7 7 0 0 1-12 2l-2-2"/></svg></span>
+      <h2 id="siteUpdateTitle">نسخه جدید سایت آماده است</h2>
+      <p id="siteUpdateDescription">برای دیدن آخرین تغییرات و عکس‌ها، سایت را بروزرسانی کنید.</p>
+      <div class="site-update__actions">
+        <button id="siteUpdateApply" type="button" autofocus>بروزرسانی</button>
+        <button id="siteUpdateLater" type="button">بعداً</button>
+      </div>
+    </dialog>
+
   </body>
 </html>

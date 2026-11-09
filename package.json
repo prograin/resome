@@ -7,12 +7,20 @@
     "build": "node scripts/build.mjs",
     "package": "npm run build && npm run check && node scripts/package.mjs",
     "check": "node scripts/check-seo.mjs",
+    "test:performance": "node scripts/check-performance.mjs",
+    "test:updates": "node scripts/check-updates.mjs",
     "images:social": "node scripts/generate-social-images.mjs",
     "test:browser": "node scripts/check-site.mjs && node scripts/check-seo-browser.mjs && node scripts/check-interactions.mjs && node scripts/check-ui.mjs"
   },
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "esbuild": "0.28.2",
     "lightningcss": "1.33.0",
     "playwright": "1.65.0",
-    "@axe-core/playwright": "4.14.0"
+    "purgecss": "9.1.0",
+    "sharp": "0.35.5"
   }
 }

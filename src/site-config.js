@@ -3,6 +3,7 @@
   "use strict";
 
   const origin = "https://prograin.ir";
+  const asset = (value) => window.SITE_ASSETS.url(value);
   const location = {
     city: { fa: "اراک", en: "Arak" },
     region: { fa: "مرکزی", en: "Markazi" },
@@ -45,7 +46,7 @@
       ...((copy[locale] || copy.fa)[page] || copy.fa.home),
       canonical: `${origin}${route.path}`,
       robots: route.private ? "noindex, nofollow, noarchive" : "index, follow, max-image-preview:large",
-      image: route.private ? `${origin}/assets/icons/icon-512.png` : `${origin}/assets/images/social/${page === "contact-page" ? "contact" : page}.jpg`,
+      image: asset(route.private ? `${origin}/assets/icons/icon-512.png` : `${origin}/assets/images/social/${page === "contact-page" ? "contact" : page}.jpg`),
       imageWidth: route.private ? 512 : 1200,
       imageHeight: route.private ? 512 : 630,
       locale: locale === "en" ? "en_US" : "fa_IR",
@@ -62,8 +63,8 @@
     const province = `${origin}/#markazi`;
     const address = { "@type": "PostalAddress", addressLocality: location.city[locale], addressRegion: location.region[locale], addressCountry: location.country };
     const graph = [
-      { "@type": "Organization", "@id": organization, name: "prograin", url: `${origin}/`, address, areaServed: [{ "@id": city }, { "@id": province }], logo: { "@type": "ImageObject", url: `${origin}/assets/icons/icon-512.png`, width: 512, height: 512 }, founder: { "@id": person }, email: contact.email, telephone: "+989914663783", sameAs: [`https://t.me/${contact.telegram}`, contact.linkedin, "https://www.youtube.com/@Prograin_ARR"] },
-      { "@type": "Person", "@id": person, name: "احمدرضا رضایی", alternateName: "Ahmadreza Rezaei", jobTitle: locale === "fa" ? "برنامه‌نویس و مدرس پایتون" : "Software developer and Python instructor", worksFor: { "@id": organization }, image: `${origin}/assets/images/profile.jpg`, address, knowsAbout: ["Python", "Web development", "Software development", "Programming education"] },
+      { "@type": "Organization", "@id": organization, name: "prograin", url: `${origin}/`, address, areaServed: [{ "@id": city }, { "@id": province }], logo: { "@type": "ImageObject", url: asset(`${origin}/assets/icons/icon-512.png`), width: 512, height: 512 }, founder: { "@id": person }, email: contact.email, telephone: "+989914663783", sameAs: [`https://t.me/${contact.telegram}`, contact.linkedin, "https://www.youtube.com/@Prograin_ARR"] },
+      { "@type": "Person", "@id": person, name: "احمدرضا رضایی", alternateName: "Ahmadreza Rezaei", jobTitle: locale === "fa" ? "برنامه‌نویس و مدرس پایتون" : "Software developer and Python instructor", worksFor: { "@id": organization }, image: asset(`${origin}/assets/images/profile.jpg`), address, knowsAbout: ["Python", "Web development", "Software development", "Programming education"] },
       { "@type": "City", "@id": city, name: location.city[locale], alternateName: locale === "fa" ? "Arak" : "اراک", containedInPlace: { "@id": province } },
       { "@type": "AdministrativeArea", "@id": province, name: locale === "fa" ? "استان مرکزی" : "Markazi Province", containedInPlace: { "@type": "Country", name: "Iran", identifier: "IR" } },
       { "@type": "WebSite", "@id": website, name: "prograin", url: `${origin}/`, publisher: { "@id": organization }, inLanguage: ["fa-IR", "en"] },

@@ -4,10 +4,10 @@ import vm from "node:vm";
 
 const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
-export async function loadPages(root) {
+export async function loadPages(root, version = "") {
   const window = {};
-  const context = vm.createContext({ window, URL, document: { documentElement: { dir: "rtl" } } });
-  for (const file of ["site-config", "local-icons", "pages/shared", "pages/home", "pages/projects", "pages/order", "pages/academy", "pages/contact"]) {
+  const context = vm.createContext({ window, URL, document: { currentScript: { dataset: { assetVersion: version } }, documentElement: { dir: "rtl" } } });
+  for (const file of ["assets", "site-config", "local-icons", "pages/shared", "pages/home", "pages/projects", "pages/order", "pages/academy", "pages/contact"]) {
     vm.runInContext(await readFile(path.join(root, `src/${file}.js`), "utf8"), context, { filename: `${file}.js` });
   }
   return window;
@@ -32,6 +32,8 @@ export function renderEntry(template, site, page, version) {
   const route = config.routes[page];
   const slots = {
     SEO_HEAD: renderHead(config, page), ASSET_VERSION: version,
+    STYLE_KEY: page,
+    PAGE_STYLESHEET: route.private ? "./src/output.css" : `./src/styles/${page === "contact-page" ? "contact" : page}.css`,
     PAGE_CLASS: `page-${route.body}-active`,
     RESUME_VISIBILITY: page === "resume" ? "" : "hidden",
     FOOTER: `<footer id="siteFooter" class="site-footer"${route.private ? "" : ' data-rendered-locale="fa"'}>${route.private ? "" : site.PAGE_SHARED.footer("fa")}</footer>`,
@@ -57,5 +59,9 @@ export async function writeDiscovery(root, config) {
   await writeFile(path.join(root, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`);
   await writeFile(path.join(root, "robots.txt"), `User-agent: *\nAllow: /\nDisallow: /.backup/\nDisallow: /node_modules/\nDisallow: /scripts/\nDisallow: /src/templates/\n\n# Private routes use noindex; crawling is allowed so search engines can read it.\nSitemap: ${config.origin}/sitemap.xml\n`);
   // Supported by Cloudflare Pages and Netlify; other hosts should mirror these rules.
-  await writeFile(path.join(root, "_headers"), ["/resume", "/resume/*", "/portfolio", "/portfolio/*", "/portfoilio", "/portfoilio/*"].map((route) => `${route}\n  X-Robots-Tag: noindex, nofollow, noarchive\n`).join("\n"));
+  const privateHeaders = ["/resume", "/resume/*", "/portfolio", "/portfolio/*", "/portfoilio", "/portfoilio/*"].map((route) => `${route}\n  X-Robots-Tag: noindex, nofollow, noarchive\n`);
+  const htmlRoutes = ["/", "/index.html", ...["home", "academy", "order", "contact", "resume", "portfolio", "portfoilio"].flatMap((name) => [`/${name}`, `/${name}/`, `/${name}/index.html`])];
+  const revalidate = htmlRoutes.map((route) => `${route}\n  Cache-Control: no-cache, must-revalidate\n`);
+  const manifest = "/site-version.json\n  Cache-Control: no-store, no-cache, must-revalidate, max-age=0\n  X-Robots-Tag: noindex\n";
+  await writeFile(path.join(root, "_headers"), [...privateHeaders, ...revalidate, manifest].join("\n"));
 }

@@ -46,7 +46,7 @@
       </header>
       <div class="project-showcase__grid">
         ${projects.map((project) => `<a class="project-showcase__item" data-project-tone="${project.tone}" href="${project.href}" target="_blank" rel="noopener noreferrer" aria-label="${project.name[language]} — ${visit}">
-          <span class="project-showcase__logo" aria-hidden="true"><img src="${project.logo}" alt="" width="80" height="80" loading="lazy" decoding="async" /></span>
+          <span class="project-showcase__logo" aria-hidden="true"><img src="${window.SITE_ASSETS.url(project.logo)}" alt="" width="80" height="80" loading="lazy" decoding="async" /></span>
           <h3 dir="auto">${project.name[language]}</h3>
           <p>${project.description[language]}</p>
           <span class="project-showcase__visit">${visit}${icon(language === "fa" ? "chevron-left" : "chevron-right", "h-4 w-4")}</span>

@@ -23,6 +23,14 @@ for (const [page, route] of Object.entries(config.routes)) {
   assert.ok(html.includes(`property="og:url" content="${seo.canonical}"`));
   assert.ok(html.includes(`name="robots" content="${seo.robots}"`));
   assert.equal(/\{\{[A-Z_]+\}\}/.test(html), false, `Unfilled template: ${page}`);
+  const stylesheet = html.match(/rel="stylesheet"[^>]*href="\.\/([^"?]+)/)?.[1];
+  if (stylesheet) {
+    const css = await read(stylesheet);
+    for (const match of css.matchAll(/url\((?:"|')?([^)'"\s]+)(?:"|')?\)/g)) {
+      if (/^(data:|https?:|#)/.test(match[1])) continue;
+      await access(path.resolve(root, path.dirname(stylesheet), match[1].split(/[?#]/)[0]));
+    }
+  }
   assert.equal(/localhost|127\.0\.0\.1/.test(html), false);
   assert.equal(titles.has(seo.title), false, `Duplicate title: ${page}`);
   titles.add(seo.title);

@@ -323,7 +323,7 @@
 
     return `
       <div class="academy-page" dir="${dir}" data-active-plan="private">
-        <section class="academy-hero motion-rise">
+        <section class="academy-hero">
           <div class="academy-hero__copy">
             <p class="page-eyebrow">${locale === "fa" ? "آکادمی prograin" : "prograin academy"}</p>
             <h1 class="${titleClass}">${t.title}</h1>

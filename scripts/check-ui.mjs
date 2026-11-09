@@ -104,6 +104,7 @@ try {
           assert.equal(await menu.getAttribute("aria-expanded"), "false");
           await menu.click();
           await page.locator("#mNavHomePage").click();
+          await page.locator("#homePage:not(.hidden)").waitFor();
           assert.equal(await page.locator("#homePage").isVisible(), true);
           assert.equal(await menu.getAttribute("aria-expanded"), "false");
         }

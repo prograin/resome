@@ -16,7 +16,7 @@ const { SITE_CONFIG: config } = await loadPages(root);
 const entries = [
   ...Object.values(config.routes).map((route) => path.join(route.directory, "index.html")),
   "home/index.html", "portfolio/index.html", "portfoilio/index.html",
-  "404.html", "robots.txt", "sitemap.xml", "site.webmanifest", "_headers",
+  "404.html", "robots.txt", "sitemap.xml", "site.webmanifest", "site-version.json", "_headers",
 ];
 const template = await readFile(path.join(root, "src/templates/layout.html"), "utf8");
 const runtime = [...template.matchAll(/(?:href|src)="\.\/(src\/[^"?]+)(?:\?[^\"]*)?"/g)].map((match) => match[1]);
@@ -25,11 +25,15 @@ for (const file of [...new Set([...entries, ...runtime])]) {
   await mkdir(path.dirname(destination), { recursive: true });
   await cp(path.join(root, file), destination);
 }
+await cp(path.join(root, "src/chunks"), path.join(output, "src/chunks"), { recursive: true });
+await cp(path.join(root, "src/styles"), path.join(output, "src/styles"), { recursive: true });
+await cp(path.join(root, "src/output.css"), path.join(output, "src/output.css"));
 await cp(path.join(root, "assets"), path.join(output, "assets"), {
   recursive: true,
   filter: (source) => {
     const relative = path.relative(root, source).replaceAll("\\", "/");
-    return !/assets\/images\/[^/]+-bg\.jpg$/i.test(relative)
+    return relative !== "assets/fonts/Vazirmatn-Variable.woff2"
+      && !/assets\/images\/[^/]+-bg\.jpg$/i.test(relative)
       && !/assets\/images\/clients\/[^/]+\.png$/i.test(relative);
   },
 });
