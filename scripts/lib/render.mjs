@@ -7,7 +7,7 @@ const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll('"',
 export async function loadPages(root) {
   const window = {};
   const context = vm.createContext({ window, URL, document: { documentElement: { dir: "rtl" } } });
-  for (const file of ["site-config", "local-icons", "pages/shared", "pages/home", "pages/order", "pages/academy", "pages/contact"]) {
+  for (const file of ["site-config", "local-icons", "pages/shared", "pages/home", "pages/projects", "pages/order", "pages/academy", "pages/contact"]) {
     vm.runInContext(await readFile(path.join(root, `src/${file}.js`), "utf8"), context, { filename: `${file}.js` });
   }
   return window;

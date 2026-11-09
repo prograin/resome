@@ -455,6 +455,8 @@
             </div>
           </div>
 
+          ${window.PAGE_PROJECTS(locale)}
+
           <div class="pricing-panel" dir="${dir}">
             <div class="pricing-panel__header">
               <div>

@@ -57,6 +57,11 @@ try {
       }
       if (route === "/order/") {
         assert.equal(await page.locator(".order-clients").count(), 0);
+        assert.equal(await page.locator(".project-showcase__item").count(), 4);
+        await page.locator(".project-showcase").scrollIntoViewIfNeeded();
+        await page.waitForFunction(() => [...document.querySelectorAll(".project-showcase__logo img")].every((image) => image.complete && image.naturalWidth > 0));
+        assert.equal(await page.locator('.project-showcase__item[href="https://drbajelani.ir/"]').count(), 1);
+        assert.equal(await page.locator('.project-showcase__item[href="https://parkping.site/"]').count(), 1);
         assert.ok(await page.locator("[data-lucide='chevron-left']").count());
         await page.locator("#langToggle").click();
         assert.equal(await page.locator("html").getAttribute("dir"), "ltr");
