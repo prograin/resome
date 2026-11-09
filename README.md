@@ -26,6 +26,8 @@ The build needs Node.js 22.12 or newer. It generates separate stylesheets for ea
 
 Run `npm run package` for a clean `dist/` directory ready for static hosting. Original images remain in the workspace; only web-ready backgrounds and client icons are included in the upload directory.
 
+Vercel uses the root `vercel.json`: Build Command is `npm run package`, Output Directory is `dist`, and Framework Preset is Other. It also configures the uncached update manifest and private-route indexing headers; Vercel does not use `_headers`.
+
 Mobile measurement results and performance checks are documented in [PERFORMANCE.md](docs/PERFORMANCE.md).
 
 ## Background images
