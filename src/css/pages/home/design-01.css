@@ -6,16 +6,10 @@
   font-size: 0.8rem;
 }
 #homePage h1 {
-  font-size: clamp(1.2rem, 2vw, 1.65rem);
-  font-weight: 650;
-  line-height: 1.9;
-  letter-spacing: 0;
-}
-.home-welcome {
-  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
   font-weight: 800;
-  line-height: 1.55;
-  margin-bottom: 0.75rem;
+  line-height: 1.7;
+  letter-spacing: 0;
 }
 .page-home-active #homePage {
   display: grid;

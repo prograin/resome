@@ -39,7 +39,7 @@ export function renderHead(config, page) {
     meta("theme-color", "#08111f"),
     ...Object.entries({
       "og:type": "website",
-      "og:site_name": "prograin",
+      "og:site_name": "Prograin",
       "og:title": seo.title,
       "og:description": seo.description,
       "og:url": seo.canonical,

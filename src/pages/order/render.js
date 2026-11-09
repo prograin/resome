@@ -14,7 +14,7 @@ export const renderOrderPage = function (locale = "fa") {
         <section class="order-content">
           <div class="order-intro">
             <div class="text-center lg:text-start">
-              <p class="page-eyebrow">${locale === "fa" ? "طراحی و توسعه با prograin" : "Design & development with prograin"}</p>
+              <p class="page-eyebrow">${locale === "fa" ? t.kicker : "Design & development with prograin"}</p>
               <h1 class="text-3xl font-semibold text-slate-950 dark:text-white sm:text-5xl ${titleClass}">
                 ${t.title}
               </h1>

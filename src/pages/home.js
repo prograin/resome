@@ -43,7 +43,6 @@ import en from "../content/home/en.json";
             <div class="home-stats">
               ${t.stats.map((stat) => `<span><bdi>${stat}</bdi></span>`).join("")}
             </div>
-            <p class="home-welcome">${t.welcome}</p>
             <h1>
               ${t.title}
             </h1>
@@ -64,11 +63,12 @@ import en from "../content/home/en.json";
       <section class="home-details">
         <h2>${t.introTitle}</h2>
         <p>${t.intro}</p>
+        <p>${t.introClasses}</p>
         <p>${t.introEnd}</p>
         <nav aria-label="${t.introTitle}">
-          <a href="/academy/" data-page-link="academy">${locale === "fa" ? "کلاس‌های برنامه‌نویسی در اراک" : "Programming classes in Arak"}</a>
-          <a href="/order/" data-page-link="order">${locale === "fa" ? "خدمات و پکیج‌های توسعه پروژه" : "Project services and packages"}</a>
-          <a href="/contact/" data-page-link="contact-page">${locale === "fa" ? "تماس با مدرس و توسعه‌دهنده" : "Contact the instructor and developer"}</a>
+          <a href="/academy/" data-page-link="academy">${t.introLinks.academy}</a>
+          <a href="/order/" data-page-link="order">${t.introLinks.order}</a>
+          <a href="/contact/" data-page-link="contact-page">${t.introLinks.contact}</a>
         </nav>
       </section>`;
   };

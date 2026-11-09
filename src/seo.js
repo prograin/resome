@@ -24,7 +24,7 @@
       "og:url": seo.canonical,
       "og:image": seo.image,
       "og:locale": seo.locale,
-      "og:site_name": "prograin",
+      "og:site_name": "Prograin",
       "og:type": "website",
       "og:image:width": seo.imageWidth,
       "og:image:height": seo.imageHeight,

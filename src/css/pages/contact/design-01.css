@@ -40,9 +40,8 @@
   font-size: 0.9rem;
   font-weight: 650;
 }
-.contact-shell--centered .contact-action--primary {
-  background: #0c827b;
-}
+.contact-shell--centered .contact-action--primary,
+.contact-shell--centered .contact-action--primary:visited,
 .contact-shell--centered .contact-action--secondary,
 .contact-shell--centered .contact-action--email,
 .contact-shell--centered .contact-action--email:visited,

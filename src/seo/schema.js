@@ -20,7 +20,7 @@ function structuredData(page, locale = "fa") {
     {
       "@type": "Organization",
       "@id": organization,
-      name: "prograin",
+      name: "Prograin",
       url: `${origin}/`,
       address,
       areaServed: [{ "@id": city }, { "@id": province }],
@@ -74,7 +74,7 @@ function structuredData(page, locale = "fa") {
     {
       "@type": "WebSite",
       "@id": website,
-      name: "prograin",
+      name: "Prograin",
       url: `${origin}/`,
       publisher: { "@id": organization },
       inLanguage: ["fa-IR", "en"],
