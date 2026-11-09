@@ -5,14 +5,13 @@
   const copy = {
     fa: {
       kicker: "Project Order",
-      title: "سفارش پروژه",
+      title: "سفارش پروژه برنامه‌نویسی در اراک",
       lead: "هر کسب‌وکار نیازهای متفاوتی دارد؛ به همین دلیل به جای استفاده از راه‌حل‌های تکراری، ساختار هر پروژه براساس هدف، کاربران و مسیر رشد آن طراحی می‌شود.\n\nبا استفاده از تکنولوژی‌هایی مانند Django، Next.js، Nuxt و FastAPI، سیستم‌هایی سریع، امن و قابل توسعه ساخته می‌شوند که بتوانند در کنار رشد کسب‌وکار شما توسعه پیدا کنند. برای پروژه‌های بزرگ‌تر نیز معماری‌های ماژولار و میکروسرویس انتخاب می‌شوند تا نگهداری، توسعه و مقیاس‌پذیری محصول در آینده ساده‌تر باشد.",
       email: "شروع سفارش با ایمیل",
       telegram: "پیام در تلگرام",
       phone: "تماس مستقیم",
       contactPage: "تماس با ما",
       pricingTitle: "انتخاب پکیج",
-      clientsTitle: "مشتری‌ها",
       activeLabel: "پکیج فعال",
       showMore: "نمایش همه امکانات",
       showLess: "نمایش کمتر",
@@ -139,26 +138,6 @@
           ],
         },
       ],
-      clients: [
-        {
-          name: "Black Wall",
-          mark: "BW",
-          href: "https://black-wall.org/",
-          icon: "./assets/images/clients/black-wall.png",
-        },
-        {
-          name: "Rokesh Mehdi",
-          mark: "RM",
-          href: "https://rokesh-mehdi.ir/",
-          icon: "./assets/images/clients/rokesh-mehdi.png",
-        },
-        {
-          name: "Dr Bajelani",
-          mark: "DB",
-          href: "https://dr-bajelani.prograin.workers.dev/",
-          icon: "./assets/images/clients/dr-bajelani.svg",
-        },
-      ],
       cards: [
         [
           "server",
@@ -188,14 +167,13 @@
     },
     en: {
       kicker: "Project Order",
-      title: "Order project",
+      title: "Software projects in Arak",
       lead: "Your project is not forced into WordPress or a ready-made template. Based on the product needs, I use frameworks and services such as Django, Next.js, Nuxt, FastAPI, payment/SMS providers, and admin tooling. Larger products can be designed as modular or microservice-based systems so growth and maintenance stay manageable.",
       email: "Start by email",
       telegram: "Message on Telegram",
       phone: "Direct call",
       contactPage: "Contact us",
       pricingTitle: "Packages",
-      clientsTitle: "Clients",
       activeLabel: "Active package",
       showMore: "Show all features",
       showLess: "Show less",
@@ -322,26 +300,6 @@
           ],
         },
       ],
-      clients: [
-        {
-          name: "Black Wall",
-          mark: "BW",
-          href: "https://black-wall.org/",
-          icon: "./assets/images/clients/black-wall.png",
-        },
-        {
-          name: "Rokesh Mehdi",
-          mark: "RM",
-          href: "https://rokesh-mehdi.ir/",
-          icon: "./assets/images/clients/rokesh-mehdi.png",
-        },
-        {
-          name: "Dr Bajelani",
-          mark: "DB",
-          href: "https://dr-bajelani.prograin.workers.dev/",
-          icon: "./assets/images/clients/dr-bajelani.svg",
-        },
-      ],
       cards: [
         [
           "server",
@@ -380,24 +338,26 @@
       violet:
         "bg-violet-100 text-violet-800 dark:bg-violet-950 dark:text-violet-200",
     };
-    const positions = [
-      "sm:self-end",
-      "sm:self-start",
-      "sm:self-end",
-      "sm:self-start sm:ms-8",
-    ];
-    const floats = [
-      "float-card-a",
-      "float-card-b",
-      "float-card-c",
-      "float-card-a",
-    ];
-
-    return `<div class="float-card ${floats[index]} w-full max-w-none rounded-lg border border-slate-200 bg-white/85 p-4 shadow-softer backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 sm:w-[86%] sm:max-w-md ${positions[index]}">
+    return `<div class="order-service rounded-lg border border-slate-200 bg-white/85 p-4 shadow-softer dark:border-slate-800 dark:bg-slate-900/55">
       <span class="inline-flex h-11 w-11 items-center justify-center rounded-lg ${tones[tone]}">${icon(iconName)}</span>
       <p class="mt-4 text-base font-semibold text-slate-950 dark:text-white sm:text-sm">${title}</p>
       <p class="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-300">${text}</p>
     </div>`;
+  };
+
+  const faqs = {
+    fa: [
+      ["برای کسب‌وکارهای اراک هم سایت طراحی می‌کنید؟", "بله؛ طراحی سایت شرکتی، فروشگاه اینترنتی و توسعه نرم‌افزار اختصاصی برای کسب‌وکارهای اراک، استان مرکزی انجام می‌شود. برای بررسی نیاز، امکانات و شیوه همکاری از صفحه تماس پیام بدهید."],
+      ["چه پروژه‌هایی می‌توانم سفارش بدهم؟", "طراحی سایت شرکتی و فروشگاه اینترنتی، توسعه بک‌اند، ربات تلگرام و اینستاگرام و اتوماسیون اختصاصی از خدمات این صفحه هستند. امکانات هر پکیج را بررسی کنید و نیاز ویژه‌تان را در تماس اولیه توضیح بدهید."],
+      ["قیمت و زمان اجرای پروژه چطور مشخص می‌شود؟", "قیمت پکیج‌های معرفی‌شده در همین صفحه آمده است. هزینه و زمان نهایی پروژه پس از بررسی امکانات، اتصال سرویس‌ها و نیازهای اختصاصی با شما هماهنگ می‌شود."],
+      ["اگر پکیج مناسبی برای پروژه‌ام پیدا نکردم چه کنم؟", "از صفحه تماس، ایده، هدف و امکانات مدنظرتان را بفرستید. می‌توانیم ساختار پروژه و راه‌حل متناسب با نیاز کسب‌وکار شما را بررسی کنیم."],
+    ],
+    en: [
+      ["Do you build websites for businesses in Arak?", "Yes. Business websites, online stores and custom software are available for businesses in Arak, Markazi Province. Use the contact page to discuss your requirements and how we can work together."],
+      ["What projects can I order?", "Services include business websites, online stores, backend development, Telegram and Instagram bots, and custom automation. Compare the package features and explain any specific requirements when you contact me."],
+      ["How are the final price and timeline determined?", "The listed package prices appear on this page. The final cost and timeline are discussed after reviewing the features, integrations and custom requirements."],
+      ["What if none of the packages fits my project?", "Send your idea, goal and required features through the contact page. We can discuss a project structure and solution that fits your business."],
+    ],
   };
 
   const packageCard = (pkg, index, t, icon, locale) => {
@@ -424,7 +384,7 @@
       </ul>
       ${
         hasMoreFeatures
-          ? `<button class="pricing-card__toggle" type="button" data-pricing-toggle aria-expanded="false">
+          ? `<button class="pricing-card__toggle" type="button" data-pricing-toggle aria-haspopup="dialog" aria-controls="modalDialog">
               <span data-pricing-toggle-label>${t.showMore}</span>
               ${icon(locale === "fa" ? "chevron-left" : "chevron-right", "h-4 w-4")}
             </button>`
@@ -433,179 +393,52 @@
     </article>`;
   };
 
-  const packageTab = (pkg, index) => {
-    const active = pkg.featured ? " is-active" : "";
-    return `<button class="pricing-tab${active}" type="button" data-pricing-tab="${index}" data-tone="${pkg.tone || "cyan"}" aria-selected="${pkg.featured ? "true" : "false"}">
-      <span class="pricing-tab__number" aria-hidden="true">0${index + 1}</span>
-      ${pkg.title}
-    </button>`;
-  };
-
-  const clientCard = (client, index) => `
-    <a class="order-client" href="${client.href}" target="_blank" rel="noopener noreferrer" aria-label="${client.name}" data-client-index="${index}">
-      <span class="order-client__icon" aria-hidden="true">
-        <img src="${client.icon}" alt="" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false;" />
-        <span class="order-client__mark" hidden>${client.mark}</span>
-      </span>
-      <span class="order-client__body">
-        <strong>${client.name}</strong>
-      </span>
-    </a>`;
-
-  function updatePricingNav(panel, index, total) {
-    panel.querySelectorAll("[data-pricing-nav]").forEach((button) => {
-      const step = Number(button.dataset.pricingNav);
-      const nextIndex = index + step;
-      button.disabled = nextIndex < 0 || nextIndex >= total;
-    });
-  }
-
-  function activatePricingCard(carousel, index, shouldScroll = false) {
-    const panel = carousel.closest(".pricing-panel") || document;
-    const cards = Array.from(carousel.querySelectorAll("[data-pricing-card]"));
-    const tabs = Array.from(panel.querySelectorAll("[data-pricing-tab]"));
-    const activeCard = cards[index] || cards[0];
-    if (!activeCard) return;
-    const activeIndex = Number(activeCard.dataset.pricingCard);
-
-    cards.forEach((card) => {
-      const isActive = card === activeCard;
-      card.classList.toggle("is-active", isActive);
-      card.setAttribute("aria-current", isActive ? "true" : "false");
-    });
-
-    tabs.forEach((tab) => {
-      const isActive = Number(tab.dataset.pricingTab) === activeIndex;
-      tab.classList.toggle("is-active", isActive);
-      tab.setAttribute("aria-selected", isActive ? "true" : "false");
-    });
-
-    updatePricingNav(panel, activeIndex, cards.length);
-
-    if (shouldScroll) {
-      activeCard.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
-    }
-  }
-
-  function setActivePricingCard(carousel) {
-    const cards = Array.from(carousel.querySelectorAll("[data-pricing-card]"));
-    if (!cards.length) return;
-
-    const activeIndex = Math.max(
-      0,
-      cards.findIndex((card) => card.classList.contains("is-active")),
-    );
-    activatePricingCard(carousel, activeIndex);
-  }
-
-  function initPricingCarousel(root = document) {
-    root.querySelectorAll("[data-pricing-carousel]").forEach((carousel) => {
-      if (carousel.dataset.pricingReady === "true") {
-        setActivePricingCard(carousel);
-        return;
-      }
-
-      carousel.dataset.pricingReady = "true";
-      const update = () => setActivePricingCard(carousel);
-
-      window.addEventListener("resize", update);
-      carousel
-        .closest(".pricing-panel")
-        ?.querySelectorAll("[data-pricing-tab]")
-        .forEach((tab) => {
-          tab.addEventListener("click", () => {
-            activatePricingCard(
-              carousel,
-              Number(tab.dataset.pricingTab),
-              !window.matchMedia("(width < 48rem)").matches,
-            );
-          });
-        });
-      carousel
-        .closest(".pricing-panel")
-        ?.querySelectorAll("[data-pricing-nav]")
-        .forEach((button) => {
-          button.addEventListener("click", () => {
-            const cards = Array.from(
-              carousel.querySelectorAll("[data-pricing-card]"),
-            );
-            const activeIndex = Math.max(
-              0,
-              cards.findIndex((card) => card.classList.contains("is-active")),
-            );
-            const nextIndex = Math.min(
-              cards.length - 1,
-              Math.max(0, activeIndex + Number(button.dataset.pricingNav)),
-            );
-            activatePricingCard(carousel, nextIndex, true);
-          });
-        });
-
-      carousel.addEventListener("click", (event) => {
+  function initPricing(root = document) {
+    root.querySelectorAll("[data-pricing-grid]").forEach((grid) => {
+      if (grid.dataset.pricingReady === "true") return;
+      grid.dataset.pricingReady = "true";
+      grid.addEventListener("click", (event) => {
         const button = event.target.closest("[data-pricing-toggle]");
         if (!button) return;
 
         const card = button.closest("[data-pricing-card]");
         if (!card) return;
 
-        const expanded = button.getAttribute("aria-expanded") === "true";
-        const nextExpanded = !expanded;
         const panelLocale =
           document.documentElement.getAttribute("lang") === "fa" ? "fa" : "en";
         const labels = copy[panelLocale] || copy.fa;
-
-        card
-          .querySelectorAll(".pricing-card__feature-extra")
-          .forEach((item) => {
-            item.hidden = !nextExpanded;
-          });
-
-        button.setAttribute("aria-expanded", nextExpanded ? "true" : "false");
-        const label = button.querySelector("[data-pricing-toggle-label]");
-        if (label)
-          label.textContent = nextExpanded ? labels.showLess : labels.showMore;
+        const pkg = labels.packages[Number(card.dataset.pricingCard)];
+        if (!pkg) return;
+        window.SITE_MODAL.open({
+          kind: "package",
+          kicker: panelLocale === "fa" ? "امکانات کامل پکیج" : "Full package features",
+          title: pkg.title,
+          htmlBody: `<div class="package-details">
+            <p class="package-details__price">${pkg.price}</p>
+            <p class="package-details__fit">${pkg.fit}</p>
+            <ul class="package-details__features">${pkg.features.map((feature) => `<li>${window.PAGE_SHARED.icon("check-circle-2", "h-4 w-4")}<span>${feature}</span></li>`).join("")}</ul>
+          </div>`,
+        });
       });
 
-      const preferred = carousel.querySelector(".pricing-card.is-active");
-      if (preferred) {
-        window.requestAnimationFrame(() => {
-          if (!window.matchMedia("(width < 48rem)").matches) {
-            preferred.scrollIntoView({
-              behavior: "auto",
-              block: "nearest",
-              inline: "center",
-            });
-          }
-          update();
-        });
-      } else {
-        update();
-      }
     });
   }
 
-  window.PAGE_ORDER_INIT = initPricingCarousel;
+  window.PAGE_ORDER_INIT = initPricing;
 
   window.PAGE_ORDER = function renderOrderPage(locale = "fa") {
     const { icon, cta } = window.PAGE_SHARED;
     const t = copy[locale] || copy.fa;
     const dir = locale === "fa" ? "rtl" : "ltr";
     const titleClass =
-      locale === "fa" ? "font-[Tahoma] tracking-normal" : "tracking-tight";
-    const rightNavStep = dir === "rtl" ? -1 : 1;
-    const leftNavStep = dir === "rtl" ? 1 : -1;
-    const rightNavLabel = dir === "rtl" ? "Previous package" : "Next package";
-    const leftNavLabel = dir === "rtl" ? "Next package" : "Previous package";
+      locale === "fa" ? "tracking-normal" : "tracking-tight";
 
     return `
-      <div class="box-border flex min-h-[calc(100svh-4rem)] items-center overflow-x-hidden py-4 sm:py-6" dir="${dir}">
-        <section class="motion-rise mx-auto flex w-full max-w-6xl flex-col justify-center gap-6 px-4 sm:px-6 lg:px-8">
-          <div class="grid w-full items-center gap-6 lg:grid-cols-[.9fr_1.1fr] lg:gap-10">
+      <div class="order-page" dir="${dir}">
+        <section class="order-content">
+          <div class="order-intro">
             <div class="text-center lg:text-start">
+              <p class="page-eyebrow">${locale === "fa" ? "طراحی و توسعه با prograin" : "Design & development with prograin"}</p>
               <h1 class="text-3xl font-semibold text-slate-950 dark:text-white sm:text-5xl ${titleClass}">
                 ${t.title}
               </h1>
@@ -617,19 +450,10 @@
               </div>
             </div>
 
-            <div class="flex w-full flex-col items-center gap-3 sm:gap-4" dir="${dir}">
+            <div class="order-services" dir="${dir}">
               ${t.cards.map((card, index) => orderCard(card, index, icon)).join("")}
             </div>
           </div>
-
-          <section class="order-clients" aria-label="${t.clientsTitle}">
-            <div class="order-clients__header">
-              <h2>${t.clientsTitle}</h2>
-            </div>
-            <div class="order-clients__list">
-              ${t.clients.map(clientCard).join("")}
-            </div>
-          </section>
 
           <div class="pricing-panel" dir="${dir}">
             <div class="pricing-panel__header">
@@ -638,22 +462,12 @@
               </div>
             </div>
 
-            <div class="pricing-tabs" role="tablist" aria-label="Packages">
+            <div class="pricing-grid" data-pricing-grid>
               ${t.packages.map((pkg, index) => packageCard(pkg, index, t, icon, locale)).join("")}
             </div>
 
-            <div class="pricing-carousel-shell">
-              <button class="pricing-nav pricing-nav--right" type="button" data-pricing-nav="${rightNavStep}" aria-label="${rightNavLabel}">
-                ${icon("arrow-right", "h-5 w-5")}
-              </button>
-              <div class="pricing-carousel" data-pricing-carousel>
-                ${t.packages.map((pkg, index) => packageCard(pkg, index, t, icon, locale)).join("")}
-              </div>
-              <button class="pricing-nav pricing-nav--left" type="button" data-pricing-nav="${leftNavStep}" aria-label="${leftNavLabel}">
-                ${icon("arrow-left", "h-5 w-5")}
-              </button>
-            </div>
           </div>
+          ${window.PAGE_SHARED.faq(locale === "fa" ? "پرسش‌های رایج درباره سفارش پروژه" : "Project questions", faqs[locale] || faqs.fa)}
         </section>
       </div>`;
   };

@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="fa" dir="rtl" class="dark scroll-smooth overflow-x-hidden">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <title>Portfolio | Ahmadreza Rezaei</title>
+    <meta name="description" content="Selected software projects by Ahmadreza Rezaei." />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <link rel="canonical" href="https://prograin.ir/resume/" />
+    <meta name="theme-color" content="#08111f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="prograin" />
+    <meta property="og:title" content="Portfolio | Ahmadreza Rezaei" />
+    <meta property="og:description" content="Selected software projects by Ahmadreza Rezaei." />
+    <meta property="og:url" content="https://prograin.ir/resume/" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:image" content="https://prograin.ir/assets/icons/icon-512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="prograin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Portfolio | Ahmadreza Rezaei" />
+    <meta name="twitter:description" content="Selected software projects by Ahmadreza Rezaei." />
+    <meta name="twitter:image" content="https://prograin.ir/assets/icons/icon-512.png" />
+    <meta name="twitter:image:alt" content="prograin" />
+
+    <link rel="stylesheet" href="./src/output.css?v=de3c4561e3d9" />
+    <link rel="preload" href="./assets/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin />
+
+
+    <link rel="icon" href="./assets/icons/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="./assets/icons/favicon-48.png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <noscript>
+      <style>
+        .academy-picker, .academy-table-section, .academy-youtube-section { background: #081523 !important; }
+        .pricing-card__feature-extra[hidden] { display: flex !important; }
+        .pricing-card__toggle, .academy-tabs, #langToggle, #themeToggle, #mobileMenuBtn { display: none !important; }
+        .academy-page .academy-plan { display: block !important; margin-bottom: 1rem; }
+      </style>
+    </noscript>
+  </head>
+
+  <body
+    class="page-resume-active min-h-screen overflow-x-hidden bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50"
+  >
+    <!-- Background -->
+    <div aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden">
+      <div
+        class="absolute inset-0 bg-[linear-gradient(135deg,rgba(236,254,255,0.95)_0%,rgba(248,250,252,0.98)_38%,rgba(255,241,242,0.7)_100%)] dark:bg-[linear-gradient(135deg,rgba(8,47,73,0.55)_0%,rgba(2,6,23,0.98)_45%,rgba(76,5,25,0.42)_100%)]"
+      ></div>
+      <div class="absolute inset-0 opacity-[0.06] dark:opacity-[0.08]">
+        <div
+          class="h-full w-full bg-[linear-gradient(rgba(15,23,42,0.55)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.55)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(226,232,240,0.38)_1px,transparent_1px),linear-gradient(90deg,rgba(226,232,240,0.38)_1px,transparent_1px)] [background-size:28px_28px]"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Fixed Navbar -->
+    <header
+      class="site-header z-50 border-b border-cyan-100/80 bg-white/80 backdrop-blur-xl dark:border-cyan-950/70 dark:bg-slate-950/75"
+    >
+      <nav
+        class="mx-auto flex min-h-20 max-w-6xl items-center justify-between px-4 py-2.5 sm:min-h-16 sm:py-3"
+      >
+        <a
+          href="/"
+          data-page-link="home"
+          class="flex items-center gap-2 font-semibold tracking-tight"
+        >
+          <img
+            id="navName"
+            class="h-11 w-11 rounded-full object-cover shadow-sm sm:h-10 sm:w-10"
+            src="./assets/icons/favicon-48.png"
+            width="48"
+            height="48"
+            alt="Ahmadreza Rezaei"
+          />
+          <span class="site-wordmark" dir="ltr">prograin<span>.</span></span>
+        </a>
+
+        <div
+          class="hidden items-center gap-5 text-sm font-medium text-slate-600 dark:text-slate-300 md:flex"
+          dir="ltr"
+        >
+          <a
+            id="navHomePage"
+            class="hover:text-slate-900 dark:hover:text-white"
+            href="/"
+            data-page-link="home"
+            >Home</a
+          >
+          <a
+            id="navOrderPage"
+            class="hover:text-slate-900 dark:hover:text-white"
+            href="/order/"
+            data-page-link="order"
+            >Order project</a
+          >
+          <a
+            id="navAcademyPage"
+            class="hover:text-slate-900 dark:hover:text-white"
+            href="/academy/"
+            data-page-link="academy"
+            >Academy</a
+          >
+          <a
+            id="navContactPage"
+            class="hover:text-slate-900 dark:hover:text-white"
+            href="/contact/"
+            data-page-link="contact-page"
+            >تماس با ما</a
+          >
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            id="langToggle"
+            class="inline-flex min-h-10 items-center gap-2 rounded-lg border border-cyan-100 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-cyan-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-cyan-950/40"
+            type="button"
+            aria-label="Toggle language"
+          >
+            <i data-lucide="languages" class="h-4 w-4"></i>
+            <span class="hidden sm:inline" id="langToggleText">FA</span>
+          </button>
+
+          <button
+            id="themeToggle"
+            class="inline-flex min-h-10 items-center gap-2 rounded-lg border border-cyan-100 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-cyan-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-cyan-950/40"
+            type="button"
+            aria-label="Toggle dark mode"
+          >
+            <i data-lucide="moon" class="h-4 w-4"></i>
+            <span class="hidden sm:inline">Theme</span>
+          </button>
+
+          <button
+            id="mobileMenuBtn"
+            class="md:hidden inline-flex min-h-10 items-center gap-2 rounded-lg border border-cyan-100 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-cyan-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-cyan-950/40"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <i data-lucide="menu" class="h-4 w-4"></i>
+          </button>
+        </div>
+      </nav>
+
+      <div
+        id="mobileMenu"
+        class="hidden border-t border-slate-200 bg-white/80 px-4 py-3 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/70 md:hidden"
+      >
+        <div
+          class="grid grid-cols-2 gap-2 text-sm text-slate-700 dark:text-slate-200"
+          dir="ltr"
+        >
+          <a
+            id="mNavHomePage"
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="/"
+            data-page-link="home"
+            >Home</a
+          >
+          <a
+            id="mNavOrderPage"
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="/order/"
+            data-page-link="order"
+            >Order project</a
+          >
+          <a
+            id="mNavAcademyPage"
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="/academy/"
+            data-page-link="academy"
+            >Academy</a
+          >
+          <a
+            id="mNavContactPage"
+            class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+            href="/contact/"
+            data-page-link="contact-page"
+            >تماس با ما</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="site-main mx-auto w-full max-w-6xl overflow-x-hidden px-4">
+      <!-- Main gateway -->
+      <section id="homePage" class="page-view hidden" data-page="home"></section>
+
+      <!-- Project order -->
+      <section id="orderPage" class="page-view hidden" data-page="order"></section>
+
+      <!-- Academy -->
+      <section id="academyPage" class="page-view hidden" data-page="academy"></section>
+
+      <!-- Contact page -->
+      <section id="contactPage" class="page-view hidden" data-page="contact-page"></section>
+
+      <div id="resumePage" class="page-view " data-page="resume">
+        <!-- Hero -->
+        <section id="resumeHome" class="pb-4 pt-10 sm:pb-5 sm:pt-14">
+          <div
+            class="rounded-lg border border-cyan-100/80 bg-white/70 p-5 shadow-soft backdrop-blur-xl dark:border-cyan-950/70 dark:bg-slate-950/45 sm:p-8 lg:p-10"
+          >
+            <div>
+              <p
+                id="heroKicker"
+                class="text-sm font-semibold uppercase tracking-wide text-cyan-700 dark:text-cyan-300"
+              ></p>
+              <h1
+                id="heroName"
+                class="mt-3 max-w-4xl text-4xl font-semibold tracking-tight text-slate-950 dark:text-white sm:text-6xl"
+              ></h1>
+              <p
+                id="heroTitle"
+                class="mt-4 max-w-4xl text-base font-semibold leading-7 text-cyan-900 dark:text-cyan-100 sm:text-xl"
+              ></p>
+              <p
+                id="heroSummary"
+                class="mt-5 hidden max-w-4xl whitespace-pre-line text-[15px] leading-7 text-slate-700 dark:text-slate-300 sm:block"
+              ></p>
+              <p
+                id="heroSummaryMobile"
+                class="mt-5 max-w-4xl text-[15px] leading-7 text-slate-700 dark:text-slate-300 sm:hidden"
+              ></p>
+              <button
+                id="heroSummaryToggle"
+                class="mt-2 text-sm font-semibold text-cyan-700 underline underline-offset-4 hover:text-cyan-900 dark:text-cyan-300 dark:hover:text-cyan-100 sm:hidden"
+                type="button"
+                aria-expanded="false"
+              >
+                <span id="heroSummaryToggleText"></span>
+              </button>
+
+              <div
+                id="heroLinks"
+                class="resume-hero-left mt-6 flex flex-wrap items-center justify-start gap-3 text-left"
+                dir="ltr"
+              ></div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- Project filters -->
+        <section
+          id="filters"
+          class="mb-8 mt-3 rounded-lg border border-cyan-100/80 bg-cyan-50/45 p-4 dark:border-cyan-950/70 dark:bg-cyan-950/15 sm:mt-4 sm:p-5"
+        >
+          <div
+            class="rounded-lg border border-slate-200 bg-white/85 p-5 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/60 sm:p-6"
+          >
+            <div class="flex flex-col gap-4">
+              <div>
+                <div class="flex items-center gap-3">
+                  <div
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200"
+                  >
+                    <i data-lucide="filter" class="h-5 w-5"></i>
+                  </div>
+                  <div>
+                    <h2
+                      id="titleRoles"
+                      class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white"
+                    >
+                      Roles
+                    </h2>
+
+                    <p
+                      id="rolesHint"
+                      class="mt-1 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300"
+                    ></p>
+                  </div>
+                </div>
+
+                <div
+                  id="roleChips"
+                  class="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section
+          id="skills"
+          class="my-8 rounded-lg border border-rose-100/80 bg-rose-50/40 p-5 dark:border-rose-950/70 dark:bg-rose-950/15 sm:p-6"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-200"
+            >
+              <i data-lucide="sparkles" class="h-5 w-5"></i>
+            </div>
+            <h2
+              id="titleSkills"
+              class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white"
+            >
+              Skills
+            </h2>
+          </div>
+
+          <div
+            id="skillsGrid"
+            class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          ></div>
+        </section>
+
+        <!-- Projects -->
+        <section
+          id="projects"
+          class="my-8 rounded-lg border border-cyan-100/80 bg-white/60 p-5 dark:border-cyan-950/70 dark:bg-cyan-950/10 sm:p-6"
+        >
+          <div
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200"
+              >
+                <i data-lucide="folder-kanban" class="h-5 w-5"></i>
+              </div>
+              <h2
+                id="titleProjects"
+                class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white"
+              >
+                Projects
+              </h2>
+            </div>
+
+            <div class="relative w-full max-w-52 sm:w-52">
+              <select
+                id="projectFilterSelect"
+                class="min-h-10 w-full appearance-none rounded-lg border border-cyan-200 bg-white/90 px-3 py-2 pe-10 text-sm font-semibold text-slate-800 shadow-sm outline-none transition hover:border-cyan-300 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-500/20 dark:border-cyan-900 dark:bg-slate-950/55 dark:text-slate-100 dark:hover:border-cyan-700 dark:focus:border-cyan-400"
+                aria-label="Project filter"
+                aria-controls="roleChips projectsGrid skillsGrid"
+              ></select>
+              <span
+                class="pointer-events-none absolute end-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200"
+                aria-hidden="true"
+              >
+                <svg
+                  class="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m6 9 6 6 6-6"></path>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div id="activeRolePill" class="mt-4 hidden"></div>
+
+          <div
+            id="projectsGrid"
+            class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          ></div>
+
+          <div
+            id="projectsEmptyState"
+            class="mt-6 hidden rounded-lg border border-slate-200 bg-white/90 p-8 text-center text-slate-700 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-200"
+          >
+            <p class="text-base font-semibold">No projects match this role.</p>
+            <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
+              Clear the selection to view all projects.
+            </p>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section
+          id="experience"
+          class="my-8 rounded-lg border border-emerald-100/80 bg-emerald-50/40 p-5 dark:border-emerald-950/70 dark:bg-emerald-950/15 sm:p-6"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200"
+            >
+              <i data-lucide="briefcase" class="h-5 w-5"></i>
+            </div>
+            <h2
+              id="titleExperience"
+              class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white"
+            >
+              Experience
+            </h2>
+          </div>
+
+          <div id="experienceList" class="mt-6 space-y-4"></div>
+        </section>
+
+        <!-- Education -->
+        <section
+          id="education"
+          class="my-8 rounded-lg border border-violet-100/80 bg-violet-50/40 p-5 dark:border-violet-950/70 dark:bg-violet-950/15 sm:p-6"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-violet-100 text-violet-800 dark:bg-violet-950 dark:text-violet-200"
+            >
+              <i data-lucide="graduation-cap" class="h-5 w-5"></i>
+            </div>
+            <h2
+              id="titleEducation"
+              class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white"
+            >
+              Education
+            </h2>
+          </div>
+
+          <div id="educationList" class="mt-6 grid gap-4 sm:grid-cols-2"></div>
+        </section>
+
+        <!-- Contact -->
+        <section
+          id="contact"
+          class="my-8 rounded-lg border border-cyan-100/80 bg-cyan-50/45 p-4 pb-5 dark:border-cyan-950/70 dark:bg-cyan-950/15 sm:p-5"
+        >
+          <div
+            class="rounded-lg border border-cyan-100 bg-white/90 p-6 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/70 sm:p-8"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200"
+              >
+                <i data-lucide="mail" class="h-5 w-5"></i>
+              </div>
+              <h2
+                id="titleContact"
+                class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white"
+              >
+                Contact
+              </h2>
+            </div>
+
+            <p
+              id="contactHint"
+              class="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300"
+            ></p>
+
+            <div id="contactLinks" class="mt-6 flex flex-wrap gap-3"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer id="siteFooter" class="site-footer"></footer>
+
+    <!-- Modal -->
+    <div
+      id="modalOverlay"
+      class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/60 p-4"
+      aria-hidden="true"
+    >
+      <div
+        id="modalDialog"
+        class="w-full max-w-3xl overflow-hidden rounded-5xl border border-slate-200 bg-white shadow-soft dark:border-slate-800 dark:bg-slate-950"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <div
+          class="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-800"
+        >
+          <div class="min-w-0">
+            <p
+              id="modalKicker"
+              class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+            ></p>
+            <h3
+              id="modalTitle"
+              class="truncate text-base font-semibold text-slate-900 dark:text-slate-50"
+            ></h3>
+          </div>
+          <button
+            id="modalCloseBtn"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
+            type="button"
+            aria-label="Close modal"
+          >
+            <i data-lucide="x" class="h-5 w-5"></i>
+          </button>
+        </div>
+
+        <div id="modalBody" class="max-h-[78vh] overflow-auto px-5 py-5" tabindex="0" role="region" aria-labelledby="modalTitle"></div>
+      </div>
+    </div>
+
+    <script src="./src/site-config.js?v=de3c4561e3d9"></script>
+    <script src="./src/seo.js?v=de3c4561e3d9"></script>
+    <script src="./src/data.js?v=de3c4561e3d9"></script>
+    <script src="./src/local-icons.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/shared.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/home.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/order.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/academy.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/contact.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/index.js?v=de3c4561e3d9"></script>
+    <script src="./src/script.js?v=de3c4561e3d9"></script>
+  </body>
+</html>

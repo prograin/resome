@@ -4,8 +4,13 @@
 
   const copy = {
     fa: {
-      title: "خوش آمدید",
-      lead: "برای سفارش پروژه، ورود به آکادمی یا تماس مستقیم، روی کارت مربوطه کلیک کنید. برای مشاوره یا سوال هم از تلگرام یا ایمیل پیام بدهید.",
+      welcome: "خوش آمدید",
+      title: "آموزش پایتون و برنامه‌نویسی در اراک",
+      lead: "کلاس خصوصی پایتون، آموزش نیمه‌خصوصی و توسعه نرم‌افزار اختصاصی؛ مسیر یادگیری یا اجرای ایده‌تان را از اینجا شروع کنید.",
+      introTitle: "آموزش و توسعه پروژه با احمدرضا رضایی",
+      intro: "من احمدرضا رضایی هستم؛ در شهر اراک، استان مرکزی فعالیت می‌کنم و در زمینه آموزش پایتون، طراحی سایت، توسعه بک‌اند و اتوماسیون پروژه انجام می‌دهم. کلاس خصوصی به‌صورت حضوری در اراک یا آنلاین و دوره نیمه‌خصوصی به‌صورت آنلاین برگزار می‌شود.",
+      introEnd: "برای انتخاب کلاس، مقایسه خدمات توسعه یا مطرح‌کردن نیازتان، از مسیرهای زیر شروع کنید.",
+      eyebrow: "توسعه نرم‌افزار · آموزش پایتون",
       order: "ثبت سفارش پروژه",
       academy: "ورود به آکادمی",
       telegram: "پیام در تلگرام",
@@ -18,14 +23,19 @@
       },
     },
     en: {
-      title: "Welcome",
-      lead: "Open the right card to order a project, enter the academy, or contact me directly. For consultation or questions, message me on Telegram or email.",
+      welcome: "Welcome",
+      title: "Python training & software development",
+      lead: "Private Python classes in Arak, semi-private online courses and custom software. Find the right path for your next step.",
+      introTitle: "Learn and build with Ahmadreza Rezaei",
+      intro: "I am Ahmadreza Rezaei, based in Arak, Markazi Province, Iran. I teach Python and develop websites, backend systems and automation. Private classes are available in person in Arak or online; semi-private courses are held online.",
+      introEnd: "Explore the classes, compare development services or get in touch to discuss what you need.",
+      eyebrow: "Software development · Python training",
       order: "Order a project",
       academy: "Enter academy",
       telegram: "Message on Telegram",
       email: "Send email",
       phone: "Direct call",
-      stats: ["+20 projects", "-3 startups"],
+      stats: ["+20 projects", "+3 startups"],
       cards: {
         order: "Custom software design and development.",
         academy: "Python training from zero to real projects.",
@@ -40,18 +50,12 @@
   copy.en.cards.contactPage =
     "Message me for projects, training, consulting, or collaboration.";
 
-  const pathCard = ({ href, label, text, iconName, tone, position, floatClass, dir }) => {
+  const pathCard = ({ href, label, text, iconName, tone, dir }) => {
     const pageKeyByHref = {
       "/": "home",
       "/order": "order",
       "/academy": "academy",
       "/contact": "contact-page",
-    };
-    const tones = {
-      cyan: "border-cyan-100 hover:border-cyan-300 dark:border-cyan-950 dark:hover:border-cyan-700",
-      emerald:
-        "border-emerald-100 hover:border-emerald-300 dark:border-emerald-950 dark:hover:border-emerald-700",
-      rose: "border-rose-100 hover:border-rose-300 dark:border-rose-950 dark:hover:border-rose-700",
     };
     const iconTones = {
       cyan: "bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200",
@@ -61,13 +65,13 @@
     };
 
     return `
-      <a href="${href}" data-page-link="${pageKeyByHref[href] || "home"}" dir="${dir}" class="group flex w-[92%] max-w-md items-center gap-4 rounded-lg border ${tones[tone]} bg-white/86 p-4 shadow-softer transition hover:bg-white dark:bg-slate-900/68 dark:hover:bg-slate-900 sm:w-[86%] sm:p-5 ${floatClass} ${position}">
+      <a href="${href}" data-page-link="${pageKeyByHref[href] || "home"}" dir="${dir}" class="home-path" data-tone="${tone}">
         <span class="icon-tile ${iconTones[tone]}">${window.PAGE_SHARED.icon(iconName)}</span>
         <span class="min-w-0">
           <span class="block text-sm font-semibold text-slate-950 dark:text-white">${label}</span>
           <span class="mt-1 block text-base leading-6 text-slate-600 dark:text-slate-300">${text}</span>
         </span>
-        <span class="home-card-cue">${window.PAGE_SHARED.icon("arrow-left", "h-4 w-4")}</span>
+        <span class="home-card-cue">${window.PAGE_SHARED.icon(dir === "rtl" ? "chevron-left" : "chevron-right", "h-4 w-4")}</span>
       </a>`;
   };
 
@@ -76,28 +80,40 @@
     const dir = locale === "fa" ? "rtl" : "ltr";
 
     return `
-      <div class="box-border min-h-[calc(100svh-4.25rem)] w-full overflow-x-hidden py-0 sm:h-[calc(100svh-4.25rem)] sm:min-h-0 sm:overflow-hidden" dir="${dir}">
-        <section class="motion-rise mx-auto flex min-h-[calc(100svh-4.25rem)] w-full max-w-6xl min-w-0 flex-col justify-center gap-5 sm:grid sm:h-full sm:min-h-0 sm:items-center lg:grid-cols-[1fr_.95fr] lg:gap-10">
-          <div class="min-w-0 text-center lg:text-start">
-            <div class="home-stats mx-auto mb-3 flex w-fit flex-wrap items-center justify-center gap-2 lg:mx-0">
-              ${t.stats.map((stat) => `<span>${stat}</span>`).join("")}
+      <div class="home-layout" dir="${dir}">
+        <section class="home-hero">
+          <div class="home-copy">
+            <p class="home-eyebrow">${t.eyebrow}</p>
+            <div class="home-stats">
+              ${t.stats.map((stat) => `<span><bdi>${stat}</bdi></span>`).join("")}
             </div>
-            <h1 class="mx-auto w-[92%] max-w-md text-4xl font-semibold leading-tight tracking-normal text-cyan-950 dark:text-cyan-50 sm:w-auto sm:max-w-3xl sm:text-5xl lg:mx-0 lg:text-6xl">
+            <p class="home-welcome">${t.welcome}</p>
+            <h1>
               ${t.title}
             </h1>
-            <p class="mx-auto mt-3 w-[92%] max-w-md break-words text-base leading-7 text-slate-700 dark:text-slate-300 sm:mt-5 sm:w-auto sm:max-w-2xl sm:leading-8 lg:mx-0">
+            <p class="home-lead">
               ${t.lead}
             </p>
           </div>
 
-          <div class="relative w-full min-w-0 self-center">
-            <nav class="relative flex w-full flex-col items-center justify-center gap-3 overflow-visible sm:min-h-[410px] sm:gap-5" dir="ltr" aria-label="Main sections">
-              ${pathCard({ href: "/order", label: t.order, text: t.cards.order, iconName: "folder-kanban", tone: "emerald", position: "sm:self-end", floatClass: "float-card float-card-b", dir })}
-              ${pathCard({ href: "/academy", label: t.academy, text: t.cards.academy, iconName: "graduation-cap", tone: "rose", position: "sm:self-start sm:ml-8", floatClass: "float-card float-card-c", dir })}
-              ${pathCard({ href: "/contact", label: t.contactPage, text: t.cards.contactPage, iconName: "send", tone: "cyan", position: "sm:self-end sm:mr-8", floatClass: "float-card float-card-a", dir })}
+          <div class="home-paths">
+            <nav aria-label="${locale === "fa" ? "مسیرهای اصلی" : "Main sections"}">
+              ${pathCard({ href: "/order", label: t.order, text: t.cards.order, iconName: "folder-kanban", tone: "emerald", dir })}
+              ${pathCard({ href: "/academy", label: t.academy, text: t.cards.academy, iconName: "graduation-cap", tone: "rose", dir })}
+              ${pathCard({ href: "/contact", label: t.contactPage, text: t.cards.contactPage, iconName: "send", tone: "cyan", dir })}
             </nav>
           </div>
         </section>
-      </div>`;
+      </div>
+      <section class="home-details">
+        <h2>${t.introTitle}</h2>
+        <p>${t.intro}</p>
+        <p>${t.introEnd}</p>
+        <nav aria-label="${t.introTitle}">
+          <a href="/academy/" data-page-link="academy">${locale === "fa" ? "کلاس‌های پایتون در اراک" : "Python classes in Arak"}</a>
+          <a href="/order/" data-page-link="order">${locale === "fa" ? "خدمات و پکیج‌های توسعه پروژه" : "Project services and packages"}</a>
+          <a href="/contact/" data-page-link="contact-page">${locale === "fa" ? "تماس با مدرس و توسعه‌دهنده" : "Contact the instructor and developer"}</a>
+        </nav>
+      </section>`;
   };
 })();

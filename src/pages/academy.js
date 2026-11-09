@@ -5,7 +5,7 @@
   const copy = {
     fa: {
       title: "آموزش برنامه نویسی پایتون در اراک",
-      lead: "مسیر یادگیری را براساس نیاز خودتان انتخاب کنید؛ آموزش برنامه نویسی در اراک، کلاس نیمه‌خصوصی برای شروع اقتصادی و منظم، و آموزش خصوصی برای پیشرفت سریع‌تر و تمرکز روی هدف شخصی شما.",
+      lead: "آموزش پایتون در اراک، استان مرکزی؛ کلاس خصوصی حضوری یا آنلاین با مسیر متناسب با هدف شما، و دوره نیمه‌خصوصی آنلاین برای یادگیری منظم با تمرین و پروژه عملی.",
       selectorTitle: "نوع آموزش را انتخاب کنید",
       comparisonTitle: "برای تصمیم‌گیری بهتر",
       youtubeTitle: "آموزش‌های رایگان یوتیوب",
@@ -191,6 +191,21 @@
     },
   };
 
+  const faqs = {
+    fa: [
+      ["کلاس پایتون در اراک حضوری است یا آنلاین؟", "کلاس خصوصی پایتون به‌صورت حضوری در اراک یا آنلاین برگزار می‌شود. دوره نیمه‌خصوصی آنلاین است. برای هماهنگی شیوه برگزاری و زمان کلاس از صفحه تماس پیام بدهید."],
+      ["برای شروع یادگیری پایتون باید از قبل برنامه‌نویسی بلد باشم؟", "مسیر آموزش از مبانی پایتون تا انجام پروژه ارائه می‌شود. پیش از شروع، سطح و هدف شما بررسی می‌شود تا مسیر یادگیری مناسبی انتخاب کنید."],
+      ["تفاوت دوره نیمه‌خصوصی با کلاس خصوصی چیست؟", "دوره نیمه‌خصوصی آنلاین، ۱۶ جلسه با سرفصل مشخص، تمرین و پروژه عملی دارد. مسیر کلاس خصوصی با هدف، زمان و نیاز شما هماهنگ می‌شود و امکان بررسی کد و رفع اشکال مستقیم فراهم است."],
+      ["چطور برای کلاس پایتون ثبت‌نام کنم؟", "از صفحه تماس با ما، از طریق تلگرام، تماس یا ایمیل پیام بدهید. سطح فعلی، هدفتان و شیوه برگزاری مدنظر را بنویسید تا درباره زمان و مسیر کلاس هماهنگ کنیم."],
+    ],
+    en: [
+      ["Are Python classes in Arak held in person or online?", "Private Python classes are available in person in Arak or online. The semi-private course is online. Contact me to arrange the format and schedule."],
+      ["Do I need previous programming experience?", "The learning path runs from Python basics to practical projects. Your current level and goals are discussed before choosing the right path."],
+      ["How do private and semi-private classes differ?", "The online semi-private course has 16 sessions, a set syllabus, exercises and a practical project. Private training adapts to your goals and schedule, with direct code review and debugging."],
+      ["How can I register for Python classes?", "Use the contact page to reach me by Telegram, phone or email. Include your current level, goal and preferred class format so we can arrange the next steps."],
+    ],
+  };
+
   const planCard = (plan, icon) => `
     <article class="academy-plan ${plan.featured ? "is-featured" : ""}" data-academy-plan="${plan.key}" data-tone="${plan.tone}">
       <div class="academy-plan__top">
@@ -256,6 +271,7 @@
       const isActive = tab.dataset.academyTab === key;
       tab.classList.toggle("is-active", isActive);
       tab.setAttribute("aria-selected", isActive ? "true" : "false");
+      tab.tabIndex = isActive ? 0 : -1;
     });
 
     root.querySelectorAll("[data-academy-plan]").forEach((plan) => {
@@ -281,6 +297,15 @@
           activateAcademyPlan(section, tab.dataset.academyTab),
         );
       });
+      section.querySelector(".academy-tabs")?.addEventListener("keydown", (event) => {
+        const tabs = [...section.querySelectorAll("[data-academy-tab]")];
+        const current = tabs.indexOf(document.activeElement);
+        if (current < 0 || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (current + 1) % tabs.length;
+        activateAcademyPlan(section, tabs[next].dataset.academyTab);
+        tabs[next].focus();
+      });
       activateAcademyPlan(section, "private");
     });
   }
@@ -292,7 +317,7 @@
     const t = copy[locale] || copy.fa;
     const dir = locale === "fa" ? "rtl" : "ltr";
     const titleClass =
-      locale === "fa" ? "font-[Tahoma] tracking-normal" : "tracking-tight";
+      locale === "fa" ? "tracking-normal" : "tracking-tight";
     const displayPlans =
       locale === "fa" ? [t.plans[1], t.plans[0]] : [t.plans[0], t.plans[1]];
 
@@ -300,19 +325,20 @@
       <div class="academy-page" dir="${dir}" data-active-plan="private">
         <section class="academy-hero motion-rise">
           <div class="academy-hero__copy">
+            <p class="page-eyebrow">${locale === "fa" ? "آکادمی prograin" : "prograin academy"}</p>
             <h1 class="${titleClass}">${t.title}</h1>
             <p>${t.lead}</p>
           </div>
         </section>
 
-        <section class="academy-picker" data-academy-plans>
+        <section class="academy-picker" data-academy-plans data-defer-background>
           <p class="academy-picker__label">${t.selectorTitle}</p>
           <div class="academy-tabs" role="tablist" aria-label="${t.selectorTitle}">
-            <button class="academy-tab is-active" type="button" data-academy-tab="private" aria-selected="true">
+            <button class="academy-tab is-active" type="button" role="tab" data-academy-tab="private" aria-selected="true">
               ${icon("sparkles", "h-4 w-4")}
               ${t.tabs.private}
             </button>
-            <button class="academy-tab" type="button" data-academy-tab="group" aria-selected="false">
+            <button class="academy-tab" type="button" role="tab" data-academy-tab="group" aria-selected="false">
               ${icon("graduation-cap", "h-4 w-4")}
               ${t.tabs.group}
             </button>
@@ -323,16 +349,19 @@
           </div>
         </section>
 
-        <section class="academy-table-section">
+        <section class="academy-table-section" data-defer-background>
           <div class="academy-table-heading">
             <h2>${t.comparisonTitle}</h2>
           </div>
-          <div class="academy-compare-grid">
-            ${comparisonColumns(t.comparison, locale, t.tabs)}
+          <p class="comparison-hint">${locale === "fa" ? "برای دیدن همه ستون‌ها، جدول را افقی حرکت دهید." : "Scroll horizontally to compare all columns."}</p>
+          <div class="academy-compare-scroll" tabindex="0" role="region" aria-label="${t.comparisonTitle}">
+            <div class="academy-compare-grid">
+              ${comparisonColumns(t.comparison, locale, t.tabs)}
+            </div>
           </div>
         </section>
 
-        <section class="academy-youtube-section">
+        <section class="academy-youtube-section" data-defer-background>
           <div class="academy-youtube-card">
             <span class="academy-youtube-card__icon">${icon("youtube", "h-5 w-5")}<span>YouTube</span></span>
             <div>
@@ -344,6 +373,7 @@
               <span>${t.youtubeCta}</span>
             </a>
           </div>
+          ${window.PAGE_SHARED.faq(locale === "fa" ? "پرسش‌های رایج درباره آموزش پایتون" : "Python training questions", faqs[locale] || faqs.fa)}
         </section>
       </div>`;
   };

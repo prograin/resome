@@ -1,10 +1,9 @@
 User-agent: *
 Allow: /
-Disallow: /resume
-Disallow: /resume/
-Disallow: /portfolio
-Disallow: /portfolio/
-Disallow: /portfoilio
-Disallow: /portfoilio/
+Disallow: /.backup/
+Disallow: /node_modules/
+Disallow: /scripts/
+Disallow: /src/templates/
 
+# Private routes use noindex; crawling is allowed so search engines can read it.
 Sitemap: https://prograin.ir/sitemap.xml

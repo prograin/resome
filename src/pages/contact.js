@@ -13,7 +13,7 @@
       linkedin: "لینکدین",
       responseTitle: "زمان پاسخ‌گویی",
       responseText: "معمولاً در کوتاه‌ترین زمان ممکن پاسخ می‌دهم.",
-      note: "در حین تماس نوع درخواست خود را با نیازتان بنویسید.",
+      note: "از ایده و نیازتان بنویسید؛ با هم مسیرش را پیدا می‌کنیم.",
     },
     en: {
       eyebrow: "Quick contact",
@@ -33,7 +33,7 @@
     <a class="contact-action contact-action--${tone}" href="${href}" ${attrs}>
       ${icon(iconName, "h-4 w-4")}
       <span>${label}</span>
-      <span class="contact-action__cue">${icon("arrow-left", "h-4 w-4")}</span>
+      <span class="contact-action__cue">${icon(document.documentElement.dir === "rtl" ? "chevron-left" : "chevron-right", "h-4 w-4")}</span>
     </a>`;
 
   window.PAGE_CONTACT = function renderContactPage(locale = "fa") {
@@ -41,12 +41,13 @@
     const t = copy[locale] || copy.fa;
     const dir = locale === "fa" ? "rtl" : "ltr";
     const titleClass =
-      locale === "fa" ? "font-[Tahoma] tracking-normal" : "tracking-tight";
+      locale === "fa" ? "tracking-normal" : "tracking-tight";
 
     return `
       <div class="contact-page" dir="${dir}">
         <section class="contact-shell contact-shell--centered">
           <div class="contact-hero">
+            <p class="contact-location">${icon("map-pin", "h-4 w-4")}<bdi dir="${dir}">${window.SITE_CONFIG.location.label[locale] || window.SITE_CONFIG.location.label.fa}</bdi></p>
             <h1 class="${titleClass}">${t.title}</h1>
             <p>${t.lead}</p>
           </div>

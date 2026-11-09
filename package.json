@@ -1,0 +1,18 @@
+{
+  "name": "prograin-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static bilingual prograin website",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "package": "npm run build && npm run check && node scripts/package.mjs",
+    "check": "node scripts/check-seo.mjs",
+    "images:social": "node scripts/generate-social-images.mjs",
+    "test:browser": "node scripts/check-site.mjs && node scripts/check-seo-browser.mjs && node scripts/check-interactions.mjs && node scripts/check-ui.mjs"
+  },
+  "devDependencies": {
+    "lightningcss": "1.33.0",
+    "playwright": "1.65.0",
+    "@axe-core/playwright": "4.14.0"
+  }
+}

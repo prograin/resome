@@ -2,28 +2,49 @@
 (() => {
   "use strict";
 
+  const pages = {
+    home: ["homePage", "PAGE_HOME"],
+    order: ["orderPage", "PAGE_ORDER"],
+    academy: ["academyPage", "PAGE_ACADEMY"],
+    "contact-page": ["contactPage", "PAGE_CONTACT"],
+  };
+
+  const backgroundObserver = "IntersectionObserver" in window
+    ? new IntersectionObserver((entries) => {
+        entries.forEach(({ target, isIntersecting }) => {
+          if (!isIntersecting) return;
+          target.classList.add("is-bg-ready");
+          backgroundObserver.unobserve(target);
+        });
+      }, { rootMargin: "600px 0px" })
+    : null;
+
+  function mount(id, render, locale) {
+    const element = document.getElementById(id);
+    if (!element || !render) return;
+    if (element.dataset.renderedLocale === locale) {
+      element.querySelectorAll("[data-defer-background]:not(.is-bg-ready)").forEach((section) => {
+        if (backgroundObserver) backgroundObserver.observe(section);
+        else section.classList.add("is-bg-ready");
+      });
+      return;
+    }
+    element.querySelectorAll("[data-defer-background]").forEach((section) => {
+      backgroundObserver?.unobserve(section);
+    });
+    element.innerHTML = render(locale);
+    element.dataset.renderedLocale = locale;
+    element.querySelectorAll("[data-defer-background]").forEach((section) => {
+      if (backgroundObserver) backgroundObserver.observe(section);
+      else section.classList.add("is-bg-ready");
+    });
+  }
+
   window.STATIC_PAGES = {
-    render() {
-      const home = document.getElementById("homePage");
-      const order = document.getElementById("orderPage");
-      const academy = document.getElementById("academyPage");
-      const contact = document.getElementById("contactPage");
-      const footer = document.getElementById("siteFooter");
-
-      const locale =
-        document.documentElement.getAttribute("lang") === "fa" ? "fa" : "en";
-
-      if (home && window.PAGE_HOME) home.innerHTML = window.PAGE_HOME(locale);
-      if (order && window.PAGE_ORDER) order.innerHTML = window.PAGE_ORDER(locale);
-      if (academy && window.PAGE_ACADEMY) {
-        academy.innerHTML = window.PAGE_ACADEMY(locale);
-      }
-      if (contact && window.PAGE_CONTACT) {
-        contact.innerHTML = window.PAGE_CONTACT(locale);
-      }
-      if (footer && window.PAGE_SHARED?.footer) {
-        footer.innerHTML = window.PAGE_SHARED.footer(locale);
-      }
+    render(page, locale) {
+      const entry = pages[page];
+      if (entry) mount(entry[0], window[entry[1]], locale);
+      if (page !== "resume") mount("siteFooter", window.PAGE_SHARED?.footer, locale);
     },
   };
 })();

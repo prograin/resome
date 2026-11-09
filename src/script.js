@@ -11,6 +11,17 @@
   }
 
   const $ = (sel, root = document) => root.querySelector(sel);
+  const preferences = {
+    get(key) {
+      try { return window.localStorage.getItem(key); }
+      catch { return null; }
+    },
+    set(key, value) {
+      // Preferences still work for this visit when browser storage is blocked.
+      try { window.localStorage.setItem(key, value); }
+      catch { /* Persistence is optional. */ }
+    },
+  };
 
   function escapeHtml(str) {
     return String(str)
@@ -65,7 +76,7 @@
   // -----------------------------
   const THEME_KEY = "portfolio_theme";
   function getPreferredTheme() {
-    const saved = localStorage.getItem(THEME_KEY);
+    const saved = preferences.get(THEME_KEY);
     if (saved === "dark" || saved === "light") return saved;
     return "dark";
   }
@@ -73,7 +84,7 @@
     const root = document.documentElement;
     if (theme === "dark") root.classList.add("dark");
     else root.classList.remove("dark");
-    localStorage.setItem(THEME_KEY, theme);
+    preferences.set(THEME_KEY, theme);
 
     const icon = $("#themeToggle [data-lucide]");
     if (icon)
@@ -88,7 +99,7 @@
 
   const state = {
     selectedRole: null, // role key
-    locale: localStorage.getItem(LOCALE_KEY) === "en" ? "en" : "fa",
+    locale: preferences.get(LOCALE_KEY) === "en" ? "en" : "fa",
     heroExpanded: false,
     currentPage: "home",
   };
@@ -103,13 +114,9 @@
     "education",
     "contact",
   ]);
-  const PAGE_PATHS = {
-    home: "/",
-    resume: "/resume",
-    order: "/order",
-    academy: "/academy",
-    "contact-page": "/contact",
-  };
+  const PAGE_PATHS = Object.fromEntries(
+    Object.entries(window.SITE_CONFIG.routes).map(([key, route]) => [key, route.path]),
+  );
   const PATH_PAGES = {
     "": "home",
     home: "home",
@@ -124,63 +131,6 @@
     "contact-page": "contact-page",
   };
   const BLOCKED_INDEX_PATHS = new Set(["resume", "portfolio", "portfoilio"]);
-  const SEO_COPY = {
-    fa: {
-      home: {
-        title: "آموزش برنامه نویسی اراک | prograin",
-        description:
-          "prograin برای آموزش برنامه نویسی در اراک، آموزش پایتون خصوصی و نیمه‌خصوصی، سفارش پروژه برنامه‌نویسی و مشاوره نرم‌افزار.",
-      },
-      order: {
-        title: "سفارش پروژه برنامه‌نویسی | احمدرضا رضایی",
-        description:
-          "ثبت سفارش پروژه اختصاصی برنامه‌نویسی، وب، بک‌اند، اتوماسیون، تحلیل داده و نرم‌افزار با احمدرضا رضایی.",
-      },
-      academy: {
-        title: "آموزش برنامه نویسی اراک | آموزش پایتون | prograin",
-        description:
-          "آموزش برنامه نویسی در اراک و آموزش پایتون خصوصی و نیمه‌خصوصی با دوره ۱۶ جلسه‌ای، رفع اشکال، بررسی کد و مسیر یادگیری پروژه‌محور.",
-      },
-      "contact-page": {
-        title: "تماس با احمدرضا رضایی | سفارش پروژه و آموزش پایتون",
-        description:
-          "راه‌های تماس با prograin برای آموزش برنامه نویسی اراک، سفارش پروژه برنامه‌نویسی، آموزش پایتون، مشاوره و همکاری.",
-      },
-      resume: {
-        title: "Portfolio | Ahmadreza Rezaei",
-        description: "Portfolio and selected software projects by Ahmadreza Rezaei.",
-        robots: "noindex, nofollow, noarchive",
-      },
-    },
-    en: {
-      home: {
-        title: "Ahmadreza Rezaei | Python Developer and Instructor",
-        description:
-          "Ahmadreza Rezaei, Python developer and instructor based in Arak, offering custom programming projects, online private training, semi-private training, and software consulting.",
-      },
-      order: {
-        title: "Order Custom Programming Projects | Ahmadreza Rezaei",
-        description:
-          "Order custom web, backend, automation, data, and software development projects with Ahmadreza Rezaei.",
-      },
-      academy: {
-        title: "Online Private and Semi-Private Python Training | Ahmadreza Rezaei",
-        description:
-          "Online private and semi-private Python training with project-based learning, debugging, code review, and a structured 16-session course.",
-      },
-      "contact-page": {
-        title: "Contact Ahmadreza Rezaei | Projects and Python Training",
-        description:
-          "Contact Ahmadreza Rezaei for programming projects, online Python training, software consulting, and collaboration.",
-      },
-      resume: {
-        title: "Portfolio | Ahmadreza Rezaei",
-        description: "Portfolio and selected software projects by Ahmadreza Rezaei.",
-        robots: "noindex, nofollow, noarchive",
-      },
-    },
-  };
-
   function routeFromHost() {
     const subdomain = window.location.hostname.split(".")[0]?.toLowerCase();
     const hostRoutes = {
@@ -206,6 +156,7 @@
       .replace(/^\/+|\/+$/g, "")
       .split("/")[0]
       ?.toLowerCase();
+    if (!firstSegment || firstSegment === "home") return routeFromHash();
     return PATH_PAGES[firstSegment] || routeFromHash();
   }
 
@@ -222,117 +173,14 @@
   }
 
   function updateSeo(page) {
-    const seo = SEO_COPY[state.locale]?.[page] || SEO_COPY.fa.home;
-    document.title = seo.title;
-
-    let metaDescription = document.querySelector("meta[name='description']");
-    if (!metaDescription) {
-      metaDescription = document.createElement("meta");
-      metaDescription.setAttribute("name", "description");
-      document.head.append(metaDescription);
-    }
-    metaDescription.setAttribute("content", seo.description);
-
-    let metaRobots = document.querySelector("meta[name='robots']");
-    if (!metaRobots) {
-      metaRobots = document.createElement("meta");
-      metaRobots.setAttribute("name", "robots");
-      document.head.append(metaRobots);
-    }
-    metaRobots.setAttribute(
-      "content",
-      isBlockedIndexPath()
-        ? "noindex, nofollow, noarchive"
-        : seo.robots || "index, follow",
-    );
-
-    let canonical = document.querySelector("link[rel='canonical']");
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.append(canonical);
-    }
-    canonical.setAttribute(
-      "href",
-      `${window.location.origin}${isBlockedIndexPath() ? "/" : pagePath(page)}`,
-    );
-    updateStructuredData(page);
-  }
-
-  function updateStructuredData(page) {
-    const data = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Ahmadreza Rezaei",
-      alternateName: "prograin",
-      url: `${window.location.origin}${pagePath(page)}`,
-      image: `${window.location.origin}/assets/images/profile.jpg`,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Arak",
-        addressCountry: "IR",
-      },
-      areaServed: [
-        { "@type": "City", name: "Arak" },
-        { "@type": "Country", name: "Iran" },
-      ],
-      email: "ahmadreza.pcg1377@gmail.com",
-      telephone: "09914663783",
-      sameAs: [
-        "https://t.me/prograin_arr",
-        "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
-        "https://www.youtube.com/@Prograin_ARR/playlists",
-      ],
-      knowsAbout: [
-        "آموزش برنامه نویسی اراک",
-        "آموزش پایتون",
-        "سفارش پروژه برنامه‌نویسی",
-        "توسعه وب",
-        "بک‌اند",
-        "اتوماسیون",
-        "تحلیل داده",
-      ],
-      makesOffer: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "آموزش برنامه نویسی در اراک",
-            serviceType: "Programming training",
-            areaServed: { "@type": "City", name: "Arak" },
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "آموزش پایتون خصوصی و نیمه‌خصوصی",
-            serviceType: "Python training",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "سفارش پروژه برنامه‌نویسی",
-            serviceType: "Software development",
-          },
-        },
-      ],
-    };
-
-    let script = document.getElementById("localSeoSchema");
-    if (!script) {
-      script = document.createElement("script");
-      script.id = "localSeoSchema";
-      script.type = "application/ld+json";
-      document.head.append(script);
-    }
-    script.textContent = JSON.stringify(data);
+    window.SITE_SEO.update(page, state.locale, isBlockedIndexPath());
   }
 
   function showPage(page = routeFromPath(), options = {}) {
     const nextPage = PAGE_KEYS.includes(page) ? page : "home";
+    if (modal.open) closeModal();
+    window.STATIC_PAGES?.render(nextPage, state.locale);
+    if (nextPage === "resume") renderResume();
     state.currentPage = nextPage;
     updateSeo(nextPage);
     document.body.classList.toggle("page-home-active", nextPage === "home");
@@ -350,6 +198,8 @@
 
     document.querySelectorAll("[data-page-link]").forEach((link) => {
       const active = link.getAttribute("data-page-link") === nextPage;
+      if (active) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
       link.classList.toggle("text-cyan-700", active);
       link.classList.toggle("dark:text-cyan-300", active);
     });
@@ -400,7 +250,7 @@
 
   function applyLocale(locale) {
     state.locale = locale === "fa" ? "fa" : "en";
-    localStorage.setItem(LOCALE_KEY, state.locale);
+    preferences.set(LOCALE_KEY, state.locale);
 
     document.documentElement.setAttribute("lang", state.locale);
     document.documentElement.setAttribute(
@@ -578,6 +428,7 @@
     bodyEl: null,
     lastFocus: null,
     open: false,
+    background: [],
   };
 
   function initModal() {
@@ -593,11 +444,29 @@
     });
     document.addEventListener("keydown", (e) => {
       if (!modal.open) return;
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeModal();
+        return;
+      }
+      if (e.key === "Tab") {
+        const controls = [...modal.overlay.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+          .filter((element) => !element.disabled && element.getClientRects().length);
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
     });
   }
 
-  function openModal({ kicker, title, htmlBody }) {
+  function openModal({ kicker, title, htmlBody, kind = "" }) {
+    if (modal.open) closeModal();
     modal.lastFocus =
       document.activeElement instanceof HTMLElement
         ? document.activeElement
@@ -606,6 +475,14 @@
     modal.kickerEl.textContent = kicker || "";
     modal.titleEl.textContent = title || "";
     modal.bodyEl.innerHTML = htmlBody || "";
+    modal.bodyEl.scrollTop = 0;
+    modal.overlay.dataset.kind = kind;
+    modal.closeBtn.setAttribute("aria-label", state.locale === "fa" ? "بستن پنجره" : "Close dialog");
+    modal.background = [...document.querySelectorAll(".site-header, .site-main, #siteFooter")]
+      .map((element) => ({ element, inert: element.inert }));
+    modal.background.forEach(({ element }) => { element.inert = true; });
+    document.documentElement.classList.add("modal-open");
+    document.body.classList.add("modal-open");
 
     modal.overlay.classList.remove("hidden");
     modal.overlay.classList.add("flex");
@@ -613,7 +490,7 @@
 
     modal.open = true;
     refreshIcons();
-    setTimeout(() => modal.closeBtn?.focus(), 0);
+    modal.closeBtn?.focus({ preventScroll: true });
   }
 
   function closeModal() {
@@ -622,9 +499,15 @@
     modal.overlay.setAttribute("aria-hidden", "true");
 
     modal.open = false;
+    modal.background.forEach(({ element, inert }) => { element.inert = inert; });
+    modal.background = [];
+    document.documentElement.classList.remove("modal-open");
+    document.body.classList.remove("modal-open");
     modal.bodyEl.innerHTML = "";
     modal.lastFocus?.focus?.();
   }
+
+  window.SITE_MODAL = { open: openModal, close: closeModal };
 
   // -----------------------------
   // Hide missing images entirely (no placeholder blocks)
@@ -762,7 +645,7 @@
           }
         : {
             home: "Home",
-      order: "Order project",
+            order: "Order project",
             academy: "Academy",
             contact: "Contact",
           };
@@ -800,7 +683,7 @@
 
     // Theme label
     const themeLabel = document.querySelector("#themeToggle span");
-    if (themeLabel) themeLabel.textContent = btns.theme || "Theme";
+    if (themeLabel) themeLabel.textContent = state.locale === "fa" ? "پوسته" : "Theme";
   }
 
   function renderTop() {
@@ -1583,6 +1466,10 @@
     const btn = $("#mobileMenuBtn");
     const menu = $("#mobileMenu");
     if (btn && menu) {
+      const closeMenu = () => {
+        menu.classList.add("hidden");
+        btn.setAttribute("aria-expanded", "false");
+      };
       btn.addEventListener("click", () => {
         const open = !menu.classList.contains("hidden");
         menu.classList.toggle("hidden", open);
@@ -1593,6 +1480,14 @@
         if (!a) return;
         menu.classList.add("hidden");
         btn.setAttribute("aria-expanded", "false");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || menu.classList.contains("hidden")) return;
+        closeMenu();
+        btn.focus();
+      });
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".site-header")) closeMenu();
       });
     }
 
@@ -1610,7 +1505,7 @@
     });
 
     window.addEventListener("hashchange", () => {
-      showPage(routeFromHash(), { scrollTop: true, smooth: true });
+      showPage(routeFromPath(), { scrollTop: true, smooth: true });
     });
 
     window.addEventListener("popstate", () => {
@@ -1618,8 +1513,12 @@
     });
 
     document.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      if (!(event.target instanceof Element)) return;
       const link = event.target.closest("a[data-page-link]");
       if (!link) return;
+      if (link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
+      if (new URL(link.href).origin !== window.location.origin) return;
 
       const page = link.getAttribute("data-page-link");
       if (!PAGE_KEYS.includes(page)) return;
@@ -1711,9 +1610,11 @@
   // -----------------------------
   // Init
   // -----------------------------
-  function renderAll() {
-    window.STATIC_PAGES?.render?.();
-    renderStaticTexts();
+  let resumeLocale = null;
+
+  function renderResume() {
+    if (resumeLocale === state.locale) return;
+    resumeLocale = state.locale;
     renderTop();
     renderChips();
     renderProjectFilterSelect();
@@ -1722,8 +1623,11 @@
     renderProjects();
     renderExperience();
     renderEducation();
+  }
+
+  function renderAll() {
+    renderStaticTexts();
     showPage(routeFromPath());
-    refreshIcons();
   }
 
   function init() {
@@ -1734,18 +1638,8 @@
     refreshIcons();
   }
 
-  function animateProfileFrame() {
-    const profileFrame = document.getElementById("profileFrame");
-    if (!profileFrame) return;
-
-    requestAnimationFrame(() =>
-      profileFrame.classList.add("opacity-100", "translate-y-0"),
-    );
-  }
-
   function boot() {
     init();
-    animateProfileFrame();
   }
 
   if (document.readyState === "loading") {

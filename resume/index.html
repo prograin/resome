@@ -1,47 +1,50 @@
-<!-- index.html (UPDATED) -->
 <!doctype html>
 <html lang="fa" dir="rtl" class="dark scroll-smooth overflow-x-hidden">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
-    <title>احمدرضا رضایی | برنامه‌نویس و مدرس پایتون</title>
-    <meta
-      name="description"
-      content="prograin برای آموزش برنامه نویسی در اراک، آموزش پایتون خصوصی و نیمه‌خصوصی، سفارش پروژه برنامه‌نویسی و مشاوره نرم‌افزار."
-    />
+    <title>Portfolio | Ahmadreza Rezaei</title>
+    <meta name="description" content="Selected software projects by Ahmadreza Rezaei." />
     <meta name="robots" content="noindex, nofollow, noarchive" />
-    <meta name="geo.region" content="IR-00" />
-    <meta name="geo.placename" content="Arak, Markazi, Iran" />
-    <link rel="canonical" href="https://prograin.ir/" />
+    <link rel="canonical" href="https://prograin.ir/resume/" />
+    <meta name="theme-color" content="#08111f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="prograin" />
+    <meta property="og:title" content="Portfolio | Ahmadreza Rezaei" />
+    <meta property="og:description" content="Selected software projects by Ahmadreza Rezaei." />
+    <meta property="og:url" content="https://prograin.ir/resume/" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:image" content="https://prograin.ir/assets/icons/icon-512.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:image:alt" content="prograin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Portfolio | Ahmadreza Rezaei" />
+    <meta name="twitter:description" content="Selected software projects by Ahmadreza Rezaei." />
+    <meta name="twitter:image" content="https://prograin.ir/assets/icons/icon-512.png" />
+    <meta name="twitter:image:alt" content="prograin" />
 
-    <link rel="stylesheet" href="./src/output.css?v=20260910-fa-chevron-left" />
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            boxShadow: {
-              soft: "0 18px 55px rgba(0,0,0,0.10)",
-              softer: "0 12px 28px rgba(0,0,0,0.08)",
-            },
-            borderRadius: {
-              "4xl": "2rem",
-              "5xl": "2.5rem",
-            },
-          },
-        },
-      };
-    </script>
+    <link rel="stylesheet" href="./src/output.css?v=de3c4561e3d9" />
+    <link rel="preload" href="./assets/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin />
+
 
     <link rel="icon" href="./assets/icons/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="./assets/icons/favicon-48.png" sizes="48x48" />
     <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
     <link rel="manifest" href="./site.webmanifest" />
+    <noscript>
+      <style>
+        .academy-picker, .academy-table-section, .academy-youtube-section { background: #081523 !important; }
+        .pricing-card__feature-extra[hidden] { display: flex !important; }
+        .pricing-card__toggle, .academy-tabs, #langToggle, #themeToggle, #mobileMenuBtn { display: none !important; }
+        .academy-page .academy-plan { display: block !important; margin-bottom: 1rem; }
+      </style>
+    </noscript>
   </head>
 
   <body
-    class="min-h-screen overflow-x-hidden bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50"
+    class="page-resume-active min-h-screen overflow-x-hidden bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-50"
   >
     <!-- Background -->
     <div aria-hidden="true" class="fixed inset-0 -z-10 overflow-hidden">
@@ -70,9 +73,12 @@
           <img
             id="navName"
             class="h-11 w-11 rounded-full object-cover shadow-sm sm:h-10 sm:w-10"
-            src="./assets/icons/favicon.ico"
+            src="./assets/icons/favicon-48.png"
+            width="48"
+            height="48"
             alt="Ahmadreza Rezaei"
           />
+          <span class="site-wordmark" dir="ltr">prograin<span>.</span></span>
         </a>
 
         <div
@@ -89,21 +95,21 @@
           <a
             id="navOrderPage"
             class="hover:text-slate-900 dark:hover:text-white"
-            href="/order"
+            href="/order/"
             data-page-link="order"
             >Order project</a
           >
           <a
             id="navAcademyPage"
             class="hover:text-slate-900 dark:hover:text-white"
-            href="/academy"
+            href="/academy/"
             data-page-link="academy"
             >Academy</a
           >
           <a
             id="navContactPage"
             class="hover:text-slate-900 dark:hover:text-white"
-            href="/contact"
+            href="/contact/"
             data-page-link="contact-page"
             >تماس با ما</a
           >
@@ -136,6 +142,7 @@
             type="button"
             aria-label="Open menu"
             aria-expanded="false"
+            aria-controls="mobileMenu"
           >
             <i data-lucide="menu" class="h-4 w-4"></i>
           </button>
@@ -160,21 +167,21 @@
           <a
             id="mNavOrderPage"
             class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="/order"
+            href="/order/"
             data-page-link="order"
             >Order project</a
           >
           <a
             id="mNavAcademyPage"
             class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="/academy"
+            href="/academy/"
             data-page-link="academy"
             >Academy</a
           >
           <a
             id="mNavContactPage"
             class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
-            href="/contact"
+            href="/contact/"
             data-page-link="contact-page"
             >تماس با ما</a
           >
@@ -184,30 +191,18 @@
 
     <main class="site-main mx-auto w-full max-w-6xl overflow-x-hidden px-4">
       <!-- Main gateway -->
-      <section id="homePage" class="page-view" data-page="home"></section>
+      <section id="homePage" class="page-view hidden" data-page="home"></section>
 
       <!-- Project order -->
-      <section
-        id="orderPage"
-        class="page-view hidden"
-        data-page="order"
-      ></section>
+      <section id="orderPage" class="page-view hidden" data-page="order"></section>
 
       <!-- Academy -->
-      <section
-        id="academyPage"
-        class="page-view hidden"
-        data-page="academy"
-      ></section>
+      <section id="academyPage" class="page-view hidden" data-page="academy"></section>
 
       <!-- Contact page -->
-      <section
-        id="contactPage"
-        class="page-view hidden"
-        data-page="contact-page"
-      ></section>
+      <section id="contactPage" class="page-view hidden" data-page="contact-page"></section>
 
-      <div id="resumePage" class="page-view hidden" data-page="resume">
+      <div id="resumePage" class="page-view " data-page="resume">
         <!-- Hero -->
         <section id="resumeHome" class="pb-4 pt-10 sm:pb-5 sm:pt-14">
           <div
@@ -252,23 +247,6 @@
             </div>
           </div>
         </section>
-
-        <!-- About -->
-        <!-- <section id="about" class="py-10">
-        <div
-          class="rounded-5xl border border-slate-200 bg-white/75 p-6 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/55 sm:p-8"
-        >
-          <div class="flex items-center gap-3">
-            <div
-              class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-slate-50"
-            >
-              <i data-lucide="user-round" class="h-5 w-5"></i>
-            </div>
-            <h2 class="text-xl font-semibold tracking-tight">About</h2>
-          </div>
-          <p id="aboutText" class="mt-4 max-w-4xl text-slate-600 dark:text-slate-300"></p>
-        </div>
-      </section> -->
 
         <!-- Project filters -->
         <section
@@ -516,18 +494,20 @@
           </button>
         </div>
 
-        <div id="modalBody" class="max-h-[78vh] overflow-auto px-5 py-5"></div>
+        <div id="modalBody" class="max-h-[78vh] overflow-auto px-5 py-5" tabindex="0" role="region" aria-labelledby="modalTitle"></div>
       </div>
     </div>
 
-    <script src="./src/data.js?v=20260910-fa-chevron-left"></script>
-    <script src="./src/local-icons.js?v=20260910-fa-chevron-left"></script>
-    <script src="./src/pages/shared.js?v=20260910-fa-chevron-left"></script>
-    <script src="./src/pages/home.js?v=20260910-fa-chevron-left"></script>
-    <script src="./src/pages/order.js?v=20260910-fa-chevron-left"></script>
-    <script src="./src/pages/academy.js?v=20260910-fa-chevron-left"></script>
-    <script src="./src/pages/contact.js?v=20260910-fa-chevron-left"></script>
-    <script src="./src/pages/index.js?v=20260910-fa-chevron-left"></script>
-    <script src="./src/script.js?v=20260910-fa-chevron-left"></script>
+    <script src="./src/site-config.js?v=de3c4561e3d9"></script>
+    <script src="./src/seo.js?v=de3c4561e3d9"></script>
+    <script src="./src/data.js?v=de3c4561e3d9"></script>
+    <script src="./src/local-icons.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/shared.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/home.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/order.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/academy.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/contact.js?v=de3c4561e3d9"></script>
+    <script src="./src/pages/index.js?v=de3c4561e3d9"></script>
+    <script src="./src/script.js?v=de3c4561e3d9"></script>
   </body>
 </html>

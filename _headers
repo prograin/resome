@@ -1,0 +1,17 @@
+/resume
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/resume/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/portfolio
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/portfolio/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/portfoilio
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/portfoilio/*
+  X-Robots-Tag: noindex, nofollow, noarchive

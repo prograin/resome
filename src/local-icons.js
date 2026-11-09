@@ -92,6 +92,7 @@
     svg.setAttribute("stroke-linejoin", "round");
     svg.setAttribute("aria-hidden", "true");
     svg.setAttribute("data-lucide", name);
+    svg.setAttribute("data-rendered-icon", name);
     if (className) svg.setAttribute("class", className);
     svg.innerHTML = ICONS[name] || ICONS.circle;
     return svg;
@@ -101,10 +102,16 @@
     root.querySelectorAll("[data-lucide]").forEach((el) => {
       const name = el.getAttribute("data-lucide");
       if (!name) return;
+      if (el.getAttribute("data-rendered-icon") === name) return;
       const className = el.getAttribute("class") || "";
       el.replaceWith(makeSvg(name, className));
     });
   }
 
-  window.lucide = { createIcons };
+  function iconMarkup(name, className = "h-5 w-5") {
+    const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-lucide="${escape(name)}" data-rendered-icon="${escape(name)}" class="${escape(className)}">${ICONS[name] || ICONS.circle}</svg>`;
+  }
+
+  window.lucide = { createIcons, iconMarkup };
 })();

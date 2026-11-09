@@ -2,15 +2,10 @@
 (() => {
   "use strict";
 
-  const contact = {
-    email: "ahmadreza.pcg1377@gmail.com",
-    phone: "09914663783",
-    telegram: "prograin_arr",
-    linkedin: "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
-  };
+  const contact = window.SITE_CONFIG.contact;
 
   const icon = (name, className = "h-5 w-5") =>
-    `<i data-lucide="${name}" class="${className}"></i>`;
+    window.lucide.iconMarkup(name, className);
 
   const cta = (href, label, iconName, tone = "cyan", attrs = "") => {
     const pageKeyByPath = {
@@ -58,7 +53,7 @@
       title: "prograin",
       lead:
         "آموزش برنامه نویسی در اراک، آموزش پایتون خصوصی و نیمه‌خصوصی، طراحی پروژه اختصاصی، توسعه وب، بک‌اند، اتوماسیون و تحلیل داده.",
-      location: "اراک، ایران",
+      location: window.SITE_CONFIG.location.label.fa,
       servicesTitle: "خدمات",
       contactTitle: "ارتباط",
       pagesTitle: "صفحات",
@@ -82,7 +77,7 @@
       title: "prograin",
       lead:
         "Python developer and instructor for custom software projects, web development, backend systems, automation, data work, and online private or semi-private training.",
-      location: "Arak, Iran",
+      location: window.SITE_CONFIG.location.label.en,
       servicesTitle: "Services",
       contactTitle: "Contact",
       pagesTitle: "Pages",
@@ -120,11 +115,11 @@
       .join("");
 
     return `
-      <div class="site-footer__inner" dir="${locale === "fa" ? "rtl" : "ltr"}" itemscope itemtype="https://schema.org/Person">
+      <div class="site-footer__inner" dir="${locale === "fa" ? "rtl" : "ltr"}">
         <section class="site-footer__brand">
-          <h2 itemprop="name">${t.title}</h2>
-          <p itemprop="description">${t.lead}</p>
-          <span class="site-footer__location" itemprop="address">${icon("map-pin", "h-4 w-4")}${t.location}</span>
+          <h2>${t.title}</h2>
+          <p>${t.lead}</p>
+          <span class="site-footer__location">${icon("map-pin", "h-4 w-4")}<bdi dir="${locale === "fa" ? "rtl" : "ltr"}">${t.location}</bdi></span>
         </section>
 
         <nav class="site-footer__group" aria-label="${t.pagesTitle}">
@@ -135,7 +130,7 @@
         <section class="site-footer__group">
           <h3>${t.servicesTitle}</h3>
           <ul>
-            ${t.services.map((service) => `<li itemprop="knowsAbout">${service}</li>`).join("")}
+            ${t.services.map((service) => `<li>${service}</li>`).join("")}
           </ul>
         </section>
 
@@ -143,8 +138,8 @@
           <h3>${t.contactTitle}</h3>
           <div class="site-footer__socials">
             <a href="https://t.me/${contact.telegram}" target="_blank" rel="noopener noreferrer" aria-label="${t.telegram}">${icon("telegram", "h-5 w-5")}</a>
-            <a href="tel:${contact.phone}" itemprop="telephone" aria-label="${t.phone}">${icon("phone", "h-5 w-5")}</a>
-            <a href="mailto:${contact.email}" itemprop="email" aria-label="${t.email}">${icon("mail", "h-5 w-5")}</a>
+            <a href="tel:${contact.phone}" aria-label="${t.phone}">${icon("phone", "h-5 w-5")}</a>
+            <a href="mailto:${contact.email}" aria-label="${t.email}">${icon("mail", "h-5 w-5")}</a>
             <a href="${contact.linkedin}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">${icon("linkedin", "h-5 w-5")}</a>
           </div>
         </address>
@@ -152,5 +147,13 @@
       </div>`;
   };
 
-  window.PAGE_SHARED = { contact, icon, cta, featureCard, footer };
+  const faq = (title, items) => `<section class="faq-section">
+    <h2>${title}</h2>
+    <div class="faq-list">${items.map(([question, answer]) => `<details class="faq-item">
+      <summary>${question}${icon(document.documentElement.dir === "rtl" ? "chevron-left" : "chevron-right", "h-4 w-4")}</summary>
+      <p>${answer}</p>
+    </details>`).join("")}</div>
+  </section>`;
+
+  window.PAGE_SHARED = { contact, icon, cta, featureCard, footer, faq };
 })();
