@@ -1,0 +1,24 @@
+.academy-plan__details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 2.8rem;
+  margin-top: 1rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: var(--ui-control-radius);
+  background: color-mix(in srgb, var(--academy-accent) 10%, transparent);
+  color: var(--ui-text);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.academy-plan__details:hover {
+  background: color-mix(in srgb, var(--academy-accent) 18%, transparent);
+}
+
+.academy-picker + .academy-youtube-section {
+  margin-top: 0;
+}

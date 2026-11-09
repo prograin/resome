@@ -1,0 +1,29 @@
+{
+  "id": "mnist-digit-recognition",
+  "title": "Handwritten Digit Recognition",
+  "shortDescription": "CNN-based handwritten digit recognition system using PyTorch and MNIST with an interactive drawing interface.",
+  "roles": ["ML"],
+  "tags": ["PyTorch", "CNN", "MNIST", "Image Processing", "OpenCV", "PyQt", "PIL"],
+  "highlights": [
+    "CNN + FFN architecture for digit classification",
+    "Interactive PyQt widget for real-time digit drawing",
+    "Image preprocessing using OpenCV and PIL",
+    "End-to-end inference from user input to prediction"
+  ],
+  "details": [
+    "Built a deep learning model combining CNN layers for feature extraction and a feedforward network for digit classification.",
+    "Trained and evaluated the model using the MNIST handwritten digits dataset.",
+    "Developed an interactive PyQt widget allowing users to draw digits directly on the screen.",
+    "Applied OpenCV for contour detection and PIL for resizing and enhancing image quality before inference.",
+    "Project focused on hands-on experience with deep learning workflows and real-time user interaction."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1LdBkhb8vczB2nLgRt6KQdUpeZrnfd-Xt/view?usp=sharing",
+    "images": []
+  },
+  "isPrivate": false
+}

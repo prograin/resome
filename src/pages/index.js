@@ -9,15 +9,19 @@
     "contact-page": ["contactPage", "PAGE_CONTACT"],
   };
 
-  const backgroundObserver = "IntersectionObserver" in window
-    ? new IntersectionObserver((entries) => {
-        entries.forEach(({ target, isIntersecting }) => {
-          if (!isIntersecting) return;
-          target.classList.add("is-bg-ready");
-          backgroundObserver.unobserve(target);
-        });
-      }, { rootMargin: "600px 0px" })
-    : null;
+  const backgroundObserver =
+    "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          (entries) => {
+            entries.forEach(({ target, isIntersecting }) => {
+              if (!isIntersecting) return;
+              target.classList.add("is-bg-ready");
+              backgroundObserver.unobserve(target);
+            });
+          },
+          { rootMargin: "600px 0px" },
+        )
+      : null;
 
   function mount(id, render, locale) {
     const element = document.getElementById(id);

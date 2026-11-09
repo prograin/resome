@@ -6,8 +6,7 @@
   const ICONS = {
     "arrow-left": '<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>',
     "arrow-right": '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
-    "arrow-up-left":
-      '<path d="M7 7h10"/><path d="M7 17V7"/><path d="m17 17-10-10"/>',
+    "arrow-up-left": '<path d="M7 7h10"/><path d="M7 17V7"/><path d="m17 17-10-10"/>',
     brain:
       '<path d="M9.5 2A3.5 3.5 0 0 0 6 5.5v.2A3.5 3.5 0 0 0 4 12a3.5 3.5 0 0 0 2 6.3v.2A3.5 3.5 0 0 0 12 21"/><path d="M14.5 2A3.5 3.5 0 0 1 18 5.5v.2A3.5 3.5 0 0 1 20 12a3.5 3.5 0 0 1-2 6.3v.2A3.5 3.5 0 0 1 12 21"/><path d="M12 2v19"/>',
     briefcase:
@@ -15,8 +14,7 @@
     calendar:
       '<path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/>',
     check: '<path d="m20 6-11 11-5-5"/>',
-    "check-circle-2":
-      '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-5"/>',
+    "check-circle-2": '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-5"/>',
     "chevron-right": '<path d="m9 18 6-6-6-6"/>',
     "chevron-left": '<path d="m15 18-6-6 6-6"/>',
     circle: '<circle cx="12" cy="12" r="9"/>',
@@ -24,8 +22,7 @@
     database:
       '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>',
     dot: '<circle cx="12" cy="12" r="2"/>',
-    download:
-      '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
+    download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>',
     "external-link":
       '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
     "file-text":
@@ -45,8 +42,7 @@
       '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 11v6"/><path d="M8 8h.01"/><path d="M12 17v-6"/><path d="M12 14a3 3 0 0 1 6 0v3"/>',
     languages:
       '<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>',
-    layers:
-      '<path d="m12 2 9 5-9 5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
+    layers: '<path d="m12 2 9 5-9 5-9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/>',
     layout:
       '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
     "layout-grid":
@@ -75,8 +71,7 @@
       '<path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path d="M5 3v4"/><path d="M3 5h4"/><path d="M19 17v4"/><path d="M17 19h4"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m4.9 19.1 1.4-1.4"/><path d="m17.7 6.3 1.4-1.4"/>',
     tag: '<path d="M12.6 2.6H4a2 2 0 0 0-2 2v8.6a2 2 0 0 0 .6 1.4l6.8 6.8a2 2 0 0 0 2.8 0l9.2-9.2a2 2 0 0 0 0-2.8l-6.8-6.8a2 2 0 0 0-1.4-.6Z"/><circle cx="7.5" cy="7.5" r=".5"/>',
-    "user-round":
-      '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
+    "user-round": '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
     x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
     youtube:
       '<path d="M22 12s0-3.4-.4-5a3 3 0 0 0-2.1-2.1C17.8 4.5 12 4.5 12 4.5s-5.8 0-7.5.4A3 3 0 0 0 2.4 7C2 8.6 2 12 2 12s0 3.4.4 5a3 3 0 0 0 2.1 2.1c1.7.4 7.5.4 7.5.4s5.8 0 7.5-.4a3 3 0 0 0 2.1-2.1c.4-1.6.4-5 .4-5Z"/><path d="m10 15 5-3-5-3Z"/>',
@@ -109,7 +104,8 @@
   }
 
   function iconMarkup(name, className = "h-5 w-5") {
-    const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
+    const escape = (value) =>
+      String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;");
     return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-lucide="${escape(name)}" data-rendered-icon="${escape(name)}" class="${escape(className)}">${ICONS[name] || ICONS.circle}</svg>`;
   }
 

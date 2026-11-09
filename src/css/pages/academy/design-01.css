@@ -1,0 +1,46 @@
+.academy-details__list {
+  margin-block: 1.5rem;
+}
+.academy-details__list > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 1rem;
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--ui-line);
+  font-size: 0.9rem;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.academy-details__list dt {
+  color: var(--ui-muted);
+}
+.academy-details__list dd {
+  margin: 0;
+  color: var(--ui-text);
+}
+.academy-details .academy-plan__cta {
+  display: flex;
+  justify-content: center;
+  padding: 0.85rem 1rem;
+  border-radius: var(--ui-control-radius);
+  background: #087b72;
+  color: white;
+  font-weight: 650;
+}
+.academy-page .academy-youtube-card {
+  border-radius: var(--ui-radius);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  background: rgb(255 255 255 / 95%);
+  box-shadow: var(--ui-shadow);
+}
+.dark .academy-page .academy-youtube-card {
+  background: rgb(13 24 43 / 95%);
+}
+.academy-youtube-card h2 {
+  font-size: 1.5rem;
+  line-height: 1.7;
+}
+.academy-youtube-card p {
+  font-size: 0.92rem;
+  line-height: 2;
+} /* Centered, borderless contact content over the full-bleed image. */

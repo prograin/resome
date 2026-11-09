@@ -1,0 +1,101 @@
+{
+  "heroKicker": "",
+  "rolesHint": "یکی از فیلترهای زیر را انتخاب کنید؛ پروژه‌ها و مهارت‌ها با هم تغییر می‌کنند.",
+  "contactHint": "",
+  "cvUrl": "#",
+  "nav": {
+    "roles": "فیلترها",
+    "skills": "مهارت‌ها",
+    "projects": "پروژه‌ها",
+    "experience": "سوابق کاری",
+    "education": "تحصیلات",
+    "contact": "تماس"
+  },
+  "sections": {
+    "roles": "فیلتر پروژه‌ها",
+    "skills": "مهارت‌ها",
+    "projects": "پروژه‌ها",
+    "experience": "سوابق کاری",
+    "education": "تحصیلات",
+    "contact": "تماس"
+  },
+  "labels": {
+    "roles": "نقش‌ها",
+    "stack": "تکنولوژی‌ها",
+    "notes": "توضیحات",
+    "privateShare": "قابل نمایش"
+  },
+  "pills": {
+    "privateNda": "خصوصی / NDA",
+    "detailsUponRequest": "برای خلاصه واضح و قابل نمایش، Details را باز کنید."
+  },
+  "modal": {
+    "projectDetails": "جزئیات پروژه",
+    "watchVideo": "تماشای ویدیو",
+    "images": "تصاویر"
+  },
+  "buttons": {
+    "theme": "Theme",
+    "language": "EN",
+    "details": "جزئیات",
+    "github": "گیت‌هاب",
+    "liveDemo": "دموی آنلاین",
+    "viewImages": "مشاهده تصاویر",
+    "watchVideo": "تماشای ویدیو",
+    "clearRole": "پاک کردن",
+    "url": "مشاهده سایت",
+    "showMore": "ادامه",
+    "showLess": "بستن",
+    "experienceMore": "جزئیات",
+    "experienceLess": "بستن"
+  },
+  "projectFilters": [
+    {
+      "key": "all",
+      "name": "همه",
+      "hint": "تمام نمونه‌کارها",
+      "icon": "layout-grid",
+      "roles": null
+    },
+    {
+      "key": "websites",
+      "name": "سایت و فروشگاه",
+      "hint": "سایت، پنل، پرداخت",
+      "icon": "globe-2",
+      "roles": ["Frontend", "Fullstack"],
+      "projectIds": ["oildb", "rokesh-mehdi", "heychat"]
+    },
+    {
+      "key": "backend",
+      "name": "بک‌اند و API",
+      "hint": "سرویس، لاگین، اتصال‌ها",
+      "icon": "server",
+      "roles": ["Backend"]
+    },
+    {
+      "key": "data",
+      "name": "داده و داشبورد",
+      "hint": "گزارش، ETL، تحلیل",
+      "icon": "database",
+      "roles": ["DataEng"]
+    },
+    {
+      "key": "ai",
+      "name": "هوش مصنوعی",
+      "hint": "بینایی ماشین و مدل‌ها",
+      "icon": "brain",
+      "roles": ["ML"]
+    },
+    {
+      "key": "desktop",
+      "name": "ابزار دسکتاپ",
+      "hint": "برنامه‌های Qt/PyQt",
+      "icon": "monitor",
+      "roles": ["Desktop"]
+    }
+  ],
+  "empty": {
+    "noProjectsTitle": "هیچ پروژه‌ای با این فیلتر تطابق ندارد.",
+    "noProjectsHint": "برای مشاهده همه پروژه‌ها، فیلتر را پاک کنید."
+  }
+}

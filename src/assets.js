@@ -2,7 +2,8 @@
 (() => {
   "use strict";
   const version = document.currentScript?.dataset.assetVersion || "";
-  const isAsset = (value) => /(?:^|\/)assets\/.*\.(?:avif|webp|png|jpe?g|svg|ico|woff2?)(?:[?#]|$)/i.test(String(value));
+  const isAsset = (value) =>
+    /(?:^|\/)assets\/.*\.(?:avif|webp|png|jpe?g|svg|ico|woff2?)(?:[?#]|$)/i.test(String(value));
   function url(value) {
     if (!version || !isAsset(value)) return value;
     const [base, fragment] = String(value).split("#", 2);

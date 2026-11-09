@@ -4,9 +4,12 @@
   "private": true,
   "description": "Static bilingual prograin website",
   "scripts": {
+    "format": "prettier --write src scripts docs README.md package.json vercel.json site.webmanifest",
+    "format:check": "prettier --check src scripts docs README.md package.json vercel.json site.webmanifest",
     "build": "node scripts/build.mjs",
     "package": "npm run build && npm run check && node scripts/package.mjs",
-    "check": "node scripts/check-seo.mjs",
+    "check": "npm run check:structure && node scripts/check-seo.mjs",
+    "check:structure": "node scripts/check-structure.mjs",
     "test:performance": "node scripts/check-performance.mjs",
     "test:updates": "node scripts/check-updates.mjs",
     "images:social": "node scripts/generate-social-images.mjs",
@@ -20,6 +23,7 @@
     "esbuild": "0.28.2",
     "lightningcss": "1.33.0",
     "playwright": "1.65.0",
+    "prettier": "3.9.10",
     "purgecss": "9.1.0",
     "sharp": "0.35.5"
   }

@@ -1,0 +1,29 @@
+{
+  "id": "mnist-digit-recognition",
+  "title": "تشخیص ارقام دست‌نویس",
+  "shortDescription": "سیستم تشخیص ارقام دست‌نویس مبتنی بر CNN با PyTorch و MNIST همراه با رابط طراحی تعاملی.",
+  "roles": ["ML"],
+  "tags": ["PyTorch", "CNN", "MNIST", "Image Processing", "OpenCV", "PyQt", "PIL"],
+  "highlights": [
+    "معماری CNN + FFN برای طبقه‌بندی ارقام",
+    "ویجت PyQt برای رسم زنده رقم",
+    "پیش‌پردازش تصویر با OpenCV و PIL",
+    "استنتاج کامل از ورودی کاربر تا پیش‌بینی"
+  ],
+  "details": [
+    "ساخت مدل یادگیری عمیق با لایه‌های CNN برای استخراج ویژگی و شبکه feedforward برای طبقه‌بندی.",
+    "آموزش و ارزیابی با دیتاست MNIST.",
+    "پیاده‌سازی ویجت PyQt برای رسم رقم توسط کاربر روی صفحه.",
+    "استفاده از OpenCV برای contour و PIL برای resize و بهبود کیفیت قبل از inference.",
+    "تمرکز پروژه روی تجربه عملی workflow یادگیری عمیق و تعامل real-time با کاربر."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1LdBkhb8vczB2nLgRt6KQdUpeZrnfd-Xt/view?usp=sharing",
+    "images": []
+  },
+  "isPrivate": false
+}

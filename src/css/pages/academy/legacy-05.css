@@ -1,0 +1,11 @@
+.dark .academy-page .academy-picker,
+.dark .academy-page .academy-plan,
+.dark .academy-page .academy-youtube-card {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+.academy-page .academy-picker,
+.academy-page .academy-comparison,
+.academy-page .academy-youtube-section {
+  overflow: visible;
+}

@@ -33,19 +33,24 @@
   window.PAGE_PROJECTS = (locale = "fa") => {
     const language = locale === "en" ? "en" : "fa";
     const { icon } = window.PAGE_SHARED;
-    const title = language === "fa" ? "پروژه‌های من" : "My projects";
+    const title = language === "fa" ? "نمونه‌کارها" : "Selected work";
     const visit = language === "fa" ? "مشاهده سایت" : "Visit website";
     return `<section class="project-showcase" aria-labelledby="publicProjectsTitle">
       <header class="project-showcase__header">
-        <span class="project-showcase__eyebrow">${icon("folder-kanban", "h-4 w-4")}${language === "fa" ? "نمونه‌کارها" : "Selected work"}</span>
-        <h2 id="publicProjectsTitle">${title}</h2>
+        <h2 id="publicProjectsTitle" class="project-showcase__title">${icon("folder-kanban", "h-4 w-4")}${title}</h2>
       </header>
       <div class="project-showcase__grid">
-        ${projects.map((project) => `<a class="project-showcase__item" data-project-tone="${project.tone}" href="${project.href}" target="_blank" rel="noopener noreferrer" aria-label="${project.name[language]} — ${visit}">
+        ${projects
+          .map(
+            (
+              project,
+            ) => `<a class="project-showcase__item" data-project-tone="${project.tone}" href="${project.href}" target="_blank" rel="noopener noreferrer" aria-label="${project.name[language]} — ${visit}">
           <span class="project-showcase__logo" aria-hidden="true"><img src="${window.SITE_ASSETS.url(project.logo)}" alt="" width="80" height="80" loading="lazy" decoding="async" /></span>
           <h3 dir="auto">${project.name[language]}</h3>
           <span class="project-showcase__visit">${visit}${icon(language === "fa" ? "chevron-left" : "chevron-right", "h-4 w-4")}</span>
-        </a>`).join("")}
+        </a>`,
+          )
+          .join("")}
       </div>
     </section>`;
   };

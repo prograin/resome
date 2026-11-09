@@ -1,0 +1,70 @@
+[
+  {
+    "category": "Backend",
+    "roles": ["Backend", "Fullstack"],
+    "items": [
+      "Python",
+      "FastAPI",
+      "Express",
+      "Node.js",
+      "RESTful Architecture",
+      "Authentication",
+      "Authorization",
+      "pytest",
+      "Microservices",
+      "Redis Streams",
+      "Pub/Sub",
+      "Elasticsearch",
+      "Telegram Bot"
+    ]
+  },
+  {
+    "category": "Data Engineering & Analytics",
+    "roles": ["DataEng"],
+    "items": [
+      "ETL Pipelines",
+      "Apache Airflow",
+      "ClickHouse",
+      "PostgreSQL",
+      "Pandas",
+      "Looker Studio",
+      "Grafana",
+      "Data Warehousing",
+      "Data Transformation",
+      "Data Automation"
+    ]
+  },
+  {
+    "category": "Frontend",
+    "roles": ["Frontend", "Fullstack"],
+    "items": ["Nuxt.js", "React", "Vue", "Tailwind CSS"]
+  },
+  {
+    "category": "Cloud & Infrastructure",
+    "roles": ["Backend", "DataEng", "Frontend", "Fullstack"],
+    "items": ["Cloudflare", "Docker", "Docker Compose", "Linux (Debian)", "Nginx"]
+  },
+  {
+    "category": "Desktop Applications",
+    "roles": ["Desktop"],
+    "items": ["Qt Creator", "PyQt", "Python Desktop UI"]
+  },
+  {
+    "category": "Machine Learning",
+    "roles": ["ML"],
+    "items": [
+      "TensorFlow",
+      "PyTorch",
+      "CNN",
+      "RNN",
+      "LSTM",
+      "Image Processing",
+      "Data Augmentation"
+    ]
+  },
+  {
+    "category": "Math & Fundamentals",
+    "roles": ["ML"],
+    "items": ["Linear Algebra", "Calculus", "Statistics"]
+  }
+]

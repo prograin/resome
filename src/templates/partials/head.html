@@ -1,0 +1,53 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <base href="/" />
+  {{SEO_HEAD}}
+
+  <link
+    rel="stylesheet"
+    data-page-style="{{STYLE_KEY}}"
+    href="{{PAGE_STYLESHEET}}?v={{ASSET_VERSION}}"
+  />
+  <link
+    rel="preload"
+    href="./assets/fonts/Vazirmatn-fa-latin.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin
+  />
+  {{PAGE_PRELOAD}}
+
+  <link rel="icon" type="image/png" href="./assets/icons/favicon-48.png" sizes="48x48" />
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="./site.webmanifest" />
+  <script
+    defer
+    fetchpriority="low"
+    data-asset-version="{{ASSET_VERSION}}"
+    src="./src/app.js?v={{ASSET_VERSION}}"
+  ></script>
+  <noscript>
+    <style>
+      .academy-picker,
+      .academy-youtube-section {
+        background: #081523 !important;
+      }
+      .pricing-card__feature-extra[hidden] {
+        display: flex !important;
+      }
+      .pricing-card__toggle,
+      .academy-plan__details,
+      .academy-tabs,
+      #langToggle,
+      #themeToggle,
+      #mobileMenuBtn {
+        display: none !important;
+      }
+      .academy-page .academy-plan {
+        display: block !important;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </noscript>
+</head>

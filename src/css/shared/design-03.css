@@ -1,0 +1,72 @@
+@media (width < 48rem) {
+  .academy-page .academy-comparison {
+    padding-inline: 0.25rem;
+  }
+  .academy-page .academy-plan,
+  .academy-page .academy-plan.is-featured {
+    padding: 1.4rem;
+  }
+  .academy-tabs {
+    border-radius: 0.9rem;
+    padding: 0.35rem;
+  }
+  .academy-tab {
+    border-radius: 0.65rem;
+    font-size: 0.8rem;
+  }
+  .contact-shell.contact-shell--centered {
+    padding: 1rem 0;
+    gap: 1.5rem;
+  }
+  .contact-shell--centered .contact-hero h1 {
+    font-size: 2rem;
+  }
+  .contact-shell--centered .contact-actions {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .site-footer {
+    padding: 2.5rem 1.25rem;
+  }
+  .site-footer__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1rem;
+  }
+  .site-footer__brand,
+  .site-footer__contact {
+    grid-column: 1 / -1;
+  }
+  .site-footer .site-footer__socials {
+    display: grid !important;
+    grid-template-columns: repeat(4, 2.75rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.faq-section {
+  width: min(100%, 58rem);
+  margin: 3rem auto 0;
+}
+.faq-section > h2 {
+  color: var(--ui-text);
+  text-align: center;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  line-height: 1.8;
+  font-weight: 750;
+  margin-bottom: 1.5rem;
+}
+.academy-page .faq-section > h2 {
+  color: #f1f5f9;
+}
+.faq-list {
+  display: grid;
+  gap: 0.75rem;
+}

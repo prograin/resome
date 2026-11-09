@@ -1,0 +1,35 @@
+{
+  "id": "realtime-sentiment-analysis",
+  "title": "Real-Time Sentiment Analysis",
+  "shortDescription": "Comparative study of LSTM models with Self-Attention for real-time sentiment prediction.",
+  "roles": ["ML"],
+  "tags": [
+    "Natural Language Processing",
+    "LSTM",
+    "Self-Attention",
+    "Deep Learning",
+    "Real-Time Inference"
+  ],
+  "highlights": [
+    "Multiple LSTM models enhanced with Self-Attention mechanisms",
+    "Live sentiment prediction with visual feedback",
+    "Model comparison based on correct vs incorrect predictions",
+    "Hyperparameter tuning and performance analysis"
+  ],
+  "details": [
+    "Developed and evaluated multiple LSTM-based sentiment analysis models enhanced with Self-Attention.",
+    "Compared model performance using real-time predictions on positive and negative sentiment data.",
+    "Analyzed prediction accuracy across models, identifying strengths and weaknesses in generalization.",
+    "Visualized correct predictions in green and incorrect predictions in red for intuitive performance analysis.",
+    "Explored the impact of hyperparameter tuning and identified areas requiring further refinement."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1XS8i8TK-3Nb9ZLL_JLHv2IA9Pgy9U3FD/view?usp=drive_link",
+    "images": []
+  },
+  "isPrivate": false
+}

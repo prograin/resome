@@ -1,0 +1,46 @@
+{
+  "id": "freelancer-etl-dashboard",
+  "title": "Freelancer Management ETL",
+  "shortDescription": "Automated ETL pipeline to monitor freelancer work hours, task progress, and performance metrics using Python and Google Sheets.",
+  "roles": ["DataEng"],
+  "tags": [
+    "Python",
+    "ETL",
+    "Airflow",
+    "Google Sheets",
+    "API Integration",
+    "Data Automation",
+    "Task Management"
+  ],
+  "highlights": [
+    "Designed ETL pipeline for freelancer activity monitoring",
+    "Aggregated key metrics: work hours, task durations, completion times, and statuses",
+    "Interactive reporting via Google Sheets for the Finance team",
+    "Automated workflows using Airflow DAGs for reliable, scheduled updates",
+    "Improved transparency and decision-making for freelancer management"
+  ],
+  "details": [
+    "Developed a scalable ETL system to track and analyze freelancer performance across multiple projects.",
+    "Extracted data from APIs, processed and transformed it using Python, and calculated metrics including hours worked, task completion times, task durations, and current task statuses.",
+    "Integrated with Google Sheets to provide a live, interactive dashboard accessible to the Finance team for tracking and reporting.",
+    "Scheduled and orchestrated ETL jobs with Airflow DAGs, ensuring automated, reliable, and timely updates.",
+    "Optimized data processing for accuracy, efficiency, and scalability to accommodate future growth.",
+    "Enabled better operational transparency and empowered the Finance team with actionable insights for managing freelancer workload and productivity."
+  ],
+  "shareableDetails": [
+    "Built an automated reporting flow for freelancer activity so the finance team could see work hours, task progress, delays, and completion status without manual collection.",
+    "Calculated practical metrics such as active work time, task duration, completion time, and current task state.",
+    "Turned scattered task data into a structured report that could be reviewed regularly by non-technical team members.",
+    "Reduced manual checking and made freelancer workload easier to compare across projects.",
+    "Designed the flow so more projects and more freelancers could be added later without rebuilding the reporting logic."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": []
+  },
+  "isPrivate": true
+}

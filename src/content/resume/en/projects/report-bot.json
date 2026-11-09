@@ -1,0 +1,33 @@
+{
+  "id": "report-bot",
+  "title": "Report Bot",
+  "shortDescription": "Confidential Telegram analytics bot + FastAPI backend with MongoDB and automated reporting flows.",
+  "roles": ["Backend", "DataEng"],
+  "tags": ["Python", "FastAPI", "Telegram Bot", "Matplotlib", "Data Analytics", "Predictions"],
+  "highlights": [
+    "Automated report generation",
+    "Interactive Telegram delivery",
+    "Graphical visualization with Matplotlib",
+    "Customizable metrics and filters for users",
+    "Prediction charts on demand",
+    "Supports manager-level dashboards"
+  ],
+  "details": [
+    "Developed a Telegram bot that delivers automated reports and visual analytics to users based on their selected metrics.",
+    "Connected the bot to data sources and generated graphs and charts using Matplotlib for intuitive visualization of trends, performance, and key metrics.",
+    "Enabled prediction visualizations so users can see forecasted outcomes for tasks or projects if they choose.",
+    "Provided manager-specific reporting, giving high-level insights and summaries for team oversight.",
+    "Designed the system to integrate seamlessly with existing project management platforms and notification systems.",
+    "Focused on flexible, user-driven reports, allowing each user to select the data and visualizations they want to receive.",
+    "Ensured scalability, reliability, and secure interaction with Telegram and backend services."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1nUgbwAzzEU3B5acAwckE_pqG8-rjVuNP/view?usp=drive_link",
+    "images": []
+  },
+  "isPrivate": false
+}

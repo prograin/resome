@@ -1,0 +1,37 @@
+{
+  "id": "flooded-area-segmentation",
+  "title": "تشخیص و سگمنتیشن نواحی سیل‌زده",
+  "shortDescription": "مدل یادگیری عمیق مبتنی بر U-Net برای تشخیص نواحی سیل‌زده از تصاویر هوایی با EfficientNet-B4 و تکنیک‌های سفارشی.",
+  "roles": ["ML"],
+  "tags": [
+    "U-Net",
+    "EfficientNet-B4",
+    "Image Segmentation",
+    "Deep Learning",
+    "Dice Loss",
+    "Data Augmentation"
+  ],
+  "highlights": [
+    "طراحی U-Net با بک‌بون EfficientNet-B4 برای سگمنتیشن سیل",
+    "پیاده‌سازی decoder سفارشی و Dice Loss",
+    "استفاده از augmentation و callbackهای آموزشی",
+    "ارزیابی با خروجی‌های بصری سگمنتیشن"
+  ],
+  "details": [
+    "توسعه پایپ‌لاین یادگیری عمیق برای شناسایی مناطق سیل‌زده از تصاویر هوایی.",
+    "استفاده از U-Net با EfficientNet-B4 به‌عنوان encoder و decoder سفارشی برای افزایش دقت.",
+    "پیاده‌سازی Dice Loss و تکنیک‌های افزایش داده برای بهبود robustness.",
+    "استفاده از callbackها برای ذخیره checkpoint، لاگ‌گیری و تنظیم پویا نرخ یادگیری.",
+    "تست روی دیتاست جداگانه و تحلیل عملکرد با خروجی‌های بصری.",
+    "کد و جزئیات بیشتر در GitHub قابل دسترسی است."
+  ],
+  "links": {
+    "github": "https://lnkd.in/du2Xe3jV",
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": ["./assets/images/flood_area_1.png", "./assets/images/flood_area_2.png"]
+  },
+  "isPrivate": false
+}

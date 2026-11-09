@@ -4,21 +4,24 @@ Static bilingual website. Serve this directory with Live Server or `python -m ht
 
 ## Editing
 
-- `src/pages/`: page templates and their Persian/English content.
+- `src/content/`: editable Persian/English text, prices, FAQs and portfolio data; one file per language and section.
+- `src/pages/`: public-page markup and page interactions, separate from translated content.
 - `src/pages/shared.js`: shared components and footer.
 - `src/pages/index.js`: mounts and caches the current page; defers lower backgrounds.
-- `src/script.js`: navigation, theme, language and shared dialogs.
-- `src/resume.js`: portfolio rendering and interactions, loaded only for the portfolio route.
+- `src/script.js`: application startup; `src/app/` contains navigation, theme, language, events and shared dialogs.
+- `src/resume/`: small portfolio components, loaded only for the portfolio route.
 - `src/loader.js`: loads page scripts and styles on demand; avoids stale renders during rapid navigation.
-- `src/site-config.js`: domain, contact information, canonical routes and bilingual SEO metadata.
+- `src/config/site.js`: domain, contact information, canonical routes and location.
+- `src/content/seo/` and `src/seo/`: metadata text and structured-data generation.
 - `src/seo.js`: updates metadata after client navigation.
-- `src/styles.css`: editable stylesheet. `src/output.css` is generated; do not edit it directly.
-- `src/ui.css`: shared visual system and responsive page layouts.
-- `src/templates/layout.html`: shared HTML shell. All root and route HTML files are generated.
+- `src/css/`: small stylesheets grouped into foundations, components and pages; `index.css` declares their cascade order.
+- `src/templates/layout.html` and `src/templates/partials/`: shared HTML shell, header, dialogs and portfolio sections.
 - `scripts/lib/render.mjs`: static rendering and sitemap/robots generation.
 - `src/app.js`, `src/chunks/` and `src/styles/`: generated minified runtime assets; edit their source files instead.
 
 Run `npm ci` to install dependencies, then `npm run build` after changing code or styles. The build renders the public content into HTML, minifies CSS, updates cache versions and generates discovery files while keeping the resume marked `noindex`. Run `npm run check` to verify the generated output. See [SEO and publication](docs/SEO.md) before deploying.
+
+See [the editing map](docs/STRUCTURE.md) for exact file locations. `npm run format` keeps source files readable; `npm run format:check` checks formatting without changes. Generated HTML, bundles, stylesheets and precompiled vendor utilities are excluded from formatting.
 
 The build needs Node.js 22.12 or newer. It generates separate stylesheets for each page and preserves dynamic states by scanning both rendered languages and source templates. Public pages do not download portfolio code/data or other page templates on first load.
 

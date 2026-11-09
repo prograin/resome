@@ -29,10 +29,16 @@ try {
       await page.goto(`${origin}${route}`);
       await page.waitForLoadState("networkidle");
       assert.equal(await page.locator("[data-page]:not(.hidden)").count(), 1);
-      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true,
-        `Horizontal overflow: ${label} ${route}`);
+      assert.equal(
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+        true,
+        `Horizontal overflow: ${label} ${route}`,
+      );
       assert.equal(await page.evaluate(() => document.fonts.check('16px "Vazirmatn"')), true);
-      assert.equal(requests.some((url) => /googleapis|gstatic|-bg\.jpg/.test(url)), false);
+      assert.equal(
+        requests.some((url) => /googleapis|gstatic|-bg\.jpg/.test(url)),
+        false,
+      );
 
       if (route === "/") {
         assert.equal(await page.locator("[data-rendered-locale]").count(), 2);
@@ -44,13 +50,21 @@ try {
         assert.ok(requests.some((url) => url.includes(`contact-bg-${mobile ? 960 : 1920}.webp`)));
       }
       if (route === "/academy/") {
-        assert.equal(requests.some((url) => url.includes("academy-youtube-bg")), false);
+        assert.equal(
+          requests.some((url) => url.includes("academy-youtube-bg")),
+          false,
+        );
         await page.locator(".academy-youtube-section").scrollIntoViewIfNeeded();
         await page.waitForLoadState("networkidle");
-        await page.waitForFunction(() => document.querySelector(".academy-youtube-section").classList.contains("is-bg-ready"));
+        await page.waitForFunction(() =>
+          document.querySelector(".academy-youtube-section").classList.contains("is-bg-ready"),
+        );
         if (mobile) {
           await page.locator("[data-academy-tab='group']").click();
-          assert.equal(await page.locator("[data-academy-tab='group']").getAttribute("aria-selected"), "true");
+          assert.equal(
+            await page.locator("[data-academy-tab='group']").getAttribute("aria-selected"),
+            "true",
+          );
         } else {
           assert.equal(await page.locator("[data-academy-plan]:visible").count(), 2);
         }
@@ -59,10 +73,21 @@ try {
         assert.equal(await page.locator(".order-clients").count(), 0);
         assert.equal(await page.locator(".project-showcase__item").count(), 4);
         await page.locator(".project-showcase").scrollIntoViewIfNeeded();
-        for (const image of await page.locator(".project-showcase__logo img").all()) await image.scrollIntoViewIfNeeded();
-        await page.waitForFunction(() => [...document.querySelectorAll(".project-showcase__logo img")].every((image) => image.complete && image.naturalWidth > 0));
-        assert.equal(await page.locator('.project-showcase__item[href="https://drbajelani.ir/"]').count(), 1);
-        assert.equal(await page.locator('.project-showcase__item[href="https://parkping.site/"]').count(), 1);
+        for (const image of await page.locator(".project-showcase__logo img").all())
+          await image.scrollIntoViewIfNeeded();
+        await page.waitForFunction(() =>
+          [...document.querySelectorAll(".project-showcase__logo img")].every(
+            (image) => image.complete && image.naturalWidth > 0,
+          ),
+        );
+        assert.equal(
+          await page.locator('.project-showcase__item[href="https://drbajelani.ir/"]').count(),
+          1,
+        );
+        assert.equal(
+          await page.locator('.project-showcase__item[href="https://parkping.site/"]').count(),
+          1,
+        );
         assert.ok(await page.locator("[data-lucide='chevron-left']").count());
         await page.locator("#langToggle").click();
         assert.equal(await page.locator("html").getAttribute("dir"), "ltr");
@@ -87,7 +112,13 @@ try {
     await page.locator("#langToggle").click();
     await page.locator("#themeToggle").click();
     await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
-    await page.screenshot({ path: new URL(`../.backup/qa/academy-${label}.png`, import.meta.url).pathname.replace(/^\/([A-Z]:)/, "$1"), fullPage: true });
+    await page.screenshot({
+      path: new URL(`../.backup/qa/academy-${label}.png`, import.meta.url).pathname.replace(
+        /^\/([A-Z]:)/,
+        "$1",
+      ),
+      fullPage: true,
+    });
     assert.deepEqual(errors, []);
     console.log(`PASS ${label} navigation, language, theme, fonts and assets`);
     await context.close();

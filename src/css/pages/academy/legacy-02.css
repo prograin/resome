@@ -1,0 +1,99 @@
+@layer components {
+  .academy-table {
+    width: 100%;
+    min-width: 44rem;
+    border-collapse: collapse;
+  }
+  .academy-table th,
+  .academy-table td {
+    border-bottom: 0;
+    padding: 0.8rem 0.9rem;
+    color: #334155;
+    font-size: 0.82rem;
+    line-height: 1.75;
+    text-align: start;
+    vertical-align: top;
+  }
+  .academy-table thead th,
+  .academy-table tbody th,
+  .academy-table tbody td {
+    text-align: center;
+  }
+  .academy-table tbody th,
+  .academy-table tbody td {
+    vertical-align: middle;
+  }
+  .academy-table thead th {
+    color: #0f172a;
+    font-weight: 800;
+    background: #f8fafc;
+  }
+  .academy-table thead th:first-child {
+    width: 28%;
+    text-align: center;
+    background: #f8fafc;
+  }
+  .academy-table thead th:nth-child(2),
+  .academy-table thead th:last-child {
+    width: 36%;
+  }
+  .academy-table thead th:nth-child(2) {
+    background: #f8fafc;
+  }
+  .academy-table tbody th {
+    color: #334155;
+    font-weight: 650;
+    white-space: nowrap;
+    text-align: center;
+    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.035), transparent);
+  }
+  .academy-table__premium {
+    color: #334155;
+    background: transparent;
+    font-weight: 650;
+    box-shadow: none;
+    text-shadow: none;
+  }
+  .dark .academy-table th,
+  .dark .academy-table td {
+    border-color: transparent;
+    color: #cbd5e1;
+  }
+  .dark .academy-table thead th {
+    color: #ffffff;
+    background: color-mix(in srgb, #020617 50%, transparent);
+  }
+  .dark .academy-table thead th:first-child {
+    background: color-mix(in srgb, #020617 50%, transparent);
+  }
+  .dark .academy-table thead th:nth-child(2) {
+    background: color-mix(in srgb, #020617 50%, transparent);
+  }
+  .dark .academy-table__premium {
+    color: #cbd5e1;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+  }
+  .dark .academy-table tbody th {
+    color: #cbd5e1;
+    background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.06), transparent);
+  }
+  .academy-youtube-section {
+    width: 100%;
+    max-width: 58rem;
+    margin: 1.25rem auto 0;
+  }
+  .academy-youtube-card {
+    display: grid;
+    gap: 1rem;
+    border: 1px solid rgba(254, 202, 202, 0.75);
+    border-radius: 0.5rem;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(239, 68, 68, 0.12), transparent 26%),
+      color-mix(in srgb, #ffffff 82%, transparent);
+    padding: 1.1rem;
+    box-shadow: 0 16px 40px rgba(127, 29, 29, 0.08);
+    backdrop-filter: blur(16px);
+  }
+}

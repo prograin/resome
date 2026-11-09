@@ -2,7 +2,7 @@
 
 The configured public origin is `https://prograin.ir` in `src/site-config.js`. Change it there if a different domain is used, then rebuild. Do not publish canonical URLs pointing at a preview hostname or localhost.
 
-The local focus is Arak, Markazi Province, Iran. The shared `location` configuration keeps city/province references consistent in the address, service areas, contact page, footer and social cards. The visible content and metadata focus on Python classes and programming education in Arak, plus website development for local businesses. No street address, coordinates, branch location or customer reviews are invented.
+The local focus is Arak, Markazi Province, Iran. The shared `location` configuration keeps city/province references consistent in the address, service areas, contact page, footer and social cards. The visible content and metadata focus on programming classes and programming education in Arak, plus website development for local businesses. No street address, coordinates, branch location or customer reviews are invented.
 
 ## What the build produces
 
@@ -27,7 +27,7 @@ The same URL supports a client-side English language option. It does not adverti
 
 ## Editing and checks
 
-Edit the shared shell in `src/templates/layout.html`, page content in `src/pages/`, identity and SEO in `src/site-config.js`, and the design in `src/styles.css` / `src/ui.css`. Never edit generated route HTML directly.
+Edit the shared shell in `src/templates/layout.html`, page text in `src/content/`, markup in `src/pages/`, identity in `src/config/site.js`, SEO in `src/content/seo/` and `src/seo/`, and design in `src/css/`. Never edit generated route HTML directly.
 
 `npm run images:social` recreates the four 1200 × 630 share cards using the local font and logo; rebuild afterward.
 

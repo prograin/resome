@@ -1,0 +1,35 @@
+{
+  "id": "realtime-sentiment-analysis",
+  "title": "تحلیل احساسات بلادرنگ",
+  "shortDescription": "مطالعه مقایسه‌ای مدل‌های LSTM همراه Self-Attention برای پیش‌بینی احساسات به‌صورت real-time.",
+  "roles": ["ML"],
+  "tags": [
+    "Natural Language Processing",
+    "LSTM",
+    "Self-Attention",
+    "Deep Learning",
+    "Real-Time Inference"
+  ],
+  "highlights": [
+    "چند مدل LSTM تقویت‌شده با Self-Attention",
+    "پیش‌بینی بلادرنگ با بازخورد بصری",
+    "مقایسه مدل‌ها بر اساس درست/غلط بودن پیش‌بینی",
+    "تنظیم هایپرپارامترها و تحلیل عملکرد"
+  ],
+  "details": [
+    "توسعه و ارزیابی چند مدل تحلیل احساسات مبتنی بر LSTM و Self-Attention.",
+    "مقایسه عملکرد مدل‌ها با پیش‌بینی‌های real-time روی داده‌های مثبت/منفی.",
+    "تحلیل دقت و شناسایی نقاط قوت و ضعف در generalization.",
+    "نمایش بصری پیش‌بینی درست (سبز) و نادرست (قرمز) برای تحلیل شهودی.",
+    "بررسی اثر تنظیم هایپرپارامترها و مشخص کردن مسیرهای بهبود."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1XS8i8TK-3Nb9ZLL_JLHv2IA9Pgy9U3FD/view?usp=drive_link",
+    "images": []
+  },
+  "isPrivate": false
+}

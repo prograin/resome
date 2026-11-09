@@ -1,0 +1,162 @@
+{
+  "kicker": "Project Order",
+  "title": "Software projects in Arak",
+  "lead": "Your project is not forced into WordPress or a ready-made template. Based on the product needs, I use frameworks and services such as Django, Next.js, Nuxt, FastAPI, payment/SMS providers, and admin tooling. Larger products can be designed as modular or microservice-based systems so growth and maintenance stay manageable.",
+  "email": "Start by email",
+  "telegram": "Message on Telegram",
+  "phone": "Direct call",
+  "contactPage": "Contact us",
+  "pricingTitle": "Packages",
+  "activeLabel": "Active package",
+  "showMore": "Show all features",
+  "showLess": "Show less",
+  "packages": [
+    {
+      "title": "Corporate website",
+      "price": "20 million Toman",
+      "fit": "Best for companies and brands that need to present their services.",
+      "icon": "layout",
+      "tone": "sky",
+      "features": [
+        "Custom UI design",
+        "Professional landing page",
+        "Company, services, and contact pages",
+        "Portfolio section",
+        "Articles / blog section",
+        "Contact form",
+        "Initial SEO optimization",
+        "Responsive mobile and desktop design",
+        "Simple content management panel"
+      ]
+    },
+    {
+      "title": "Online store",
+      "price": "30 million Toman",
+      "fit": "Best for small businesses that need a simple online sales flow.",
+      "icon": "tag",
+      "tone": "emerald",
+      "featured": true,
+      "features": [
+        "Custom store design",
+        "Product management",
+        "Product categories",
+        "Product search",
+        "Shopping cart",
+        "Order placement",
+        "Customer user panel",
+        "User login and registration",
+        "Basic authentication",
+        "Payment gateway integration",
+        "Order management",
+        "Inventory management",
+        "Product image upload",
+        "Medium admin panel",
+        "Standard UI design"
+      ]
+    },
+    {
+      "title": "Professional online store",
+      "price": "50 million Toman",
+      "fit": "Best for shops that need richer commerce and professional management.",
+      "icon": "server",
+      "tone": "cyan",
+      "features": [
+        "Everything in the small package +",
+        "Professional UI/UX design",
+        "Advanced admin dashboard",
+        "Admin roles and permissions",
+        "Multi-admin management",
+        "Article and blog system",
+        "User comments system",
+        "Product rating",
+        "Product comparison",
+        "Advanced product filters",
+        "Gmail Authentication integration",
+        "SMS login",
+        "PDF invoice creation",
+        "Sales report",
+        "User report",
+        "ZarinPal integration",
+        "Advanced discount system",
+        "Sales campaign management",
+        "Product video upload",
+        "More advanced SEO"
+      ]
+    },
+    {
+      "title": "Telegram bot",
+      "price": "30 million Toman",
+      "fit": "Best for automating communication with Telegram users.",
+      "icon": "send",
+      "tone": "amber",
+      "features": [
+        "Telegram Bot design",
+        "Button menu",
+        "Automated reply",
+        "User information collection",
+        "Notification messaging",
+        "Simple API integration",
+        "Simple Telegram bot"
+      ]
+    },
+    {
+      "title": "Professional Telegram bot",
+      "price": "+35 million Toman",
+      "fit": "Best for larger systems that need data and user management.",
+      "icon": "database",
+      "tone": "violet",
+      "features": [
+        "Database",
+        "User management",
+        "User profiles",
+        "Interaction history storage",
+        "Admin panel",
+        "Group messaging",
+        "Membership system",
+        "Payment system",
+        "Website integration",
+        "Reporting",
+        "Order management through the bot"
+      ]
+    },
+    {
+      "title": "Instagram bot",
+      "price": "15 million Toman",
+      "fit": "Best for light Instagram automation and first-response workflows.",
+      "icon": "instagram",
+      "tone": "rose",
+      "features": [
+        "Automated direct replies",
+        "Frequent message management",
+        "Product/service information sending",
+        "Simple API integration"
+      ]
+    }
+  ],
+  "cards": [
+    [
+      "server",
+      "Custom implementation",
+      "Admin panels, shops, APIs, dashboards, backend and frontend are designed around your real workflow.",
+      "emerald"
+    ],
+    [
+      "lock",
+      "Security and continuity",
+      "Authentication, permissions, protected routes, safer data handling, backups, and progress preservation are planned from the beginning.",
+      "emerald"
+    ],
+    [
+      "layers",
+      "Service integrations",
+      "ZarinPal, Enamad, SMS providers, notifications, storage, admin panels, and external services can be connected when needed.",
+      "cyan"
+    ],
+    [
+      "sparkles",
+      "UI shaped around taste",
+      "The interface follows your brand, customer expectations, and product behavior so it feels polished and usable.",
+      "violet"
+    ]
+  ]
+}

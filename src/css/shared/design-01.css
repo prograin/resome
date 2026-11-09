@@ -1,0 +1,167 @@
+/* Shared visual system. Kept separate from the existing utility stylesheet. */
+:root {
+  --ui-radius: 1.25rem;
+  --ui-text: #172338;
+  --ui-muted: #526278;
+  --ui-surface: #ffffff;
+  --ui-line: #e0e8ef;
+  --ui-shadow: 0 8px 28px rgb(15 23 42 / 7%);
+  --ui-accent: #087f78;
+  --header-height: 4.25rem;
+  --ui-title-size: clamp(2rem, 4vw, 3.4rem);
+  --ui-title-leading: 1.6;
+  --ui-body-size: 0.95rem;
+  --ui-body-leading: 2.1;
+  --ui-control-radius: 0.8rem;
+}
+.dark {
+  --ui-text: #f1f5f9;
+  --ui-muted: #b1bfd0;
+  --ui-surface: #101c30;
+  --ui-line: #26354b;
+  --ui-shadow: 0 8px 28px rgb(0 0 0 / 18%);
+  --ui-accent: #69e2cd;
+}
+html {
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+}
+body {
+  line-height: 1.8;
+}
+body.page-home-active {
+  overflow-y: auto;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+svg {
+  flex-shrink: 0;
+}
+:where(a, button, select, [tabindex]):focus-visible {
+  outline: 3px solid #22b8a5;
+  outline-offset: 5px;
+}
+::selection {
+  background: #99f6e4;
+  color: #102a32;
+}
+.page-eyebrow {
+  display: block;
+  margin: 0 0 1rem;
+  color: var(--ui-accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+#homePage h1,
+.order-intro h1,
+.academy-hero__copy h1,
+.contact-shell--centered .contact-hero h1 {
+  text-wrap: balance;
+}
+.academy-hero__copy .page-eyebrow {
+  color: #a5f3e5 !important;
+  font-size: 0.8rem;
+  margin: 0 0 1rem;
+  text-shadow: none;
+} /* A quieter header with clear active and keyboard states. */
+.site-header {
+  border-bottom-color: var(--ui-line);
+  background: rgb(255 255 255 / 93%);
+  box-shadow: 0 4px 20px rgb(15 23 42 / 3%);
+}
+.dark .site-header {
+  background: rgb(8 16 31 / 94%);
+  border-bottom-color: #1b293c;
+}
+.site-header > nav {
+  min-height: var(--header-height);
+  max-width: 75rem;
+  padding: 0.6rem 1.5rem;
+}
+.site-header #navName {
+  width: 2.25rem;
+  height: 2.25rem;
+  box-shadow: none;
+}
+.site-wordmark {
+  color: var(--ui-text);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.site-wordmark > span {
+  color: var(--ui-accent);
+}
+.site-header nav > .site-page-links {
+  gap: 0.25rem;
+}
+.site-header nav > .site-page-links > a {
+  border-radius: 0.65rem;
+  padding: 0.45rem 0.8rem;
+  font-weight: 600;
+}
+.site-header a[aria-current="page"] {
+  background: rgb(13 148 136 / 9%);
+  color: var(--ui-accent);
+}
+.site-header > nav > a[aria-current="page"] {
+  background: transparent;
+}
+.site-header button {
+  border-color: var(--ui-line);
+  border-radius: 0.7rem;
+  box-shadow: none;
+  min-height: 2.6rem;
+}
+#mobileMenu {
+  padding: 0.75rem 1rem 1rem;
+  background: var(--ui-surface);
+}
+#mobileMenu a {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+} /* Full-bleed home, with one clear reading order and aligned choices. */
+#homePage > .home-layout {
+  height: auto !important;
+  min-height: 100svh !important;
+  padding-top: var(--header-height) !important;
+  padding-inline: clamp(1.25rem, 5vw, 4rem);
+}
+#homePage > .home-layout > .home-hero {
+  height: auto !important;
+  min-height: calc(100svh - var(--header-height)) !important;
+  width: min(100%, 70rem);
+  margin-inline: auto;
+  padding-block: 4rem;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+.home-copy {
+  text-align: start;
+}
+#homePage .home-eyebrow {
+  color: #a5f3e5 !important;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-shadow: none;
+  margin-bottom: 1.25rem;
+}
+.home-stats {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}

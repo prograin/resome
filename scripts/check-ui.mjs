@@ -14,11 +14,17 @@ try {
   for (const width of [360, 768, 1024, 1440]) {
     for (const locale of ["fa", "en"]) {
       for (const theme of ["dark", "light"]) {
-        const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: "reduce" });
-        await context.addInitScript(({ locale, theme }) => {
-          localStorage.setItem("portfolio_locale", locale);
-          localStorage.setItem("portfolio_theme", theme);
-        }, { locale, theme });
+        const context = await browser.newContext({
+          viewport: { width, height: 900 },
+          reducedMotion: "reduce",
+        });
+        await context.addInitScript(
+          ({ locale, theme }) => {
+            localStorage.setItem("portfolio_locale", locale);
+            localStorage.setItem("portfolio_theme", theme);
+          },
+          { locale, theme },
+        );
         const page = await context.newPage();
         const errors = [];
         page.on("pageerror", (error) => errors.push(error.message));
@@ -32,13 +38,33 @@ try {
           const visible = page.locator("[data-page]:not(.hidden)");
           assert.equal(await visible.locator("h1").count(), 1, label);
           assert.equal(await page.evaluate(() => scrollY), 0, `Initial scroll: ${label}`);
-          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, label);
-          assert.equal(await page.evaluate(() => {
-            const ids = [...document.querySelectorAll("[id]")].map((element) => element.id);
-            return ids.length === new Set(ids).size;
-          }), true, `Duplicate IDs: ${label}`);
-          assert.equal(await page.locator("svg[data-lucide]").evaluateAll((icons) =>
-            icons.filter((icon) => icon.dataset.lucide !== "circle" && icon.innerHTML === '<circle cx="12" cy="12" r="9"></circle>').length), 0, `Missing icon: ${label}`);
+          assert.equal(
+            await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+            true,
+            label,
+          );
+          assert.equal(
+            await page.evaluate(() => {
+              const ids = [...document.querySelectorAll("[id]")].map((element) => element.id);
+              return ids.length === new Set(ids).size;
+            }),
+            true,
+            `Duplicate IDs: ${label}`,
+          );
+          assert.equal(
+            await page
+              .locator("svg[data-lucide]")
+              .evaluateAll(
+                (icons) =>
+                  icons.filter(
+                    (icon) =>
+                      icon.dataset.lucide !== "circle" &&
+                      icon.innerHTML === '<circle cx="12" cy="12" r="9"></circle>',
+                  ).length,
+              ),
+            0,
+            `Missing icon: ${label}`,
+          );
 
           if (route === "order/") {
             assert.equal(await page.locator("[data-pricing-card]").count(), 6);
@@ -46,24 +72,73 @@ try {
             for (const button of await buttons.all()) {
               const card = button.locator("xpath=..");
               await button.click();
-              assert.equal(await page.locator("#modalOverlay").getAttribute("aria-hidden"), "false");
-              assert.equal(await page.locator("#modalTitle").innerText(), await card.locator("h3").innerText());
-              assert.equal(await page.locator(".package-details__features li").count(), await card.locator(".pricing-card__features li").count());
+              assert.equal(
+                await page.locator("#modalOverlay").getAttribute("aria-hidden"),
+                "false",
+              );
+              assert.equal(
+                await page.locator("#modalTitle").innerText(),
+                await card.locator("h3").innerText(),
+              );
+              assert.equal(
+                await page.locator(".package-details__features li").count(),
+                await card.locator(".pricing-card__features li").count(),
+              );
               await page.keyboard.press("Escape");
               assert.equal(await page.locator("#modalOverlay").getAttribute("aria-hidden"), "true");
               assert.ok(await card.locator(".pricing-card__feature-extra[hidden]").count());
             }
           }
           if (route === "academy/") {
-            assert.equal(await page.locator(".academy-compare-column").count(), 3);
-            for (const column of await page.locator(".academy-compare-column").all()) {
-              assert.equal(await column.evaluate((element) => getComputedStyle(element).display !== "none"), true);
+            assert.equal(await page.locator(".academy-page > .academy-faq-section").count(), 1);
+            assert.equal(await page.locator(".academy-youtube-section .faq-section").count(), 0);
+            assert.equal(await page.locator(".academy-compare-scroll").count(), 0);
+            assert.equal(
+              await page.locator(".academy-table-section, .academy-decision-grid").count(),
+              0,
+            );
+            assert.equal(await page.locator("[data-academy-details]").count(), 2);
+            assert.equal(
+              await page
+                .locator(".academy-comparison")
+                .evaluate((element) => element.scrollWidth <= element.clientWidth),
+              true,
+            );
+            for (const button of await page.locator("[data-academy-details]").all()) {
+              if (width < 768) {
+                const key = await button.getAttribute("data-academy-details");
+                await page.locator(`[data-academy-tab='${key}']`).click();
+              }
+              await button.click();
+              assert.equal(
+                await page.locator("#modalOverlay").getAttribute("aria-hidden"),
+                "false",
+              );
+              assert.equal(
+                await page.locator("#modalTitle").innerText(),
+                await button.locator("xpath=..").locator("h3").innerText(),
+              );
+              assert.equal(await page.locator(".academy-details__list > div").count(), 18);
+              assert.equal(
+                await page
+                  .locator("#modalDialog")
+                  .evaluate((element) => element.scrollWidth <= element.clientWidth),
+                true,
+              );
+              await page.keyboard.press("Escape");
+              assert.equal(
+                await button.evaluate((element) => document.activeElement === element),
+                true,
+              );
             }
             if (width < 768) {
               const tab = page.locator("[data-academy-tab='private']");
               await tab.focus();
               await tab.press("ArrowRight");
-              assert.equal(await page.locator("[data-academy-tab='group']").getAttribute("aria-selected"), "true");
+              assert.equal(
+                await page.locator("[data-academy-tab='group']").getAttribute("aria-selected"),
+                "true",
+              );
               assert.equal(await page.locator("[data-academy-plan='group']").isVisible(), true);
               await page.locator("[data-academy-tab='group']").press("Home");
               assert.equal(await tab.getAttribute("aria-selected"), "true");
@@ -71,7 +146,9 @@ try {
           }
           if (route === "resume/") {
             const filter = page.locator("#projectFilterSelect");
-            const values = await filter.locator("option").evaluateAll((items) => items.map((option) => option.value));
+            const values = await filter
+              .locator("option")
+              .evaluateAll((items) => items.map((option) => option.value));
             if (values.length > 1) {
               await filter.selectOption(values[1]);
               await filter.selectOption("all");
@@ -89,11 +166,21 @@ try {
             const audit = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
             const violations = audit.violations.map((issue) => ({
               id: issue.id,
-              nodes: issue.nodes.map((node) => ({ target: node.target, summary: node.failureSummary })),
+              nodes: issue.nodes.map((node) => ({
+                target: node.target,
+                summary: node.failureSummary,
+              })),
             }));
             report.push({ label, violations });
             assert.deepEqual(violations, [], `Accessibility: ${label}`);
-            await page.screenshot({ path: fileURLToPath(new URL(`ui-${route.replace("/", "") || "home"}-${width}-${locale}-${theme}.png`, output)) });
+            await page.screenshot({
+              path: fileURLToPath(
+                new URL(
+                  `ui-${route.replace("/", "") || "home"}-${width}-${locale}-${theme}.png`,
+                  output,
+                ),
+              ),
+            });
           }
         }
         if (width < 768) {

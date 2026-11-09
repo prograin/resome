@@ -1,0 +1,86 @@
+#homePage {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+#homePage > div {
+  height: 100svh !important;
+  min-height: 100svh !important;
+  padding-top: 4.25rem !important;
+  padding-bottom: 0 !important;
+}
+
+#homePage > div > section {
+  height: calc(100svh - 4.25rem) !important;
+  min-height: calc(100svh - 4.25rem) !important;
+}
+
+#homePage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url("../assets/images/optimized/home-bg-1920.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#homePage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.34) 52%, rgba(2, 6, 23, 0.62)),
+    linear-gradient(180deg, rgba(2, 6, 23, 0.34), rgba(2, 6, 23, 0.58));
+}
+
+#homePage > * {
+  position: relative;
+  z-index: 1;
+  padding-inline: 1rem;
+}
+
+#homePage h1,
+#homePage p {
+  color: #ffffff !important;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.36);
+}
+.home-stats span {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: rgba(15, 23, 42, 0.5);
+  color: #ffffff;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 850;
+  line-height: 1.4;
+  text-shadow: none;
+}
+.home-card-cue {
+  display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: auto;
+  color: currentColor;
+  opacity: 0.9;
+}
+
+.dark .home-card-cue {
+  color: currentColor;
+}
+
+@media (width >= 48rem) {
+  #homePage > * {
+    padding-inline: 1.5rem;
+  }
+}

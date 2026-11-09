@@ -1,0 +1,45 @@
+{
+  "id": "rokesh-mehdi",
+  "title": "Rokesh Mehdi",
+  "shortDescription": "A production e-commerce website for Rokesh Mehdi with authentication, admin dashboard, product/content management, payment flow, SMS notifications, Enamad setup, and ZarinPal integration.",
+  "roles": ["Backend", "Frontend", "Fullstack"],
+  "tags": [
+    "PHP",
+    "MySQL",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "ZarinPal",
+    "Enamad",
+    "Melipayamak",
+    "SMS Gateway",
+    "Payment Gateway",
+    "SEO",
+    "Articles"
+  ],
+  "highlights": [
+    "Built a full e-commerce website with custom PHP backend logic",
+    "Implemented authentication and an admin dashboard for managing site operations",
+    "Enabled admin-side management of products, content, orders, and key website data",
+    "Integrated ZarinPal, Enamad requirements, and SMS notifications for commerce workflows",
+    "Added articles/content management to support SEO and ongoing site updates"
+  ],
+  "details": [
+    "Designed and implemented the website as a complete production e-commerce system, covering public pages, backend logic, and admin workflows.",
+    "Built authentication and dashboard flows so the admin can manage products, website content, operational data, and commerce-related actions from one place.",
+    "Implemented payment handling with ZarinPal and connected the website to trust and verification requirements such as Enamad.",
+    "Integrated SMS notifications so important user and order-related events can be sent through the site workflow.",
+    "Added content/articles management to support SEO, product education, and regular website updates.",
+    "Focused on a maintainable admin experience so the owner can control the important parts of the shop without direct code changes."
+  ],
+  "links": {
+    "url": "https://rokesh-mehdi.ir",
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": []
+  },
+  "isPrivate": false
+}

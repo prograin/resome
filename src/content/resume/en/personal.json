@@ -1,0 +1,18 @@
+{
+  "name": "Ahmadreza Rezaei",
+  "title": "Data Engineer | Backend Engineer | Full-Stack Developer",
+  "location": "Tehran, Iran",
+  "timezone": "GMT+3:30 (Tehran)",
+  "employmentType": "Full-time",
+  "workModes": ["On-site", "Remote", "Hybrid"],
+  "email": "ahmadreza.pcg1377@gmail.com",
+  "number": "09914663783",
+  "links": {
+    "github": "https://github.com/prograin",
+    "linkedin": "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
+    "youtube": "https://www.youtube.com/@Prograin_ARR",
+    "instagram": "https://www.instagram.com/prograin_/"
+  },
+  "about": "\nDeveloper and researcher in Deep Learning and Backend Engineering, with experience designing and implementing RESTful APIs and working with modular, microservice, and event-driven architectures. Familiar with the Pub/Sub communication pattern and proficient in JavaScript, Python, and TypeScript.\n\nExperienced in deploying projects to servers; working with Docker and Docker Compose; using Linux environments (Ubuntu, Debian); and designing software architecture.\n\nHands-on experience with SQL and NoSQL databases such as MongoDB, Elasticsearch, ClickHouse, PostgreSQL, and BigQuery across both OLTP and OLAP projects. Interested in R&D roles focused on intelligent modeling and scalable systems, with a strong ability to solve complex problems.\n\nSkilled in deep learning models, computer vision, and the mathematical foundations of artificial intelligence.\n",
+  "mobileAbout": "Backend, data, and full-stack engineer with hands-on experience designing REST APIs, data pipelines, dashboards, deployments, and scalable services. Comfortable with SQL/NoSQL databases, Linux/Docker environments, and intelligent systems, with a focus on solving real operational problems."
+}

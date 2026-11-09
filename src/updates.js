@@ -10,8 +10,20 @@
   let retry = 0;
   let applying = false;
   const copy = {
-    fa: { title: "نسخه جدید سایت آماده است", message: "برای دیدن آخرین تغییرات و عکس‌ها، سایت را بروزرسانی کنید.", update: "بروزرسانی", later: "بعداً", applying: "در حال بروزرسانی…" },
-    en: { title: "A new version is ready", message: "Update the site to see the latest changes and images.", update: "Update", later: "Later", applying: "Updating…" },
+    fa: {
+      title: "نسخه جدید سایت آماده است",
+      message: "برای دیدن آخرین تغییرات و عکس‌ها، سایت را بروزرسانی کنید.",
+      update: "بروزرسانی",
+      later: "بعداً",
+      applying: "در حال بروزرسانی…",
+    },
+    en: {
+      title: "A new version is ready",
+      message: "Update the site to see the latest changes and images.",
+      update: "Update",
+      later: "Later",
+      applying: "Updating…",
+    },
   };
   const dialog = () => document.getElementById("siteUpdateDialog");
   const lock = (value) => {
@@ -22,7 +34,15 @@
   function present() {
     clearTimeout(retry);
     const element = dialog();
-    if (!element || !latestVersion || dismissed.has(latestVersion) || document.hidden || element.open || applying) return;
+    if (
+      !element ||
+      !latestVersion ||
+      dismissed.has(latestVersion) ||
+      document.hidden ||
+      element.open ||
+      applying
+    )
+      return;
     if (document.querySelector('#modalOverlay[aria-hidden="false"]')) {
       retry = setTimeout(present, 750);
       return;
@@ -38,7 +58,8 @@
   }
 
   async function check() {
-    if (!currentVersion || checking || document.hidden || navigator.onLine === false || applying) return;
+    if (!currentVersion || checking || document.hidden || navigator.onLine === false || applying)
+      return;
     checking = true;
     lastCheck = Date.now();
     const controller = new AbortController();
@@ -46,13 +67,24 @@
     try {
       const url = new URL("/site-version.json", location.origin);
       url.searchParams.set("check", String(Date.now()));
-      const response = await fetch(url, { cache: "no-store", signal: controller.signal, credentials: "same-origin" });
+      const response = await fetch(url, {
+        cache: "no-store",
+        signal: controller.signal,
+        credentials: "same-origin",
+      });
       if (!response.ok) return;
       const data = await response.json();
       if (typeof data.version !== "string" || !/^[a-f0-9]{12}$/i.test(data.version)) return;
-      if (data.version !== currentVersion) { latestVersion = data.version; present(); }
-    } catch { /* Offline or an unavailable endpoint must not interrupt the site. */ }
-    finally { clearTimeout(timeout); checking = false; }
+      if (data.version !== currentVersion) {
+        latestVersion = data.version;
+        present();
+      }
+    } catch {
+      /* Offline or an unavailable endpoint must not interrupt the site. */
+    } finally {
+      clearTimeout(timeout);
+      checking = false;
+    }
   }
 
   function init() {

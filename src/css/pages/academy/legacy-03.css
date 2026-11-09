@@ -1,0 +1,91 @@
+@media (width >= 48rem) {
+  .academy-page {
+    padding-block: 1.5rem 2.5rem;
+  }
+  .academy-hero {
+    padding-block: 2rem 0.75rem;
+  }
+  .academy-hero__copy h1 {
+    font-size: 3rem;
+  }
+  .academy-picker {
+    padding: 1.2rem;
+  }
+  .academy-tabs {
+    display: none;
+  }
+  .academy-picker__label {
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+  }
+  .academy-comparison {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .academy-plan {
+    display: block;
+    min-height: 31rem;
+    padding: 1.2rem;
+    opacity: 0.92;
+    animation: none;
+  }
+  .academy-plan:hover {
+    border-color: var(--academy-accent);
+    box-shadow: 0 22px 52px color-mix(in srgb, var(--academy-accent) 20%, transparent);
+    opacity: 1;
+    transform: scale(1.03);
+  }
+  .academy-plan:hover li {
+    color: #0f172a;
+  }
+  .dark .academy-plan:hover li {
+    color: #ffffff;
+  }
+  .academy-plan.is-featured {
+    min-height: 33rem;
+    padding: 1.35rem;
+    border-color: color-mix(in srgb, var(--academy-accent) 72%, #e2e8f0);
+    box-shadow:
+      0 24px 62px color-mix(in srgb, var(--academy-accent) 22%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--academy-accent) 18%, transparent);
+    opacity: 1;
+  }
+  .academy-plan.is-featured h3 {
+    font-size: 1.35rem;
+  }
+  .academy-plan.is-featured .academy-plan__price {
+    font-size: 2rem;
+  }
+  .academy-plan.is-featured .academy-plan__cta {
+    min-height: 3rem;
+    background: color-mix(in srgb, var(--academy-accent) 92%, #0f172a);
+  }
+}
+@media (width < 48rem) {
+  .academy-page {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+  .academy-hero__copy {
+    max-width: calc(100vw - 2rem);
+  }
+  .academy-hero {
+    padding-block: 1.5rem 0.5rem;
+  }
+  .academy-hero__copy h1 {
+    font-size: 2rem;
+  }
+  .academy-plan {
+    animation: academy-slide-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .academy-plan:not(.is-active) {
+    display: none;
+  }
+  .academy-table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+}

@@ -2,10 +2,10 @@
 
 Measured locally on 2026-11-08 with Lighthouse 12.8.2, headless Microsoft Edge, a 390 × 844 mobile viewport, default simulated mobile throttling and a fresh browser profile per page. These are individual laboratory runs against the same local server, not PageSpeed results from the public domain.
 
-| Page | Performance before → after | LCP before → after | FCP before → after | Transfer before → after |
-| --- | --- | --- | --- | --- |
-| Home | 80 → 96 | 4.88 s → 2.63 s | 2.11 s → 1.50 s | 671 KB → 285 KB |
-| Academy | 80 → 95 | 4.88 s → 2.78 s | 2.25 s → 1.65 s | 703 KB → 315 KB |
+| Page    | Performance before → after | LCP before → after | FCP before → after | Transfer before → after |
+| ------- | -------------------------- | ------------------ | ------------------ | ----------------------- |
+| Home    | 80 → 96                    | 4.88 s → 2.63 s    | 2.11 s → 1.50 s    | 671 KB → 285 KB         |
+| Academy | 80 → 95                    | 4.88 s → 2.78 s    | 2.25 s → 1.65 s    | 703 KB → 315 KB         |
 
 CLS was zero in both final runs. Final TBT was 94 ms for home and 99 ms for academy. The initial local runs had TBT of 0 ms and 17 ms respectively; the reported 390 ms from the public mobile audit was not reproduced locally. Do not describe these measurements as a verified reduction from 390 ms on the live site.
 

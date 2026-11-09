@@ -1,0 +1,102 @@
+{
+  "heroKicker": "Portfolio",
+  "rolesHint": "Choose a filter below to update both projects and skills.",
+  "contactHint": "Interested in collaboration, consulting, or a full-time role? Reach out via any channel below.",
+  "cvUrl": "#",
+  "nav": {
+    "roles": "Filters",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "education": "Education",
+    "contact": "Contact",
+    "about": "About"
+  },
+  "sections": {
+    "roles": "Filter projects",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "education": "Education",
+    "contact": "Contact"
+  },
+  "labels": {
+    "roles": "Roles",
+    "stack": "Stack",
+    "notes": "Notes",
+    "privateShare": "Shareable summary"
+  },
+  "pills": {
+    "privateNda": "Private / NDA",
+    "detailsUponRequest": "Open Details for a clear shareable summary."
+  },
+  "modal": {
+    "projectDetails": "Project details",
+    "watchVideo": "Watch video",
+    "images": "Images"
+  },
+  "buttons": {
+    "theme": "Theme",
+    "language": "FA",
+    "details": "Details",
+    "github": "GitHub",
+    "liveDemo": "Live demo",
+    "viewImages": "View images",
+    "watchVideo": "Watch video",
+    "clearRole": "Clear",
+    "url": "Website",
+    "showMore": "More",
+    "showLess": "Less",
+    "experienceMore": "Details",
+    "experienceLess": "Less"
+  },
+  "projectFilters": [
+    {
+      "key": "all",
+      "name": "All work",
+      "hint": "Everything",
+      "icon": "layout-grid",
+      "roles": null
+    },
+    {
+      "key": "websites",
+      "name": "Websites & shops",
+      "hint": "Sites, panels, payments",
+      "icon": "globe-2",
+      "roles": ["Frontend", "Fullstack"],
+      "projectIds": ["oildb", "rokesh-mehdi", "heychat"]
+    },
+    {
+      "key": "backend",
+      "name": "Backend & APIs",
+      "hint": "Services, auth, integrations",
+      "icon": "server",
+      "roles": ["Backend"]
+    },
+    {
+      "key": "data",
+      "name": "Data & dashboards",
+      "hint": "ETL, reports, analytics",
+      "icon": "database",
+      "roles": ["DataEng"]
+    },
+    {
+      "key": "ai",
+      "name": "AI & vision",
+      "hint": "ML, CV, deep learning",
+      "icon": "brain",
+      "roles": ["ML"]
+    },
+    {
+      "key": "desktop",
+      "name": "Desktop tools",
+      "hint": "Qt/PyQt apps",
+      "icon": "monitor",
+      "roles": ["Desktop"]
+    }
+  ],
+  "empty": {
+    "noProjectsTitle": "No projects match this filter.",
+    "noProjectsHint": "Clear the filter to view all projects."
+  }
+}

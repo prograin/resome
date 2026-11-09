@@ -1,0 +1,49 @@
+{
+  "id": "heychat",
+  "title": "HeyChat",
+  "shortDescription": "سیستم ارتباط‌گیری و پیام‌رسانی مبتنی بر مایکروسرویس با معماری رویدادمحور، جست‌وجو و احراز هویت/مجوزدهی از طریق گیت‌وی.",
+  "roles": ["Backend", "DataEng", "Frontend"],
+  "tags": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis Streams",
+    "Pub/Sub",
+    "Elasticsearch",
+    "Caching",
+    "Docker Compose",
+    "Nginx",
+    "React",
+    "Telegram Bot",
+    "Telegram Auth Widget",
+    "Authentication",
+    "Authorization",
+    "API Gateway",
+    "TailwindCSS",
+    "Atomic Design",
+    "Feature-based Architecture"
+  ],
+  "highlights": [
+    "معماری مایکروسرویس و ماژولار (Modular) در برخی سرویس‌ها",
+    "رویدادمحور (Event-Driven) با Redis Streams و استفاده از Pub/Sub در بخش‌های منتخب",
+    "عبور همه درخواست‌ها از API Gateway با Authentication/Authorization",
+    "سیستم جست‌وجوی مبتنی بر Elasticsearch + ذخیره‌سازی داده در PostgreSQL + Caching"
+  ],
+  "details": [
+    "پیاده‌سازی قابلیت‌های اصلی: افزودن کانتکت، بلاک/آن‌بلاک، جست‌وجوی کاربران، مشاهده پروفایل، ارسال درخواست چت و اتصال کاربران.",
+    "طراحی ارتباط بین سرویس‌ها به‌صورت ترکیبی: رویدادمحور در بخش‌های کلیدی و ارتباط REST API در برخی مسیرها برای هماهنگی سرویس‌ها.",
+    "پیاده‌سازی Frontend با React (base-feature) با رعایت Hooks، استفاده از Tailwind و ساختار کامپوننت‌ها به سبک Atomic برای توسعه‌پذیری آینده.",
+    "اجرای احراز هویت از طریق Telegram Authenticate Widget و صدور توکن کاربر برای دسترسی امن.",
+    "طراحی دقیق Routes با اصول RESTful Resource Naming و اعمال سیاست‌های دسترسی در Gateway.",
+    "راه‌اندازی زیرساخت با Docker Compose و مپ‌کردن سرویس‌ها به یک ورودی واحد؛ استفاده از Nginx Reverse Proxy برای Load Balancing و Route Management."
+  ],
+  "links": {
+    "github": "https://github.com/prograin/heychat",
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": []
+  },
+  "isPrivate": false
+}

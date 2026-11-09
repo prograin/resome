@@ -1,0 +1,17 @@
+.page-contact-active .site-main {
+  max-width: none;
+  padding-inline: 0;
+}
+.page-home-active .site-main {
+  max-width: none;
+  padding-inline: 0;
+  padding-top: 0;
+}
+.page-academy-active .site-main {
+  max-width: none;
+  padding-inline: 0;
+}
+
+.page-academy-active .page-view[data-page="academy"] {
+  margin-top: 0;
+}

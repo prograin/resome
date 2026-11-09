@@ -1,0 +1,122 @@
+<!-- Fixed Navbar -->
+<header
+  class="site-header z-50 border-b border-cyan-100/80 bg-white/80 backdrop-blur-xl dark:border-cyan-950/70 dark:bg-slate-950/75"
+>
+  <nav
+    class="mx-auto flex min-h-20 max-w-6xl items-center justify-between px-4 py-2.5 sm:min-h-16 sm:py-3"
+  >
+    <a href="/" data-page-link="home" class="flex items-center gap-2 font-semibold tracking-tight">
+      <img
+        id="navName"
+        class="h-11 w-11 rounded-full object-cover shadow-sm sm:h-10 sm:w-10"
+        src="./assets/icons/favicon-48.png"
+        width="48"
+        height="48"
+        alt="Ahmadreza Rezaei"
+      />
+      <span class="site-wordmark" dir="ltr">prograin<span>.</span></span>
+    </a>
+
+    <div
+      class="site-page-links hidden items-center gap-5 text-sm font-medium text-slate-600 dark:text-slate-300 md:flex"
+    >
+      <a
+        id="navHomePage"
+        class="hover:text-slate-900 dark:hover:text-white"
+        href="/"
+        data-page-link="home"
+        >خانه</a
+      >
+      <a
+        id="navAcademyPage"
+        class="hover:text-slate-900 dark:hover:text-white"
+        href="/academy/"
+        data-page-link="academy"
+        >آکادمی</a
+      >
+      <a
+        id="navOrderPage"
+        class="hover:text-slate-900 dark:hover:text-white"
+        href="/order/"
+        data-page-link="order"
+        >پروژه</a
+      >
+      <a
+        id="navContactPage"
+        class="hover:text-slate-900 dark:hover:text-white"
+        href="/contact/"
+        data-page-link="contact-page"
+        >تماس با ما</a
+      >
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button
+        id="langToggle"
+        class="inline-flex min-h-10 items-center gap-2 rounded-lg border border-cyan-100 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-cyan-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-cyan-950/40"
+        type="button"
+        aria-label="Toggle language"
+      >
+        <i data-lucide="languages" class="h-4 w-4"></i>
+        <span class="hidden sm:inline" id="langToggleText">FA</span>
+      </button>
+
+      <button
+        id="themeToggle"
+        class="inline-flex min-h-10 items-center gap-2 rounded-lg border border-cyan-100 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-cyan-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-cyan-950/40"
+        type="button"
+        aria-label="Toggle dark mode"
+      >
+        <i data-lucide="moon" class="h-4 w-4"></i>
+        <span class="hidden sm:inline">Theme</span>
+      </button>
+
+      <button
+        id="mobileMenuBtn"
+        class="md:hidden inline-flex min-h-10 items-center gap-2 rounded-lg border border-cyan-100 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-cyan-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-cyan-950/40"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <i data-lucide="menu" class="h-4 w-4"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div
+    id="mobileMenu"
+    class="hidden border-t border-slate-200 bg-white/80 px-4 py-3 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/70 md:hidden"
+  >
+    <div class="site-page-links grid grid-cols-2 gap-2 text-sm text-slate-700 dark:text-slate-200">
+      <a
+        id="mNavHomePage"
+        class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+        href="/"
+        data-page-link="home"
+        >خانه</a
+      >
+      <a
+        id="mNavAcademyPage"
+        class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+        href="/academy/"
+        data-page-link="academy"
+        >آکادمی</a
+      >
+      <a
+        id="mNavOrderPage"
+        class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+        href="/order/"
+        data-page-link="order"
+        >پروژه</a
+      >
+      <a
+        id="mNavContactPage"
+        class="rounded-xl px-3 py-2 hover:bg-slate-100 dark:hover:bg-slate-900"
+        href="/contact/"
+        data-page-link="contact-page"
+        >تماس با ما</a
+      >
+    </div>
+  </div>
+</header>

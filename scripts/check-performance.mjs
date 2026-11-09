@@ -6,8 +6,10 @@ const origin = process.env.SITE_URL || "http://127.0.0.1:4173";
 const browser = await chromium.launch({ channel: "msedge", headless: true });
 try {
   for (const [route, chunk, cssBudget, jsBudget] of [
-    ["/", "home", 40000, 50000], ["/academy/", "academy", 60000, 60000],
-    ["/order/", "order", 55000, 65000], ["/contact/", "contact", 45000, 50000],
+    ["/", "home", 40000, 50000],
+    ["/academy/", "academy", 60000, 60000],
+    ["/order/", "order", 55000, 65000],
+    ["/contact/", "contact", 45000, 50000],
   ]) {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
     const page = await context.newPage();
@@ -16,19 +18,33 @@ try {
     page.on("request", (request) => requests.push(request.url()));
     page.on("response", (response) => {
       const type = response.request().resourceType();
-      if (["script", "stylesheet"].includes(type)) bodies.push(response.body().then((body) => ({ type, bytes: body.length })));
+      if (["script", "stylesheet"].includes(type))
+        bodies.push(response.body().then((body) => ({ type, bytes: body.length })));
     });
     await page.goto(`${origin}${route}`);
     await page.waitForLoadState("networkidle");
     const resources = await Promise.all(bodies);
-    const css = resources.filter((item) => item.type === "stylesheet").reduce((sum, item) => sum + item.bytes, 0);
-    const js = resources.filter((item) => item.type === "script").reduce((sum, item) => sum + item.bytes, 0);
+    const css = resources
+      .filter((item) => item.type === "stylesheet")
+      .reduce((sum, item) => sum + item.bytes, 0);
+    const js = resources
+      .filter((item) => item.type === "script")
+      .reduce((sum, item) => sum + item.bytes, 0);
     assert.ok(css <= cssBudget, `${route} CSS: ${css}`);
     assert.ok(js <= jsBudget, `${route} JS: ${js}`);
-    assert.equal(requests.some((url) => /chunks\/resume|\/data\.js|\/output\.css/.test(url)), false);
-    assert.deepEqual(requests.filter((url) => url.includes("/chunks/")).map((url) => new URL(url).pathname), [`/src/chunks/${chunk}.js`]);
+    assert.equal(
+      requests.some((url) => /chunks\/resume|\/data\.js|\/output\.css/.test(url)),
+      false,
+    );
+    assert.deepEqual(
+      requests.filter((url) => url.includes("/chunks/")).map((url) => new URL(url).pathname),
+      [`/src/chunks/${chunk}.js`],
+    );
     assert.equal(await page.evaluate(() => window.PORTFOLIO_DATA_I18N.fa.projects), undefined);
-    assert.equal(await page.locator('script[src*="/src/app.js"]').evaluate((element) => element.defer), true);
+    assert.equal(
+      await page.locator('script[src*="/src/app.js"]').evaluate((element) => element.defer),
+      true,
+    );
     console.log(`PASS mobile budget ${route}: CSS ${css}, JS ${js} bytes; portfolio excluded`);
     await context.close();
   }
@@ -63,4 +79,6 @@ try {
   assert.deepEqual(errors, []);
   console.log("PASS delayed chunks, rapid navigation, language and lazy portfolio rendering");
   await context.close();
-} finally { await browser.close(); }
+} finally {
+  await browser.close();
+}

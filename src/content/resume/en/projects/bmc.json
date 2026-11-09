@@ -1,0 +1,31 @@
+{
+  "id": "bmc",
+  "title": "BMC",
+  "shortDescription": "An Excel-like desktop system focused on structured persistence, database-backed workbooks, and a formula engine for dynamic, editable tables.",
+  "roles": ["DataEng"],
+  "tags": ["XML", "Persistence", "Formula Parsing", "Data Modeling", "Desktop UI", "File I/O"],
+  "highlights": [
+    "Excel-like workbook management with save/load",
+    "Database-backed (.db) file persistence",
+    "Formula engine (parse, evaluate, display)",
+    "Editable tables with sheet (tab) add/remove",
+    "Text and cell editing with structured data modeling"
+  ],
+  "details": [
+    "BMC is an Excel-like desktop application designed for managing structured tabular data with reliable persistence and a smooth editing experience.",
+    "It supports saving and loading workbook files in a database-backed (.db) format—enabling consistent storage, fast reloads, and scalable data organization.",
+    "Users can create and manage multiple sheets (tabs), add/remove sheets as needed, and work with editable tables that behave similarly to spreadsheets.",
+    "A built-in formula engine allows users to write formulas, parse and evaluate expressions, and display computed results while keeping the original formulas accessible and editable.",
+    "The system includes full table editing capabilities—editing cell text, updating values, and maintaining structured data integrity across sheets and persisted files.",
+    "Additional implementation details can be shared upon request."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1lakH1BSma0JWRzMAMTDgBFkS1u2JA3Kf/view?usp=drive_link",
+    "images": []
+  },
+  "isPrivate": false
+}

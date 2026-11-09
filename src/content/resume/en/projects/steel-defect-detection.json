@@ -1,0 +1,41 @@
+{
+  "id": "steel-defect-detection",
+  "title": "Steel Defect Detection",
+  "shortDescription": "Industrial computer vision system for defect detection and localization using TensorFlow + EfficientNetB0, mask-driven training, and a custom loss for bbox/confidence/classification.",
+  "roles": ["ML"],
+  "tags": [
+    "TensorFlow",
+    "EfficientNetB0",
+    "Computer Vision",
+    "Object Detection",
+    "Image Processing",
+    "Albumentations",
+    "Data Augmentation",
+    "Custom Loss",
+    "CNN"
+  ],
+  "highlights": [
+    "Defect detection + localization in industrial images",
+    "EfficientNetB0 backbone with custom conv/dense heads",
+    "Grid-based output (7×7) for location-aware predictions",
+    "Custom loss for bounding boxes, confidence, and classification",
+    "Mask-based dataset preprocessing + strong augmentations (Albumentations)",
+    "Trained for 100 epochs and evaluated on diverse test images"
+  ],
+  "details": [
+    "This project focuses on automated defect detection in industrial steel manufacturing, aiming to improve quality control by accurately detecting and localizing defects in images.",
+    "I used a public dataset containing defect masks and built a preprocessing pipeline to prepare training targets and improve robustness. Data diversity was increased using Albumentations-based augmentations to help the model generalize to real-world variations.",
+    "The model is built with TensorFlow and uses EfficientNetB0 as the feature extractor, followed by a custom head. Outputs are produced as a 7×7 grid to enable location-aware predictions and more precise defect localization.",
+    "To optimize detection quality, I implemented a custom loss function that jointly learns bounding box regression, confidence estimation, and defect classification—improving convergence and feature learning under challenging defect patterns.",
+    "The network was trained for 100 epochs and tested across multiple scenarios. The results demonstrate reliable defect detection and localization, with example outputs provided in the project media and repository."
+  ],
+  "links": {
+    "github": "https://github.com/prograin/Steel-defect-detection",
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": ["./assets/images/steel_defect_1.png", "./assets/images/steel_defect_2.png"]
+  },
+  "isPrivate": false
+}

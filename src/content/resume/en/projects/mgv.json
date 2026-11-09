@@ -1,0 +1,39 @@
+{
+  "id": "mgv",
+  "title": "Matrix Graphical Visualization (MGV)",
+  "shortDescription": "PyQt6 desktop app for interactive matrix visualization, formula-driven tables, and Python-powered animations with an embedded code editor.",
+  "roles": ["Desktop"],
+  "tags": [
+    "PyQt6",
+    "Qt Creator",
+    "Python",
+    "Desktop UI",
+    "Linear Algebra",
+    "2D Graphics",
+    "Formula Parsing"
+  ],
+  "highlights": [
+    "2D Graphics View (row-space / column-space visualization)",
+    "Customizable color management for matrix items",
+    "Table-based matrix editing with formula support",
+    "Matrix-to-graphics conversion (values → 2D items)",
+    "Embedded Python editor with improved autocompletion + syntax highlighting",
+    "Python-driven animation of matrix visualizations (2D + colorized)"
+  ],
+  "details": [
+    "MGV (Matrix Graphical Visualization) is a PyQt6-based desktop application built to make matrix exploration more visual, interactive, and programmable.",
+    "It introduces a dedicated 2D Graphics View that can visualize matrices in row space or column space, with flexible color controls to improve readability and separation of elements.",
+    "The Table View supports end-to-end matrix value management: editing values, converting table data into 2D graphical items, and writing formulas directly in cells for faster manipulation and experimentation.",
+    "MGV includes an advanced embedded Python editor with stronger autocompletion and a syntax highlighter, enabling users to write clean scripts to control behavior and workflows inside the app.",
+    "A key capability is animation: users can generate animated matrix visualizations using Python code—both as 2D graphics sequences and colorized transitions—making it useful for demos, teaching, and simulation-style exploration."
+  ],
+  "links": {
+    "github": "https://github.com/prograin/Matrix_repre_py",
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1Zkx_dxIfF9TCKFLTbI0GZcuxtdLTlwxh/view?usp=drive_link",
+    "images": []
+  },
+  "isPrivate": false
+}

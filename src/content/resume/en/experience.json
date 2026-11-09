@@ -1,0 +1,58 @@
+[
+  {
+    "company": "Al-Zahra Studio",
+    "role": "Data Engineer | Data Analyst | Full-Stack Developer",
+    "dates": "Azar 1403 – Present",
+    "url": "https://alzahravfx.com/",
+    "bullets": [
+      "Designed and deployed data pipelines, reporting flows, and backend services for operational teams.",
+      "Turned organizational data into dashboards and decision-support reports for finance and management workflows.",
+      "Developed backend services using a microservices architecture with FastAPI (user management, logging, reporting) and implemented RESTful APIs for system integration.",
+      "Worked hands-on with MongoDB, PostgreSQL, and BigQuery; implemented ETL pipelines and production data processing while adhering to data security principles.",
+      "Used Pandas for data analysis, Pytest for automated testing, and applied Fernet encryption and hashing to protect sensitive information.",
+      "Worked in server-based Linux environments and contributed to building resilient, scalable systems on real infrastructure.",
+      "Proficient in Git for version control, team collaboration, and modular development in real-world, scalable projects."
+    ]
+  },
+  {
+    "company": "Black Wall",
+    "role": "Full Stack Developer",
+    "dates": "Farvardin 1405 – Present",
+    "url": "https://black-wall.org/",
+    "bullets": [
+      "Built and maintained the public website plus private internal workflows for business operations.",
+      "Worked across frontend, backend, data modeling, deployment, and access control with a focus on reliability.",
+      "Designed and developed user interfaces (UI) and backend logic to deliver a smooth and integrated user experience.",
+      "Handled database migrations and optimized database structures throughout development and deployment processes.",
+      "Managed databases, configured infrastructure, and deployed projects on Cloudflare as well as internal servers.",
+      "Set up and maintained internal and local databases for organizational systems and services.",
+      "Deployed and maintained websites and internal platforms with a focus on availability, security, and developer experience."
+    ]
+  },
+  {
+    "company": "Asre Maharat",
+    "role": "Advanced Python & Django Instructor | Private Training",
+    "dates": "Bahman 1404 – Present",
+    "url": "https://asremaharat.com/",
+    "bullets": [
+      "Taught advanced Python and Django through private, project-focused sessions.",
+      "Helped learners write cleaner code, debug better, and understand real backend development patterns.",
+      "Covered Django fundamentals, models, views, routing, templates, and practical web development workflows.",
+      "Adapted lessons to each student's level so technical concepts stayed approachable and useful."
+    ]
+  },
+  {
+    "company": "VAYO Tech Studio",
+    "role": "Software Developer | Data Engineer",
+    "dates": "Ordibehesht 1402 – Azar 1403",
+    "bullets": [
+      "Built desktop tools and data-management features for internal workflows.",
+      "Worked on UI, structured storage, file/document handling, and data persistence for practical production use.",
+      "Used SQLite to store and manage structured, tabular data similar to Excel-like datasets.",
+      "Built practical tools for managing files, documents, and data with a focus on accuracy, speed, and efficiency.",
+      "Highly proficient in Python and applied it in practical projects and production environments.",
+      "Successful remote work experience with strong time management, teamwork, and consistent, effective reporting.",
+      "Worked with SVN for version control, team collaboration, and tracking changes in software development projects."
+    ]
+  }
+]

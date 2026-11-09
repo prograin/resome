@@ -1,0 +1,27 @@
+{
+  "home": {
+    "title": "Programming Training in Arak, Markazi | prograin",
+    "description": "Learn programming with Ahmadreza Rezaei in Arak, Markazi Province, Iran. Private in-person or online classes, semi-private courses and custom software development.",
+    "label": "Home"
+  },
+  "academy": {
+    "title": "Programming Classes in Arak, Markazi | prograin",
+    "description": "Private programming classes in Arak, Markazi Province, in person or online, plus a 16-session semi-private online course with practical exercises and code review.",
+    "label": "Programming training"
+  },
+  "order": {
+    "title": "Web Development in Arak, Markazi | prograin",
+    "description": "Custom websites and online stores for businesses in Arak, Markazi Province. Backend systems, Telegram bots and automation. Compare packages and discuss your needs.",
+    "label": "Order a project"
+  },
+  "contact-page": {
+    "title": "Contact prograin | Arak, Markazi, Iran",
+    "description": "Contact Ahmadreza Rezaei in Arak, Markazi Province, Iran, for programming classes, website development and custom projects by phone, Telegram, email or LinkedIn.",
+    "label": "Contact"
+  },
+  "resume": {
+    "title": "Portfolio | Ahmadreza Rezaei",
+    "description": "Selected software projects by Ahmadreza Rezaei.",
+    "label": "Portfolio"
+  }
+}

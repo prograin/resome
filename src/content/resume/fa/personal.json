@@ -1,0 +1,18 @@
+{
+  "name": "احمدرضا رضایی",
+  "title": "مهندس داده | مهندس بک‌اند | توسعه‌دهنده فول‌استک",
+  "location": "تهران، ایران",
+  "timezone": "GMT+3:30 (تهران)",
+  "employmentType": "تمام‌وقت",
+  "workModes": ["حضوری", "دورکاری", "هیبرید"],
+  "email": "ahmadreza.pcg1377@gmail.com",
+  "number": "09914663783",
+  "links": {
+    "github": "https://github.com/prograin",
+    "linkedin": "https://www.linkedin.com/in/ahmadreza-rezaei-b60866304",
+    "youtube": "https://www.youtube.com/@Prograin_ARR",
+    "instagram": "https://www.instagram.com/prograin_/"
+  },
+  "about": "\nتوسعه‌دهنده و پژوهشگر در حوزه‌ی یادگیری عمیق و مهندسی بک‌اند، با تجربه‌ی طراحی و پیاده‌سازی APIهای RESTful و کار با معماری‌های ماژولار، میکروسرویس و Event-Driven. آشنا با الگوی ارتباطی Pub/Sub و مسلط به JavaScript، Python و TypeScript.\n\nدارای تجربه‌ی استقرار پروژه‌ها روی سرور، کار با Docker و Docker Compose، استفاده از محیط‌های لینوکسی (Ubuntu، Debian) و طراحی معماری نرم‌افزار.\n\nتجربه عملی کار با پایگاه‌داده‌های SQL و NoSQL مانند MongoDB، Elasticsearch، ClickHouse، PostgreSQL و BigQuery در پروژه‌های OLTP و OLAP. علاقه‌مند به نقش‌های R&D با تمرکز بر مدل‌سازی هوشمند و سیستم‌های مقیاس‌پذیر، با توانایی بالا در حل مسائل پیچیده.\n\nمسلط به مدل‌های یادگیری عمیق، بینایی ماشین و مبانی ریاضی هوش مصنوعی.\n",
+  "mobileAbout": "مهندس بک‌اند، داده و فول‌استک با تجربه عملی در طراحی APIهای REST، پایپ‌لاین داده، داشبورد، استقرار و سرویس‌های مقیاس‌پذیر. با دیتابیس‌های SQL/NoSQL، محیط‌های Linux/Docker و سیستم‌های هوشمند کار کرده‌ام و تمرکزم حل مسئله‌های واقعی عملیاتی است."
+}

@@ -17,7 +17,7 @@ subsetter = subset.Subsetter(options=options)
 ranges = [(0x0000, 0x00FF), (0x0600, 0x06FF), (0x2000, 0x206F)]
 unicodes = {code for start, end in ranges for code in range(start, end + 1)}
 for path in (ROOT / "src").rglob("*"):
-    if path.suffix in {".js", ".html"}:
+    if path.suffix in {".js", ".html", ".json"}:
         unicodes.update(map(ord, path.read_text(encoding="utf-8")))
 # GSUB closure preserves contextual Arabic shaping and ligatures automatically.
 subsetter.populate(unicodes=sorted(unicodes))

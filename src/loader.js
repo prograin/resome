@@ -6,7 +6,12 @@
   const version = script?.dataset.assetVersion || "";
   const pending = new Map();
   const styles = new Map();
-  const pages = { home: ["home", "PAGE_HOME"], order: ["order", "PAGE_ORDER"], academy: ["academy", "PAGE_ACADEMY"], "contact-page": ["contact", "PAGE_CONTACT"] };
+  const pages = {
+    home: ["home", "PAGE_HOME"],
+    order: ["order", "PAGE_ORDER"],
+    academy: ["academy", "PAGE_ACADEMY"],
+    "contact-page": ["contact", "PAGE_CONTACT"],
+  };
 
   function load(name) {
     if (pending.has(name)) return pending.get(name);
@@ -35,8 +40,15 @@
       const name = page === "contact-page" ? "contact" : page;
       const file = page === "resume" ? "../output.css" : `../styles/${name}.css`;
       link.href = new URL(`${file}?v=${encodeURIComponent(version)}`, base).href;
-      link.onload = () => { link.dataset.pageStyle = page; resolve(); };
-      link.onerror = () => { styles.delete(page); link.remove(); reject(new Error(`Could not load page styles: ${page}`)); };
+      link.onload = () => {
+        link.dataset.pageStyle = page;
+        resolve();
+      };
+      link.onerror = () => {
+        styles.delete(page);
+        link.remove();
+        reject(new Error(`Could not load page styles: ${page}`));
+      };
       document.head.append(link);
     });
     styles.set(page, promise);

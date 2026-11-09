@@ -1,0 +1,18 @@
+@media (width < 48rem) {
+  #homePage .home-copy,
+  #homePage .home-path > span:nth-child(2) {
+    text-align: center;
+  }
+
+  #homePage .home-stats {
+    justify-content: center;
+  }
+
+  #homePage .home-lead {
+    margin-inline: auto;
+  }
+
+  #homePage .home-path > span:nth-child(2) {
+    flex: 1;
+  }
+}

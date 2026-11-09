@@ -1,0 +1,73 @@
+<!-- Modal -->
+<div
+  id="modalOverlay"
+  class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/60 p-4"
+  aria-hidden="true"
+>
+  <div
+    id="modalDialog"
+    class="w-full max-w-3xl overflow-hidden rounded-5xl border border-slate-200 bg-white shadow-soft dark:border-slate-800 dark:bg-slate-950"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+    <div
+      class="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-800"
+    >
+      <div class="min-w-0">
+        <p
+          id="modalKicker"
+          class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+        ></p>
+        <h3
+          id="modalTitle"
+          class="truncate text-base font-semibold text-slate-900 dark:text-slate-50"
+        ></h3>
+      </div>
+      <button
+        id="modalCloseBtn"
+        class="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
+        type="button"
+        aria-label="Close modal"
+      >
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+    </div>
+
+    <div
+      id="modalBody"
+      class="max-h-[78vh] overflow-auto px-5 py-5"
+      tabindex="0"
+      role="region"
+      aria-labelledby="modalTitle"
+    ></div>
+  </div>
+</div>
+
+<dialog
+  id="siteUpdateDialog"
+  class="site-update-dialog"
+  aria-labelledby="siteUpdateTitle"
+  aria-describedby="siteUpdateDescription"
+>
+  <span class="site-update__symbol" aria-hidden="true"
+    ><svg
+      viewBox="0 0 24 24"
+      width="28"
+      height="28"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M20 7v5h-5M4 17v-5h5" />
+      <path d="M6 7a7 7 0 0 1 12-2l2 2M18 17a7 7 0 0 1-12 2l-2-2" /></svg
+  ></span>
+  <h2 id="siteUpdateTitle">نسخه جدید سایت آماده است</h2>
+  <p id="siteUpdateDescription">برای دیدن آخرین تغییرات و عکس‌ها، سایت را بروزرسانی کنید.</p>
+  <div class="site-update__actions">
+    <button id="siteUpdateApply" type="button" autofocus>بروزرسانی</button>
+    <button id="siteUpdateLater" type="button">بعداً</button>
+  </div>
+</dialog>

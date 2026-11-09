@@ -1,0 +1,152 @@
+@media (width >= 48rem) {
+  .contact-hero {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .contact-link-grid {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .contact-orbit {
+    position: relative;
+    display: block;
+    min-height: 10rem;
+    grid-column: 2;
+    grid-row: 2;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: transparent;
+  }
+  .contact-orbit::before,
+  .contact-orbit::after {
+    content: "";
+    position: absolute;
+    inset: 20%;
+    border: 2px solid rgba(94, 234, 212, 0.22);
+    border-radius: 999px;
+    transform: rotate(-7deg);
+    animation: contact-orbit-drift 7s ease-in-out infinite;
+    transition:
+      border-color 180ms ease,
+      filter 180ms ease;
+  }
+  .contact-orbit::after {
+    inset: 34%;
+    border-color: rgba(125, 211, 252, 0.2);
+    transform: rotate(18deg);
+    animation: contact-orbit-drift-alt 8s ease-in-out infinite;
+  }
+  .contact-orbit:hover::before {
+    border-width: 2px;
+    border-color: rgba(94, 234, 212, 0.52);
+    filter: drop-shadow(0 0 14px rgba(94, 234, 212, 0.18));
+  }
+  .contact-orbit:hover::after {
+    border-width: 2px;
+    border-color: rgba(125, 211, 252, 0.44);
+    filter: drop-shadow(0 0 14px rgba(125, 211, 252, 0.16));
+  }
+  .contact-final-stack {
+    grid-column: 2;
+    grid-row: 3;
+  }
+  .contact-geo {
+    position: relative;
+    display: grid;
+    min-height: 8rem;
+    grid-column: 1;
+    grid-row: 3;
+    place-items: center;
+    overflow: hidden;
+  }
+  .contact-geo::before,
+  .contact-geo::after {
+    content: none;
+  }
+  .contact-geo span {
+    position: absolute;
+    display: block;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(94, 234, 212, 0.42);
+    box-shadow: 0 0 12px rgba(94, 234, 212, 0.16);
+    animation: contact-line-random 6.5s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.42s);
+  }
+  .contact-geo span:nth-child(even) {
+    background: rgba(125, 211, 252, 0.34);
+    animation-name: contact-line-random-alt;
+  }
+  .contact-geo span:nth-child(1) {
+    width: 6.5rem;
+    inset-inline-start: 8%;
+    top: 22%;
+  }
+  .contact-geo span:nth-child(2) {
+    width: 3.4rem;
+    inset-inline-start: 36%;
+    top: 34%;
+  }
+  .contact-geo span:nth-child(3) {
+    width: 7.6rem;
+    inset-inline-start: 18%;
+    top: 48%;
+  }
+  .contact-geo span:nth-child(4) {
+    width: 4.2rem;
+    inset-inline-start: 62%;
+    top: 58%;
+  }
+  .contact-geo span:nth-child(5) {
+    width: 5.3rem;
+    inset-inline-start: 12%;
+    top: 70%;
+  }
+  .contact-geo span:nth-child(6) {
+    width: 2.8rem;
+    inset-inline-start: 72%;
+    top: 26%;
+  }
+  .contact-geo span:nth-child(7) {
+    width: 6rem;
+    inset-inline-start: 42%;
+    top: 78%;
+  }
+  .contact-geo span:nth-child(8) {
+    width: 3.6rem;
+    inset-inline-start: 4%;
+    top: 56%;
+  }
+  .contact-geo span:nth-child(9) {
+    width: 4.8rem;
+    inset-inline-start: 56%;
+    top: 42%;
+  }
+  .contact-hero h1 {
+    font-size: 3.15rem;
+  }
+}
+@keyframes contact-shape-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -0.45rem;
+  }
+}
+@keyframes contact-orbit-drift {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  45% {
+    translate: 0.45rem -0.45rem;
+    rotate: 0.25deg;
+  }
+  75% {
+    translate: -0.3rem 0.28rem;
+    rotate: -0.2deg;
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "title": "prograin",
+  "lead": "Software developer and programming instructor for custom software projects, web development, backend systems, automation, data work, and online private or semi-private training.",
+  "servicesTitle": "Services",
+  "contactTitle": "Contact",
+  "pagesTitle": "Pages",
+  "services": [
+    "Custom programming projects",
+    "Programming training",
+    "Private and semi-private training",
+    "Software consulting and development"
+  ],
+  "pages": [
+    {
+      "href": "/",
+      "label": "Home"
+    },
+    {
+      "href": "/order",
+      "label": "Order project"
+    },
+    {
+      "href": "/academy",
+      "label": "Academy"
+    },
+    {
+      "href": "/contact",
+      "label": "Contact"
+    }
+  ],
+  "telegram": "Telegram",
+  "phone": "Direct call",
+  "email": "Email"
+}

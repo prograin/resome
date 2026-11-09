@@ -38,22 +38,35 @@ for (const [page, route] of Object.entries(config.routes)) {
   if (!route.private) {
     publicUrls.push(seo.canonical);
     assert.ok(html.includes(`data-page="${page}" data-rendered-locale="fa"`));
-    const schema = JSON.parse(html.match(/<script id="localSeoSchema" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+    const schema = JSON.parse(
+      html.match(
+        /<script id="localSeoSchema" type="application\/ld\+json">([\s\S]*?)<\/script>/,
+      )[1],
+    );
     assert.equal(schema["@context"], "https://schema.org");
     assert.ok(schema["@graph"].some((item) => item.url === seo.canonical));
     const organization = schema["@graph"].find((item) => item["@type"] === "Organization");
     assert.equal(organization.address.addressLocality, config.location.city.fa);
     assert.equal(organization.address.addressRegion, config.location.region.fa);
     assert.ok(schema["@graph"].some((item) => item["@type"] === "City" && item.name === "اراک"));
-    assert.ok(schema["@graph"].some((item) => item["@type"] === "AdministrativeArea" && item.name === "استان مرکزی"));
+    assert.ok(
+      schema["@graph"].some(
+        (item) => item["@type"] === "AdministrativeArea" && item.name === "استان مرکزی",
+      ),
+    );
     assert.ok(html.includes(config.location.label.fa));
     for (const item of schema["@graph"].filter((item) => item["@type"] === "BreadcrumbList")) {
       assert.ok(item.itemListElement.length >= 2);
     }
     assert.equal(/href="\/(resume|portfolio|portfoilio)\/?"/.test(html), false);
-    const content = html.match(new RegExp(`data-page="${page}"[^>]*>([\\s\\S]*?)<div id="resumePage"`))?.[1] || "";
+    const content =
+      html.match(new RegExp(`data-page="${page}"[^>]*>([\\s\\S]*?)<div id="resumePage"`))?.[1] ||
+      "";
     assert.ok(/<h1[\s>]/.test(content));
-    assert.ok(content.replace(/<[^>]*>/g, "").trim().length > 250, `Missing initial content: ${page}`);
+    assert.ok(
+      content.replace(/<[^>]*>/g, "").trim().length > 250,
+      `Missing initial content: ${page}`,
+    );
   } else {
     assert.equal(html.includes('id="localSeoSchema"'), false);
   }
@@ -69,13 +82,19 @@ for (const [page, route] of Object.entries(config.routes)) {
 }
 
 const sitemap = await read("sitemap.xml");
-assert.deepEqual([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]).sort(), publicUrls.sort());
+assert.deepEqual(
+  [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]).sort(),
+  publicUrls.sort(),
+);
 assert.equal(/resume|portfolio|portfoilio|localhost|127\.0\.0\.1/.test(sitemap), false);
 const robots = await read("robots.txt");
 assert.ok(robots.includes(`Sitemap: ${config.origin}/sitemap.xml`));
 assert.equal(/Disallow:\s*\/(?:resume|portfolio|portfoilio)/.test(robots), false);
 for (const alias of ["portfolio", "portfoilio"]) {
-  assert.match(await read(`${alias}/index.html`), /name="robots" content="noindex, nofollow, noarchive"/);
+  assert.match(
+    await read(`${alias}/index.html`),
+    /name="robots" content="noindex, nofollow, noarchive"/,
+  );
 }
 const manifest = JSON.parse(await read("site.webmanifest"));
 assert.match(await read("404.html"), /name="robots" content="noindex, follow"/);

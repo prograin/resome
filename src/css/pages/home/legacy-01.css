@@ -1,0 +1,130 @@
+@layer base {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  html[dir="rtl"],
+  html[dir="rtl"] body {
+    direction: ltr;
+  }
+  html[dir="rtl"] .site-header,
+  html[dir="rtl"] .site-main,
+  html[dir="rtl"] #mobileMenu,
+  html[dir="rtl"] #modalOverlay {
+    direction: rtl;
+  }
+  @media (width >= 40rem) {
+    body.page-home-active {
+      overflow-y: hidden;
+    }
+  }
+}
+@layer components {
+  .site-header {
+    position: fixed !important;
+    inset-inline: 0;
+    top: 0;
+    width: 100%;
+  }
+  .site-main {
+    padding-top: 4.25rem;
+  }
+  .resume-hero-left {
+    direction: ltr !important;
+    text-align: left !important;
+    margin-inline-start: 0 !important;
+    margin-inline-end: auto !important;
+  }
+  #heroLinks.resume-hero-left,
+  .resume-hero-left > div {
+    justify-content: flex-start !important;
+  }
+  #navName:not(img) {
+    display: none !important;
+  }
+  @media (width >= 40rem) {
+    #navName {
+      display: block !important;
+    }
+  }
+  img#navName {
+    display: block !important;
+  }
+  .home-stage {
+    position: relative;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .home-stage::before {
+    content: "";
+    position: absolute;
+    inset-inline: 8%;
+    top: 8%;
+    height: 46%;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle at 20% 20%,
+        color-mix(in srgb, oklch(86.5% 0.127 207.078) 22%, transparent),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 78% 36%,
+        color-mix(in srgb, oklch(81% 0.117 11.638) 18%, transparent),
+        transparent 38%
+      ),
+      radial-gradient(
+        circle at 44% 80%,
+        color-mix(in srgb, oklch(84.5% 0.143 164.978) 16%, transparent),
+        transparent 34%
+      );
+    @supports (color: color-mix(in lab, red, red)) {
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          color-mix(in oklab, var(--color-cyan-300) 22%, transparent),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 78% 36%,
+          color-mix(in oklab, var(--color-rose-300) 18%, transparent),
+          transparent 38%
+        ),
+        radial-gradient(
+          circle at 44% 80%,
+          color-mix(in oklab, var(--color-emerald-300) 16%, transparent),
+          transparent 34%
+        );
+    }
+    filter: blur(18px);
+    opacity: 0.8;
+    z-index: -1;
+  }
+  .page-shell {
+    min-height: calc(100vh - 5rem);
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  [dir="rtl"] {
+    font-family: "Vazirmatn", "Segoe UI", Tahoma, Arial, sans-serif;
+  }
+  .motion-rise {
+    animation: motion-rise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .service-orbit {
+    animation: soft-pulse 8s ease-in-out infinite;
+  }
+  .float-card {
+    animation: float-card 7s ease-in-out infinite;
+  }
+  .float-card-a {
+    animation-delay: 0ms;
+  }
+  .float-card-b {
+    animation-delay: 900ms;
+  }
+  .float-card-c {
+    animation-delay: 1800ms;
+  }
+}

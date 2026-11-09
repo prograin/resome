@@ -13,13 +13,19 @@ async function check(name, run, options = {}) {
   } catch (error) {
     failures.push(`${name}: ${error.message}`);
     console.log(`FAIL ${name}: ${error.message}`);
-  } finally { await context.close(); }
+  } finally {
+    await context.close();
+  }
 }
 try {
   await check("storage unavailable", async (context) => {
-    await context.addInitScript(() => Object.defineProperty(window, "localStorage", {
-      get() { throw new DOMException("Storage is disabled", "SecurityError"); },
-    }));
+    await context.addInitScript(() =>
+      Object.defineProperty(window, "localStorage", {
+        get() {
+          throw new DOMException("Storage is disabled", "SecurityError");
+        },
+      }),
+    );
     const page = await context.newPage();
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
@@ -27,7 +33,10 @@ try {
     await page.locator("#langToggle").click();
     assert.equal(await page.locator("html").getAttribute("lang"), "en");
     await page.locator("#themeToggle").click();
-    assert.equal(await page.locator("html").evaluate((element) => element.classList.contains("dark")), false);
+    assert.equal(
+      await page.locator("html").evaluate((element) => element.classList.contains("dark")),
+      false,
+    );
     assert.deepEqual(errors, []);
   });
   await check("modified and new-tab links retain native behavior", async (context) => {
@@ -42,15 +51,24 @@ try {
         if (variant === "download") anchor.download = "page.html";
         document.body.append(anchor);
         let intercepted;
-        document.addEventListener("click", (event) => {
-          intercepted = event.defaultPrevented;
-          event.preventDefault(); // avoid opening real tabs during this probe
-        }, { once: true });
-        anchor.dispatchEvent(new MouseEvent("click", {
-          bubbles: true, cancelable: true,
-          ctrlKey: variant === "ctrl", metaKey: variant === "meta",
-          shiftKey: variant === "shift", altKey: variant === "alt",
-        }));
+        document.addEventListener(
+          "click",
+          (event) => {
+            intercepted = event.defaultPrevented;
+            event.preventDefault(); // avoid opening real tabs during this probe
+          },
+          { once: true },
+        );
+        anchor.dispatchEvent(
+          new MouseEvent("click", {
+            bubbles: true,
+            cancelable: true,
+            ctrlKey: variant === "ctrl",
+            metaKey: variant === "meta",
+            shiftKey: variant === "shift",
+            altKey: variant === "alt",
+          }),
+        );
         anchor.remove();
         return intercepted;
       }, variant);
@@ -61,7 +79,9 @@ try {
   await check("hash changes keep the current page", async (context) => {
     const page = await context.newPage();
     await page.goto(`${origin}/academy/`);
-    await page.evaluate(() => { location.hash = "section"; });
+    await page.evaluate(() => {
+      location.hash = "section";
+    });
     await page.waitForURL("**/#section");
     assert.equal(await page.locator("#academyPage").isVisible(), true);
   });
@@ -82,18 +102,29 @@ try {
     await page.waitForURL(`${origin}/`);
     assert.equal(await page.locator("#modalOverlay").getAttribute("aria-hidden"), "true");
     assert.equal(await page.locator(".site-main").evaluate((element) => element.inert), false);
-    assert.equal(await page.locator("html").evaluate((element) => element.classList.contains("modal-open")), false);
+    assert.equal(
+      await page.locator("html").evaluate((element) => element.classList.contains("modal-open")),
+      false,
+    );
   });
-  await check("home background covers content on short phones", async (context) => {
-    const page = await context.newPage();
-    await page.goto(origin);
-    const geometry = await page.evaluate(() => ({
-      hero: document.querySelector(".home-layout").getBoundingClientRect().height,
-      background: parseFloat(getComputedStyle(document.querySelector("#homePage"), "::before").height),
-      overflow: document.documentElement.scrollWidth > innerWidth,
-    }));
-    assert.ok(geometry.background >= geometry.hero - 1, JSON.stringify(geometry));
-    assert.equal(geometry.overflow, false);
-  }, { viewport: { width: 320, height: 568 } });
-} finally { await browser.close(); }
+  await check(
+    "home background covers content on short phones",
+    async (context) => {
+      const page = await context.newPage();
+      await page.goto(origin);
+      const geometry = await page.evaluate(() => ({
+        hero: document.querySelector(".home-layout").getBoundingClientRect().height,
+        background: parseFloat(
+          getComputedStyle(document.querySelector("#homePage"), "::before").height,
+        ),
+        overflow: document.documentElement.scrollWidth > innerWidth,
+      }));
+      assert.ok(geometry.background >= geometry.hero - 1, JSON.stringify(geometry));
+      assert.equal(geometry.overflow, false);
+    },
+    { viewport: { width: 320, height: 568 } },
+  );
+} finally {
+  await browser.close();
+}
 assert.deepEqual(failures, [], failures.join("\n"));

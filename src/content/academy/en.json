@@ -1,0 +1,77 @@
+{
+  "title": "Programming training",
+  "lead": "Choose the learning path that fits your goal: online semi-private training for a structured and affordable start, or private mentoring for faster, focused progress.",
+  "selectorTitle": "Choose your training type",
+  "detailsTitle": "Training details",
+  "detailsLabel": "View details",
+  "youtubeTitle": "Free YouTube Training",
+  "youtubeLead": "I have made part of my training content available for free on YouTube so you can start learning in any situation.\n\nThese lessons are useful for self-paced learning or for getting familiar with the teaching style before joining focused courses.",
+  "youtubeCta": "View YouTube channel",
+  "tabs": {
+    "group": "Online semi-private",
+    "private": "Private mentoring"
+  },
+  "plans": [
+    {
+      "key": "group",
+      "icon": "graduation-cap",
+      "badge": "Best Value",
+      "title": "Online semi-private",
+      "price": "2,500,000 Toman",
+      "suffix": "/ course",
+      "fit": "Best for starting your learning path",
+      "cta": "Contact or message instructor",
+      "tone": "group",
+      "features": [
+        "Online semi-private class",
+        "16 training sessions",
+        "Defined syllabus",
+        "Practical project",
+        "Regular exercises"
+      ]
+    },
+    {
+      "key": "private",
+      "icon": "sparkles",
+      "badge": "Personal Mentoring",
+      "title": "Private mentoring",
+      "price": "650,000 Toman",
+      "suffix": "/ hour",
+      "fit": "Fully personalized learning focused on your project and goal",
+      "cta": "Contact or message instructor",
+      "tone": "private",
+      "featured": true,
+      "features": [
+        "Full focus on your learning goal",
+        "Custom roadmap",
+        "Project review",
+        "Direct troubleshooting",
+        "Career guidance"
+      ]
+    }
+  ],
+  "comparison": [
+    ["Class type", "Online semi-private", "One-to-one"],
+    ["Session count", "16 sessions", "Coordinated with you"],
+    ["Learning path", "Prepared syllabus", "Custom roadmap"],
+    ["Scheduling", "Based on course schedule", "Coordinated with you"],
+    ["Learning plan", "Pre-designed program", "Fully tailored to your needs"],
+    ["Learning speed", "Class-paced", "Based on your personal rhythm and needs"],
+    ["Topic selection", "Fixed syllabus", "Focused on the skills and projects you need"],
+    [
+      "Troubleshooting",
+      "Limited scheduled support",
+      "Direct, complete troubleshooting with the mentor"
+    ],
+    ["Code review", "Limited", "Complete code review"],
+    ["Project review", "General project review", "Detailed personal project review"],
+    ["Final project", "Course project", "Your real project"],
+    ["Exercises", "Standard exercises", "Custom exercises for you"],
+    ["Mentor access", "Limited", "Direct mentor access and expert feedback"],
+    ["Career guidance", "Not included", "Included"],
+    ["Project bug fixing", "Limited", "Directly with the mentor"],
+    ["Best for", "Starting the learning path", "Fast growth and entering the job market"],
+    ["After-class support", "Based on course rules", "Adjustable"],
+    ["Path changes", "None or limited", "Fully possible"]
+  ]
+}

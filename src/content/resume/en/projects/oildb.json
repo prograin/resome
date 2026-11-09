@@ -1,0 +1,55 @@
+{
+  "id": "oildb",
+  "title": "Black Wall",
+  "shortDescription": "An international oil and raw-material trading platform for listing and selling petroleum products, with authentication, secure media storage, push notifications, workers, and private operational workflows.",
+  "roles": ["DataEng", "Backend", "Frontend", "Fullstack"],
+  "tags": [
+    "Ecommerce Website",
+    "Business Website",
+    "Nuxt.js",
+    "Vue",
+    "Cloudflare",
+    "Cloudflare D1",
+    "SQLite",
+    "Database Migrations",
+    "Authentication",
+    "Tailwind CSS",
+    "Composables",
+    "Full-Stack",
+    "Production Deployment"
+  ],
+  "highlights": [
+    "Built an international marketplace-style platform for petroleum products and industrial raw materials",
+    "Implemented authentication flows for protected access and controlled operational actions",
+    "Designed secure image handling so product media and uploaded assets are stored safely",
+    "Added push notification flows and background worker logic for operational updates",
+    "Built on Cloudflare infrastructure with D1 storage, migrations, workers, and production deployment",
+    "Nuxt + Vue UI with Tailwind CSS for a clean, responsive, multilingual-ready trading experience"
+  ],
+  "details": [
+    "Black Wall is positioned as an international platform for buying and selling oil-related products and industrial raw materials, not just a simple company website.",
+    "The product side supports structured presentation of petroleum products, product media, and business-facing information for buyers and sellers.",
+    "Authentication and protected flows were designed so sensitive actions stay behind controlled access instead of being exposed publicly.",
+    "Media handling was built around safer storage patterns, keeping product images and uploaded files managed through the application rather than loose public assets.",
+    "Push notification and worker-based flows were added to support operational updates and background processing without blocking the main user experience.",
+    "The implementation uses Nuxt/Vue with Cloudflare infrastructure, including D1, migrations, worker logic, and modular composables for maintainability."
+  ],
+  "shareableDetails": [
+    "Built Black Wall as an international trading platform for oil products and industrial raw materials.",
+    "Implemented protected authentication flows so operational features are not exposed to public users.",
+    "Designed safer storage and handling for product images and uploaded media.",
+    "Added push notification and worker-based flows for background updates and operational events.",
+    "Structured product and business data so petroleum products and raw materials can be presented clearly.",
+    "Kept sensitive implementation details private while preserving the public website link for review."
+  ],
+  "links": {
+    "url": "https://black-wall.org/",
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "",
+    "images": []
+  },
+  "isPrivate": true
+}

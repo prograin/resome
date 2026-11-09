@@ -1,0 +1,181 @@
+@layer components {
+  .dark .academy-youtube-card {
+    border-color: rgba(127, 29, 29, 0.72);
+    background:
+      radial-gradient(circle at 12% 18%, rgba(239, 68, 68, 0.14), transparent 30%),
+      color-mix(in srgb, #0f172a 66%, transparent);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+  }
+  .academy-youtube-card__icon {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 2.8rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    justify-self: left;
+    border-radius: 0.5rem;
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 0 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 850;
+  }
+  .dark .academy-youtube-card__icon {
+    background: rgba(127, 29, 29, 0.45);
+    color: #fca5a5;
+  }
+  .academy-youtube-card h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 1.2rem;
+    font-weight: 800;
+    line-height: 1.65;
+  }
+  .dark .academy-youtube-card h2 {
+    color: #ffffff;
+  }
+  .academy-youtube-card p {
+    margin: 0.45rem 0 0;
+    max-width: 48rem;
+    white-space: pre-line;
+    color: #475569;
+    font-size: 0.9rem;
+    line-height: 1.9;
+  }
+  .dark .academy-youtube-card p {
+    color: #cbd5e1;
+  }
+  .academy-youtube-card a {
+    display: inline-flex;
+    width: fit-content;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    background: #dc2626;
+    color: #ffffff;
+    padding: 0.7rem 1rem;
+    font-size: 0.86rem;
+    font-weight: 850;
+    box-shadow: 0 14px 30px rgba(220, 38, 38, 0.22);
+    transition:
+      transform 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+  .academy-youtube-card a:hover {
+    background: #b91c1c;
+    box-shadow: 0 18px 36px rgba(220, 38, 38, 0.3);
+    transform: translateY(-1px);
+  }
+}
+.academy-youtube-section {
+  width: 100%;
+  max-width: 58rem;
+  margin: 1.25rem auto 0;
+}
+.academy-youtube-card {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid rgba(254, 202, 202, 0.75);
+  border-radius: 0.5rem;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(239, 68, 68, 0.12), transparent 26%),
+    color-mix(in srgb, #ffffff 82%, transparent);
+  padding: 1.1rem;
+  box-shadow: 0 16px 40px rgba(127, 29, 29, 0.08);
+  backdrop-filter: blur(16px);
+}
+.dark .academy-youtube-card {
+  border-color: rgba(127, 29, 29, 0.72);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(239, 68, 68, 0.14), transparent 30%),
+    color-mix(in srgb, #0f172a 66%, transparent);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+}
+.academy-youtube-card__icon {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.8rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  justify-self: left;
+  border-radius: 0.5rem;
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 0 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+.dark .academy-youtube-card__icon {
+  background: rgba(127, 29, 29, 0.45);
+  color: #fca5a5;
+}
+.academy-page[dir="rtl"] .academy-youtube-card__icon {
+  justify-self: right;
+}
+.academy-youtube-card h2 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.65;
+}
+.dark .academy-youtube-card h2 {
+  color: #ffffff;
+}
+.academy-youtube-card p {
+  margin: 0.45rem 0 0;
+  max-width: 48rem;
+  white-space: pre-line;
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.9;
+}
+.dark .academy-youtube-card p {
+  color: #cbd5e1;
+}
+.academy-youtube-card a {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  background: #dc2626;
+  color: #ffffff;
+  padding: 0.7rem 1rem;
+  font-size: 0.86rem;
+  font-weight: 850;
+  white-space: nowrap;
+  box-shadow: 0 14px 30px rgba(220, 38, 38, 0.22);
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+.academy-youtube-card a:hover {
+  background: #b91c1c;
+  box-shadow: 0 18px 36px rgba(220, 38, 38, 0.3);
+  transform: translateY(-1px);
+}
+.academy-page[dir="rtl"] .academy-youtube-card a {
+  justify-self: left;
+}
+.academy-page[dir="ltr"] .academy-youtube-card a {
+  justify-self: right;
+}
+@keyframes academy-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

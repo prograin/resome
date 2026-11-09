@@ -1,0 +1,38 @@
+[
+  {
+    "key": "Backend",
+    "name": "Backend",
+    "icon": "server",
+    "blurb": "APIs, auth, microservices, messaging."
+  },
+  {
+    "key": "Frontend",
+    "name": "Frontend",
+    "icon": "layout",
+    "blurb": "Modern UI, responsive layouts, clean UX."
+  },
+  {
+    "key": "Fullstack",
+    "name": "Fullstack",
+    "icon": "layers",
+    "blurb": "End-to-end systems, frontend to backend integration."
+  },
+  {
+    "key": "DataEng",
+    "name": "Data Engineering & Analytics",
+    "icon": "database",
+    "blurb": "ETL, warehouses, analytics, monitoring."
+  },
+  {
+    "key": "ML",
+    "name": "Machine Learning",
+    "icon": "brain",
+    "blurb": "Vision models, training pipelines, evaluation."
+  },
+  {
+    "key": "Desktop",
+    "name": "Desktop Applications",
+    "icon": "monitor",
+    "blurb": "Qt/PyQt tooling, desktop UI systems."
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "id": "heychat",
+  "title": "HeyChat",
+  "shortDescription": "Interest- and job-based connection & messaging platform built on microservices with event-driven processing, search, and gateway-level auth.",
+  "roles": ["Backend", "DataEng", "Frontend"],
+  "tags": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis Streams",
+    "Pub/Sub",
+    "Elasticsearch",
+    "Caching",
+    "Docker Compose",
+    "Nginx",
+    "React",
+    "Telegram Bot",
+    "Telegram Auth Widget",
+    "Authentication",
+    "Authorization",
+    "API Gateway",
+    "TailwindCSS",
+    "Atomic Design",
+    "Feature-based Architecture"
+  ],
+  "highlights": [
+    "Microservice architecture with modular services where appropriate",
+    "Event-driven design using Redis Streams + selective Redis Pub/Sub",
+    "API Gateway enforcing authentication & authorization for all requests",
+    "Elasticsearch-powered search with PostgreSQL persistence and caching to reduce redundant reads"
+  ],
+  "details": [
+    "Delivered core product features: add contacts, block/unblock, user search, profile viewing, chat requests, and user-to-user connections.",
+    "Designed inter-service communication with a hybrid approach: event-driven flows for key operations and REST APIs for service coordination where needed.",
+    "Built the frontend with React using a feature-based structure and proper Hooks usage; styled with Tailwind and implemented UI components following atomic design principles for future scalability.",
+    "Implemented authentication via Telegram Authenticate Widget to issue user tokens and streamline onboarding (Telegram bot is the primary interaction surface).",
+    "Implemented search with Elasticsearch and stored system-of-record data in PostgreSQL; introduced caching to improve performance and prevent duplicate requests.",
+    "Used Docker Compose for service orchestration and exposed services through a unified entry; placed an Nginx reverse proxy in the request path for load balancing and route management.",
+    "Designed and implemented RESTful routes with careful resource naming; enforced access policies through gateway-level authentication and authorization."
+  ],
+  "links": {
+    "github": "https://github.com/prograin/heychat",
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": []
+  },
+  "isPrivate": false
+}

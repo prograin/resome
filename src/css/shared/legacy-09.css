@@ -1,0 +1,139 @@
+@keyframes contact-orbit-drift-alt {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  38% {
+    translate: -0.35rem 0.42rem;
+    rotate: -2deg;
+  }
+  78% {
+    translate: 0.34rem -0.32rem;
+    rotate: 1.5deg;
+  }
+}
+@keyframes contact-dot-random {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  45% {
+    translate: 0 -0.7rem;
+  }
+  72% {
+    translate: 0 0.45rem;
+  }
+}
+@keyframes contact-dot-random-alt {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  38% {
+    translate: 0 0.65rem;
+  }
+  76% {
+    translate: 0 -0.5rem;
+  }
+}
+@keyframes contact-line-random {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  42% {
+    translate: 0.45rem -0.6rem;
+  }
+  74% {
+    translate: -0.35rem 0.35rem;
+  }
+}
+@keyframes contact-line-random-alt {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  36% {
+    translate: -0.42rem 0.55rem;
+  }
+  78% {
+    translate: 0.36rem -0.42rem;
+  }
+}
+@keyframes contact-button-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+@keyframes motion-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.contact-actions .contact-action--email,
+.contact-actions .contact-action--email:visited {
+  border-color: rgba(248, 113, 113, 0.48) !important;
+  background: linear-gradient(135deg, #991b1b, #ef4444) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 16px 34px rgba(239, 68, 68, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.contact-actions .contact-action--email:hover {
+  border-color: rgba(252, 165, 165, 0.68) !important;
+  background: linear-gradient(135deg, #b91c1c, #f87171) !important;
+  box-shadow:
+    0 18px 38px rgba(239, 68, 68, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+#heroLinks a[href="#contact-page"],
+#heroLinks a[href="/contact"] {
+  border-color: rgba(45, 212, 191, 0.72) !important;
+  background: linear-gradient(135deg, #0f766e, #14b8a6) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 18px 42px rgba(20, 184, 166, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset !important;
+}
+
+#heroLinks a[href="#contact-page"]:hover,
+#heroLinks a[href="/contact"]:hover {
+  border-color: rgba(153, 246, 228, 0.92) !important;
+  background: linear-gradient(135deg, #0d9488, #2dd4bf) !important;
+  box-shadow:
+    0 22px 48px rgba(20, 184, 166, 0.38),
+    0 0 24px rgba(45, 212, 191, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset !important;
+}
+
+#contactLinks a[href="#contact-page"],
+#contactLinks a[href="/contact"] {
+  border-color: rgba(45, 212, 191, 0.72) !important;
+  background: linear-gradient(135deg, #0f766e, #14b8a6) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 18px 42px rgba(20, 184, 166, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset !important;
+}
+
+#contactLinks a[href="#contact-page"]:hover,
+#contactLinks a[href="/contact"]:hover {
+  border-color: rgba(153, 246, 228, 0.92) !important;
+  background: linear-gradient(135deg, #0d9488, #2dd4bf) !important;
+  box-shadow:
+    0 22px 48px rgba(20, 184, 166, 0.38),
+    0 0 24px rgba(45, 212, 191, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset !important;
+}

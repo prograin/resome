@@ -1,0 +1,39 @@
+{
+  "id": "mgv",
+  "title": "نمایش گرافیکی ماتریس (MGV)",
+  "shortDescription": "اپ دسکتاپ PyQt6 برای نمایش تعاملی ماتریس، جدول‌های مبتنی بر فرمول، و انیمیشن‌های Python با ویرایشگر کد داخلی.",
+  "roles": ["Desktop"],
+  "tags": [
+    "PyQt6",
+    "Qt Creator",
+    "Python",
+    "Desktop UI",
+    "Linear Algebra",
+    "2D Graphics",
+    "Formula Parsing"
+  ],
+  "highlights": [
+    "Graphics View دوبعدی (نمایش فضای سطری/ستونی)",
+    "مدیریت رنگ قابل تنظیم برای آیتم‌های ماتریس",
+    "ویرایش ماتریس در جدول با پشتیبانی از فرمول",
+    "تبدیل مقادیر ماتریس به آیتم‌های گرافیکی دوبعدی",
+    "ویرایشگر Python داخلی با auto-complete و syntax highlight بهتر",
+    "انیمیشن‌سازی نمایش ماتریس با اسکریپت‌های Python"
+  ],
+  "details": [
+    "MGV یک اپلیکیشن دسکتاپ مبتنی بر PyQt6 برای تبدیل تجربه کار با ماتریس‌ها به حالت بصری، تعاملی و قابل برنامه‌نویسی است.",
+    "دارای نمای دوبعدی اختصاصی برای نمایش ماتریس در فضای سطری یا ستونی با کنترل رنگ برای خوانایی بهتر.",
+    "Table View مسیر کامل مدیریت مقدارهای ماتریس را پوشش می‌دهد: ویرایش، تبدیل به آیتم‌های دوبعدی و نوشتن فرمول در سلول‌ها.",
+    "شامل ویرایشگر Python داخلی با auto-completion قوی‌تر و syntax highlighter برای کنترل workflowهای داخل برنامه.",
+    "قابلیت کلیدی: انیمیشن‌سازی — تولید انیمیشن‌های نمایش ماتریس (دوبعدی و رنگی) با Python؛ مناسب دمو، آموزش و شبیه‌سازی."
+  ],
+  "links": {
+    "github": "https://github.com/prograin/Matrix_repre_py",
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1Zkx_dxIfF9TCKFLTbI0GZcuxtdLTlwxh/view?usp=drive_link",
+    "images": []
+  },
+  "isPrivate": false
+}

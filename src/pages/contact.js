@@ -40,8 +40,7 @@
     const { contact, icon } = window.PAGE_SHARED;
     const t = copy[locale] || copy.fa;
     const dir = locale === "fa" ? "rtl" : "ltr";
-    const titleClass =
-      locale === "fa" ? "tracking-normal" : "tracking-tight";
+    const titleClass = locale === "fa" ? "tracking-normal" : "tracking-tight";
 
     return `
       <div class="contact-page" dir="${dir}">

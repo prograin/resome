@@ -1,0 +1,98 @@
+.contact-page {
+  position: relative;
+  display: grid;
+  min-height: calc(100svh - 4.25rem);
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  isolation: isolate;
+}
+
+.contact-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url("../assets/images/optimized/contact-bg-1920.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.dark .contact-page::before {
+  background-image: url("../assets/images/optimized/contact-bg-1920.webp");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+
+.contact-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 23, 0.42), rgba(2, 6, 23, 0.74)),
+    radial-gradient(circle at 50% 30%, rgba(20, 184, 166, 0.18), transparent 42%);
+}
+.contact-shell.contact-shell--centered {
+  display: flex;
+  width: min(100%, 42rem);
+  max-width: 42rem;
+  min-height: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.35rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: transparent;
+  padding: clamp(1.2rem, 4vw, 2.4rem);
+  box-shadow: none;
+  backdrop-filter: none;
+  animation: none !important;
+}
+.contact-page[dir="rtl"] .contact-shell.contact-shell--centered,
+.contact-page[dir="rtl"] .contact-shell.contact-shell--centered > * {
+  direction: rtl;
+}
+
+.contact-shell--centered *,
+.contact-shell--centered *::before,
+.contact-shell--centered *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.contact-shell--centered .contact-visual,
+.contact-shell--centered .contact-geo,
+.contact-shell--centered .contact-orbit {
+  display: none !important;
+}
+
+.contact-shell--centered .contact-hero {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  text-align: center;
+}
+.contact-shell--centered .contact-eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0 0 0.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: rgba(15, 23, 42, 0.36);
+  color: #99f6e4;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}

@@ -1,0 +1,177 @@
+.pricing-card {
+  --pricing-accent: #06b6d4;
+  --pricing-accent-soft: #ecfeff;
+  --pricing-accent-dark: #67e8f9;
+  --pricing-icon-bg: #ccfbf1;
+  --pricing-icon-fg: #065f46;
+  position: relative;
+  box-sizing: border-box;
+  flex: 0 0 min(82vw, 26rem);
+  min-height: 34rem;
+  scroll-snap-align: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, #ffffff 88%, transparent);
+  padding: 1.15rem;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+  opacity: 0.56;
+  transform: scale(0.88);
+  transition:
+    transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 280ms ease,
+    border-color 280ms ease,
+    box-shadow 280ms ease,
+    background-color 280ms ease;
+}
+.dark .pricing-card {
+  border-color: #1e293b;
+  background: color-mix(in srgb, #0f172a 72%, transparent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+}
+.pricing-card.is-active {
+  border-color: var(--pricing-accent);
+  background: #ffffff;
+  box-shadow: 0 22px 52px color-mix(in srgb, var(--pricing-accent) 24%, transparent);
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+.dark .pricing-card.is-active {
+  border-color: var(--pricing-accent-dark);
+  background: #0f172a;
+  box-shadow: 0 22px 52px color-mix(in srgb, var(--pricing-accent-dark) 16%, transparent);
+}
+.pricing-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.pricing-card__icon {
+  display: inline-flex;
+  width: 2.65rem;
+  height: 2.65rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: var(--pricing-icon-bg);
+  color: var(--pricing-icon-fg);
+}
+.dark .pricing-card__icon {
+  background: color-mix(in srgb, var(--pricing-accent) 24%, #020617);
+  color: var(--pricing-accent-dark);
+}
+.pricing-card__badge {
+  display: none;
+  min-height: 2rem;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  color: #475569;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.pricing-card.is-active .pricing-card__badge {
+  border-color: color-mix(in srgb, var(--pricing-accent) 38%, white);
+  background: var(--pricing-accent-soft);
+  color: color-mix(in srgb, var(--pricing-accent) 72%, #0f172a);
+}
+.dark .pricing-card__badge {
+  border-color: #334155;
+  background: color-mix(in srgb, #020617 42%, transparent);
+  color: #cbd5e1;
+}
+.dark .pricing-card.is-active .pricing-card__badge {
+  border-color: color-mix(in srgb, var(--pricing-accent-dark) 48%, #020617);
+  background: color-mix(in srgb, var(--pricing-accent) 28%, #020617);
+  color: #ffffff;
+}
+.pricing-card__title {
+  margin: 1rem 0 0;
+  min-height: 3.2rem;
+  color: #020617;
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+.dark .pricing-card__title {
+  color: #ffffff;
+}
+.pricing-card__price {
+  margin: 0.45rem 0 0;
+  color: var(--pricing-accent);
+  font-size: 1.75rem;
+  font-weight: 850;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+.dark .pricing-card__price {
+  color: var(--pricing-accent-dark);
+}
+.pricing-card__fit {
+  min-height: 3.2rem;
+  margin: 0.65rem 0 0;
+  color: #64748b;
+  font-size: 0.86rem;
+  line-height: 1.85;
+}
+.dark .pricing-card__fit {
+  color: #cbd5e1;
+}
+.pricing-card__features {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pricing-card__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: #334155;
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+.pricing-card__features span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.pricing-card__features svg,
+.pricing-card__features i {
+  flex: 0 0 auto;
+  margin-top: 0.25rem;
+  color: var(--pricing-accent);
+}
+.dark .pricing-card__features li {
+  color: #e2e8f0;
+}
+.pricing-card__toggle {
+  display: inline-flex;
+  width: 100%;
+  min-height: 2.45rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--pricing-accent) 12%, #ffffff);
+  color: color-mix(in srgb, var(--pricing-accent) 80%, #0f172a);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+.pricing-card__toggle[aria-expanded="true"] svg,
+.pricing-card__toggle[aria-expanded="true"] i {
+  transform: rotate(90deg);
+}
+.dark .pricing-card__toggle {
+  background: color-mix(in srgb, var(--pricing-accent) 22%, #020617);
+  color: var(--pricing-accent-dark);
+}

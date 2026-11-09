@@ -1,0 +1,48 @@
+{
+  "id": "notification-system",
+  "title": "Notification System",
+  "shortDescription": "Confidential FastAPI service for scheduled notifications with Telegram integration and secure auth.",
+  "roles": ["Backend"],
+  "tags": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Authentication",
+    "Authorization",
+    "Telegram Bot",
+    "pytest"
+  ],
+  "highlights": [
+    "Secure auth",
+    "Telegram integration",
+    "Scheduling",
+    "Testable architecture",
+    "Real-time task status notifications",
+    "Automated daily summary reports"
+  ],
+  "details": [
+    "Developed a confidential notification system as a FastAPI backend service, integrated with Telegram to deliver timely updates to users.",
+    "Connected the system to the main project management platform to monitor task statuses in real time.",
+    "Implemented automatic notifications when a task status changes, ensuring users are immediately informed of progress.",
+    "Designed reminders for tasks exceeding expected durations, helping users stay on track and manage deadlines efficiently.",
+    "Delivered daily summary reports to users, providing an overview of completed, pending, and delayed tasks.",
+    "Focused on secure authentication, authorization, and scalable architecture to handle multiple users and notifications reliably.",
+    "Built with testable design patterns to ensure maintainability, reliability, and easy integration with future features."
+  ],
+  "shareableDetails": [
+    "Built an internal notification service that watches task activity and sends useful updates to the right users at the right time.",
+    "Added automatic messages for task status changes so users did not need to keep checking the project system manually.",
+    "Created reminder logic for tasks that stayed open longer than expected, helping teams notice delays earlier.",
+    "Prepared daily summaries so users could quickly see completed, pending, and delayed work.",
+    "Focused on access control and reliability so notifications stayed relevant and did not expose unrelated information."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": []
+  },
+  "isPrivate": true
+}

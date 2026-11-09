@@ -1,0 +1,21 @@
+{
+  "welcome": "Welcome",
+  "title": "Programming training & software development",
+  "lead": "Private programming classes in Arak, semi-private online courses and custom software. Find the right path for your next step.",
+  "introTitle": "Learn and build with Ahmadreza Rezaei",
+  "intro": "I am Ahmadreza Rezaei, based in Arak, Markazi Province, Iran. I teach programming and develop websites, backend systems and automation. Private classes are available in person in Arak or online; semi-private courses are held online.",
+  "introEnd": "Explore the classes, compare development services or get in touch to discuss what you need.",
+  "eyebrow": "Software development · Programming training",
+  "order": "Order a project",
+  "academy": "Enter academy",
+  "telegram": "Message on Telegram",
+  "email": "Send email",
+  "phone": "Direct call",
+  "stats": ["+20 projects", "+3 startups"],
+  "cards": {
+    "order": "Custom software design and development.",
+    "academy": "Programming training from zero to real projects.",
+    "contactPage": "Message me for projects, training, consulting, or collaboration."
+  },
+  "contactPage": "Contact us"
+}

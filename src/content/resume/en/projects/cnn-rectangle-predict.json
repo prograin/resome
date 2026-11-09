@@ -1,0 +1,39 @@
+{
+  "id": "cnn-rectangle-predict",
+  "title": "CNN Rectangle Prediction",
+  "shortDescription": "A hands-on CNN experiment to predict rectangle geometry from synthetic images.",
+  "roles": ["ML"],
+  "tags": [
+    "Convolutional Neural Networks",
+    "Image Processing",
+    "Deep Learning",
+    "Python",
+    "Synthetic Dataset"
+  ],
+  "highlights": [
+    "Custom dataset generation with random rectangles",
+    "CNN-based feature extraction with BatchNorm and Dropout",
+    "Regression of rectangle center, width, and height",
+    "Visualization of predictions vs ground truth"
+  ],
+  "details": [
+    "Generated a synthetic dataset of 100x100 images containing randomly placed rectangles.",
+    "Designed and trained a CNN followed by a fully connected network to regress geometric parameters.",
+    "Evaluated model performance using loss curves and correlation analysis between predictions and true values.",
+    "Visualized test samples by overlaying predicted rectangle centers against ground-truth centers.",
+    "Project focused on practical understanding of CNNs and image-based regression tasks."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": [
+      "./assets/images/rect_predict_3.png",
+      "./assets/images/rect_predict_2.png",
+      "./assets/images/rect_predict_1.png"
+    ]
+  },
+  "isPrivate": false
+}

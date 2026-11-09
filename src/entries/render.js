@@ -1,0 +1,9 @@
+import "../assets.js";
+import "../site-config.js";
+import "../local-icons.js";
+import "../pages/shared.js";
+import "../pages/home.js";
+import "../pages/projects.js";
+import "../pages/order.js";
+import "../pages/academy.js";
+import "../pages/contact.js";

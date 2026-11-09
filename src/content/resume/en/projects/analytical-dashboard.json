@@ -1,0 +1,48 @@
+{
+  "id": "analytical-dashboard",
+  "title": "Analytical Dashboard",
+  "shortDescription": "Confidential ETL + warehouse + dashboards for KPI-driven reporting and monitoring.",
+  "roles": ["DataEng"],
+  "tags": [
+    "ETL Pipelines",
+    "Apache Airflow",
+    "PostgreSQL",
+    "ClickHouse",
+    "Looker Studio",
+    "Grafana",
+    "Linux (Debian)"
+  ],
+  "highlights": [
+    "Incremental ingestion strategies",
+    "Warehousing (PostgreSQL + ClickHouse)",
+    "Airflow scheduling",
+    "KPI dashboards"
+  ],
+  "details": [
+    "Designed and deployed a real-time analytical dashboard at Al-Zahra Studio to monitor team performance, manage tasks, and analyze project progress across Finance, Executive Management, Coordination, and Project Management teams.",
+    "Built an ETL pipeline to retrieve, cleanse, and transform data from an internal API, with both full and incremental loads updated every 2 hours.",
+    "Loaded processed data into a data warehouse and created optimized SQL-based tables for fast and reliable analysis.",
+    "Developed a dashboard with 13 charts across 5 pages and 5 tailored KPIs, enabling filtering by project and time range for managers and analysts.",
+    "Automated script execution using Windows Task Scheduler and maintained version control of code and queries with Git.",
+    "Improved reporting accuracy and efficiency for Finance, enhanced cross-department insights for Executive Management, enabled real-time monitoring for Coordination, and facilitated faster decision-making for Project Management.",
+    "Addressed challenges in data structuring, visualization, and warehouse design with a hybrid full/incremental update approach, ensuring scalable and reliable data processing.",
+    "Laid the groundwork for future improvements, including event-based updates and flexible reporting in line with upcoming corporate data policies."
+  ],
+  "shareableDetails": [
+    "Built an internal analytics dashboard for multiple departments so managers could track work status, team performance, and project progress from one place.",
+    "Designed the data flow from collection to cleaning, transformation, storage, and reporting, with updates planned around the team's operational rhythm.",
+    "Created KPI views and charts that helped finance, coordination, project management, and executive users answer their own recurring questions faster.",
+    "Added filtering by project and time range so the same dashboard could support both high-level review and more focused investigation.",
+    "Improved reporting reliability by separating raw operational data from cleaned reporting-ready data.",
+    "Kept department names, internal data structure, and implementation details private because the project works with organizational data."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": []
+  },
+  "isPrivate": true
+}

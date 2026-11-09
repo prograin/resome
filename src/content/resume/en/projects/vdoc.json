@@ -1,0 +1,32 @@
+{
+  "id": "vdoc",
+  "title": "Documentation",
+  "shortDescription": "Desktop documentation system with XML/HTML storage, autosave, rich text editing, and hierarchical tree visualization.",
+  "roles": ["DataEng", "Desktop"],
+  "tags": ["PyQt", "Qt Creator", "XML", "HTML", "Desktop UI"],
+  "highlights": [
+    "Rich text editing + autosave",
+    "XML/HTML document storage",
+    "Hierarchical folder/tree management",
+    "Header indexing & quick in-document navigation",
+    "Desktop UI built with PyQt/Qt Creator"
+  ],
+  "details": [
+    "Documentation is a desktop application built to manage and organize documents with a structured, scalable approach.",
+    "It includes a full text management layer: creating, editing, and maintaining documents with an autosave workflow to prevent data loss and keep edits continuously synced.",
+    "Documents are stored using XML/HTML formats to preserve structure and enable reliable persistence, searchability, and future extensibility.",
+    "The app provides hierarchical (tree-based) folder management, making it easy to categorize large collections of files and navigate them like a lightweight knowledge base.",
+    "For long documents, vDoc supports header indexing and smooth navigation—users can jump between sections quickly and move through content with minimal friction.",
+    "Built with PyQt and Qt Creator, the UI focuses on speed, clarity, and an editor-first workflow designed for daily, intensive usage.",
+    "Additional technical details can be shared upon request."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": "https://drive.google.com/file/d/1ogetJtmWDpi-1iOFq9u6PaLGCmRzEHjb/view?usp=sharing",
+    "images": []
+  },
+  "isPrivate": false
+}

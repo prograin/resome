@@ -1,0 +1,39 @@
+{
+  "id": "cnn-rectangle-predict",
+  "title": "پیش‌بینی مستطیل با CNN",
+  "shortDescription": "یک آزمایش عملی CNN برای پیش‌بینی ویژگی‌های هندسی مستطیل از تصاویر مصنوعی.",
+  "roles": ["ML"],
+  "tags": [
+    "Convolutional Neural Networks",
+    "Image Processing",
+    "Deep Learning",
+    "Python",
+    "Synthetic Dataset"
+  ],
+  "highlights": [
+    "تولید دیتاست سفارشی با مستطیل‌های تصادفی",
+    "استخراج ویژگی با CNN همراه BatchNorm و Dropout",
+    "رگرسیون مرکز، عرض و ارتفاع مستطیل",
+    "نمایش مقایسه پیش‌بینی و واقعیت"
+  ],
+  "details": [
+    "ساخت دیتاست مصنوعی شامل تصاویر ۱۰۰×۱۰۰ با مستطیل‌های تصادفی.",
+    "طراحی و آموزش CNN به‌همراه یک شبکه fully-connected برای رگرسیون پارامترهای هندسی.",
+    "ارزیابی با منحنی loss و تحلیل همبستگی پیش‌بینی‌ها با مقادیر واقعی.",
+    "نمایش نمونه‌ها با رسم مرکز پیش‌بینی‌شده و مرکز واقعی.",
+    "هدف پروژه: درک عملی CNN در مسئله‌های رگرسیون مبتنی بر تصویر."
+  ],
+  "links": {
+    "github": null,
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": [
+      "./assets/images/rect_predict_3.png",
+      "./assets/images/rect_predict_2.png",
+      "./assets/images/rect_predict_1.png"
+    ]
+  },
+  "isPrivate": false
+}

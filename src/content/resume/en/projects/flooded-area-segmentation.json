@@ -1,0 +1,37 @@
+{
+  "id": "flooded-area-segmentation",
+  "title": "Flooded Area Detection & Segmentation",
+  "shortDescription": "U-Net-based deep learning model for detecting flooded regions from aerial imagery, optimized with EfficientNet-B4 and custom techniques.",
+  "roles": ["ML"],
+  "tags": [
+    "U-Net",
+    "EfficientNet-B4",
+    "Image Segmentation",
+    "Deep Learning",
+    "Dice Loss",
+    "Data Augmentation"
+  ],
+  "highlights": [
+    "Designed U-Net with EfficientNet-B4 backbone for flood segmentation",
+    "Implemented custom decoder and Dice Loss function",
+    "Applied data augmentation and smart training callbacks",
+    "Evaluated model performance with visual segmentation outputs"
+  ],
+  "details": [
+    "Developed a deep learning pipeline to detect flooded areas from aerial imagery.",
+    "Used U-Net architecture with EfficientNet-B4 as the encoder backbone and a custom decoder for improved segmentation accuracy.",
+    "Implemented a custom Dice Loss function and data augmentation techniques to enhance model robustness.",
+    "Applied callbacks for model checkpointing, logging, and dynamic learning rate adjustments during training.",
+    "Tested the model on a separate dataset and analyzed segmentation performance through visual output images.",
+    "Project code and further details are available on GitHub for reference and replication."
+  ],
+  "links": {
+    "github": "https://lnkd.in/du2Xe3jV",
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": ["./assets/images/flood_area_1.png", "./assets/images/flood_area_2.png"]
+  },
+  "isPrivate": false
+}

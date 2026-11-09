@@ -1,0 +1,60 @@
+<!-- Projects -->
+<section
+  id="projects"
+  class="my-8 rounded-lg border border-cyan-100/80 bg-white/60 p-5 dark:border-cyan-950/70 dark:bg-cyan-950/10 sm:p-6"
+>
+  <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex items-center gap-3">
+      <div
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200"
+      >
+        <i data-lucide="folder-kanban" class="h-5 w-5"></i>
+      </div>
+      <h2
+        id="titleProjects"
+        class="text-xl font-semibold tracking-tight text-slate-950 dark:text-white"
+      >
+        Projects
+      </h2>
+    </div>
+
+    <div class="relative w-full max-w-52 sm:w-52">
+      <select
+        id="projectFilterSelect"
+        class="min-h-10 w-full appearance-none rounded-lg border border-cyan-200 bg-white/90 px-3 py-2 pe-10 text-sm font-semibold text-slate-800 shadow-sm outline-none transition hover:border-cyan-300 focus:border-cyan-600 focus:ring-2 focus:ring-cyan-500/20 dark:border-cyan-900 dark:bg-slate-950/55 dark:text-slate-100 dark:hover:border-cyan-700 dark:focus:border-cyan-400"
+        aria-label="Project filter"
+        aria-controls="roleChips projectsGrid skillsGrid"
+      ></select>
+      <span
+        class="pointer-events-none absolute end-2 top-1/2 inline-flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-200"
+        aria-hidden="true"
+      >
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.25"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m6 9 6 6 6-6"></path>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <div id="activeRolePill" class="mt-4 hidden"></div>
+
+  <div id="projectsGrid" class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+  <div
+    id="projectsEmptyState"
+    class="mt-6 hidden rounded-lg border border-slate-200 bg-white/90 p-8 text-center text-slate-700 shadow-soft backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-200"
+  >
+    <p class="text-base font-semibold">No projects match this role.</p>
+    <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">
+      Clear the selection to view all projects.
+    </p>
+  </div>
+</section>

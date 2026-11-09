@@ -1,0 +1,41 @@
+{
+  "id": "steel-defect-detection",
+  "title": "تشخیص عیوب فولاد",
+  "shortDescription": "سیستم بینایی ماشین صنعتی برای تشخیص و مکان‌یابی عیوب با TensorFlow + EfficientNetB0 و loss سفارشی (bbox/confidence/classification).",
+  "roles": ["ML"],
+  "tags": [
+    "TensorFlow",
+    "EfficientNetB0",
+    "Computer Vision",
+    "Object Detection",
+    "Image Processing",
+    "Albumentations",
+    "Data Augmentation",
+    "Custom Loss",
+    "CNN"
+  ],
+  "highlights": [
+    "تشخیص و مکان‌یابی عیوب در تصاویر صنعتی",
+    "بک‌بون EfficientNetB0 با هدهای سفارشی",
+    "خروجی شبکه به صورت گرید ۷×۷ برای پیش‌بینی مکان‌محور",
+    "Loss سفارشی برای bbox + confidence + classification",
+    "پیش‌پردازش مبتنی بر mask و augmentationهای قوی",
+    "آموزش ۱۰۰ epoch و ارزیابی روی تصاویر متنوع"
+  ],
+  "details": [
+    "تمرکز پروژه روی تشخیص خودکار عیوب در تولید فولاد و بهبود کنترل کیفیت با مکان‌یابی دقیق عیب‌ها در تصویر است.",
+    "از دیتاست عمومی شامل mask عیوب استفاده شد و پایپ‌لاین پیش‌پردازش برای تولید targetهای آموزش ساخته شد؛ با augmentationهای Albumentations برای افزایش robustness.",
+    "مدل با TensorFlow ساخته شد و EfficientNetB0 به عنوان استخراج‌کننده ویژگی استفاده شد و هد سفارشی برای خروجی‌های تشخیص اضافه شد. خروجی‌ها به شکل گرید ۷×۷ تولید می‌شوند.",
+    "برای بهبود همگرایی و یادگیری ویژگی‌ها، loss سفارشی شامل رگرسیون bbox، برآورد confidence و طبقه‌بندی عیب پیاده‌سازی شد.",
+    "مدل ۱۰۰ epoch آموزش داده شد و نتایج، تشخیص و مکان‌یابی قابل اتکا را نشان می‌دهد (نمونه خروجی‌ها در مدیا/ریپازیتوری)."
+  ],
+  "links": {
+    "github": "https://github.com/prograin/Steel-defect-detection",
+    "liveDemo": null
+  },
+  "media": {
+    "videoUrl": null,
+    "images": ["./assets/images/steel_defect_1.png", "./assets/images/steel_defect_2.png"]
+  },
+  "isPrivate": false
+}
