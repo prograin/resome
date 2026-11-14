@@ -2,29 +2,42 @@
   "name": "prograin-site",
   "version": "1.0.0",
   "private": true,
-  "description": "Static bilingual prograin website",
+  "type": "module",
+  "description": "Bilingual Prograin website built with Next.js",
   "scripts": {
-    "format": "prettier --write src scripts docs README.md package.json vercel.json site.webmanifest",
-    "format:check": "prettier --check src scripts docs README.md package.json vercel.json site.webmanifest",
-    "build": "node scripts/build.mjs",
-    "package": "npm run build && npm run check && node scripts/package.mjs",
-    "check": "npm run check:structure && node scripts/check-seo.mjs",
+    "format": "prettier --write src scripts docs README.md package.json vercel.json site.webmanifest.json next.config.mjs eslint.config.mjs",
+    "format:check": "prettier --check src scripts docs README.md package.json vercel.json site.webmanifest.json next.config.mjs eslint.config.mjs",
+    "build": "node scripts/prepare-next.mjs && next build",
+    "package": "npm run build && npm run check",
+    "check": "npm run check:structure && node scripts/check-export.mjs",
     "check:structure": "node scripts/check-structure.mjs",
     "test:performance": "node scripts/check-performance.mjs",
     "test:updates": "node scripts/check-updates.mjs",
     "images:social": "node scripts/generate-social-images.mjs",
-    "test:browser": "node scripts/check-site.mjs && node scripts/check-seo-browser.mjs && node scripts/check-interactions.mjs && node scripts/check-ui.mjs"
+    "test:browser": "node scripts/check-site.mjs && node scripts/check-seo-browser.mjs && node scripts/check-interactions.mjs && node scripts/check-ui.mjs",
+    "dev": "node scripts/prepare-next.mjs && next dev -H 127.0.0.1 -p 4173",
+    "preview": "node scripts/preview.mjs",
+    "lint": "eslint src"
   },
   "engines": {
     "node": ">=22.12.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
-    "esbuild": "0.28.2",
+    "@next/eslint-plugin-next": "16.4.6",
+    "eslint": "9.39.5",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react-hooks": "7.1.1",
     "lightningcss": "1.33.0",
     "playwright": "1.65.0",
     "prettier": "3.9.10",
     "purgecss": "9.1.0",
+    "serve-handler": "6.1.8",
     "sharp": "0.35.5"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   }
 }

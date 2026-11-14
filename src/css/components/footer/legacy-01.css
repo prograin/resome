@@ -1,4 +1,4 @@
-.page-resume-active #siteFooter {
+body:has([data-site-page="resume"]) #siteFooter {
   display: none;
 }
 .site-footer {
@@ -111,6 +111,6 @@
   font-size: 0.82rem !important;
 }
 
-.page-contact-active .site-main {
+body:has([data-site-page="contact"]) .site-main {
   min-height: calc(100svh - 4.25rem);
 }

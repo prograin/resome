@@ -41,7 +41,7 @@ try {
       );
 
       if (route === "/") {
-        assert.equal(await page.locator("[data-rendered-locale]").count(), 2);
+        assert.equal(await page.locator("#homePage h1").count(), 1);
         assert.equal(await page.locator("#projectsGrid > *").count(), 0);
         assert.equal(requests.filter((url) => /optimized\//.test(url)).length, 1);
         assert.ok(requests.some((url) => url.includes(`home-bg-${mobile ? 960 : 1920}.webp`)));

@@ -12,7 +12,7 @@ import { createProjectDetails } from "./project-details.js";
 import { createImageGallery } from "./image-gallery.js";
 import { createEvents } from "./events.js";
 
-window.CREATE_RESUME_UI = (services) => {
+export function createResumeUI(services) {
   const { state } = services;
   const context = { ...services, $: (selector, root = document) => root.querySelector(selector) };
   for (const create of [
@@ -47,4 +47,4 @@ window.CREATE_RESUME_UI = (services) => {
 
   context.attachResumeEvents();
   return { render: renderResume };
-};
+}

@@ -1,6 +1,6 @@
 import { origin, location, contact, routes } from "../config/site.js";
 import { metadata } from "./metadata.js";
-const asset = (value) => window.SITE_ASSETS.url(value);
+import { assetUrl as asset } from "../config/assets.js";
 
 function structuredData(page, locale = "fa") {
   if (routes[page]?.private) return null;

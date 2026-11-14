@@ -1,7 +1,6 @@
 import { createHash } from "node:crypto";
 import { readFile, writeFile, mkdir, readdir, access } from "node:fs/promises";
 import path from "node:path";
-import vm from "node:vm";
 import sharp from "sharp";
 
 const digest = (value) => createHash("sha256").update(value).digest("hex");
@@ -57,13 +56,14 @@ export async function optimizeImages(root) {
   await writeFile(cachePath, JSON.stringify(cache, null, 2));
 }
 
-export async function assetFingerprint(root) {
+export async function assetFingerprint(root, directory = "assets", exclude = new Set()) {
   const hash = createHash("sha256");
   async function walk(directory) {
     const entries = (await readdir(path.join(root, directory), { withFileTypes: true })).sort(
       (a, b) => a.name.localeCompare(b.name),
     );
     for (const entry of entries) {
+      if (exclude.has(entry.name)) continue;
       const file = path.join(directory, entry.name);
       if (entry.isDirectory()) await walk(file);
       else {
@@ -72,25 +72,6 @@ export async function assetFingerprint(root) {
       }
     }
   }
-  await walk("assets");
+  await walk(directory);
   return hash.digest("hex");
-}
-
-export async function assetVersioner(root, version) {
-  const context = {
-    window: {},
-    document: { currentScript: { dataset: { assetVersion: version } } },
-  };
-  vm.runInNewContext(await readFile(path.join(root, "src/assets.js"), "utf8"), context);
-  const assetUrl = context.window.SITE_ASSETS.url;
-  return (source) =>
-    String(source)
-      .replace(
-        /(["'])([^"'<>\s]+)\1/g,
-        (match, quote, value) => `${quote}${assetUrl(value)}${quote}`,
-      )
-      .replace(
-        /url\((["']?)([^)"']+)\1\)/g,
-        (match, quote, value) => `url(${assetUrl(value.trim())})`,
-      );
 }

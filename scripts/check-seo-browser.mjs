@@ -45,14 +45,19 @@ try {
   const errors = [];
   app.on("pageerror", (error) => errors.push(error.message));
   await app.goto(origin);
+  await app.waitForLoadState("networkidle");
   for (const [key, path] of [
     ["academy", "/academy/"],
     ["order", "/order/"],
     ["contact-page", "/contact/"],
     ["home", "/"],
   ]) {
-    await app.evaluate((key) => document.querySelector(`[data-page-link="${key}"]`).click(), key);
+    await app.locator(`.site-header nav [data-page-link="${key}"]`).click();
     await app.waitForURL(`${origin}${path}`);
+    await app.waitForFunction((href) => {
+      const links = document.querySelectorAll('link[rel="canonical"]');
+      return links.length === 1 && links[0].href === href;
+    }, `https://prograin.ir${path}`);
     const canonical = await app.locator('link[rel="canonical"]').getAttribute("href");
     assert.equal(canonical, `https://prograin.ir${path}`);
     assert.equal(await app.locator('meta[property="og:url"]').getAttribute("content"), canonical);
@@ -67,6 +72,11 @@ try {
     await app.locator("#langToggle").click();
   }
   await app.goBack();
+  await app.waitForURL(`${origin}/contact/`);
+  await app.waitForFunction(() => {
+    const links = document.querySelectorAll('link[rel="canonical"]');
+    return links.length === 1 && links[0].href === "https://prograin.ir/contact/";
+  });
   assert.equal(
     await app.locator('link[rel="canonical"]').getAttribute("href"),
     "https://prograin.ir/contact/",

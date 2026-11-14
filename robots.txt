@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /.backup/
-Disallow: /node_modules/
-Disallow: /scripts/
-Disallow: /src/templates/
-
-# Private routes use noindex; crawling is allowed so search engines can read it.
-Sitemap: https://prograin.ir/sitemap.xml

@@ -1,0 +1,26 @@
+export const copy = {
+  fa: {
+    eyebrow: "ارتباط سریع",
+    title: "بیایید شروع کنیم",
+    lead: "برای پروژه، آموزش، مشاوره یا همکاری، از طریق راه‌های زیر پیام دهید. درخواست شما را بررسی می‌کنم و در کوتاه‌ترین زمان پاسخ می‌دهم.",
+    telegram: "شروع گفتگو در تلگرام",
+    phone: "تماس مستقیم",
+    email: "ارسال ایمیل",
+    linkedin: "لینکدین",
+    responseTitle: "زمان پاسخ‌گویی",
+    responseText: "معمولاً در کوتاه‌ترین زمان ممکن پاسخ می‌دهم.",
+    note: "از ایده و نیازتان بنویسید؛ با هم مسیرش را پیدا می‌کنیم.",
+  },
+  en: {
+    eyebrow: "Quick contact",
+    title: "Let's Start",
+    lead: "For projects, training, consulting, or collaboration, message me through one of the channels below. I will review your request and respond as soon as possible.",
+    telegram: "Start on Telegram",
+    phone: "Direct call",
+    email: "Send email",
+    linkedin: "LinkedIn",
+    responseTitle: "Response time",
+    responseText: "I usually respond as soon as possible.",
+    note: "When you reach out, include your request type and what you need.",
+  },
+};

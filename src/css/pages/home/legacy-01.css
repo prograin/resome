@@ -15,7 +15,7 @@
     direction: rtl;
   }
   @media (width >= 40rem) {
-    body.page-home-active {
+    body:has([data-site-page="home"]) {
       overflow-y: hidden;
     }
   }

@@ -1,8 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-// Assemble sources in declared order before pruning and minifying. Asset URLs stay
-// relative to the generated src/output.css, independent of source-file nesting.
+// Assemble sources in declared order before pruning and minifying.
 export async function readStyles(root, file = "src/css/index.css", stack = []) {
   if (stack.includes(file)) throw new Error(`Circular stylesheet include: ${file}`);
   const source = await readFile(path.join(root, file), "utf8");

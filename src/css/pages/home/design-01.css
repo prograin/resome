@@ -11,7 +11,7 @@
   line-height: 1.7;
   letter-spacing: 0;
 }
-.page-home-active #homePage {
+body:has([data-site-page="home"]) #homePage {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
 }

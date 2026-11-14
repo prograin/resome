@@ -1,9 +1,0 @@
-import "../assets.js";
-import "../site-config.js";
-import "../seo.js";
-import "../updates.js";
-import "../loader.js";
-import "../local-icons.js";
-import "../pages/shared.js";
-import "../pages/index.js";
-import "../script.js";

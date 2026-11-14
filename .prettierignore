@@ -17,3 +17,8 @@ resume/index.html
 portfolio/index.html
 portfoilio/index.html
 package-lock.json
+
+.next/
+out/
+public/
+src/generated/

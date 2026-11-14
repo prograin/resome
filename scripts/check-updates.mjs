@@ -1,22 +1,16 @@
 import assert from "node:assert/strict";
 import { readFile, mkdir, mkdtemp, rm } from "node:fs/promises";
 import { chromium } from "playwright";
-import { assetVersioner, optimizeImages, assetFingerprint } from "./lib/assets.mjs";
-import { fileURLToPath } from "node:url";
+import { optimizeImages, assetFingerprint } from "./lib/assets.mjs";
 import AxeBuilder from "@axe-core/playwright";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import sharp from "sharp";
 
-const root = fileURLToPath(new URL("../", import.meta.url));
 const origin = process.env.SITE_URL || "http://127.0.0.1:4173";
-const { version } = JSON.parse(await readFile(new URL("../site-version.json", import.meta.url)));
-const rewrite = await assetVersioner(root, version);
-assert.equal(
-  rewrite('url("../assets/images/home-bg.jpg?v=old#x")'),
-  `url(../assets/images/home-bg.jpg?v=${version}#x)`,
+const { version } = JSON.parse(
+  await readFile(new URL("../out/site-version.json", import.meta.url)),
 );
-assert.equal(rewrite('src="/assets/images/x.webp"'), `src="/assets/images/x.webp?v=${version}"`);
 const fixture = await mkdtemp(path.join(tmpdir(), "prograin-assets-"));
 try {
   await mkdir(path.join(fixture, "assets/images/clients"), { recursive: true });
@@ -53,6 +47,7 @@ try {
       fail ? route.abort() : route.fulfill({ json: { version: remote } }),
     );
     await page.goto(`${origin}/order/?source=test#packages`);
+    await page.waitForFunction(() => Boolean(window.SITE_UPDATES));
     if (locale === "en") await page.locator("#langToggle").click();
     await page.evaluate(() => window.SITE_UPDATES.check());
     assert.equal(await page.locator("#siteUpdateDialog").isVisible(), false);

@@ -14,38 +14,29 @@ const contact = {
 const routes = {
   home: {
     path: "/",
-    directory: "",
     container: "homePage",
-    renderer: "PAGE_HOME",
     background: "home",
     body: "home",
   },
   order: {
     path: "/order/",
-    directory: "order",
     container: "orderPage",
-    renderer: "PAGE_ORDER",
     body: "order",
   },
   academy: {
     path: "/academy/",
-    directory: "academy",
     container: "academyPage",
-    renderer: "PAGE_ACADEMY",
     background: "academy-hero",
     body: "academy",
   },
   "contact-page": {
     path: "/contact/",
-    directory: "contact",
     container: "contactPage",
-    renderer: "PAGE_CONTACT",
     background: "contact",
     body: "contact",
   },
   resume: {
     path: "/resume/",
-    directory: "resume",
     container: "resumePage",
     body: "resume",
     private: true,

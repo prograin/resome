@@ -53,7 +53,7 @@
   position: absolute;
   inset: -8%;
   z-index: -2;
-  background-image: url("../assets/images/optimized/academy-hero-bg-1920.webp");
+  background-image: url("/assets/images/optimized/academy-hero-bg-1920.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -119,11 +119,11 @@
 }
 
 .academy-picker::before {
-  background-image: url("../assets/images/optimized/academy-training-bg-1920.webp");
+  background-image: url("/assets/images/optimized/academy-training-bg-1920.webp");
 }
 
 .academy-youtube-section::before {
-  background-image: url("../assets/images/optimized/academy-youtube-bg-1920.webp");
+  background-image: url("/assets/images/optimized/academy-youtube-bg-1920.webp");
 }
 
 .academy-picker__label,

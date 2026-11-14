@@ -1,3 +1,5 @@
+> The Lighthouse figures below were recorded before the Next.js migration. Run the current browser checks against a production export to measure the new build. The current production smoke check reports 155–160 KB of gzip-estimated initial JavaScript on public routes, including the Next.js runtime.
+
 # Mobile performance changes
 
 Measured locally on 2026-11-08 with Lighthouse 12.8.2, headless Microsoft Edge, a 390 × 844 mobile viewport, default simulated mobile throttling and a fresh browser profile per page. These are individual laboratory runs against the same local server, not PageSpeed results from the public domain.
@@ -25,7 +27,7 @@ Use Node.js 22.12 or newer:
 ```powershell
 npm ci
 npm run package
-python -m http.server 4173 --bind 127.0.0.1
+npm run preview
 ```
 
 In another terminal:
@@ -37,6 +39,6 @@ npm run test:browser
 
 The performance test enforces CSS/script transfer budgets, verifies that public loads exclude portfolio code/data, and tests delayed chunks and rapid navigation. It does not manufacture a Lighthouse score. The font regeneration tool additionally requires `python -m pip install 'fonttools[woff]'`.
 
-After publishing `dist/`, rerun mobile PageSpeed Insights on the actual domain. Server response time, compression, cache headers, CDN behavior and device conditions can change the results. The temporary Lighthouse installation used for these measurements was removed from project dependencies after testing.
+After publishing `out/`, rerun mobile PageSpeed Insights on the actual domain. Server response time, compression, cache headers, CDN behavior and device conditions can change the results. The temporary Lighthouse installation used for these measurements was removed from project dependencies after testing.
 
 References: [Optimizing LCP](https://web.dev/articles/optimize-lcp), [resource loading](https://web.dev/learn/performance/optimize-resource-loading), [PurgeCSS safelisting](https://www.purgecss.com/safelisting).

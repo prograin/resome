@@ -88,7 +88,7 @@ try {
   await check("legacy portfolio fragment loads directly", async (context) => {
     const page = await context.newPage();
     await page.goto(`${origin}/#projects`);
-    assert.equal(await page.locator("#resumePage").isVisible(), true);
+    await page.locator("#resumePage").waitFor();
     assert.match(await page.locator('meta[name="robots"]').getAttribute("content"), /noindex/);
   });
   await check("history closes stale dialogs and unlocks the page", async (context) => {

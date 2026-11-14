@@ -1,84 +1,53 @@
-// Deterministic transfer budgets and lazy-loading checks, separate from lab scores.
+// Check production asset budgets and ensure public pages do not download the portfolio.
 import assert from "node:assert/strict";
+import { gzipSync } from "node:zlib";
 import { chromium } from "playwright";
 
 const origin = process.env.SITE_URL || "http://127.0.0.1:4173";
 const browser = await chromium.launch({ channel: "msedge", headless: true });
+const pages = [
+  ["/", "home", 40000],
+  ["/academy/", "academy", 60000],
+  ["/order/", "order", 55000],
+  ["/contact/", "contact", 45000],
+];
+
 try {
-  for (const [route, chunk, cssBudget, jsBudget] of [
-    ["/", "home", 40000, 50000],
-    ["/academy/", "academy", 60000, 60000],
-    ["/order/", "order", 55000, 65000],
-    ["/contact/", "contact", 45000, 50000],
-  ]) {
+  for (const [route, name, cssBudget] of pages) {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
     const page = await context.newPage();
-    const requests = [];
-    const bodies = [];
-    page.on("request", (request) => requests.push(request.url()));
+    const assets = new Map();
     page.on("response", (response) => {
       const type = response.request().resourceType();
-      if (["script", "stylesheet"].includes(type))
-        bodies.push(response.body().then((body) => ({ type, bytes: body.length })));
+      if (["script", "stylesheet", "image"].includes(type)) {
+        assets.set(
+          new URL(response.url()).pathname,
+          response.body().then((body) => ({ type, body })),
+        );
+      }
     });
     await page.goto(`${origin}${route}`);
     await page.waitForLoadState("networkidle");
-    const resources = await Promise.all(bodies);
-    const css = resources
-      .filter((item) => item.type === "stylesheet")
-      .reduce((sum, item) => sum + item.bytes, 0);
-    const js = resources
-      .filter((item) => item.type === "script")
-      .reduce((sum, item) => sum + item.bytes, 0);
-    assert.ok(css <= cssBudget, `${route} CSS: ${css}`);
-    assert.ok(js <= jsBudget, `${route} JS: ${js}`);
-    assert.equal(
-      requests.some((url) => /chunks\/resume|\/data\.js|\/output\.css/.test(url)),
-      false,
+    const css = await assets.get(`/styles/${name}.css`);
+    assert.ok(css?.body.length <= cssBudget, `${route} stylesheet budget`);
+    const resources = await Promise.all(assets.values());
+    const scripts = resources.filter((asset) => asset.type === "script");
+    const js = scripts.reduce((bytes, { body }) => bytes + gzipSync(body).length, 0);
+    assert.ok(js <= 180000, `${route} compressed JavaScript: ${js} bytes`);
+    assert.ok(
+      scripts.every(({ body }) => !body.includes("freelancer-etl-dashboard")),
+      "Portfolio data in a public route bundle",
     );
-    assert.deepEqual(
-      requests.filter((url) => url.includes("/chunks/")).map((url) => new URL(url).pathname),
-      [`/src/chunks/${chunk}.js`],
+    assert.ok([...assets.keys()].every((url) => !url.includes("/src/chunks/")));
+    if (route === "/") {
+      const backgrounds = [...assets.keys()].filter((url) => url.includes("/optimized/"));
+      assert.deepEqual(backgrounds, ["/assets/images/optimized/home-bg-960.webp"]);
+    }
+    console.log(
+      `PASS ${route}: CSS ${css.body.length} B, script gzip estimate ${js} B, portfolio data excluded`,
     );
-    assert.equal(await page.evaluate(() => window.PORTFOLIO_DATA_I18N.fa.projects), undefined);
-    assert.equal(
-      await page.locator('script[src*="/src/app.js"]').evaluate((element) => element.defer),
-      true,
-    );
-    console.log(`PASS mobile budget ${route}: CSS ${css}, JS ${js} bytes; portfolio excluded`);
     await context.close();
   }
-
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
-  const page = await context.newPage();
-  const errors = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  await page.route("**/src/chunks/academy.js?*", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 200));
-    await route.continue();
-  });
-  await page.goto(origin);
-  await page.waitForLoadState("networkidle");
-  await page.evaluate(() => {
-    document.querySelector('[data-page-link="academy"]').click();
-    document.querySelector('[data-page-link="order"]').click();
-  });
-  await page.waitForLoadState("networkidle");
-  assert.equal(await page.locator("#orderPage").isVisible(), true);
-  assert.equal(await page.locator("#academyPage").isVisible(), false);
-  await page.locator("#langToggle").click();
-  await page.waitForFunction(() => document.querySelector(".order-page")?.dir === "ltr");
-  await page.evaluate(() => {
-    history.pushState({}, "", "/resume/");
-    dispatchEvent(new PopStateEvent("popstate"));
-  });
-  await page.waitForFunction(() => document.querySelector("#projectsGrid").children.length > 0);
-  assert.ok(await page.locator("#projectsGrid > *").count());
-  assert.equal(await page.locator("#siteFooter").isVisible(), false);
-  assert.match(await page.locator('meta[name="robots"]').getAttribute("content"), /noindex/);
-  assert.deepEqual(errors, []);
-  console.log("PASS delayed chunks, rapid navigation, language and lazy portfolio rendering");
-  await context.close();
 } finally {
   await browser.close();
 }

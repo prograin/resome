@@ -1,3 +1,4 @@
+import { assetUrl } from "../config/assets.js";
 // image gallery behavior for the private portfolio.
 export function createImageGallery(context) {
   const { state, getData, modal, openModal } = context;
@@ -36,7 +37,7 @@ export function createImageGallery(context) {
               <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white/60 dark:border-slate-800 dark:bg-slate-950/30" data-img-container="1">
                 <div class="flex items-center justify-center bg-slate-50 dark:bg-slate-900/40" style="min-height: 280px;">
                   <img
-                    src="${context.escapeHtml(window.SITE_ASSETS.url(src))}"
+                    src="${context.escapeHtml(assetUrl(src))}"
                     alt="${context.escapeHtml(project.title)} image"
                     class="max-h-[70vh] w-auto max-w-full object-contain"
                     data-hide-on-error="1"

@@ -13,7 +13,7 @@ import project11 from "./projects/flooded-area-segmentation.json";
 import project12 from "./projects/cnn-rectangle-predict.json";
 import project13 from "./projects/mnist-digit-recognition.json";
 import project14 from "./projects/realtime-sentiment-analysis.json";
-export default [
+const projects = [
   project0,
   project1,
   project2,
@@ -30,3 +30,5 @@ export default [
   project13,
   project14,
 ];
+
+export default projects;

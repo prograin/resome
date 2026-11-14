@@ -4,3 +4,11 @@ input.css
 node_modules
 dist/
 src.zip
+
+.next/
+out/
+public/assets/
+public/styles/
+public/site-version.json
+public/_headers
+src/generated/

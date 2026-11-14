@@ -1,5 +1,5 @@
-.page-contact-active #contactPage,
-.page-contact-active .contact-page {
+body:has([data-site-page="contact"]) #contactPage,
+body:has([data-site-page="contact"]) .contact-page {
   min-height: calc(100svh - 4.25rem);
 }
 @media (width < 56rem) {
@@ -16,22 +16,22 @@
 }
 @media (width <= 48rem) {
   #homePage::before {
-    background-image: url("../assets/images/optimized/home-bg-960.webp");
+    background-image: url("/assets/images/optimized/home-bg-960.webp");
   }
   .contact-page::before,
   .dark .contact-page::before {
-    background-image: url("../assets/images/optimized/contact-bg-960.webp");
+    background-image: url("/assets/images/optimized/contact-bg-960.webp");
   }
   .academy-hero::before {
-    background-image: url("../assets/images/optimized/academy-hero-bg-960.webp");
+    background-image: url("/assets/images/optimized/academy-hero-bg-960.webp");
   }
 
   .academy-picker::before {
-    background-image: url("../assets/images/optimized/academy-training-bg-960.webp");
+    background-image: url("/assets/images/optimized/academy-training-bg-960.webp");
   }
 
   .academy-youtube-section::before {
-    background-image: url("../assets/images/optimized/academy-youtube-bg-960.webp");
+    background-image: url("/assets/images/optimized/academy-youtube-bg-960.webp");
   }
 }
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {

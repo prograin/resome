@@ -5,8 +5,7 @@ import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const lineLimit = 250;
-const generatedDirectories = new Set(["src/chunks", "src/styles", "src/css/vendor"]);
-const generatedFiles = new Set(["src/app.js", "src/output.css"]);
+const generatedDirectories = new Set(["src/generated", "src/css/vendor"]);
 const failures = [];
 let checked = 0;
 let longest = 0;
@@ -18,7 +17,7 @@ async function visit(directory) {
       if (!generatedDirectories.has(file)) await visit(file);
       continue;
     }
-    if (generatedFiles.has(file) || !/\.(js|css|html|json)$/.test(file)) continue;
+    if (!/\.(jsx?|tsx?|css|html|json)$/.test(file)) continue;
     const content = await readFile(path.join(root, file), "utf8");
     const lines = content.trimEnd().split(/\r?\n/).length;
     checked += 1;

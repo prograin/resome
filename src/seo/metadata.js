@@ -1,9 +1,8 @@
-import "../assets.js";
 import { origin, routes } from "../config/site.js";
 import fa from "../content/seo/fa.json";
 import en from "../content/seo/en.json";
 const copy = { fa, en };
-const asset = (value) => window.SITE_ASSETS.url(value);
+import { assetUrl as asset } from "../config/assets.js";
 
 function metadata(page = "home", locale = "fa") {
   const route = routes[page] || routes.home;

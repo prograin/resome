@@ -1,68 +1,23 @@
-# prograin
+# Prograin
 
-Static bilingual website. Serve this directory with Live Server or `python -m http.server 4173`.
+Bilingual software development and programming education website built with Next.js App Router.
 
-## Editing
-
-- `src/content/`: editable Persian/English text, prices, FAQs and portfolio data; one file per language and section.
-- `src/pages/`: public-page markup and page interactions, separate from translated content.
-- `src/pages/shared.js`: shared components and footer.
-- `src/pages/index.js`: mounts and caches the current page; defers lower backgrounds.
-- `src/script.js`: application startup; `src/app/` contains navigation, theme, language, events and shared dialogs.
-- `src/resume/`: small portfolio components, loaded only for the portfolio route.
-- `src/loader.js`: loads page scripts and styles on demand; avoids stale renders during rapid navigation.
-- `src/config/site.js`: domain, contact information, canonical routes and location.
-- `src/content/seo/` and `src/seo/`: metadata text and structured-data generation.
-- `src/seo.js`: updates metadata after client navigation.
-- `src/css/`: small stylesheets grouped into foundations, components and pages; `index.css` declares their cascade order.
-- `src/templates/layout.html` and `src/templates/partials/`: shared HTML shell, header, dialogs and portfolio sections.
-- `scripts/lib/render.mjs`: static rendering and sitemap/robots generation.
-- `src/app.js`, `src/chunks/` and `src/styles/`: generated minified runtime assets; edit their source files instead.
-
-Run `npm ci` to install dependencies, then `npm run build` after changing code or styles. The build renders the public content into HTML, minifies CSS, updates cache versions and generates discovery files while keeping the resume marked `noindex`. Run `npm run check` to verify the generated output. See [SEO and publication](docs/SEO.md) before deploying.
-
-See [the editing map](docs/STRUCTURE.md) for exact file locations. `npm run format` keeps source files readable; `npm run format:check` checks formatting without changes. Generated HTML, bundles, stylesheets and precompiled vendor utilities are excluded from formatting.
-
-The build needs Node.js 22.12 or newer. It generates separate stylesheets for each page and preserves dynamic states by scanning both rendered languages and source templates. Public pages do not download portfolio code/data or other page templates on first load.
-
-`python scripts/optimize_font.py` creates the smaller Persian/Latin font while preserving the original and its license. It requires `fonttools[woff]`. Run it after adding new scripts or changing the font source.
-
-Run `npm run package` for a clean `dist/` directory ready for static hosting. Original images remain in the workspace; only web-ready backgrounds and client icons are included in the upload directory.
-
-Vercel uses the root `vercel.json`: Build Command is `npm run package`, Output Directory is `dist`, and Framework Preset is Other. It also configures the uncached update manifest and private-route indexing headers; Vercel does not use `_headers`.
-
-Mobile measurement results and performance checks are documented in [PERFORMANCE.md](docs/PERFORMANCE.md).
-
-## Background images
-
-Keep original images in `assets/images/` under these names:
-
-`home-bg.jpg`, `contact-bg.jpg`, `academy-hero-bg.jpg`, `academy-training-bg.jpg`, `academy-decision-bg.jpg`, `academy-youtube-bg.jpg`.
-
-After replacing images, run:
-
-```powershell
-npm run build
+```sh
+npm ci
+npm run dev
 ```
 
-The optimizer preserves originals and creates desktop/mobile WebP copies under `assets/images/optimized/`, plus small client logos. The site serves these optimized copies. Local Vazirmatn font and its license are in `assets/fonts/`.
+Open [http://localhost:4173](http://localhost:4173). The development server supports fast refresh for page and content changes. Restart it after changing stylesheet sources or original images so it can regenerate the assets.
 
-The build automatically regenerates optimized copies when original images change. Every release includes content-based asset versions, so updated images use fresh URLs while repeat visits within the same release stay fast.
+- `src/app/` defines routes, the shared layout, metadata endpoints and the 404 page.
+- `src/features/` contains route components. Shared UI and browser preferences live in `src/components/`.
+- `src/content/` stores bilingual copy, prices, FAQs and portfolio data.
+- `src/css/` contains small stylesheet modules. `src/css/index.css` sets their order.
+- `src/seo/` supplies route metadata and structured data. Update the domain in `src/config/site.js`.
+- `src/resume/` contains the portfolio sections, rendering and filtering. Its runtime and data are scoped to the portfolio routes.
 
-## Update notification
+For production, run `npm run package`. Next.js prerenders the public routes and exports the site to `out/`. Vercel uses the checked-in build command and output directory. The asset preparation step creates responsive WebP backgrounds and release-versioned assets. Keep originals in `assets/`. See [the editing guide](docs/STRUCTURE.md) and [SEO and publication](docs/SEO.md).
 
-Deploy the complete `dist/` directory from `npm run package`, including `site-version.json`. Open pages check for a newer release after 15 seconds and every minute, and when returning to the tab. A Persian/English dialog offers Update or Later. Update reloads the current page with a fresh URL; Later dismisses that release for this visit. Existing package dialogs finish before the update prompt appears.
+To test the production export, run `npm run preview` after packaging and open port 4173. Set the `PORT` environment variable if the port is in use. `npm run test:browser`, `npm run test:performance` and `npm run test:updates` target that preview by default and accept a `SITE_URL` override. Browser tests use Microsoft Edge through Playwright.
 
-`_headers` configures HTML revalidation and disables caching for the version manifest on compatible hosts. Other hosts must apply equivalent Cache-Control headers. Users receive the notification once they have loaded a release containing this feature. Run `npm run test:updates` to verify versioned assets and update interactions.
-
-## Browser checks
-
-With the local server running and Microsoft Edge installed:
-
-```powershell
-npm run test:browser
-```
-
-UI checks cover five pages at four viewport widths, both languages and both themes, package feature dialogs, mobile navigation, academy tabs and portfolio dialogs. The accessibility checks cover the public pages at phone and desktop widths. Screenshots and the audit report are saved in the ignored `.backup/qa/` directory.
-
-Interaction regressions also cover restricted browser storage, Ctrl/Command-click and new-tab links, hash navigation, legacy portfolio fragments, and closing dialogs during browser history navigation.
+Use `npm run lint` and `npm run format:check` to check code style. Use `npm run format` to apply formatting.

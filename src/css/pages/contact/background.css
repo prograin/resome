@@ -14,14 +14,14 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url("../assets/images/optimized/contact-bg-1920.webp");
+  background-image: url("/assets/images/optimized/contact-bg-1920.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .dark .contact-page::before {
-  background-image: url("../assets/images/optimized/contact-bg-1920.webp");
+  background-image: url("/assets/images/optimized/contact-bg-1920.webp");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

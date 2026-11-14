@@ -28,7 +28,7 @@ html {
 body {
   line-height: 1.8;
 }
-body.page-home-active {
+body:has([data-site-page="home"]) {
   overflow-y: auto;
 }
 button,

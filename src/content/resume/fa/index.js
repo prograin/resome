@@ -5,4 +5,6 @@ import skills from "./skills.json";
 import experience from "./experience.json";
 import education from "./education.json";
 import projects from "./projects.js";
-export default { ui, personal, roles, skills, experience, education, projects };
+const content = { ui, personal, roles, skills, experience, education, projects };
+
+export default content;
