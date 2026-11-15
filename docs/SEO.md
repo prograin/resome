@@ -1,6 +1,6 @@
 # SEO and publication
 
-The configured public origin is `https://prograin.ir` in `src/site-config.js`. Change it there if a different domain is used, then rebuild. Do not publish canonical URLs pointing at a preview hostname or localhost.
+The configured public origin is `https://www.prograin.ir` in `src/site-config.js`. Change it there if a different domain is used, then rebuild. Do not publish canonical URLs pointing at a preview hostname or localhost.
 
 The local focus is Arak, Markazi Province, Iran. The shared `location` configuration keeps city/province references consistent in the address, service areas, contact page, footer and social cards. The visible content and metadata focus on programming classes and programming education in Arak, plus website development for local businesses. No street address, coordinates, branch location or customer reviews are invented.
 
@@ -20,7 +20,7 @@ The local focus is Arak, Markazi Province, Iran. The shared `location` configura
 1. Run `npm ci` and `npm run package` (which builds and checks the site).
 2. Publish the contents of the generated `dist/` directory. It includes only runtime files and omits `.backup/`, `node_modules/`, source templates, archives, development scripts and oversized original backgrounds.
 3. Ensure the actual host serves the canonical paths with successful responses and returns a real 404 for nonexistent pages. Do not redirect the portfolio aliases to a public page.
-4. Verify the real domain in Google Search Console. Submit `https://prograin.ir/sitemap.xml` and inspect the four public URLs. Request indexing after checking the rendered page.
+4. Verify the real domain in Google Search Console. Submit `https://www.prograin.ir/sitemap.xml` and inspect the four public URLs. Request indexing after checking the rendered page.
 5. Use Search Console's indexing and Core Web Vitals reports after Google has crawled the published version. Local test results do not prove that Google has indexed the live site, and ranking cannot be guaranteed.
 
 The same URL supports a client-side English language option. It does not advertise separate English `hreflang` URLs that do not exist.

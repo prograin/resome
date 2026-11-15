@@ -18,7 +18,7 @@ try {
     assert.ok((await view.innerText()).trim().length > 250);
     assert.equal(
       await page.locator('link[rel="canonical"]').getAttribute("href"),
-      `https://prograin.ir${route}`,
+      `https://www.prograin.ir${route}`,
     );
     assert.equal(
       await page.locator('meta[name="robots"]').getAttribute("content"),
@@ -54,7 +54,7 @@ try {
     await app.evaluate((key) => document.querySelector(`[data-page-link="${key}"]`).click(), key);
     await app.waitForURL(`${origin}${path}`);
     const canonical = await app.locator('link[rel="canonical"]').getAttribute("href");
-    assert.equal(canonical, `https://prograin.ir${path}`);
+    assert.equal(canonical, `https://www.prograin.ir${path}`);
     assert.equal(await app.locator('meta[property="og:url"]').getAttribute("content"), canonical);
     assert.equal(
       await app.locator('meta[property="og:title"]').getAttribute("content"),
@@ -69,7 +69,7 @@ try {
   await app.goBack();
   assert.equal(
     await app.locator('link[rel="canonical"]').getAttribute("href"),
-    "https://prograin.ir/contact/",
+    "https://www.prograin.ir/contact/",
   );
   assert.deepEqual(errors, []);
   console.log("PASS private aliases, client navigation, back button and language metadata");

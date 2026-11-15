@@ -6,4 +6,4 @@ Disallow: /scripts/
 Disallow: /src/templates/
 
 # Private routes use noindex; crawling is allowed so search engines can read it.
-Sitemap: https://prograin.ir/sitemap.xml
+Sitemap: https://www.prograin.ir/sitemap.xml
