@@ -3,11 +3,11 @@
   background: rgb(255 255 255 / 10%);
   padding: 0.35rem 0.9rem;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: var(--ui-font-caption);
 }
 #homePage h1 {
   font-size: clamp(1.8rem, 3.5vw, 3rem);
-  font-weight: 800;
+  font-weight: var(--ui-weight-strong);
   line-height: 1.7;
   letter-spacing: 0;
 }
@@ -39,7 +39,7 @@ body:has([data-site-page="home"]) #homePage {
 .home-details h2 {
   color: #f1f5f9;
   font-size: clamp(1.3rem, 3vw, 1.8rem);
-  font-weight: 750;
+  font-weight: var(--ui-weight-heading);
   line-height: 1.8;
   margin-bottom: 1.2rem;
 }

@@ -1,3 +1,15 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+main {
+  flex: 1;
+  min-width: 0;
+}
+
 body:has([data-site-page="contact"]) .site-main {
   max-width: none;
   padding-inline: 0;

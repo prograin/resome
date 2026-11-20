@@ -1,0 +1,46 @@
+body:has([data-site-page="academy"]) .academy-neo,
+.academy-page
+  :is(
+    .academy-plan,
+    .academy-youtube-card,
+    .learning-path,
+    .faq-item,
+    .academy-tabs,
+    .academy-plan__badge,
+    .academy-plan__icon
+  ),
+.student-login .student-panel,
+.student-dashboard :is(.student-progress__card, .student-sidebar__panel),
+.student-dashboard-status,
+.ui-dialog[data-kind="academy"],
+.academy-inset,
+.academy-page .faq-item > p {
+  border: 0;
+  background: var(--academy-card-surface, var(--academy-surface));
+  box-shadow: var(--academy-neo-shadow, var(--academy-shadow-inset));
+}
+
+.academy-page :is(.learning-paths, .academy-faq-section) {
+  background: var(--academy-surface);
+}
+
+.academy-inset,
+.academy-page .faq-item > p {
+  border-radius: var(--ui-control-radius);
+}
+
+.academy-page .faq-item > p {
+  margin: 0 var(--ui-space-3) var(--ui-space-3);
+  padding: var(--ui-space-3);
+}
+
+.academy-plan > .academy-inset,
+.academy-details > .academy-inset,
+.learning-path__details > .academy-inset,
+.student-progress__plot.academy-inset {
+  padding: var(--ui-space-3);
+}
+
+.learning-path__details > ol.academy-inset {
+  padding-inline-start: var(--ui-space-8);
+}

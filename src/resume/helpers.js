@@ -84,11 +84,13 @@ export function createHelpers(context) {
   function mountHideMissingImages(root = document) {
     const imgs = Array.from(root.querySelectorAll("img[data-hide-on-error='1']"));
     for (const img of imgs) {
-      img.addEventListener("error", () => {
+      function removeMissingImage() {
         const container = img.closest("[data-img-container='1']");
         if (container) container.remove();
         else img.remove();
-      });
+      }
+      if (img.complete && img.naturalWidth === 0) removeMissingImage();
+      else img.addEventListener("error", removeMissingImage, { once: true });
     }
   }
 

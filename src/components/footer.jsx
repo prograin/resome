@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { SiteLink as Link } from "./site-link";
 import fa from "../content/footer/fa.json";
 import en from "../content/footer/en.json";
 import { contact, location } from "../config/site";

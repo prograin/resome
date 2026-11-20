@@ -18,4 +18,21 @@
 
 ترتیب فایل‌های استایل در `src/css/index.css` تعیین می‌شود. کلاس هر عنصر را در `src/css/` جست‌وجو کنید. تصویر پس‌زمینهٔ خانه و تماس در فایل‌های `background.css` همان صفحه قرار دارد. برای نسخهٔ جدید عکس، فایل اصلی را در `assets/images/` جایگزین و دوباره بیلد کنید.
 
-`npm run dev` سرور توسعه را روی پورت ۴۱۷۳ اجرا می‌کند. `npm run package` خروجی قابل انتشار را در `out/` می‌سازد. فایل‌های `out/`، `.next/` و فایل‌های تولیدشده در `public/` و `src/generated/` را مستقیم ویرایش نکنید.
+## سیستم طراحی
+
+- رنگ‌های تم روشن و تیره، فاصله‌ها، اندازهٔ متن، گردی، سایه و لایهٔ مودال در `src/css/foundation/tokens.css` تعریف شده‌اند. مثلاً `--ui-surface` برای سطح، `--ui-text` برای متن و `--ui-space-4` برای فاصلهٔ یک رم است.
+- دکمهٔ مشترک `src/components/ui/button.jsx` چهار حالت `primary`، `outline`، `soft` و `raised` دارد. حالت را با `variant` انتخاب کنید. برای لینک از `as="a"` یا `as={Link}` استفاده کنید. استایل مشترک در `src/css/components/button.css` است.
+- مودال جزئیات از `DialogView` در `src/components/ui/dialog.jsx` استفاده می‌کند. `useDetailsDialog()` برای باز و بسته کردن مودال در صفحات در دسترس است. Radix فوکوس، Escape و بستن با کلیک بیرون را مدیریت می‌کند.
+- استایل مشترک سؤال‌ها در `src/css/components/faq.css` است. چیدمان و پس‌زمینهٔ مخصوص هر صفحه در `src/css/pages/` قرار می‌گیرد.
+
+قواعد عمومی در `src/css/shared/base.css`، هدر در `components/header.css` و فوتر در `components/footer/` نگهداری می‌شوند. قواعدی که قبلاً در فایل‌های `shared/design-01.css` تا `design-04.css` مخلوط بودند، به فایل‌های مشخص مانند `home/hero-layout.css`، `order/showcase.css`، `order/pricing.css` و `order/package-details.css` منتقل شده‌اند. قواعد کاهش حرکت در `shared/reduced-motion.css` هستند. ترتیب بارگذاری در `src/css/index.css` مشخص است.
+
+برای فاصله، وزن عنوان، متن کوچک و حلقهٔ فوکوس از توکن‌های `foundation/tokens.css` استفاده کنید. در آکادمی، سطح کارت‌ها از `surfaces.css` و ظاهر کنترل‌ها از `controls.css` می‌آید؛ ویژگی‌های ظاهری مشترک را در فایل هر فرم تکرار نکنید.
+
+`npm run dev` سرور توسعه را روی پورت ۴۱۷۳ اجرا می‌کند. `npm run package` بیلد Next.js را در `.next/` می‌سازد. فایل‌های `.next/` و فایل‌های تولیدشده در `public/` و `src/generated/` را مستقیم ویرایش نکنید.
+
+ساختار ORM، مهاجرت‌های PostgreSQL، اجزای مشترک و استایل‌های آکادمی در [معماری آکادمی](ACADEMY-ARCHITECTURE.md) توضیح داده شده است.
+
+تفکیک استایل خروجی در `scripts/lib/style-groups.mjs` انجام می‌شود: استایل‌های عمومی آکادمی در `academy.css` و بخش ورود، داشبورد و مدیریت در `students.css` قرار می‌گیرند. توکن‌ها، کنترل‌ها و کشوی موبایل بین این دو مشترک‌اند. این فایل‌ها هنگام بیلد تولید می‌شوند؛ تغییرات را در فایل‌های منبع `src/css/` انجام دهید.
+
+قاعدهٔ چیدمان همهٔ صفحات: بدنه یک flex ستونی با حداقل ارتفاع viewport است و `main` همیشه `flex: 1` دارد تا فضای باقی‌مانده را پر کند. این قاعده در `src/css/shared/page-containers.css` نگهداری می‌شود.

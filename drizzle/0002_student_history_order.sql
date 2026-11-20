@@ -1,0 +1,2 @@
+DROP INDEX "student_award_student_history_idx";--> statement-breakpoint
+CREATE INDEX "student_award_student_history_idx" ON "student_award" USING btree ("student_id","recorded_at" DESC NULLS LAST,"id" DESC NULLS LAST);

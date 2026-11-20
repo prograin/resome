@@ -19,7 +19,7 @@
   margin-top: 0.1rem;
   color: #0f172a;
   font-size: 0.9rem;
-  font-weight: 800;
+  font-weight: var(--ui-weight-strong);
 }
 .dark .contact-info strong {
   color: #ffffff;
@@ -98,7 +98,7 @@
 .contact-eyebrow {
   margin: 0 0 0.75rem;
   color: #5eead4;
-  font-size: 0.8rem;
+  font-size: var(--ui-font-caption);
   font-weight: 850;
   letter-spacing: 0;
 }

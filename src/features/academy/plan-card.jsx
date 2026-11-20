@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Button } from "../../components/ui/button";
+import { SiteLink as Link } from "../../components/site-link";
 import { Icon } from "../../components/icon";
 import { useDetailsDialog } from "../../components/details-dialog";
 
@@ -15,7 +16,7 @@ export function PlanCard({ plan, active, copy, dir }) {
           <p className="package-details__price">
             {plan.price} <span>{plan.suffix}</span>
           </p>
-          <dl className="academy-details__list">
+          <dl className="academy-details__list academy-inset">
             {copy.comparison.map((row) => (
               <div key={row[0]}>
                 <dt>{row[0]}</dt>
@@ -23,9 +24,16 @@ export function PlanCard({ plan, active, copy, dir }) {
               </div>
             ))}
           </dl>
-          <Link prefetch={false} className="academy-plan__cta" href="/contact/" onClick={close}>
+          <Button
+            as={Link}
+            variant="primary"
+            prefetch={false}
+            className="academy-plan__cta"
+            href="/contact/"
+            onClick={close}
+          >
             {plan.cta}
-          </Link>
+          </Button>
         </div>
       ),
     });
@@ -33,23 +41,23 @@ export function PlanCard({ plan, active, copy, dir }) {
   return (
     <article
       id={`academy-plan-${plan.key}`}
-      className={`academy-plan ${plan.featured ? "is-featured" : ""} ${active ? "is-active" : ""}`}
+      className={`academy-plan academy-neo ${plan.featured ? "is-featured" : ""} ${active ? "is-active" : ""}`}
       data-academy-plan={plan.key}
       data-tone={plan.tone}
       aria-current={active}
     >
       <div className="academy-plan__top">
-        <span className="academy-plan__icon">
+        <span className="academy-plan__icon academy-neo">
           <Icon name={plan.icon} />
         </span>
-        <span className="academy-plan__badge">{plan.badge}</span>
+        <span className="academy-plan__badge academy-neo">{plan.badge}</span>
       </div>
       <h3>{plan.title}</h3>
       <p className="academy-plan__price">
         {plan.price} {plan.suffix && <span>{plan.suffix}</span>}
       </p>
       <p className="academy-plan__fit">{plan.fit}</p>
-      <ul>
+      <ul className="academy-inset">
         {plan.features.map((feature) => (
           <li key={feature}>
             <Icon name="check-circle-2" className="h-4 w-4" />
@@ -57,7 +65,8 @@ export function PlanCard({ plan, active, copy, dir }) {
           </li>
         ))}
       </ul>
-      <button
+      <Button
+        variant="soft"
         className="academy-plan__details"
         type="button"
         data-academy-details={plan.key}
@@ -67,10 +76,16 @@ export function PlanCard({ plan, active, copy, dir }) {
       >
         <span>{copy.detailsLabel}</span>
         <Icon name={dir === "rtl" ? "chevron-left" : "chevron-right"} className="h-4 w-4" />
-      </button>
-      <Link prefetch={false} className="academy-plan__cta" href="/contact/">
+      </Button>
+      <Button
+        as={Link}
+        variant="primary"
+        prefetch={false}
+        className="academy-plan__cta"
+        href="/contact/"
+      >
         {plan.cta}
-      </Link>
+      </Button>
     </article>
   );
 }

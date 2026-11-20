@@ -1,0 +1,78 @@
+/* Each nested neumorphic surface reverses the depth of its nearest surface. */
+body:has([data-site-page="academy"]) {
+  :is(
+    .academy-neo,
+    .academy-inset,
+    .student-progress__card,
+    .ui-button,
+    input,
+    select,
+    textarea
+  ):not([type="range"], [type="hidden"]) {
+    &
+      :is(
+        .academy-neo,
+        .academy-inset,
+        .student-progress__card,
+        .ui-button,
+        input,
+        select,
+        textarea
+      ):not([type="range"], [type="hidden"]) {
+      --academy-neo-shadow: var(--academy-shadow-outset);
+      --academy-neo-child-shadow: var(--academy-shadow-inset);
+      &
+        :is(
+          .academy-neo,
+          .academy-inset,
+          .student-progress__card,
+          .ui-button,
+          input,
+          select,
+          textarea
+        ):not([type="range"], [type="hidden"]) {
+        --academy-neo-shadow: var(--academy-shadow-inset);
+        --academy-neo-child-shadow: var(--academy-shadow-outset);
+        &
+          :is(
+            .academy-neo,
+            .academy-inset,
+            .student-progress__card,
+            .ui-button,
+            input,
+            select,
+            textarea
+          ):not([type="range"], [type="hidden"]) {
+          --academy-neo-shadow: var(--academy-shadow-outset);
+          --academy-neo-child-shadow: var(--academy-shadow-inset);
+          &
+            :is(
+              .academy-neo,
+              .academy-inset,
+              .student-progress__card,
+              .ui-button,
+              input,
+              select,
+              textarea
+            ):not([type="range"], [type="hidden"]) {
+            --academy-neo-shadow: var(--academy-shadow-inset);
+            --academy-neo-child-shadow: var(--academy-shadow-outset);
+            &
+              :is(
+                .academy-neo,
+                .academy-inset,
+                .student-progress__card,
+                .ui-button,
+                input,
+                select,
+                textarea
+              ):not([type="range"], [type="hidden"]) {
+              --academy-neo-shadow: var(--academy-shadow-outset);
+              --academy-neo-child-shadow: var(--academy-shadow-inset);
+            }
+          }
+        }
+      }
+    }
+  }
+}

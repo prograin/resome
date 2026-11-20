@@ -1,0 +1,68 @@
+.learning-paths {
+  padding: var(--ui-space-4) var(--ui-space-4) clamp(2rem, 5vw, 4rem);
+  background: var(--ui-surface);
+  color: var(--ui-text);
+}
+
+.learning-paths__inner {
+  width: min(100%, var(--ui-content-width));
+  margin-inline: auto;
+}
+
+.learning-paths h2 {
+  margin-bottom: var(--ui-space-5);
+  text-align: start;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: var(--ui-weight-heading);
+}
+
+.learning-paths__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ui-space-4);
+}
+
+.learning-path {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--ui-space-3);
+  padding: var(--ui-space-5);
+  border-radius: var(--ui-radius-card);
+}
+
+.learning-path h3,
+.learning-path__details h3 {
+  font-weight: 700;
+}
+
+.learning-path p,
+.learning-path__details {
+  color: var(--ui-muted);
+  font-size: var(--ui-body-size);
+}
+
+.learning-path > .ui-button {
+  justify-content: space-between;
+  text-align: start;
+}
+
+.learning-path__details ol {
+  padding-inline-start: var(--ui-space-5);
+  list-style: decimal;
+}
+
+.learning-path__branch {
+  margin-top: var(--ui-space-3);
+}
+
+.learning-path__note {
+  margin-top: var(--ui-space-3);
+  padding-top: var(--ui-space-3);
+  border-top: 1px solid var(--ui-line);
+}
+
+@media (width <= 48rem) {
+  .learning-paths__cards {
+    grid-template-columns: 1fr;
+  }
+}

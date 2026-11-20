@@ -2,7 +2,13 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 // Assemble sources in declared order before pruning and minifying.
-export async function readStyles(root, file = "src/css/index.css", stack = []) {
+export async function readStyles(
+  root,
+  file = "src/css/index.css",
+  stack = [],
+  include = () => true,
+) {
+  if (!include(file)) return "";
   if (stack.includes(file)) throw new Error(`Circular stylesheet include: ${file}`);
   const source = await readFile(path.join(root, file), "utf8");
   const matches = [...source.matchAll(/^@import "([^"]+)";\s*$/gm)];
@@ -13,7 +19,7 @@ export async function readStyles(root, file = "src/css/index.css", stack = []) {
     const target = path.posix.normalize(path.posix.join(path.posix.dirname(file), match[1]));
     if (!target.startsWith("src/css/"))
       throw new Error(`Stylesheet outside source directory: ${target}`);
-    output.push(await readStyles(root, target, [...stack, file]));
+    output.push(await readStyles(root, target, [...stack, file], include));
     cursor = match.index + match[0].length;
   }
   output.push(source.slice(cursor));

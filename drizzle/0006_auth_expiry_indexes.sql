@@ -1,0 +1,2 @@
+CREATE INDEX "student_session_expiry_idx" ON "student_session" USING btree ("expiresAt");--> statement-breakpoint
+CREATE INDEX "student_verification_expiry_idx" ON "student_verification" USING btree ("expiresAt");

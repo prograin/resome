@@ -1,4 +1,8 @@
-> The Lighthouse figures below were recorded before the Next.js migration. Run the current browser checks against a production export to measure the new build. The current production smoke check reports 155–160 KB of gzip-estimated initial JavaScript on public routes, including the Next.js runtime.
+> The Lighthouse figures below were recorded before the Next.js migration. Run the current browser checks against a production server to measure the new build. The current production smoke check reports 155–164 KB of gzip-estimated initial JavaScript on public routes, including the Next.js runtime.
+
+## Current Next.js stylesheet checks
+
+Verified locally on 2026-11-19 against the production build. Splitting public academy styles from student/admin styles reduced raw home CSS from 45,050 to 36,611 bytes and public academy CSS from 74,384 to 47,084 bytes. Student pages load a separate 65,278-byte stylesheet. Public route transfer budgets, responsive academy layouts in both themes/languages, and image-update checks passed. These byte counts are not Lighthouse scores.
 
 # Mobile performance changes
 
@@ -39,6 +43,6 @@ npm run test:browser
 
 The performance test enforces CSS/script transfer budgets, verifies that public loads exclude portfolio code/data, and tests delayed chunks and rapid navigation. It does not manufacture a Lighthouse score. The font regeneration tool additionally requires `python -m pip install 'fonttools[woff]'`.
 
-After publishing `out/`, rerun mobile PageSpeed Insights on the actual domain. Server response time, compression, cache headers, CDN behavior and device conditions can change the results. The temporary Lighthouse installation used for these measurements was removed from project dependencies after testing.
+After deploying the Next.js build, rerun mobile PageSpeed Insights on the actual domain. Server response time, compression, cache headers, CDN behavior and device conditions can change the results. The temporary Lighthouse installation used for these measurements was removed from project dependencies after testing.
 
 References: [Optimizing LCP](https://web.dev/articles/optimize-lcp), [resource loading](https://web.dev/learn/performance/optimize-resource-loading), [PurgeCSS safelisting](https://www.purgecss.com/safelisting).

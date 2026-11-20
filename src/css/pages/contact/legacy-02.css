@@ -69,27 +69,6 @@
 .contact-shell--centered .contact-action:hover {
   transform: none;
 }
-.contact-shell--centered .contact-action--primary {
-  border-color: transparent;
-  background: linear-gradient(135deg, #0f766e, #14b8a6);
-}
-
-.contact-shell--centered .contact-action--secondary {
-  border-color: transparent;
-  background: linear-gradient(135deg, #047857, #10b981);
-}
-
-.contact-shell--centered .contact-action--linkedin {
-  border-color: transparent;
-  background: linear-gradient(135deg, #075985, #0284c7);
-}
-
-.contact-shell--centered .contact-action--email,
-.contact-shell--centered .contact-action--email:visited {
-  border-color: transparent !important;
-  background: linear-gradient(135deg, #9f1239, #e11d48) !important;
-  color: #ffffff !important;
-}
 .contact-shell--centered .contact-final-stack {
   position: relative;
   display: grid;

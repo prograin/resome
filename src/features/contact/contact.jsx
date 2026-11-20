@@ -1,6 +1,7 @@
 "use client";
 
 import { contact, location } from "../../config/site";
+import { Button } from "../../components/ui/button";
 import { Icon } from "../../components/icon";
 import { usePreferences } from "../../components/preferences";
 import { copy } from "./content";
@@ -9,10 +10,10 @@ export function Contact() {
   const { locale, dir } = usePreferences();
   const text = copy[locale];
   const actions = [
-    ["telegram", "primary", `https://t.me/${contact.telegram}`, text.telegram, true],
-    ["phone", "secondary", `tel:${contact.phone}`, text.phone],
-    ["mail", "email", `mailto:${contact.email}`, text.email],
-    ["linkedin", "linkedin", contact.linkedin, text.linkedin, true],
+    ["telegram", `https://t.me/${contact.telegram}`, text.telegram, true],
+    ["phone", `tel:${contact.phone}`, text.phone],
+    ["mail", `mailto:${contact.email}`, text.email],
+    ["linkedin", contact.linkedin, text.linkedin, true],
   ];
   return (
     <div className="contact-page" dir={dir}>
@@ -27,10 +28,12 @@ export function Contact() {
         </div>
         <div className="contact-link-grid">
           <div className="contact-actions">
-            {actions.map(([icon, tone, href, label, external]) => (
-              <a
+            {actions.map(([icon, href, label, external]) => (
+              <Button
+                as="a"
+                variant="raised"
                 key={icon}
-                className={`contact-action contact-action--${tone}`}
+                className="contact-action"
                 href={href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
@@ -43,7 +46,7 @@ export function Contact() {
                     className="h-4 w-4"
                   />
                 </span>
-              </a>
+              </Button>
             ))}
           </div>
         </div>

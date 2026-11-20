@@ -185,7 +185,7 @@
 .order-client__body small {
   color: #64748b;
   font-size: 0.76rem;
-  font-weight: 800;
+  font-weight: var(--ui-weight-strong);
   line-height: 1.5;
 }
 

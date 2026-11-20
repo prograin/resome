@@ -1,0 +1,61 @@
+.student-history {
+  --student-table-align: center;
+  --student-table-padding: var(--ui-space-3);
+  position: relative;
+}
+
+.student-history__table {
+  table-layout: fixed;
+}
+
+.student-history__table thead th {
+  font-weight: var(--ui-weight-heading);
+  border-block-end: 1px solid var(--ui-line);
+}
+
+.student-history__table thead th:first-child {
+  width: 14%;
+}
+.student-history__table thead th:nth-child(2) {
+  width: 10%;
+}
+.student-history__table thead th:nth-child(3) {
+  width: 28%;
+}
+.student-history__table thead th:nth-child(4) {
+  width: 24%;
+}
+.student-history__table thead th:last-child {
+  width: 24%;
+}
+
+.student-history__note {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 2;
+}
+
+.student-history__course {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.student-history__table td:last-child {
+  text-align: end;
+}
+
+@media (width >= 48rem) {
+  .student-history__table tbody tr:not(:last-child) > * {
+    border-block-end: 1px solid var(--ui-line);
+  }
+}
+
+@media (width < 48rem) {
+  .student-history__table tbody tr:not(:last-child) {
+    padding-block-end: var(--ui-space-4);
+    border-block-end: 1px solid var(--ui-line);
+  }
+}

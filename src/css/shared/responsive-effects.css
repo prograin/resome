@@ -1,0 +1,13 @@
+@media (width < 48rem), (pointer: coarse) {
+  .site-header,
+  #mobileMenu,
+  .home-path,
+  .order-service,
+  .pricing-panel {
+    backdrop-filter: none;
+  }
+  .home-path,
+  .order-service {
+    animation: none !important;
+  }
+}

@@ -1,4 +1,9 @@
 {
+  "academy-admin": {
+    "title": "Academy administration | Prograin",
+    "description": "Private student, course and assessment administration for Prograin Academy.",
+    "label": "Academy administration"
+  },
   "home": {
     "title": "Prograin",
     "description": "Custom software, website development and programming classes with Ahmadreza Rezaei in Arak, Markazi, Iran. Private in-person or online and semi-private online training.",
@@ -8,6 +13,46 @@
     "title": "Programming Classes in Arak, Markazi | Prograin",
     "description": "Private programming classes in Arak, Markazi Province, in person or online, plus a 16-session semi-private online course with practical exercises and code review.",
     "label": "Programming training"
+  },
+  "academy-consultation": {
+    "title": "Programming Training Consultation in Arak | Prograin",
+    "description": "Explore private and semi-private programming training and get in touch for a consultation.",
+    "label": "Training consultation"
+  },
+  "academy-students": {
+    "title": "Student Page | Prograin",
+    "description": "The Prograin academy student page.",
+    "label": "Student page"
+  },
+  "academy-dashboard": {
+    "title": "Dashboard | Prograin",
+    "description": "The Prograin academy student dashboard.",
+    "label": "Dashboard"
+  },
+  "academy-chart": {
+    "title": "Points chart | Prograin",
+    "description": "Student points chart.",
+    "label": "Points chart"
+  },
+  "academy-courses": {
+    "title": "Student courses | Prograin",
+    "description": "Student courses, course status and points.",
+    "label": "Courses"
+  },
+  "academy-goals": {
+    "title": "Learning goals | Prograin",
+    "description": "Student learning goals and progress.",
+    "label": "Goals"
+  },
+  "academy-history": {
+    "title": "Points history | Prograin",
+    "description": "Student score history, recorded dates and instructor notes.",
+    "label": "Points history"
+  },
+  "academy-profile": {
+    "title": "Student profile | Prograin",
+    "description": "Student account profile.",
+    "label": "Profile"
   },
   "order": {
     "title": "Custom Software & Web Development in Arak | Prograin",

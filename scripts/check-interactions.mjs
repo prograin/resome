@@ -97,13 +97,16 @@ try {
     await page.evaluate(() => document.querySelector('[data-page-link="order"]').click());
     await page.waitForURL(`${origin}/order/`);
     await page.locator("[data-pricing-toggle]").first().click();
-    assert.equal(await page.locator("#modalOverlay").getAttribute("aria-hidden"), "false");
+    await page.locator("#modalDialog").waitFor();
     await page.goBack();
     await page.waitForURL(`${origin}/`);
-    assert.equal(await page.locator("#modalOverlay").getAttribute("aria-hidden"), "true");
-    assert.equal(await page.locator(".site-main").evaluate((element) => element.inert), false);
+    await page.locator("#modalDialog").waitFor({ state: "hidden" });
     assert.equal(
-      await page.locator("html").evaluate((element) => element.classList.contains("modal-open")),
+      await page.locator(".site-main").evaluate((element) => element.hasAttribute("aria-hidden")),
+      false,
+    );
+    assert.equal(
+      await page.locator("body").evaluate((element) => element.hasAttribute("data-scroll-locked")),
       false,
     );
   });

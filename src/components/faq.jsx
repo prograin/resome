@@ -5,12 +5,12 @@ export function Faq({ title, items, dir, className = "" }) {
       <h2>{title}</h2>
       <div className="faq-list">
         {items.map(([question, answer]) => (
-          <details className="faq-item" key={question}>
+          <details className="faq-item academy-neo" key={question}>
             <summary>
               {question}
               <Icon name={dir === "rtl" ? "chevron-left" : "chevron-right"} className="h-4 w-4" />
             </summary>
-            <p>{answer}</p>
+            <p className="academy-neo">{answer}</p>
           </details>
         ))}
       </div>

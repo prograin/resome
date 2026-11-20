@@ -1,0 +1,71 @@
+.academy-admin__course-table {
+  --student-table-align: center;
+}
+
+.academy-admin__course-table :is(th, td) {
+  border-block-end: 1px solid var(--ui-line);
+}
+
+.academy-admin__course-table .student-panel__form {
+  display: grid;
+  justify-items: center;
+}
+
+.academy-admin__course-table .academy-admin__roster-fields {
+  display: flex;
+  justify-content: center;
+}
+
+.academy-admin__course-table .ui-button {
+  white-space: nowrap;
+}
+
+.academy-admin__course-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2);
+}
+
+.academy-admin__status-control select {
+  min-width: 7rem;
+  font-size: var(--ui-font-caption);
+}
+
+.academy-admin__status-control [data-enrollment-status="active"] {
+  color: var(--academy-color-green);
+}
+
+.academy-admin__status-control [data-enrollment-status="inactive"] {
+  color: var(--academy-color-orange);
+}
+
+.academy-admin__status-control [data-enrollment-status="completed"] {
+  color: var(--academy-color-blue);
+}
+
+.academy-admin__enrollment-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (width < 48rem) {
+  .academy-admin__course-table .academy-admin__actions-cell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .academy-admin__course-table .academy-admin__actions-cell::before {
+    display: none;
+    content: none;
+  }
+
+  .academy-admin__course-table .academy-admin__username-column {
+    display: none;
+  }
+
+  .academy-admin__course-table tbody tr {
+    padding-block: var(--ui-space-3);
+    border-block-end: 1px solid var(--ui-line);
+  }
+}

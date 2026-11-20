@@ -1,7 +1,7 @@
 import { assetUrl } from "../config/assets.js";
 // image gallery behavior for the private portfolio.
 export function createImageGallery(context) {
-  const { state, getData, modal, openModal } = context;
+  const { state, getData, openModal } = context;
   function openProjectImages(project) {
     const DATA = getData();
     const modalText = DATA.ui?.modal || {};
@@ -29,6 +29,7 @@ export function createImageGallery(context) {
     openModal({
       kicker: modalText.images || "Images",
       title: project.title,
+      onMount: context.mountHideMissingImages,
       htmlBody: `
         <div class="space-y-4">
           ${images
@@ -50,8 +51,6 @@ export function createImageGallery(context) {
         </div>
       `,
     });
-
-    setTimeout(() => context.mountHideMissingImages(modal.bodyEl), 0);
   }
 
   return { openProjectImages };

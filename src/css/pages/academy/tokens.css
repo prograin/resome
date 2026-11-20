@@ -1,0 +1,46 @@
+body:has([data-site-page="academy"]) {
+  --ui-surface: #edf2f8;
+  --ui-text: #1c2c44;
+  --ui-muted: #40516b;
+  --ui-line: #d4deeb;
+  --ui-accent: #176c65;
+  --ui-ring: #278b80;
+  --academy-surface: var(--ui-surface);
+  --academy-depth-light: rgb(255 255 255 / 90%);
+  --academy-depth-dark: rgb(154 173 198 / 50%);
+  --academy-color-red: #9f2f46;
+  --academy-color-blue: #2458a5;
+  --academy-color-orange: #944008;
+  --academy-color-green: #145e47;
+  --academy-score-1: #bc354c;
+  --academy-score-2: #b85825;
+  --academy-score-3: #946b09;
+  --academy-score-4: #2e8057;
+  --academy-score-5: #147153;
+  --academy-shadow-inset:
+    inset 3px 3px 8px var(--academy-depth-dark), inset -3px -3px 8px var(--academy-depth-light);
+  --academy-shadow-outset:
+    3px 3px 8px var(--academy-depth-dark), -3px -3px 8px var(--academy-depth-light);
+  --academy-neo-shadow: var(--academy-shadow-inset);
+  --academy-neo-child-shadow: var(--academy-shadow-outset);
+}
+
+.dark body:has([data-site-page="academy"]) {
+  --ui-surface: #142237;
+  --ui-text: #edf3fd;
+  --ui-muted: #b5c3d8;
+  --ui-line: #2d405a;
+  --ui-accent: #7bd8c5;
+  --ui-ring: #7bd8c5;
+  --academy-depth-light: rgb(128 159 205 / 12%);
+  --academy-depth-dark: rgb(2 9 21 / 65%);
+  --academy-color-red: #ff9cae;
+  --academy-color-blue: #9abdff;
+  --academy-color-orange: #ffbb79;
+  --academy-color-green: #79dbb2;
+  --academy-score-1: #f37d8b;
+  --academy-score-2: #f4a176;
+  --academy-score-3: #e4bf64;
+  --academy-score-4: #9acf96;
+  --academy-score-5: #75d8b0;
+}

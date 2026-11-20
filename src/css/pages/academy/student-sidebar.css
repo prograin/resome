@@ -1,0 +1,118 @@
+.student-sidebar {
+  flex: none;
+  width: var(--student-sidebar-width);
+  min-height: calc(
+    var(--student-sidebar-items) * (var(--ui-control-height) + var(--ui-space-2)) + 2 *
+      var(--ui-space-2) + 1px
+  );
+}
+
+.student-sidebar__anchor {
+  position: sticky;
+  top: var(--student-sidebar-top);
+  height: 100%;
+  max-height: calc(100vh - var(--student-sidebar-top) - var(--ui-space-4));
+  max-height: calc(100dvh - var(--student-sidebar-top) - var(--ui-space-4));
+}
+
+.student-sidebar[data-expanded="true"] .student-sidebar__anchor {
+  z-index: 2;
+}
+
+.student-sidebar__panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+  gap: var(--ui-space-2);
+  padding: var(--ui-space-2);
+  border-radius: var(--ui-radius);
+  background: var(--ui-surface);
+}
+
+.student-sidebar[data-expanded="true"] .student-sidebar__panel {
+  width: var(--student-sidebar-expanded-width);
+}
+
+.student-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--ui-space-2);
+}
+
+.student-sidebar__profile {
+  display: grid;
+  gap: var(--ui-space-3);
+  margin-block-start: auto;
+  padding-block-start: var(--ui-space-3);
+}
+
+.student-sidebar__profile > .student-sidebar__divider {
+  margin: 0;
+}
+
+.student-sidebar__profile > .ui-button {
+  width: 100%;
+  direction: rtl;
+}
+
+.student-sidebar[data-expanded="true"] .student-sidebar__profile > .ui-button {
+  justify-content: space-between;
+}
+
+.student-sidebar__profile svg {
+  flex: none;
+}
+
+.student-sidebar__identity {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  color: var(--ui-muted);
+  font-size: var(--ui-font-caption);
+}
+
+.student-sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: rtl;
+}
+
+[data-academy-menu][data-expanded="true"] .student-sidebar__header {
+  direction: ltr;
+}
+
+.student-sidebar__toggle {
+  width: calc(var(--student-sidebar-width, 3.5rem) - 2 * var(--ui-space-2));
+  flex: none;
+}
+
+.student-sidebar__divider {
+  border: 0;
+  border-block-start: 1px solid var(--ui-line);
+}
+
+.student-sidebar .ui-button {
+  padding-inline: var(--ui-space-2);
+}
+
+.student-sidebar nav .ui-button {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.student-sidebar nav .ui-button:hover {
+  color: var(--ui-accent);
+}
+
+.student-sidebar[data-expanded="true"] nav .ui-button {
+  justify-content: flex-start;
+  text-align: start;
+}

@@ -1,0 +1,38 @@
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+:where(html, body, body *) {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-scrollbar-thumb) var(--ui-surface);
+}
+
+:where(html, body, body *)::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+:where(html, body, body *)::-webkit-scrollbar-track,
+:where(html, body, body *)::-webkit-scrollbar-corner {
+  background: var(--ui-surface);
+}
+
+:where(html, body, body *)::-webkit-scrollbar-thumb {
+  border: 2px solid var(--ui-surface);
+  border-radius: 999px;
+  background: var(--ui-scrollbar-thumb);
+}
+
+:where(html, body, body *)::-webkit-scrollbar-thumb:hover {
+  background: var(--ui-scrollbar-thumb-hover);
+}
+
+@media (forced-colors: active) {
+  :where(html, body, body *) {
+    scrollbar-color: auto;
+  }
+}

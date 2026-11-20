@@ -2,16 +2,20 @@ import { routes } from "../config/site";
 import { assetUrl } from "../config/assets";
 import { Footer } from "./footer";
 import { PageMetadataSync } from "./page-metadata-sync";
+import { studentPaths } from "../lib/student-auth/paths";
+import { StudentFooter } from "./student-shell";
 
 export function PageFrame({ page, children }) {
   const route = routes[page];
+  const students = route.path.startsWith(studentPaths.signIn);
+  const stylesheet = route.private
+    ? "portfolio"
+    : route.path.startsWith(studentPaths.signIn)
+      ? "students"
+      : route.body;
   return (
     <>
-      <link
-        rel="stylesheet"
-        precedence="site"
-        href={assetUrl(`/styles/${route.private ? "portfolio" : route.body}.css`)}
-      />
+      <link rel="stylesheet" precedence="site" href={assetUrl(`/styles/${stylesheet}.css`)} />
       <PageMetadataSync page={page} />
       {route.background &&
         [960, 1920].map((size) => (
@@ -32,7 +36,7 @@ export function PageFrame({ page, children }) {
           {children}
         </section>
       </main>
-      {!route.private && <Footer />}
+      {!route.private && (students ? <StudentFooter /> : <Footer />)}
     </>
   );
 }

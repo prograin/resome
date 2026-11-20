@@ -27,7 +27,7 @@
 .contact-panel__top p {
   margin: 0;
   color: #64748b;
-  font-size: 0.8rem;
+  font-size: var(--ui-font-caption);
   font-weight: 700;
 }
 .contact-panel__top a {
@@ -128,7 +128,7 @@
   margin: 0.85rem 0 0;
   color: #0f172a;
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: var(--ui-weight-strong);
 }
 .dark .contact-checklist h2 {
   color: #ffffff;

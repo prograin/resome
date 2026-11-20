@@ -1,0 +1,56 @@
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--student-table-size, 0.85rem);
+  text-align: var(--student-table-align, start);
+}
+
+.student-table :is(th, td) {
+  padding: var(--student-table-padding, var(--ui-space-2));
+  text-align: var(--student-table-align, start);
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+
+@media (width < 48rem) {
+  .student-table--stacked {
+    display: block;
+  }
+  .student-table--stacked thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .student-table--stacked tbody {
+    display: grid;
+    gap: var(--ui-space-4);
+  }
+  .student-table--stacked tr {
+    display: grid;
+    gap: var(--ui-space-2);
+  }
+
+  .student-table--stacked tbody :is(th, td) {
+    display: grid;
+    grid-template-columns: minmax(5rem, 0.7fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--ui-space-3);
+    padding: var(--ui-space-2) 0;
+    border: 0;
+    text-align: end;
+  }
+  .student-table--stacked [data-label]::before {
+    content: attr(data-label);
+    color: var(--ui-muted);
+    font-weight: var(--ui-weight-control);
+    text-align: start;
+  }
+  .student-table--stacked tbody :is(th, td) > * {
+    justify-self: end;
+    min-width: 0;
+    max-width: 100%;
+  }
+}

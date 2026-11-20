@@ -1,12 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { SiteLink as Link } from "./site-link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { assetUrl } from "../config/assets";
+import { Button } from "./ui/button";
 import { Icon } from "./icon";
 import { usePreferences } from "./preferences";
+import { AcademyMobileHeader } from "./academy-mobile-header";
+import { StudentHeader } from "./student-shell";
+import { studentPaths } from "../lib/student-auth/paths";
+import { BackButton } from "./ui/back-button";
 
 const pages = [
   ["Home", "/", "خانه", "Home"],
@@ -15,13 +20,12 @@ const pages = [
   ["Contact", "/contact/", "تماس با ما", "Contact"],
 ];
 
-const buttonClass =
-  "inline-flex min-h-10 items-center gap-2 rounded-lg border border-cyan-100 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-cyan-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-cyan-950/40";
 const normalize = (path) => path.replace(/\/$/, "") || "/";
 
 export function Header() {
   const { locale, theme, toggleLocale, toggleTheme } = usePreferences();
   const pathname = usePathname();
+  const academy = pathname === "/academy" || pathname.startsWith("/academy/");
   const [openedPath, setOpenedPath] = useState(null);
   const open = openedPath === pathname;
   const mobileButton = useRef(null);
@@ -43,6 +47,13 @@ export function Header() {
       document.removeEventListener("click", dismiss);
     };
   }, [open]);
+
+  if (
+    normalize(pathname).startsWith(studentPaths.signIn.slice(0, -1) + "/") ||
+    normalize(pathname) === studentPaths.signIn.slice(0, -1)
+  ) {
+    return <StudentHeader pathname={pathname} />;
+  }
 
   function links(mobile) {
     return pages.map(([id, href, persian, english]) => (
@@ -73,9 +84,12 @@ export function Header() {
   return (
     <header
       ref={header}
-      className="site-header z-50 border-b border-cyan-100/80 bg-white/80 backdrop-blur-xl dark:border-cyan-950/70 dark:bg-slate-950/75"
+      className={`site-header ${academy ? "site-header--academy" : ""} z-50 border-b border-cyan-100/80 bg-white/80 backdrop-blur-xl dark:border-cyan-950/70 dark:bg-slate-950/75`}
     >
-      <nav className="mx-auto flex min-h-20 max-w-6xl items-center justify-between px-4 py-2.5 sm:min-h-16 sm:py-3">
+      <nav
+        dir={academy ? "rtl" : undefined}
+        className="site-header__standard mx-auto flex min-h-20 max-w-6xl items-center justify-between px-4 py-2.5 sm:min-h-16 sm:py-3"
+      >
         <Link
           prefetch={false}
           href="/"
@@ -98,9 +112,8 @@ export function Header() {
           {links(false)}
         </div>
         <div className="flex items-center gap-2">
-          <button
+          <Button
             id="langToggle"
-            className={buttonClass}
             type="button"
             aria-label={fa ? "تغییر زبان" : "Toggle language"}
             onClick={toggleLocale}
@@ -109,21 +122,19 @@ export function Header() {
             <span className="hidden sm:inline" id="langToggleText">
               {fa ? "EN" : "FA"}
             </span>
-          </button>
-          <button
+          </Button>
+          <Button
             id="themeToggle"
-            className={buttonClass}
             type="button"
             aria-label={fa ? "تغییر پوسته" : "Toggle theme"}
             onClick={toggleTheme}
           >
             <Icon name={theme === "dark" ? "sun" : "moon"} className="h-4 w-4" />
             <span className="hidden sm:inline">{fa ? "پوسته" : "Theme"}</span>
-          </button>
-          <button
+          </Button>
+          <Button
             ref={mobileButton}
             id="mobileMenuBtn"
-            className={`md:hidden ${buttonClass}`}
             type="button"
             aria-label={fa ? "منو" : "Menu"}
             aria-expanded={open}
@@ -131,9 +142,16 @@ export function Header() {
             onClick={() => setOpenedPath(open ? null : pathname)}
           >
             <Icon name="menu" className="h-4 w-4" />
-          </button>
+          </Button>
+          {academy && (
+            <BackButton
+              fallback={normalize(pathname) === "/academy" ? "/" : "/academy/"}
+              iconOnly
+            />
+          )}
         </div>
       </nav>
+      {academy && <AcademyMobileHeader fa={fa} pathname={pathname} />}
       <div
         id="mobileMenu"
         className={`${open ? "" : "hidden"} border-t border-slate-200 bg-white/80 px-4 py-3 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/70 md:hidden`}

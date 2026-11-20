@@ -34,7 +34,7 @@
   }
   #langToggleText {
     display: inline;
-    font-size: 0.75rem;
+    font-size: var(--ui-font-small);
   }
   #homePage > .home-layout > .home-hero {
     padding-block: 2.5rem;

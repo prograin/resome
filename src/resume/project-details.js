@@ -1,6 +1,6 @@
 // project details behavior for the private portfolio.
 export function createProjectDetails(context) {
-  const { state, getData, modal, openModal } = context;
+  const { state, getData, openModal } = context;
   function openProjectDetails(project) {
     const DATA = getData();
     const ui = DATA.ui || {};

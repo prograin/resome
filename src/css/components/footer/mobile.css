@@ -1,0 +1,17 @@
+@media (width < 48rem) {
+  .site-footer {
+    padding: 2.5rem 1.25rem;
+  }
+  .site-footer__inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1rem;
+  }
+  .site-footer__brand,
+  .site-footer__contact {
+    grid-column: 1 / -1;
+  }
+  .site-footer .site-footer__socials {
+    display: grid !important;
+    grid-template-columns: repeat(4, 2.75rem);
+  }
+}

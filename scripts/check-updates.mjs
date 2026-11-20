@@ -9,11 +9,12 @@ import sharp from "sharp";
 
 const origin = process.env.SITE_URL || "http://127.0.0.1:4173";
 const { version } = JSON.parse(
-  await readFile(new URL("../out/site-version.json", import.meta.url)),
+  await readFile(new URL("../public/site-version.json", import.meta.url)),
 );
 const fixture = await mkdtemp(path.join(tmpdir(), "prograin-assets-"));
 try {
   await mkdir(path.join(fixture, "assets/images/clients"), { recursive: true });
+  await mkdir(path.join(fixture, "assets/icons/courses"), { recursive: true });
   const source = path.join(fixture, "assets/images/home-bg.jpg");
   const output = path.join(fixture, "assets/images/optimized/home-bg-960.webp");
   const create = (background) =>
@@ -34,6 +35,8 @@ try {
     "PASS changed originals regenerate WebP and release fingerprint; unchanged builds stay stable",
   );
 } finally {
+  const relative = path.relative(path.resolve(tmpdir()), path.resolve(fixture));
+  assert.ok(relative.startsWith("prograin-assets-") && !relative.includes(path.sep));
   await rm(fixture, { recursive: true, force: true });
 }
 const browser = await chromium.launch({ channel: "msedge", headless: true });
@@ -59,6 +62,7 @@ try {
     );
     remote = version === "aaaaaaaaaaaa" ? "bbbbbbbbbbbb" : "aaaaaaaaaaaa";
     await page.locator("[data-pricing-toggle]").first().click();
+    await page.locator("#modalDialog").waitFor();
     await page.evaluate(() => window.SITE_UPDATES.check());
     assert.equal(await page.locator("#siteUpdateDialog").isVisible(), false);
     await page.keyboard.press("Escape");

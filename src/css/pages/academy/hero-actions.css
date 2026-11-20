@@ -1,0 +1,44 @@
+.academy-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--ui-space-3);
+  margin-top: var(--ui-space-5);
+}
+
+.academy-hero__actions .ui-button {
+  min-width: min(100%, 11rem);
+  min-height: var(--ui-control-height-lg);
+  padding-inline: var(--ui-space-5);
+  font-size: 1rem;
+}
+
+.academy-hero__students {
+  --ui-action: var(--ui-action-violet);
+  --ui-action-hover: var(--ui-action-violet-hover);
+}
+.academy-entry .academy-hero::before {
+  background-image: url("/assets/images/optimized/academy-entry-bg-1920.webp");
+}
+
+@media (width <= 48rem) {
+  .academy-entry .academy-hero__actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 23rem);
+    margin-inline: auto;
+  }
+
+  .academy-entry .academy-hero__actions .ui-button {
+    min-width: 0;
+    padding-inline: var(--ui-space-2);
+  }
+
+  .academy-entry .academy-hero::before {
+    inset: 0;
+    background-image: url("/assets/images/optimized/academy-entry-bg-960.webp");
+    background-position: 0 0;
+    background-attachment: scroll;
+  }
+}

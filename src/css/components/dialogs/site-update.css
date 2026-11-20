@@ -1,0 +1,44 @@
+html.site-update-open,
+body.site-update-open {
+  overflow: hidden !important;
+}
+.site-update-dialog {
+  width: min(28rem, calc(100% - 2rem));
+  margin: auto;
+  padding: var(--ui-space-8);
+  border: 1px solid var(--ui-line);
+  border-radius: var(--ui-radius);
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  box-shadow: var(--ui-shadow-dialog);
+  text-align: center;
+}
+.site-update-dialog::backdrop {
+  background: var(--ui-backdrop);
+}
+.site-update__symbol {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+  border-radius: 1rem;
+  background: rgb(13 148 136 / 12%);
+  color: var(--ui-accent);
+}
+.site-update-dialog h2 {
+  font-size: 1.3rem;
+  font-weight: var(--ui-weight-heading);
+  line-height: 1.8;
+}
+.site-update-dialog p {
+  margin: 0.75rem 0 1.5rem;
+  color: var(--ui-muted);
+  font-size: 0.9rem;
+  line-height: 2;
+}
+.site-update__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--ui-space-3);
+}

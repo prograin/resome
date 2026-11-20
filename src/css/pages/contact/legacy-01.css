@@ -1,37 +1,3 @@
-@media (width < 48rem) {
-  .academy-table thead th,
-  .academy-table tbody th,
-  .academy-table tbody td {
-    width: auto !important;
-    padding: 0.85rem 0.55rem;
-    font-size: 0.76rem;
-    line-height: 1.85;
-  }
-  .academy-table thead th:not([data-academy-column]),
-  .academy-table tbody th {
-    width: 42% !important;
-  }
-  .academy-table thead th[data-academy-column],
-  .academy-table tbody td[data-academy-column] {
-    width: 58% !important;
-  }
-  .academy-page[data-active-plan="group"] [data-academy-column="private"],
-  .academy-page[data-active-plan="private"] [data-academy-column="group"] {
-    display: none;
-  }
-  .academy-picker {
-    width: calc(100vw - 2rem);
-    max-width: calc(100vw - 2rem);
-    margin-inline: auto;
-    padding: 0.75rem;
-  }
-  .academy-plan__price {
-    font-size: 1.55rem;
-  }
-  .academy-plan {
-    text-align: start;
-  }
-}
 .contact-page {
   box-sizing: border-box;
   position: relative;
@@ -88,7 +54,7 @@
   margin: 0 0 0.65rem;
   color: #0f766e;
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: var(--ui-weight-strong);
 }
 .dark .contact-eyebrow {
   color: #5eead4;

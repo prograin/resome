@@ -1,0 +1,46 @@
+.student-management__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--ui-space-4);
+}
+
+.student-management__row > * {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.student-management__goals > .student-dashboard-goals {
+  width: 100%;
+  grid-area: auto;
+  contain: none;
+}
+
+.student-management__goals,
+.student-management__row > form {
+  align-content: start;
+}
+
+.student-management__award-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.6fr) minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--ui-space-3);
+}
+
+.student-management__award-fields > label {
+  min-width: 0;
+}
+
+@media (width < 48rem) {
+  .student-management__award-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width < 64rem) {
+  .student-management__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

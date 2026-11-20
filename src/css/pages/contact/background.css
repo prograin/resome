@@ -92,7 +92,7 @@
   background: rgba(15, 23, 42, 0.36);
   color: #99f6e4;
   padding: 0.35rem 0.65rem;
-  font-size: 0.75rem;
-  font-weight: 800;
+  font-size: var(--ui-font-small);
+  font-weight: var(--ui-weight-strong);
   letter-spacing: 0;
 }

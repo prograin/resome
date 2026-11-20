@@ -17,7 +17,7 @@ async function visit(directory) {
       if (!generatedDirectories.has(file)) await visit(file);
       continue;
     }
-    if (!/\.(jsx?|tsx?|css|html|json)$/.test(file)) continue;
+    if (!/\.(m?jsx?|tsx?|css|html|json)$/.test(file)) continue;
     const content = await readFile(path.join(root, file), "utf8");
     const lines = content.trimEnd().split(/\r?\n/).length;
     checked += 1;
@@ -27,6 +27,7 @@ async function visit(directory) {
 }
 
 await visit("src");
+await visit("scripts");
 if (failures.length)
   throw new Error(`Split these source files into focused modules:\n${failures.join("\n")}`);
 console.log(

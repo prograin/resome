@@ -1,0 +1,95 @@
+.academy-admin__roster-row {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  align-items: center;
+  gap: var(--ui-space-4);
+}
+
+.academy-admin__student-identity {
+  display: grid;
+  gap: var(--ui-space-1);
+  min-width: 0;
+}
+
+.student-progress .academy-admin__student-identity h2 {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.academy-admin__student-identity > .academy-admin__username {
+  color: var(--ui-muted);
+  font-size: var(--ui-font-caption);
+}
+
+.academy-admin__roster-fields {
+  display: grid;
+  grid-template-columns: minmax(4rem, 0.5fr) minmax(0, 2fr) auto;
+  gap: var(--ui-space-3);
+  align-items: end;
+}
+
+@media (width >= 48rem) {
+  .academy-admin__student-identity {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--ui-space-4);
+  }
+
+  .academy-admin__student-identity > * {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (width < 48rem) {
+  .academy-admin__roster-row .academy-admin__username {
+    display: none;
+  }
+
+  .academy-admin__roster-row {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 2.8fr);
+    gap: var(--ui-space-2);
+    padding: var(--ui-space-3);
+  }
+
+  .student-progress .academy-admin__student-identity h2 {
+    font-size: var(--ui-font-caption);
+  }
+
+  .academy-admin__roster-row .academy-admin__roster-fields {
+    grid-template-columns: 2.8rem minmax(0, 1fr) auto;
+    gap: var(--ui-space-1);
+  }
+
+  .academy-admin__roster-row :is(label, .ui-button) {
+    font-size: var(--ui-font-small);
+  }
+
+  .academy-admin__roster-row .ui-button {
+    padding-inline: var(--ui-space-2);
+  }
+
+  .academy-admin__roster-row .student-panel__form :is(input, textarea) {
+    padding-inline: var(--ui-space-2);
+  }
+
+  .academy-admin__roster-row[data-view="grades"] {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ui-space-3);
+    padding: var(--ui-space-4);
+  }
+
+  .academy-admin__roster-row[data-view="grades"] .academy-admin__roster-fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--ui-space-3);
+  }
+
+  .academy-admin__roster-row[data-view="grades"] :is(label, .ui-button) {
+    font-size: var(--ui-font-control);
+  }
+
+  .academy-admin__roster-row[data-view="grades"] textarea {
+    min-height: 5rem;
+  }
+}

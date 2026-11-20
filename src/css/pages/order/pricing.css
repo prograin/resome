@@ -1,0 +1,37 @@
+.pricing-panel,
+.dark .pricing-panel {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+.pricing-panel__header {
+  padding: 0 0 1.8rem;
+}
+.pricing-panel__header h2,
+.dark .pricing-panel__header h2 {
+  color: var(--ui-text);
+  font-size: 1.8rem;
+  font-weight: var(--ui-weight-heading);
+  text-shadow: none;
+}
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+.pricing-grid .pricing-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  min-height: 35rem;
+  padding: 1.5rem;
+  border-radius: var(--ui-radius);
+  opacity: 1;
+  transform: none;
+  background: var(--ui-surface);
+  border-color: var(--ui-line);
+  box-shadow: var(--ui-shadow);
+}

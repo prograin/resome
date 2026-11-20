@@ -1,0 +1,78 @@
+.student-goal__range {
+  --goal-slider-start: var(--academy-score-1);
+  --goal-slider-middle: var(--academy-color-blue);
+  --goal-slider-end: var(--academy-score-5);
+  --goal-slider-direction: to right;
+  --goal-slider-color: color-mix(
+    in srgb,
+    color-mix(
+      in srgb,
+      var(--goal-slider-start),
+      var(--goal-slider-middle) clamp(0%, calc(var(--goal-slider-fill) * 2), 100%)
+    ),
+    var(--goal-slider-end) clamp(0%, calc(var(--goal-slider-fill) * 2 - 100%), 100%)
+  );
+  --goal-slider-track:
+    linear-gradient(
+      var(--goal-slider-direction),
+      transparent var(--goal-slider-fill),
+      color-mix(in srgb, var(--ui-surface) 68%, transparent) var(--goal-slider-fill)
+    ),
+    linear-gradient(
+      var(--goal-slider-direction),
+      var(--goal-slider-start),
+      var(--goal-slider-middle) 50%,
+      var(--goal-slider-end)
+    );
+  appearance: none;
+  width: 100%;
+  min-height: var(--ui-control-height);
+  background: transparent;
+  cursor: pointer;
+}
+
+.student-goal__range:dir(rtl) {
+  --goal-slider-direction: to left;
+}
+
+.student-goal__range::-webkit-slider-runnable-track {
+  height: var(--ui-space-2);
+  border-radius: var(--ui-radius);
+  background: var(--goal-slider-track);
+}
+
+.student-goal__range::-moz-range-track {
+  height: var(--ui-space-2);
+  border-radius: var(--ui-radius);
+  background: var(--goal-slider-track);
+}
+
+.student-goal__range::-webkit-slider-thumb {
+  appearance: none;
+  width: var(--ui-space-5);
+  height: var(--ui-space-5);
+  margin-top: calc((var(--ui-space-2) - var(--ui-space-5)) / 2);
+  border-radius: 50%;
+  background: var(--goal-slider-color);
+  box-shadow:
+    inset 0 0 0 2px var(--ui-surface),
+    var(--academy-neo-child-shadow, var(--academy-shadow-outset));
+  cursor: inherit;
+}
+
+.student-goal__range::-moz-range-thumb {
+  width: var(--ui-space-5);
+  height: var(--ui-space-5);
+  border: 0;
+  border-radius: 50%;
+  background: var(--goal-slider-color);
+  box-shadow:
+    inset 0 0 0 2px var(--ui-surface),
+    var(--academy-neo-child-shadow, var(--academy-shadow-outset));
+  cursor: inherit;
+}
+
+.student-goal__range:disabled {
+  cursor: default;
+  opacity: 1;
+}

@@ -6,6 +6,7 @@ import { transform } from "lightningcss";
 import { PurgeCSS } from "purgecss";
 import { optimizeImages, assetFingerprint } from "./lib/assets.mjs";
 import { readStyles } from "./lib/css.mjs";
+import { includeStyle } from "./lib/style-groups.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const source = (file) => path.join(root, file);
@@ -30,17 +31,7 @@ async function compileStyles(stylesheet, content, version) {
     keyframes: true,
     defaultExtractor: (value) => value.match(/[\w\-/:.\[\]%#()]+/g) || [],
     safelist: {
-      standard: [
-        /\[/,
-        /^contact-action--/,
-        "dark",
-        "rtl",
-        "hidden",
-        "flex",
-        "is-bg-ready",
-        "modal-open",
-        "site-update-open",
-      ],
+      standard: [/\[/, "dark", "rtl", "hidden", "flex", "is-bg-ready", "site-update-open"],
     },
   });
   const css = trimmed.css.replace(
@@ -54,6 +45,7 @@ await optimizeImages(root);
 const hash = createHash("sha256");
 hash.update(await assetFingerprint(root));
 hash.update(await assetFingerprint(root, "src", new Set(["generated"])));
+hash.update(await assetFingerprint(root, "scripts/lib"));
 for (const file of [
   "package-lock.json",
   "next.config.mjs",
@@ -63,15 +55,29 @@ for (const file of [
   hash.update(await readFile(source(file)));
 }
 const version = hash.digest("hex").slice(0, 12);
-const stylesheet = await readStyles(root);
 const common = await Promise.all(["src/components", "src/app", "src/config"].map(collect)).then(
   (sources) => sources.flat(),
 );
 const styles = await Promise.all(
-  ["home", "order", "academy", "contact", "portfolio", "error"].map(async (name) => {
-    const feature = name === "error" ? [] : await collect(`src/features/${name}`);
+  ["home", "order", "academy", "students", "contact", "portfolio", "error"].map(async (name) => {
+    const stylesheet = await readStyles(root, "src/css/index.css", [], (file) =>
+      includeStyle(name, file),
+    );
+    const feature = ["error", "students"].includes(name)
+      ? []
+      : await collect(`src/features/${name}`);
     const portfolio = name === "portfolio" ? await collect("src/resume") : [];
-    const code = await compileStyles(stylesheet, [...common, ...feature, ...portfolio], version);
+    const students =
+      name === "students"
+        ? await Promise.all(
+            ["src/features/students", "src/features/academy-admin"].map(collect),
+          ).then((sources) => sources.flat())
+        : [];
+    const code = await compileStyles(
+      stylesheet,
+      [...common, ...feature, ...portfolio, ...students],
+      version,
+    );
     return [name, code];
   }),
 );
@@ -97,8 +103,8 @@ await cp(source("assets"), source("public/assets"), {
     const relative = path.relative(source("assets"), file).replaceAll("\\", "/");
     return (
       relative !== "fonts/Vazirmatn-Variable.woff2" &&
-      !/^images\/[^/]+-bg\.jpg$/i.test(relative) &&
-      !/^images\/clients\/[^/]+\.png$/i.test(relative)
+      !/^images\/[^/]+-bg(?:-mobile)?\.(jpg|png)$/i.test(relative) &&
+      !/^(images\/clients|icons\/courses)\/[^/]+\.png$/i.test(relative)
     );
   },
 });

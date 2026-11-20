@@ -24,7 +24,7 @@ try {
     page.on("request", (request) => requests.push(request.url()));
     const label = mobile ? "mobile" : "desktop";
 
-    for (const route of ["/", "/contact/", "/academy/", "/order/", "/resume/"]) {
+    for (const route of ["/", "/contact/", "/academy/consultation/", "/order/", "/resume/"]) {
       requests.length = 0;
       await page.goto(`${origin}${route}`);
       await page.waitForLoadState("networkidle");
@@ -49,7 +49,7 @@ try {
       if (route === "/contact/") {
         assert.ok(requests.some((url) => url.includes(`contact-bg-${mobile ? 960 : 1920}.webp`)));
       }
-      if (route === "/academy/") {
+      if (route === "/academy/consultation/") {
         assert.equal(
           requests.some((url) => url.includes("academy-youtube-bg")),
           false,
@@ -107,10 +107,20 @@ try {
     await page.locator("#homePage:not(.hidden)").waitFor();
     await page.evaluate(() => document.querySelector("[data-page-link='academy']").click());
     await page.locator("#academyPage:not(.hidden)").waitFor();
-    await page.locator("#langToggle").click();
-    assert.equal(await page.locator(".academy-page").getAttribute("dir"), "ltr");
-    await page.locator("#langToggle").click();
-    await page.locator("#themeToggle").click();
+    if (mobile) {
+      assert.equal(await page.locator("#langToggle").isVisible(), false);
+      assert.equal(await page.locator("#themeToggle").isVisible(), false);
+      assert.equal(await page.locator("#mobileMenuBtn").isVisible(), false);
+      await page.locator("#academyMenuButton").click();
+      await page.locator("#academy-mobile-menu").waitFor();
+      await page.keyboard.press("Escape");
+      await page.locator("#academy-mobile-menu").waitFor({ state: "hidden" });
+    } else {
+      await page.locator("#langToggle").click();
+      assert.equal(await page.locator(".academy-page").getAttribute("dir"), "ltr");
+      await page.locator("#langToggle").click();
+      await page.locator("#themeToggle").click();
+    }
     await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
     await page.screenshot({
       path: new URL(`../.backup/qa/academy-${label}.png`, import.meta.url).pathname.replace(

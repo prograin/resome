@@ -1,0 +1,210 @@
+.student-chart {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-space-4);
+  direction: ltr;
+}
+
+.student-chart__graph {
+  direction: inherit;
+  min-width: 0;
+}
+
+.student-chart__empty {
+  display: grid;
+  place-items: center;
+  padding: var(--ui-space-4);
+  text-align: center;
+}
+
+html[dir="rtl"] .student-chart__graph,
+html[dir="rtl"] .student-chart__metrics,
+html[dir="rtl"] .student-weekly-leaders {
+  direction: rtl;
+}
+
+.student-chart__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--ui-space-3);
+  align-content: start;
+}
+
+.student-chart__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+  margin-block-end: var(--ui-space-4);
+}
+
+.student-chart__modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2);
+}
+
+.student-chart__modes .ui-button[aria-pressed="true"] {
+  font-weight: var(--ui-weight-heading);
+}
+
+.student-chart__mode-select {
+  display: none;
+}
+
+.student-chart__average {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  align-self: start;
+  width: 100%;
+  height: 100%;
+  gap: var(--ui-space-2);
+  text-align: start;
+}
+
+.student-progress .student-chart__average > p {
+  font-size: 0.95rem;
+  font-weight: var(--ui-weight-control);
+}
+
+.student-chart__average-value {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: var(--ui-weight-heading);
+  color: var(--student-average-color, var(--ui-text));
+}
+
+@media (width < 48rem) {
+  .student-chart__controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+  .student-chart__controls > label {
+    min-width: 0;
+  }
+  .student-chart__controls select {
+    font-size: var(--ui-font-control);
+  }
+  .student-chart__modes {
+    display: none;
+  }
+  .student-chart__mode-select {
+    display: grid;
+  }
+  .student-chart {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .student-chart__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.student-chart-layout {
+  display: grid;
+  gap: var(--ui-space-4);
+  min-width: 0;
+}
+
+.student-weekly-change {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-2);
+  font-size: var(--ui-font-caption);
+}
+
+.student-weekly-change--positive {
+  color: var(--academy-color-green);
+}
+
+.student-weekly-change--negative {
+  color: var(--academy-color-red);
+}
+
+.student-weekly-change--neutral {
+  color: var(--ui-muted);
+}
+
+.student-weekly-leaders {
+  --academy-card-surface: color-mix(
+    in srgb,
+    var(--academy-surface),
+    var(--academy-color-green) 10%
+  );
+  --student-table-align: center;
+  min-width: 0;
+  align-self: start;
+}
+
+.student-weekly-leaders__scroll {
+  overflow-x: auto;
+}
+
+.student-weekly-leaders tbody tr:not(:last-child) > td {
+  border-block-end: 1px solid var(--ui-line);
+}
+
+.student-weekly-leaders__scroll:focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: var(--ui-space-1);
+}
+
+.student-weekly-leaders__rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-2);
+}
+
+@media (width < 48rem) {
+  .student-weekly-leaders__scroll {
+    overscroll-behavior-x: contain;
+    padding-block-end: var(--ui-space-2);
+  }
+
+  .student-weekly-leaders .student-table {
+    min-width: max(26rem, calc(100% + 4rem));
+  }
+
+  .student-weekly-leaders :is(th, td) {
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+
+  .student-weekly-leaders__scroll--more {
+    mask-image: linear-gradient(to left, transparent, #000 1.25rem);
+  }
+
+  html[dir="rtl"] .student-weekly-leaders__scroll--more {
+    mask-image: linear-gradient(to right, transparent, #000 1.25rem);
+  }
+}
+
+@media (width >= 48rem) {
+  .student-weekly-leaders {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    gap: var(--ui-space-3);
+    min-height: 0;
+    contain: size;
+  }
+
+  .student-weekly-leaders > h2 {
+    flex: none;
+  }
+
+  .student-weekly-leaders__scroll {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+  }
+}
+
+@media (width >= 64rem) {
+  .student-chart {
+    grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr);
+  }
+}

@@ -10,8 +10,7 @@
   }
   html[dir="rtl"] .site-header,
   html[dir="rtl"] .site-main,
-  html[dir="rtl"] #mobileMenu,
-  html[dir="rtl"] #modalOverlay {
+  html[dir="rtl"] #mobileMenu {
     direction: rtl;
   }
   @media (width >= 40rem) {

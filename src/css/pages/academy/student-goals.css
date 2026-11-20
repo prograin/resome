@@ -1,0 +1,119 @@
+.ui-dialog:has(.student-goal__form[data-add="true"]) {
+  --ui-dialog-width: 56rem;
+}
+
+.student-goal__form {
+  grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+  align-items: end;
+}
+
+.student-goal__form > div {
+  min-width: 0;
+}
+
+.student-goal__form[data-add="true"] {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.student-goal__description-field,
+.student-goal__actions,
+.student-goal__form > p {
+  grid-column: 1 / -1;
+}
+
+.student-goal__description {
+  white-space: pre-wrap;
+}
+
+.student-goal__heading,
+.student-goal__slider-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-3);
+}
+
+.student-goal__priority {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  margin-block-start: var(--ui-space-2);
+}
+
+.student-goal__priority [data-priority] {
+  padding: 0.1rem var(--ui-space-2);
+  border-radius: var(--ui-radius);
+  color: var(--goal-priority-color);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.student-goal__priority [data-priority="1"] {
+  --goal-priority-color: var(--academy-color-red);
+}
+
+.student-goal__priority [data-priority="2"] {
+  --goal-priority-color: var(--academy-color-blue);
+}
+
+.student-goal__priority [data-priority="3"] {
+  --goal-priority-color: var(--academy-color-green);
+}
+
+.student-goal__progress-value {
+  flex: none;
+}
+
+.student-goal__heading {
+  align-items: start;
+}
+
+.student-goal__action {
+  flex: none;
+}
+
+.student-goal__description-toggle {
+  justify-self: left;
+  margin-block-start: var(--ui-space-2);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: var(--ui-font-small);
+  text-decoration: underline;
+}
+
+.student-goal__slider {
+  display: grid;
+  gap: var(--ui-space-3);
+}
+
+.student-goal__form .student-goal__slider-label {
+  display: flex;
+}
+
+.student-goal__range-surface {
+  display: flex;
+  padding-inline: var(--ui-space-3);
+}
+
+.student-goal__description-surface {
+  display: grid;
+}
+
+@media (width <= 48rem) {
+  .ui-dialog__overlay:has(.student-goal__form[data-add="true"]) {
+    padding-inline: var(--ui-space-2);
+  }
+
+  .student-goal__form[data-add="true"] {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .student-goal__form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .student-goal__title-field {
+    grid-column: 1 / -1;
+  }
+}

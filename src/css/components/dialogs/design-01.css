@@ -1,3 +1,61 @@
+.ui-dialog__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ui-dialog-layer);
+  display: grid;
+  place-items: center;
+  padding: var(--ui-space-4);
+  overflow: auto;
+  background: var(--ui-backdrop);
+}
+
+.ui-dialog {
+  width: min(100%, var(--ui-dialog-width));
+  overflow: hidden;
+  border: 1px solid var(--ui-line);
+  border-radius: var(--ui-radius);
+  background: var(--ui-surface);
+  color: var(--ui-text);
+  box-shadow: var(--ui-shadow-dialog);
+}
+
+.ui-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-3);
+  padding: var(--ui-space-4) var(--ui-space-5);
+  border-bottom: 1px solid var(--ui-line);
+}
+
+.ui-dialog__kicker {
+  color: var(--ui-muted);
+  font-size: var(--ui-font-small);
+  font-weight: var(--ui-weight-control);
+}
+
+.ui-dialog__title {
+  font-size: 1.2rem;
+  font-weight: var(--ui-weight-heading);
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.ui-dialog__close {
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  min-height: 0;
+  padding: 0;
+}
+
+.ui-dialog__body {
+  max-height: min(72svh, calc(100svh - 8rem));
+  padding: var(--ui-space-5);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
 .package-details__features li {
   display: flex;
   align-items: start;

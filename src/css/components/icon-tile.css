@@ -1,0 +1,11 @@
+@layer components {
+  .icon-tile {
+    display: inline-flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+  }
+}

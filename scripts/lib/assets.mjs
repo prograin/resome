@@ -14,24 +14,34 @@ export async function optimizeImages(root) {
     /* First build. */
   }
   const jobs = [];
-  for (const file of await readdir(path.join(root, "assets/images"))) {
-    if (!file.endsWith("-bg.jpg")) continue;
+  const backgrounds = await readdir(path.join(root, "assets/images"));
+  const mobileBackgrounds = new Map(
+    backgrounds
+      .filter((file) => /-bg-mobile\.(jpg|png)$/i.test(file))
+      .map((file) => [path.parse(file).name.slice(0, -"-mobile".length), file]),
+  );
+  for (const file of backgrounds) {
+    if (!/-bg\.(jpg|png)$/i.test(file)) continue;
+    const name = path.parse(file);
+    const mobile = mobileBackgrounds.get(name.name) ?? file;
     for (const width of [960, 1920])
       jobs.push({
-        source: `assets/images/${file}`,
-        target: `assets/images/optimized/${file.slice(0, -4)}-${width}.webp`,
+        source: `assets/images/${width === 960 ? mobile : file}`,
+        target: `assets/images/optimized/${name.name}-${width}.webp`,
         width,
         quality: 80,
       });
   }
-  for (const file of await readdir(path.join(root, "assets/images/clients"))) {
-    if (file.endsWith(".png"))
-      jobs.push({
-        source: `assets/images/clients/${file}`,
-        target: `assets/images/clients/${file.slice(0, -4)}.webp`,
-        width: 128,
-        quality: 85,
-      });
+  for (const directory of ["assets/images/clients", "assets/icons/courses"]) {
+    for (const file of await readdir(path.join(root, directory))) {
+      if (file.endsWith(".png"))
+        jobs.push({
+          source: `${directory}/${file}`,
+          target: `${directory}/${file.slice(0, -4)}.webp`,
+          width: 128,
+          quality: 85,
+        });
+    }
   }
   for (const job of jobs) {
     const source = await readFile(path.join(root, job.source));

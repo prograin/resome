@@ -1,3 +1,5 @@
+import { Button } from "./ui/button";
+
 export function UpdateMarkup() {
   return (
     <dialog
@@ -24,12 +26,10 @@ export function UpdateMarkup() {
       <h2 id="siteUpdateTitle">نسخه جدید سایت آماده است</h2>
       <p id="siteUpdateDescription">برای دیدن آخرین تغییرات و عکس‌ها، سایت را بروزرسانی کنید.</p>
       <div className="site-update__actions">
-        <button id="siteUpdateApply" type="button">
+        <Button id="siteUpdateApply" variant="primary">
           بروزرسانی
-        </button>
-        <button id="siteUpdateLater" type="button">
-          بعداً
-        </button>
+        </Button>
+        <Button id="siteUpdateLater">بعداً</Button>
       </div>
     </dialog>
   );

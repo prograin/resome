@@ -1,0 +1,80 @@
+.academy-page .ui-button,
+.student-login .ui-button,
+.student-progress .ui-button,
+.student-sidebar__toggle,
+.site-header--academy .ui-button,
+.ui-dialog[data-kind="academy"] .ui-button,
+:is(.student-login, .student-progress, .ui-dialog[data-kind="academy"])
+  .student-panel__form
+  :is(input:not([type="range"]), select, textarea),
+.site-header > .academy-mobile-menu:not([hidden]) {
+  border: 0;
+  box-shadow: var(--academy-neo-shadow, var(--academy-shadow-inset));
+}
+
+:is(.student-login, .student-progress, .ui-dialog[data-kind="academy"])
+  .student-panel__form
+  :is(input:not([type="range"]), select, textarea) {
+  background: var(--academy-surface);
+}
+
+.student-sidebar .ui-button[aria-current="page"],
+.academy-page .ui-button[aria-selected="true"] {
+  color: var(--ui-accent);
+  font-weight: var(--ui-weight-heading);
+}
+
+:where(
+    .academy-page,
+    .student-login,
+    .student-progress,
+    .student-sidebar,
+    .site-header--academy,
+    .ui-dialog[data-kind="academy"]
+  )
+  .ui-button:not(.ui-button--primary) {
+  background: var(--academy-surface);
+  color: var(--ui-text);
+}
+
+:where(
+    .academy-page,
+    .student-login,
+    .student-progress,
+    .student-sidebar,
+    .site-header--academy,
+    .ui-dialog[data-kind="academy"]
+  )
+  .ui-button:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+:where(
+    .academy-page,
+    .student-login,
+    .student-progress,
+    .student-sidebar,
+    .ui-dialog[data-kind="academy"],
+    .site-header--academy
+  )
+  .ui-button:active:not(:disabled):not(.student-sidebar nav .ui-button) {
+  box-shadow: var(--academy-neo-child-shadow, var(--academy-shadow-outset));
+}
+
+.student-panel__form [role="alert"] {
+  color: var(--academy-color-red);
+}
+
+.student-panel__form [role="status"] {
+  color: var(--academy-color-green);
+}
+
+.student-panel__form
+  :is([data-status="limit"], [data-status="freshSession"], [data-status="emailLocked"]) {
+  color: var(--academy-color-orange);
+}
+
+.student-panel__form [aria-invalid="true"] {
+  outline: var(--ui-focus-width) solid var(--academy-color-red);
+  outline-offset: var(--ui-focus-offset);
+}

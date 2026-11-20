@@ -14,7 +14,7 @@
   gap: clamp(2rem, 5vw, 4rem);
 }
 .order-intro h1 {
-  font-weight: 800;
+  font-weight: var(--ui-weight-strong);
   line-height: var(--ui-title-leading);
   font-size: var(--ui-title-size);
 }
@@ -25,7 +25,7 @@
 }
 .order-intro .page-eyebrow {
   color: var(--ui-accent);
-  font-size: 0.8rem;
+  font-size: var(--ui-font-caption);
 }
 .order-services {
   display: grid;
@@ -34,7 +34,7 @@
   min-width: 0;
 }
 .order-service > p:last-child {
-  font-size: 0.8rem;
+  font-size: var(--ui-font-caption);
   line-height: 1.95;
 }
 .order-services > div {
@@ -86,12 +86,12 @@
   align-items: center;
   gap: 0.5rem;
   color: var(--ui-accent);
-  font-size: 0.75rem;
+  font-size: var(--ui-font-small);
   font-weight: 600;
 }
 .order-clients h2 {
   font-size: 1.65rem;
-  font-weight: 750;
+  font-weight: var(--ui-weight-heading);
 }
 .order-clients__list {
   margin-top: 1.75rem;
@@ -158,7 +158,7 @@
   align-items: center;
   gap: 0.4rem;
   color: var(--ui-accent);
-  font-size: 0.75rem;
+  font-size: var(--ui-font-small);
   font-weight: 600;
 }
 .project-showcase {

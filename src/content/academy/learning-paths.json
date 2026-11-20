@@ -1,0 +1,110 @@
+{
+  "fa": {
+    "title": "برای انتخاب بهترین مسیر",
+    "paths": [
+      {
+        "title": "شروع از صفر با پایتون",
+        "description": "اگر تازه شروع کرده‌ای و هنوز حوزه موردعلاقه‌ات را پیدا نکرده‌ای، پایتون می‌تواند نقطه شروع مناسبی باشد. با مبانی برنامه‌نویسی آشنا شو و بعد وارد توسعه بک‌اند شو.",
+        "action": "شروع مسیر پایتون",
+        "steps": [
+          "مبانی پایتون",
+          "حل مسئله و پروژه‌های کوچک",
+          "Git و پایگاه داده",
+          "Django و ساخت API",
+          "بک‌اند پیشرفته",
+          "مبانی شبکه و Linux",
+          "استقرار پروژه"
+        ]
+      },
+      {
+        "title": "ساخت وب و رابط کاربری",
+        "description": "اگر به طراحی رابط کاربری و ساخت صفحات تعاملی علاقه داری، از پایه‌های وب شروع کن و به توسعه برنامه‌های مدرن برس.",
+        "action": "شروع مسیر توسعه وب",
+        "steps": [
+          "HTML و CSS",
+          "طراحی واکنش‌گرا",
+          "JavaScript",
+          "Git",
+          "React",
+          "Next.js",
+          "مبانی شبکه و Linux",
+          "استقرار پروژه"
+        ]
+      },
+      {
+        "title": "بازی‌سازی و انیمیشن",
+        "description": "اگر دوست داری بازی، شخصیت یا دنیای سه‌بعدی بسازی، شاخه موردعلاقه‌ات را انتخاب کن.",
+        "action": "کشف مسیر بازی و انیمیشن",
+        "branches": [
+          {
+            "title": "بازی‌سازی با Unity",
+            "description": "مبانی C#، آشنایی با Unity، ساخت یک بازی کوچک."
+          },
+          {
+            "title": "بازی‌سازی با Unreal Engine",
+            "description": "آشنایی با محیط و Blueprints، یادگیری C++، ساخت پروژه عملی."
+          },
+          {
+            "title": "مدل‌سازی و انیمیشن با Maya",
+            "description": "مبانی سه‌بعدی، مدل‌سازی، ریگ و انیمیشن؛ سپس Python برای اسکریپت‌نویسی و خودکارسازی کارها."
+          }
+        ],
+        "note": "این شاخه‌ها مسیرهای انتخابی‌اند. شاخهٔ موردعلاقه‌ات را انتخاب کن؛ لازم نیست همهٔ ابزارها و زبان‌ها را یاد بگیری."
+      }
+    ]
+  },
+  "en": {
+    "title": "Choose a learning path",
+    "paths": [
+      {
+        "title": "Start from scratch with Python",
+        "description": "If you’re new to programming and still exploring your interests, Python is a good place to start. Learn programming fundamentals and then move into backend development.",
+        "action": "Start the Python path",
+        "steps": [
+          "Python fundamentals",
+          "Problem-solving and small projects",
+          "Git and databases",
+          "Django and API development",
+          "Advanced backend development",
+          "Networking and Linux fundamentals",
+          "Project deployment"
+        ]
+      },
+      {
+        "title": "Build websites and interfaces",
+        "description": "If you enjoy designing interfaces and building interactive pages, start with web fundamentals and work up to modern applications.",
+        "action": "Start the web development path",
+        "steps": [
+          "HTML and CSS",
+          "Responsive design",
+          "JavaScript",
+          "Git",
+          "React",
+          "Next.js",
+          "Networking and Linux fundamentals",
+          "Project deployment"
+        ]
+      },
+      {
+        "title": "Game development and animation",
+        "description": "If you’d like to build games, characters, or 3D worlds, choose the branch that interests you.",
+        "action": "Explore games and animation",
+        "branches": [
+          {
+            "title": "Game development with Unity",
+            "description": "Learn C# fundamentals, get to know Unity, and build a small game."
+          },
+          {
+            "title": "Game development with Unreal Engine",
+            "description": "Get familiar with the editor and Blueprints, learn C++, and build a hands-on project."
+          },
+          {
+            "title": "Modeling and animation with Maya",
+            "description": "Learn 3D fundamentals, modeling, rigging, and animation, then use Python for scripting and automation."
+          }
+        ],
+        "note": "Pick the branch that interests you. You only need the tools and languages that go with that branch."
+      }
+    ]
+  }
+}

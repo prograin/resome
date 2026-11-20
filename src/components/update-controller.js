@@ -41,7 +41,7 @@ export function createUpdateController(currentVersion) {
       applying
     )
       return;
-    if (document.querySelector('#modalOverlay[aria-hidden="false"]')) {
+    if (document.querySelector("[data-details-dialog-active]")) {
       retry = setTimeout(present, 750);
       return;
     }

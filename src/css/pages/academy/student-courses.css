@@ -1,0 +1,102 @@
+.student-course__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-space-3);
+}
+
+.student-course__label-short {
+  display: none;
+}
+
+@media (width < 48rem) {
+  .student-course__label-full {
+    display: none;
+  }
+
+  .student-course__label-short {
+    display: inline;
+  }
+}
+
+.student-course__icon {
+  flex: none;
+  object-fit: contain;
+}
+
+.dark .student-course__icon[data-course-icon="github"] {
+  filter: invert(1);
+}
+
+html:not(.dark)
+  .student-course__icon:is([data-course-icon="syllabus"], [data-course-icon="videos"]) {
+  filter: invert(1);
+}
+
+.student-course__form {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+.student-course__wide-field {
+  grid-column: 1 / -1;
+}
+
+.student-course__video,
+.student-course__syllabus {
+  padding: var(--ui-space-3);
+  overflow-wrap: anywhere;
+}
+
+.student-course__video p {
+  margin-block: var(--ui-space-2);
+  white-space: pre-wrap;
+}
+
+.student-course__syllabus {
+  padding-inline-start: var(--ui-space-8);
+  list-style: decimal;
+}
+
+.ui-dialog:has(.student-course__syllabus-content) .ui-dialog__header {
+  border-bottom: 0;
+}
+.student-course--beginner {
+  --course-difficulty-color: var(--academy-color-green);
+}
+
+.student-course--intermediate {
+  --course-difficulty-color: var(--academy-color-orange);
+}
+
+.student-course--advanced {
+  --course-difficulty-color: var(--academy-color-red);
+}
+
+:is(.student-course--intermediate, .student-course--advanced) {
+  --course-difficulty-tint: 14%;
+  --course-difficulty-badge-bg: var(--course-difficulty-color);
+  --course-difficulty-badge-ink: var(--ui-on-action);
+}
+
+.dark :is(.student-course--intermediate, .student-course--advanced) {
+  --course-difficulty-badge-ink: var(--ui-raised);
+}
+
+.student-course {
+  --academy-card-surface: color-mix(
+    in srgb,
+    var(--academy-surface),
+    var(--course-difficulty-color, var(--academy-surface)) var(--course-difficulty-tint, 12%)
+  );
+}
+
+.student-course__difficulty span {
+  display: inline-block;
+  padding-inline: var(--ui-space-2);
+  border-radius: var(--ui-radius);
+  background: var(--course-difficulty-badge-bg, color-mix(in srgb, currentColor 14%, transparent));
+  color: var(--course-difficulty-badge-ink, var(--course-difficulty-color, var(--ui-muted)));
+  font-weight: var(--ui-weight-control);
+}
+.student-course p > strong {
+  font-weight: var(--ui-weight-strong);
+}

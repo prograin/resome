@@ -1,6 +1,10 @@
 {
   "title": "Programming training",
   "lead": "Choose the learning path that fits your goal: online semi-private training for a structured and affordable start, or private mentoring for faster, focused progress.",
+  "entryLead": "Learn programming through hands-on projects in private or small-group classes.",
+  "studentsPage": "Students",
+  "consultationPage": "Consultation",
+  "support": "Support",
   "selectorTitle": "Choose your training type",
   "detailsTitle": "Training details",
   "detailsLabel": "View details",

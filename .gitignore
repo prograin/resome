@@ -12,3 +12,6 @@ public/styles/
 public/site-version.json
 public/_headers
 src/generated/
+
+.env*
+!.env.example

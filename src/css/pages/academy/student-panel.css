@@ -1,0 +1,88 @@
+.site-main:has(.student-login) {
+  padding-block-start: 0;
+}
+
+.student-login {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: max(var(--ui-space-4), calc(var(--header-height) + 0.25rem)) var(--ui-space-4);
+}
+
+.student-login .student-panel {
+  margin: 0;
+}
+
+.student-login h1 {
+  text-align: center;
+}
+
+.student-panel {
+  display: grid;
+  gap: var(--ui-space-4);
+  width: min(100%, 28rem);
+  margin: clamp(2rem, 8vh, 5rem) auto;
+  padding: var(--ui-space-8);
+  border-radius: var(--ui-radius);
+  color: var(--ui-text);
+}
+
+.student-panel h1 {
+  font-size: 1.5rem;
+  font-weight: var(--ui-weight-heading);
+}
+
+.student-panel__form,
+.student-panel__fields,
+.student-panel__form label {
+  display: grid;
+  gap: var(--ui-space-3);
+}
+
+.student-panel__form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.student-panel__form :is(input:not([type="range"]), select, textarea) {
+  min-width: 0;
+  width: 100%;
+  min-height: var(--ui-control-height);
+  padding: var(--ui-space-2) var(--ui-space-3);
+  border-radius: var(--ui-control-radius);
+  color: var(--ui-text);
+  font: inherit;
+  font-size: var(--ui-font-control);
+  line-height: 1.8;
+}
+
+.student-panel__form :is(input, select, textarea):focus-visible {
+  outline: var(--ui-focus-width) solid var(--ui-ring);
+  outline-offset: var(--ui-focus-offset);
+}
+
+.student-panel__form textarea {
+  resize: vertical;
+}
+
+.student-panel__form small {
+  color: var(--ui-muted);
+  font-size: var(--ui-font-caption);
+  line-height: 1.8;
+}
+
+.student-goal__actions,
+.student-course__actions {
+  display: grid;
+  justify-items: left;
+}
+
+.student-dialog-form-actions {
+  display: flex;
+  grid-column: 1 / -1;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+}

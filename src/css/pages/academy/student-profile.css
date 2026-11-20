@@ -1,0 +1,29 @@
+.student-profile {
+  width: min(100%, var(--ui-content-width));
+  margin-inline: auto;
+}
+
+.student-profile__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--ui-space-4);
+}
+
+.student-profile__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+}
+
+.student-profile__form input[readonly] {
+  cursor: default;
+}
+
+@media (width < 48rem) {
+  .student-profile__fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

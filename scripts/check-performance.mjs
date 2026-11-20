@@ -8,6 +8,7 @@ const browser = await chromium.launch({ channel: "msedge", headless: true });
 const pages = [
   ["/", "home", 40000],
   ["/academy/", "academy", 60000],
+  ["/academy/consultation/", "academy", 60000],
   ["/order/", "order", 55000],
   ["/contact/", "contact", 45000],
 ];

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
+import { origin as canonicalOrigin } from "../src/config/site.js";
 
 const origin = process.env.SITE_URL || "http://127.0.0.1:4173";
 const browser = await chromium.launch({ channel: "msedge", headless: true });
@@ -10,21 +11,26 @@ try {
     viewport: { width: 390, height: 844 },
   });
   const page = await context.newPage();
-  for (const route of ["/", "/academy/", "/order/", "/contact/"]) {
+  for (const route of ["/", "/academy/", "/academy/consultation/", "/order/", "/contact/"]) {
     const response = await page.goto(`${origin}${route}`);
     assert.equal(response.status(), 200);
     const view = page.locator("[data-page]:not(.hidden)");
     assert.equal(await view.locator("h1").count(), 1);
-    assert.ok((await view.innerText()).trim().length > 250);
+    if (route === "/academy/") {
+      assert.equal(await view.locator("h1").textContent(), "Prograin Academy");
+      assert.equal(await view.locator(".academy-hero__actions a").count(), 2);
+    } else {
+      assert.ok((await view.innerText()).trim().length > 250);
+    }
     assert.equal(
       await page.locator('link[rel="canonical"]').getAttribute("href"),
-      `https://prograin.ir${route}`,
+      `${canonicalOrigin}${route}`,
     );
     assert.equal(
       await page.locator('meta[name="robots"]').getAttribute("content"),
       "index, follow, max-image-preview:large",
     );
-    if (["/academy/", "/order/"].includes(route)) {
+    if (["/academy/consultation/", "/order/"].includes(route)) {
       const question = page.locator(".faq-item").first();
       await question.locator("summary").click();
       assert.equal(await question.locator("p").isVisible(), true);
@@ -52,14 +58,19 @@ try {
     ["contact-page", "/contact/"],
     ["home", "/"],
   ]) {
+    if (key === "order") {
+      await app.evaluate(() => window.scrollTo({ top: 600, behavior: "instant" }));
+      assert.ok(await app.evaluate(() => window.scrollY > 0));
+    }
     await app.locator(`.site-header nav [data-page-link="${key}"]`).click();
     await app.waitForURL(`${origin}${path}`);
     await app.waitForFunction((href) => {
       const links = document.querySelectorAll('link[rel="canonical"]');
       return links.length === 1 && links[0].href === href;
-    }, `https://prograin.ir${path}`);
+    }, `${canonicalOrigin}${path}`);
+    assert.equal(await app.evaluate(() => window.scrollY), 0, path);
     const canonical = await app.locator('link[rel="canonical"]').getAttribute("href");
-    assert.equal(canonical, `https://prograin.ir${path}`);
+    assert.equal(canonical, `${canonicalOrigin}${path}`);
     assert.equal(await app.locator('meta[property="og:url"]').getAttribute("content"), canonical);
     assert.equal(
       await app.locator('meta[property="og:title"]').getAttribute("content"),
@@ -73,14 +84,12 @@ try {
   }
   await app.goBack();
   await app.waitForURL(`${origin}/contact/`);
-  await app.waitForFunction(() => {
+  const contactCanonical = `${canonicalOrigin}/contact/`;
+  await app.waitForFunction((href) => {
     const links = document.querySelectorAll('link[rel="canonical"]');
-    return links.length === 1 && links[0].href === "https://prograin.ir/contact/";
-  });
-  assert.equal(
-    await app.locator('link[rel="canonical"]').getAttribute("href"),
-    "https://prograin.ir/contact/",
-  );
+    return links.length === 1 && links[0].href === href;
+  }, contactCanonical);
+  assert.equal(await app.locator('link[rel="canonical"]').getAttribute("href"), contactCanonical);
   assert.deepEqual(errors, []);
   console.log("PASS private aliases, client navigation, back button and language metadata");
   await interactive.close();

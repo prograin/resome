@@ -1,0 +1,130 @@
+body:has(.student-dashboard),
+.site-main:has(.student-dashboard) {
+  overflow-x: clip;
+}
+
+.site-main:has(.student-dashboard),
+.page-view:has(> .student-dashboard) {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-view:has(> .student-dashboard) {
+  flex: 1;
+}
+
+.student-dashboard {
+  --student-sidebar-width: 3.5rem;
+  --student-sidebar-expanded-width: 13rem;
+  --student-sidebar-top: calc(var(--header-height) + var(--ui-space-4));
+  display: flex;
+  flex: 1;
+  flex-direction: row-reverse;
+  gap: var(--ui-space-3);
+  width: 100%;
+  padding-inline: clamp(var(--ui-space-3), 2vw, var(--ui-space-8));
+  padding-block: var(--ui-space-5);
+  margin-inline: auto;
+  direction: ltr;
+}
+
+.student-dashboard__main {
+  flex: 1;
+  min-width: 0;
+}
+
+.student-progress {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  padding: clamp(var(--ui-space-3), 2vw, var(--ui-space-8));
+  gap: var(--ui-space-8);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.student-progress__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-3);
+  padding-block-end: var(--ui-space-4);
+  border-bottom: 1px solid var(--ui-line);
+}
+
+.student-progress .student-progress__updated {
+  max-width: 55%;
+  margin-inline-start: auto;
+  font-size: var(--ui-font-caption);
+  text-align: end;
+}
+
+.student-progress > .student-progress__header {
+  flex-wrap: wrap;
+}
+
+.student-progress__header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+  margin-inline-start: auto;
+  max-width: 100%;
+}
+
+.student-progress__header-actions > .student-progress__updated {
+  max-width: none;
+  margin-inline-start: 0;
+}
+
+.student-progress__section,
+.student-progress__grid {
+  display: grid;
+  gap: var(--ui-space-3);
+  min-width: 0;
+}
+
+.student-progress__grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+.student-progress__card {
+  min-width: 0;
+  padding: var(--ui-space-4);
+  border-radius: var(--ui-radius-card);
+  overflow-wrap: anywhere;
+}
+
+.student-progress__card.student-panel__form {
+  align-content: start;
+}
+
+.student-progress h2 {
+  font-size: 1.15rem;
+  font-weight: var(--ui-weight-heading);
+}
+
+.student-progress :is(h3, strong) {
+  font-weight: var(--ui-weight-control);
+}
+
+.student-progress p {
+  color: var(--ui-muted);
+  font-size: var(--ui-body-size);
+}
+
+.student-progress__plot {
+  position: relative;
+  min-width: 0;
+  height: clamp(13rem, 34vw, 20rem);
+}
+
+@media (width <= 48rem) {
+  .student-dashboard {
+    width: calc(100% - 2 * var(--ui-space-2));
+    padding-inline: 0;
+    gap: var(--ui-space-2);
+  }
+}

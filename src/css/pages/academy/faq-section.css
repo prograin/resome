@@ -1,4 +1,4 @@
-.academy-page > .academy-faq-section {
+.academy-page .academy-faq-section {
   width: 100%;
   max-width: none;
   margin: 0;
@@ -7,12 +7,12 @@
 }
 
 .academy-page .academy-faq-section > h2 {
-  max-width: 58rem;
+  max-width: var(--ui-content-width);
   margin-inline: auto;
   color: var(--ui-text);
 }
 
 .academy-faq-section > .faq-list {
-  width: min(100%, 58rem);
+  width: min(100%, var(--ui-content-width));
   margin-inline: auto;
 }

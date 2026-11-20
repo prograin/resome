@@ -76,41 +76,6 @@
 .contact-action:nth-child(4) {
   animation-delay: -4.2s;
 }
-.contact-action--primary {
-  border-color: rgba(56, 189, 248, 0.52);
-  background: linear-gradient(135deg, #0284c7, #38bdf8);
-  box-shadow:
-    0 16px 34px rgba(56, 189, 248, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-.contact-action--secondary {
-  border-color: rgba(34, 197, 94, 0.5);
-  background: linear-gradient(135deg, #15803d, #22c55e);
-  box-shadow:
-    0 16px 34px rgba(34, 197, 94, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-.contact-action--linkedin {
-  border-color: rgba(10, 102, 194, 0.58);
-  background: linear-gradient(135deg, #075985, #0a66c2);
-  box-shadow:
-    0 16px 34px rgba(10, 102, 194, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-.contact-action--email {
-  border-color: rgba(248, 113, 113, 0.48);
-  background: linear-gradient(135deg, #991b1b, #ef4444);
-  box-shadow:
-    0 16px 34px rgba(239, 68, 68, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-.contact-action--ghost {
-  border-color: rgba(129, 140, 248, 0.42);
-  background: linear-gradient(135deg, rgba(49, 46, 129, 0.74), rgba(30, 41, 59, 0.68));
-  box-shadow:
-    0 16px 34px rgba(129, 140, 248, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
 .contact-note {
   display: flex;
   align-items: flex-start;

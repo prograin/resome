@@ -1,0 +1,10 @@
+@media (width < 48rem) {
+  .contact-shell.contact-shell--centered {
+    padding: 1rem 0;
+    gap: 1.5rem;
+  }
+  .contact-shell--centered .contact-actions {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}

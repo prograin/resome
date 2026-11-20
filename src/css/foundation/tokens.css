@@ -1,0 +1,68 @@
+:root {
+  --ui-space-1: 0.25rem;
+  --ui-space-2: 0.5rem;
+  --ui-space-3: 0.75rem;
+  --ui-space-4: 1rem;
+  --ui-space-5: 1.25rem;
+  --ui-space-8: 2rem;
+  --ui-radius: 1.25rem;
+  --ui-control-height: 2.8rem;
+  --ui-control-height-lg: 3.5rem;
+  --ui-font-control: 0.9rem;
+  --ui-font-caption: 0.8rem;
+  --ui-font-small: 0.75rem;
+  --ui-weight-control: 650;
+  --ui-weight-heading: 750;
+  --ui-weight-strong: 800;
+  --ui-focus-width: 2px;
+  --ui-focus-offset: 3px;
+  --ui-ring: #22b8a5;
+  --ui-action: #087b72;
+  --ui-action-hover: #066b64;
+  --ui-action-violet: #6337b8;
+  --ui-action-violet-hover: #522b9d;
+  --ui-on-action: #fff;
+  --ui-radius-card: 1rem;
+  --ui-content-width: 58rem;
+  --ui-header-surface: rgb(255 255 255 / 93%);
+  --ui-header-line: var(--ui-line);
+  --ui-raised: #142a40;
+  --ui-on-raised: #e8f1fa;
+  --ui-backdrop: rgb(2 6 23 / 65%);
+  --ui-shadow-control: 0 6px 20px rgb(0 0 0 / 15%);
+  --ui-shadow-dialog: 0 24px 80px rgb(0 0 0 / 30%);
+  --ui-dialog-width: 48rem;
+  --ui-dialog-layer: 60;
+  --ui-text: #172338;
+  --ui-muted: #526278;
+  --ui-scrollbar-thumb: #738399;
+  --ui-scrollbar-thumb-hover: #52657f;
+  --ui-surface: #ffffff;
+  --ui-line: #e0e8ef;
+  --ui-shadow: 0 8px 28px rgb(15 23 42 / 7%);
+  --ui-accent: #087f78;
+  --header-height: 4.25rem;
+  --ui-title-size: clamp(2rem, 4vw, 3.4rem);
+  --ui-title-leading: 1.6;
+  --ui-body-size: 0.95rem;
+  --ui-body-leading: 2.1;
+  --ui-control-radius: 0.8rem;
+}
+@media (width <= 48rem) {
+  :root {
+    --ui-title-size: 1.625rem;
+  }
+}
+
+.dark {
+  --ui-header-surface: rgb(8 16 31 / 94%);
+  --ui-header-line: #1b293c;
+  --ui-text: #f1f5f9;
+  --ui-muted: #b1bfd0;
+  --ui-scrollbar-thumb: #617893;
+  --ui-scrollbar-thumb-hover: #8296b0;
+  --ui-surface: #101c30;
+  --ui-line: #26354b;
+  --ui-shadow: 0 8px 28px rgb(0 0 0 / 18%);
+  --ui-accent: #69e2cd;
+}

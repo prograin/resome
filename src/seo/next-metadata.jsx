@@ -12,7 +12,10 @@ export function routeMetadata(page) {
     title: seo.title,
     description: seo.description,
     alternates: { canonical: seo.canonical },
-    robots: privatePage ? seo.robots : { index: true, follow: true, "max-image-preview": "large" },
+    robots:
+      privatePage || routes[page].noindex
+        ? seo.robots
+        : { index: true, follow: true, "max-image-preview": "large" },
     openGraph: {
       type: "website",
       siteName: "Prograin",

@@ -1,0 +1,59 @@
+.site-header {
+  border-bottom-color: var(--ui-header-line);
+  background: var(--ui-header-surface);
+  box-shadow: 0 4px 20px rgb(15 23 42 / 3%);
+}
+.site-header > nav {
+  min-height: var(--header-height);
+  max-width: 75rem;
+  padding: 0.6rem 1.5rem;
+}
+.site-header #navName {
+  width: 2.25rem;
+  height: 2.25rem;
+  box-shadow: none;
+}
+.site-wordmark {
+  color: var(--ui-text);
+  font-size: 1.2rem;
+  font-weight: var(--ui-weight-strong);
+  letter-spacing: -0.04em;
+}
+.site-wordmark > span {
+  color: var(--ui-accent);
+}
+.site-header nav > .site-page-links {
+  gap: 0.25rem;
+}
+.site-header nav > .site-page-links > a {
+  border-radius: 0.65rem;
+  padding: 0.45rem 0.8rem;
+  font-weight: 600;
+}
+.site-header a[aria-current="page"] {
+  background: rgb(13 148 136 / 9%);
+  color: var(--ui-accent);
+}
+.site-header > nav > a[aria-current="page"] {
+  background: transparent;
+}
+.site-header button {
+  border-color: var(--ui-line);
+  border-radius: var(--ui-control-radius);
+  box-shadow: none;
+  min-height: var(--ui-control-height);
+}
+#mobileMenu {
+  padding: 0.75rem 1rem 1rem;
+  background: var(--ui-surface);
+}
+#mobileMenu a {
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+}
+@media (width >= 48rem) {
+  .site-header #mobileMenuBtn {
+    display: none;
+  }
+}

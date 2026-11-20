@@ -1,0 +1,103 @@
+.academy-page {
+  width: 100%;
+  padding: 0;
+}
+.academy-hero,
+.academy-picker,
+.academy-youtube-section {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+}
+.academy-hero {
+  display: grid;
+  place-items: center;
+  height: calc(100svh - var(--header-height));
+  min-height: calc(100svh - var(--header-height));
+  padding: var(--ui-space-4);
+  overflow: hidden;
+}
+.academy-hero::before,
+.academy-picker::before,
+.academy-youtube-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.academy-hero::before {
+  background-image: url("/assets/images/optimized/academy-hero-bg-1920.webp");
+}
+.academy-picker::before {
+  background-image: url("/assets/images/optimized/academy-training-bg-1920.webp");
+}
+.academy-youtube-section::before {
+  background-image: url("/assets/images/optimized/academy-youtube-bg-1920.webp");
+}
+.academy-hero::after,
+.academy-picker::after,
+.academy-youtube-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(2 6 23 / 50%), rgb(2 6 23 / 70%));
+}
+.academy-hero__copy {
+  position: relative;
+  max-width: min(100%, var(--ui-content-width));
+  text-align: center;
+}
+.academy-hero__copy h1 {
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  font-weight: var(--ui-weight-strong);
+  line-height: 1.55;
+  color: #fff;
+}
+.academy-hero__copy p {
+  max-width: 48rem;
+  margin: var(--ui-space-4) auto 0;
+  color: #edf3fd;
+  font-size: var(--ui-body-size);
+  line-height: 2;
+}
+.academy-picker,
+.academy-youtube-section {
+  padding: clamp(2rem, 5vw, 4rem) var(--ui-space-4);
+}
+.academy-picker__label,
+.academy-tabs,
+.academy-comparison,
+.academy-youtube-card {
+  width: min(100%, var(--ui-content-width));
+  margin-inline: auto;
+}
+.academy-picker__label {
+  margin-block-end: var(--ui-space-5);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: var(--ui-weight-heading);
+  text-align: center;
+}
+@media (width <= 48rem) {
+  .academy-hero::before {
+    background-image: url("/assets/images/optimized/academy-hero-bg-960.webp");
+  }
+  .academy-picker::before {
+    background-image: url("/assets/images/optimized/academy-training-bg-960.webp");
+  }
+  .academy-youtube-section::before {
+    background-image: url("/assets/images/optimized/academy-youtube-bg-960.webp");
+  }
+}
+@media (width <= 48rem), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .academy-hero::before,
+  .academy-picker::before,
+  .academy-youtube-section::before {
+    background-attachment: scroll;
+  }
+}

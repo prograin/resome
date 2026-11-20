@@ -32,18 +32,13 @@ export function Portfolio() {
       getData: () => portfolio[state.locale],
       refreshIcons: () => createIcons(document.getElementById("resumePage")),
       openModal: (details) => openModal.current(details),
-      modal: {
-        get bodyEl() {
-          return dialog.body.current;
-        },
-      },
     });
     runtime.current = { state, ui };
     return () => {
       controller.abort();
       runtime.current = null;
     };
-  }, [dialog.body]);
+  }, []);
   useEffect(() => {
     const { state, ui } = runtime.current;
     state.locale = locale;

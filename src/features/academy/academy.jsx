@@ -1,5 +1,8 @@
 "use client";
 
+import { SiteLink as Link } from "../../components/site-link";
+import { Button } from "../../components/ui/button";
+import { routes } from "../../config/site";
 import { useEffect, useRef, useState } from "react";
 import fa from "../../content/academy/fa.json";
 import en from "../../content/academy/en.json";
@@ -7,6 +10,8 @@ import faqs from "../../content/academy/faq.json";
 import { Faq } from "../../components/faq";
 import { Icon } from "../../components/icon";
 import { usePreferences } from "../../components/preferences";
+import { AcademyHero } from "./academy-hero";
+import { LearningPaths } from "./learning-paths";
 import { PlanCard } from "./plan-card";
 
 const keys = ["private", "group"];
@@ -60,79 +65,84 @@ export function Academy() {
   }
 
   return (
-    <div className="academy-page" dir={dir} data-active-plan={active}>
-      <section className="academy-hero">
-        <div className="academy-hero__copy">
-          <h1 className={locale === "fa" ? "tracking-normal" : "tracking-tight"}>{copy.title}</h1>
-          <p>{copy.lead}</p>
-        </div>
-      </section>
-      <BackgroundSection className="academy-picker" data-academy-plans>
-        <p className="academy-picker__label">{copy.selectorTitle}</p>
-        <div className="academy-tabs" role="tablist" aria-label={copy.selectorTitle}>
-          {keys.map((key, index) => (
-            <button
-              key={key}
-              ref={(element) => {
-                tabs.current[index] = element;
-              }}
-              className={`academy-tab ${active === key ? "is-active" : ""}`}
-              type="button"
-              role="tab"
-              data-academy-tab={key}
-              aria-selected={active === key}
-              aria-controls={`academy-plan-${key}`}
-              tabIndex={active === key ? 0 : -1}
-              onClick={() => setActive(key)}
-              onKeyDown={(event) => handleTabKey(event, index)}
-            >
-              <Icon name={icons[key]} className="h-4 w-4" />
-              {copy.tabs[key]}
-            </button>
-          ))}
-        </div>
-        <div className="academy-comparison" aria-label={copy.selectorTitle}>
-          {plans.map((plan) => (
-            <PlanCard
-              key={plan.key}
-              plan={plan}
-              active={active === plan.key}
-              dir={dir}
-              copy={copy}
-            />
-          ))}
-        </div>
-      </BackgroundSection>
-      <BackgroundSection className="academy-youtube-section">
-        <div className="academy-youtube-card">
-          <span className="academy-youtube-card__icon">
-            <Icon name="youtube" />
-            <span>YouTube</span>
-          </span>
-          <div>
-            <h2>{copy.youtubeTitle}</h2>
-            <p>{copy.youtubeLead}</p>
+    <div className="academy-page academy-consultation" dir={dir} data-active-plan={active}>
+      <AcademyHero locale={locale} title={copy.title} lead={copy.lead}>
+        <Button as={Link} prefetch={false} variant="primary" href={routes["contact-page"].path}>
+          {copy.support}
+        </Button>
+      </AcademyHero>
+      <div className="academy-consultation__content">
+        <LearningPaths locale={locale} dir={dir} />
+        <BackgroundSection className="academy-picker" data-academy-plans>
+          <p className="academy-picker__label">{copy.selectorTitle}</p>
+          <div className="academy-tabs academy-neo" role="tablist" aria-label={copy.selectorTitle}>
+            {keys.map((key, index) => (
+              <Button
+                variant="soft"
+                key={key}
+                ref={(element) => {
+                  tabs.current[index] = element;
+                }}
+                className={`academy-tab ${active === key ? "is-active" : ""}`}
+                type="button"
+                role="tab"
+                data-academy-tab={key}
+                aria-selected={active === key}
+                aria-controls={`academy-plan-${key}`}
+                tabIndex={active === key ? 0 : -1}
+                onClick={() => setActive(key)}
+                onKeyDown={(event) => handleTabKey(event, index)}
+              >
+                <Icon name={icons[key]} className="h-4 w-4" />
+                {copy.tabs[key]}
+              </Button>
+            ))}
           </div>
-          <a
-            href="https://www.youtube.com/@Prograin_ARR/playlists"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon name="external-link" className="h-4 w-4" />
-            <span>{copy.youtubeCta}</span>
-          </a>
-        </div>
-      </BackgroundSection>
-      <Faq
-        className="academy-faq-section"
-        dir={dir}
-        items={faqs[locale]}
-        title={
-          locale === "fa"
-            ? "پرسش‌های رایج درباره آموزش برنامه‌نویسی"
-            : "Programming training questions"
-        }
-      />
+          <div className="academy-comparison" aria-label={copy.selectorTitle}>
+            {plans.map((plan) => (
+              <PlanCard
+                key={plan.key}
+                plan={plan}
+                active={active === plan.key}
+                dir={dir}
+                copy={copy}
+              />
+            ))}
+          </div>
+        </BackgroundSection>
+        <BackgroundSection className="academy-youtube-section">
+          <div className="academy-youtube-card academy-neo">
+            <span className="academy-youtube-card__icon">
+              <Icon name="youtube" />
+              <span>YouTube</span>
+            </span>
+            <div>
+              <h2>{copy.youtubeTitle}</h2>
+              <p>{copy.youtubeLead}</p>
+            </div>
+            <Button
+              as="a"
+              variant="soft"
+              href="https://www.youtube.com/@Prograin_ARR/playlists"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="external-link" className="h-4 w-4" />
+              <span>{copy.youtubeCta}</span>
+            </Button>
+          </div>
+        </BackgroundSection>
+        <Faq
+          className="academy-faq-section"
+          dir={dir}
+          items={faqs[locale]}
+          title={
+            locale === "fa"
+              ? "پرسش‌های رایج درباره آموزش برنامه‌نویسی"
+              : "Programming training questions"
+          }
+        />
+      </div>
     </div>
   );
 }

@@ -1,4 +1,6 @@
-const origin = "https://prograin.ir";
+import { studentPaths } from "../lib/student-auth/paths.js";
+
+const origin = "https://www.prograin.ir";
 const location = {
   city: { fa: "اراک", en: "Arak" },
   region: { fa: "مرکزی", en: "Markazi" },
@@ -26,8 +28,62 @@ const routes = {
   academy: {
     path: "/academy/",
     container: "academyPage",
+    background: "academy-entry",
+    body: "academy",
+  },
+  "academy-consultation": {
+    path: "/academy/consultation/",
+    container: "academyPage",
     background: "academy-hero",
     body: "academy",
+  },
+  "academy-students": {
+    path: studentPaths.signIn,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
+  "academy-dashboard": {
+    path: studentPaths.dashboard,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
+  "academy-admin": {
+    path: studentPaths.admin,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
+  "academy-chart": {
+    path: studentPaths.chart,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
+  "academy-courses": {
+    path: studentPaths.courses,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
+  "academy-history": {
+    path: studentPaths.history,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
+  "academy-goals": {
+    path: studentPaths.goals,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
+  "academy-profile": {
+    path: studentPaths.profile,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
   },
   "contact-page": {
     path: "/contact/",

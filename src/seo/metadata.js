@@ -11,11 +11,13 @@ function metadata(page = "home", locale = "fa") {
     canonical: `${origin}${route.path}`,
     robots: route.private
       ? "noindex, nofollow, noarchive"
-      : "index, follow, max-image-preview:large",
+      : route.noindex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large",
     image: asset(
       route.private
         ? `${origin}/assets/icons/icon-512.png`
-        : `${origin}/assets/images/social/${page === "contact-page" ? "contact" : page}.jpg`,
+        : `${origin}/assets/images/social/${route.body}.jpg`,
     ),
     imageWidth: route.private ? 512 : 1200,
     imageHeight: route.private ? 512 : 630,

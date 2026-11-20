@@ -1,4 +1,11 @@
 export const ICONS = {
+  "arrow-up": '<path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>',
+  "arrow-down": '<path d="m5 12 7 7 7-7"/><path d="M12 5v14"/>',
+  "arrow-up-down":
+    '<path d="m3 7 4-4 4 4"/><path d="M7 3v18"/><path d="m13 17 4 4 4-4"/><path d="M17 21V3"/>',
+  "move-horizontal": '<path d="m18 8 4 4-4 4"/><path d="m6 8-4 4 4 4"/><path d="M2 12h20"/>',
+  "trending-up": '<path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/>',
+  "trending-down": '<path d="m22 17-8.5-8.5-5 5L2 7"/><path d="M16 17h6v-6"/>',
   "arrow-left": '<path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>',
   "arrow-right": '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
   "arrow-up-left": '<path d="M7 7h10"/><path d="M7 17V7"/><path d="m17 17-10-10"/>',
@@ -54,6 +61,8 @@ export const ICONS = {
   phone:
     '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9Z"/>',
   play: '<path d="m8 5 12 7-12 7Z"/>',
+  pencil: '<path d="M16 3a2.8 2.8 0 0 1 4 4L9 18l-5 2 2-5Z"/><path d="m14 5 4 4"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
   rocket:
     '<path d="M4.5 16.5c-1.5 1.3-2 3.1-2 5 1.9 0 3.7-.5 5-2"/><path d="M9 15 4 10l2-5 5 5"/><path d="m14 9 5 5-5 2-5-5 2-5Z"/><path d="M15 4c2.8-1.1 5-1 5-1s.1 2.2-1 5c-1.4 3.5-4.7 7-8 9l-4-4c2-3.3 5.5-6.6 9-8Z"/><circle cx="15" cy="9" r="1"/>',
   send: '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
@@ -66,6 +75,8 @@ export const ICONS = {
   sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.9 4.9 1.4 1.4"/><path d="m17.7 17.7 1.4 1.4"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m4.9 19.1 1.4-1.4"/><path d="m17.7 6.3 1.4-1.4"/>',
   tag: '<path d="M12.6 2.6H4a2 2 0 0 0-2 2v8.6a2 2 0 0 0 .6 1.4l6.8 6.8a2 2 0 0 0 2.8 0l9.2-9.2a2 2 0 0 0 0-2.8l-6.8-6.8a2 2 0 0 0-1.4-.6Z"/><circle cx="7.5" cy="7.5" r=".5"/>',
   "user-round": '<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
+  users:
+    '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/><circle cx="9" cy="7" r="4"/>',
   x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
   youtube:
     '<path d="M22 12s0-3.4-.4-5a3 3 0 0 0-2.1-2.1C17.8 4.5 12 4.5 12 4.5s-5.8 0-7.5.4A3 3 0 0 0 2.4 7C2 8.6 2 12 2 12s0 3.4.4 5a3 3 0 0 0 2.1 2.1c1.7.4 7.5.4 7.5.4s5.8 0 7.5-.4a3 3 0 0 0 2.1-2.1c.4-1.6.4-5 .4-5Z"/><path d="m10 15 5-3-5-3Z"/>',

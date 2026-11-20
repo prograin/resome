@@ -1,0 +1,170 @@
+.student-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas: "goals course";
+  gap: var(--ui-space-4);
+  direction: ltr;
+}
+
+.student-summary > section {
+  min-width: 0;
+}
+
+html[dir="rtl"] .student-summary > section {
+  direction: rtl;
+}
+
+.student-summary__course {
+  grid-area: course;
+}
+
+.student-dashboard-goals {
+  grid-area: goals;
+  align-self: start;
+}
+
+.student-dashboard-goals > .student-progress__card {
+  --academy-card-surface: color-mix(in srgb, var(--academy-surface), var(--academy-color-blue) 6%);
+}
+
+.student-summary__empty-card,
+.student-dashboard-goals__empty {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: var(--ui-space-4);
+  padding-block: var(--ui-space-4);
+  text-align: center;
+}
+
+.student-summary__empty-card {
+  min-height: 12rem;
+}
+
+.student-dashboard-goals__empty {
+  min-height: 10rem;
+}
+
+.student-summary__table {
+  --student-table-size: 0.8rem;
+  --student-table-padding: var(--ui-space-2) 0.25rem;
+  --student-table-align: center;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.student-summary__table tbody tr > * {
+  background: color-mix(in srgb, var(--academy-surface), var(--goal-priority-color) 24%);
+}
+
+.student-summary__table .ui-button {
+  width: 100%;
+  padding-inline: 0.25rem;
+  font-size: inherit;
+}
+
+.student-goal-priority {
+  color: color-mix(in srgb, var(--goal-priority-color) 82%, var(--ui-text));
+}
+
+.student-goal-priority--high {
+  --goal-priority-color: var(--academy-color-red);
+}
+.student-goal-priority--medium {
+  --goal-priority-color: var(--academy-color-blue);
+}
+.student-goal-priority--low {
+  --goal-priority-color: var(--academy-color-green);
+}
+
+.student-goal-progress--compact .student-goal__slider-label {
+  justify-content: center;
+  font-size: var(--ui-font-caption);
+}
+
+.student-goal-progress--compact .student-goal__range-surface {
+  padding-inline: var(--ui-space-2);
+}
+
+.student-goal-progress--compact .student-goal__range {
+  min-height: var(--ui-space-8);
+}
+
+.student-progress li[id] {
+  scroll-margin-block-start: calc(var(--header-height) + var(--ui-space-8));
+}
+
+.student-progress li:target {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: var(--ui-space-2);
+}
+
+.student-dashboard-status {
+  margin-block: var(--ui-space-8);
+}
+
+@media (width >= 64rem) {
+  .student-dashboard-goals {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    min-height: 0;
+    contain: size;
+  }
+
+  .student-dashboard-goals > .student-progress__card {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .student-dashboard-goals__content {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+  }
+
+  .student-dashboard-goals__content:has(.student-dashboard-goals__empty) {
+    display: grid;
+  }
+}
+
+@media (width < 64rem) {
+  .student-summary {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "course" "goals";
+  }
+}
+
+@media (width >= 48rem) {
+  .student-summary__table tbody tr:first-child > :first-child {
+    border-start-start-radius: var(--ui-control-radius);
+  }
+
+  .student-summary__table tbody tr:first-child > :last-child {
+    border-start-end-radius: var(--ui-control-radius);
+  }
+
+  .student-summary__table tbody tr:last-child > :first-child {
+    border-end-start-radius: var(--ui-control-radius);
+  }
+
+  .student-summary__table tbody tr:last-child > :last-child {
+    border-end-end-radius: var(--ui-control-radius);
+  }
+}
+
+@media (width < 48rem) {
+  .student-summary__table .student-goal__slider-label {
+    display: none;
+  }
+
+  .student-summary__table tbody tr {
+    padding: var(--ui-space-3);
+    border-radius: var(--ui-control-radius);
+    overflow: hidden;
+    background: color-mix(in srgb, var(--academy-surface), var(--goal-priority-color) 24%);
+  }
+}

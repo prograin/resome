@@ -1,0 +1,34 @@
+.error-page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2rem;
+  background: #081523;
+  color: #d7e4ef;
+  text-align: center;
+}
+.error-page .error-code {
+  color: #67e8cd;
+  font-size: clamp(4rem, 15vw, 8rem);
+  font-weight: var(--ui-weight-strong);
+  line-height: 1.3;
+}
+.error-page h1 {
+  color: #f1f5f9;
+  font-size: 1.75rem;
+  font-weight: var(--ui-weight-heading);
+}
+.error-page nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.error-page nav a {
+  color: #8ce4d6;
+  text-decoration: underline;
+  text-underline-offset: 0.35rem;
+}

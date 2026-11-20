@@ -1,3 +1,4 @@
+import { Button } from "../../components/ui/button";
 import { Icon } from "../../components/icon";
 import { useDetailsDialog } from "../../components/details-dialog";
 
@@ -54,7 +55,8 @@ export function PackageCard({ plan, index, locale, dir, detailsLabel }) {
         ))}
       </ul>
       {plan.features.length > 6 && (
-        <button
+        <Button
+          variant="soft"
           className="pricing-card__toggle"
           type="button"
           data-pricing-toggle
@@ -64,7 +66,7 @@ export function PackageCard({ plan, index, locale, dir, detailsLabel }) {
         >
           <span>{detailsLabel}</span>
           <Icon name={dir === "rtl" ? "chevron-left" : "chevron-right"} className="h-4 w-4" />
-        </button>
+        </Button>
       )}
     </article>
   );

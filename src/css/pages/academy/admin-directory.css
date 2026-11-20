@@ -1,0 +1,160 @@
+.academy-admin__search {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.academy-admin__search > input[type="search"] {
+  min-width: 0;
+}
+
+.academy-admin__search > a {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+@media (width >= 64rem) {
+  .academy-admin__search:has(> a) {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  .academy-admin__search > a {
+    grid-column: auto;
+  }
+}
+
+.academy-admin__directory-tools {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--ui-space-4);
+}
+
+.academy-admin__directory-tools > form {
+  min-width: 0;
+}
+
+.academy-admin__directory-tools .student-table__sort-tools {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  margin-block-end: 0;
+  min-height: var(--ui-control-height);
+  border-inline-start: 1px solid var(--ui-line);
+  padding-inline-start: var(--ui-space-4);
+}
+
+.academy-admin__directory {
+  --student-table-align: center;
+  --student-table-padding: var(--ui-space-4) var(--ui-space-2);
+}
+
+.academy-admin__directory :is(th, td) {
+  border-block-end: 1px solid var(--ui-line);
+}
+
+.academy-admin__directory small {
+  display: block;
+  margin-block-start: var(--ui-space-2);
+  color: var(--ui-muted);
+  font-weight: 400;
+  font-size: var(--ui-font-caption);
+}
+
+.academy-admin__directory h2 {
+  font-weight: var(--ui-weight-heading);
+}
+
+.academy-admin__empty {
+  padding: var(--ui-space-8);
+  text-align: center;
+}
+
+.academy-admin__directory-tools :is(.ui-button, input[type="search"], select) {
+  min-height: var(--ui-control-height);
+  white-space: nowrap;
+}
+
+.academy-admin__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--ui-space-4);
+  padding-block-start: var(--ui-space-4);
+}
+
+.academy-admin__pagination-controls,
+.academy-admin__pagination-pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-2);
+  min-width: 0;
+}
+
+.academy-admin__pagination-pages {
+  flex-wrap: wrap;
+}
+
+.academy-admin__pagination .ui-button {
+  white-space: nowrap;
+}
+
+.academy-admin__pagination-pages .ui-button {
+  flex: 0 0 var(--ui-control-height);
+  width: var(--ui-control-height);
+  padding-inline: 0;
+}
+
+@media (width < 64rem) {
+  .academy-admin__directory-tools {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .academy-admin__directory-tools .student-table__sort-tools {
+    gap: var(--ui-space-2);
+    padding-inline-start: var(--ui-space-3);
+  }
+}
+
+@media (width < 48rem) {
+  .academy-admin__directory > .student-progress__header .ui-button {
+    flex: none;
+    white-space: nowrap;
+    padding-inline: var(--ui-space-2);
+    font-size: var(--ui-font-caption);
+  }
+
+  .academy-admin__directory-tools .student-table__sort-tools {
+    border-inline-start: 0;
+    padding-inline-start: 0;
+  }
+
+  .academy-admin__toolbar > .ui-button {
+    flex: 1 1 0;
+  }
+
+  .academy-admin__pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .academy-admin__pagination-summary {
+    text-align: center;
+  }
+
+  .academy-admin__pagination-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .academy-admin__pagination-pages {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .academy-admin__directory tbody tr {
+    padding-block: var(--ui-space-3);
+    border-block-end: 1px solid var(--ui-line);
+  }
+}

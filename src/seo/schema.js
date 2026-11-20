@@ -5,6 +5,7 @@ import { assetUrl as asset } from "../config/assets.js";
 function structuredData(page, locale = "fa") {
   if (routes[page]?.private) return null;
   const meta = metadata(page, locale);
+  const training = page === "academy" || page === "academy-consultation";
   const person = `${origin}/#person`;
   const organization = `${origin}/#organization`;
   const website = `${origin}/#website`;
@@ -88,7 +89,7 @@ function structuredData(page, locale = "fa") {
       inLanguage: locale === "fa" ? "fa-IR" : "en",
       isPartOf: { "@id": website },
       about: {
-        "@id": page === "academy" || page === "order" ? `${meta.canonical}#service` : person,
+        "@id": training || page === "order" ? `${meta.canonical}#service` : person,
       },
       ...(page === "home" ? {} : { breadcrumb: { "@id": `${meta.canonical}#breadcrumb` } }),
     },
@@ -107,19 +108,18 @@ function structuredData(page, locale = "fa") {
         { "@type": "ListItem", position: 2, name: meta.label, item: meta.canonical },
       ],
     });
-  if (page === "academy" || page === "order")
+  if (training || page === "order")
     graph.push({
       "@type": "Service",
       "@id": `${meta.canonical}#service`,
-      name:
-        page === "academy"
-          ? locale === "fa"
-            ? "آموزش خصوصی و نیمه‌خصوصی برنامه‌نویسی"
-            : "Private and semi-private Programming training"
-          : locale === "fa"
-            ? "طراحی سایت و توسعه نرم‌افزار اختصاصی"
-            : "Custom websites and software development",
-      serviceType: page === "academy" ? "Programming training" : "Software development",
+      name: training
+        ? locale === "fa"
+          ? "آموزش خصوصی و نیمه‌خصوصی برنامه‌نویسی"
+          : "Private and semi-private Programming training"
+        : locale === "fa"
+          ? "طراحی سایت و توسعه نرم‌افزار اختصاصی"
+          : "Custom websites and software development",
+      serviceType: training ? "Programming training" : "Software development",
       provider: { "@id": person },
       url: meta.canonical,
       areaServed: [{ "@id": city }, { "@id": province }, { "@type": "Country", name: "Iran" }],

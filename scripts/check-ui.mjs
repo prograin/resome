@@ -31,7 +31,7 @@ try {
         page.on("response", (response) => {
           if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`);
         });
-        for (const route of ["", "order/", "academy/", "contact/", "resume/"]) {
+        for (const route of ["", "order/", "academy/consultation/", "contact/", "resume/"]) {
           await page.goto(`${origin}/${route}`);
           await page.waitForLoadState("networkidle");
           const label = `${width} ${locale} ${theme} /${route}`;
@@ -72,12 +72,9 @@ try {
             for (const button of await buttons.all()) {
               const card = button.locator("xpath=..");
               await button.click();
+              await page.locator("#modalDialog").waitFor();
               assert.equal(
-                await page.locator("#modalOverlay").getAttribute("aria-hidden"),
-                "false",
-              );
-              assert.equal(
-                await page.locator("#modalTitle").innerText(),
+                await page.locator(".ui-dialog__title").innerText(),
                 await card.locator("h3").innerText(),
               );
               assert.equal(
@@ -85,12 +82,15 @@ try {
                 await card.locator(".pricing-card__features li").count(),
               );
               await page.keyboard.press("Escape");
-              assert.equal(await page.locator("#modalOverlay").getAttribute("aria-hidden"), "true");
+              await page.locator("#modalDialog").waitFor({ state: "hidden" });
               assert.ok(await card.locator(".pricing-card__feature-extra[hidden]").count());
             }
           }
-          if (route === "academy/") {
-            assert.equal(await page.locator(".academy-page > .academy-faq-section").count(), 1);
+          if (route === "academy/consultation/") {
+            assert.equal(
+              await page.locator(".academy-consultation__content > .academy-faq-section").count(),
+              1,
+            );
             assert.equal(await page.locator(".academy-youtube-section .faq-section").count(), 0);
             assert.equal(await page.locator(".academy-compare-scroll").count(), 0);
             assert.equal(
@@ -110,12 +110,9 @@ try {
                 await page.locator(`[data-academy-tab='${key}']`).click();
               }
               await button.click();
+              await page.locator("#modalDialog").waitFor();
               assert.equal(
-                await page.locator("#modalOverlay").getAttribute("aria-hidden"),
-                "false",
-              );
-              assert.equal(
-                await page.locator("#modalTitle").innerText(),
+                await page.locator(".ui-dialog__title").innerText(),
                 await button.locator("xpath=..").locator("h3").innerText(),
               );
               assert.equal(await page.locator(".academy-details__list > div").count(), 18);
@@ -126,9 +123,9 @@ try {
                 true,
               );
               await page.keyboard.press("Escape");
-              assert.equal(
-                await button.evaluate((element) => document.activeElement === element),
-                true,
+              await page.waitForFunction(
+                (element) => document.activeElement === element,
+                await button.elementHandle(),
               );
             }
             if (width < 768) {
@@ -155,9 +152,9 @@ try {
             }
             const details = page.locator("[data-action='open-details']").first();
             await details.click();
-            assert.equal(await page.locator("#modalOverlay").getAttribute("aria-hidden"), "false");
+            await page.locator("#modalDialog").waitFor();
             await page.keyboard.press("Escape");
-            assert.equal(await page.locator("#modalOverlay").getAttribute("aria-hidden"), "true");
+            await page.locator("#modalDialog").waitFor({ state: "hidden" });
           }
 
           // Audit both themes and languages at desktop and phone sizes.
@@ -176,7 +173,7 @@ try {
             await page.screenshot({
               path: fileURLToPath(
                 new URL(
-                  `ui-${route.replace("/", "") || "home"}-${width}-${locale}-${theme}.png`,
+                  `ui-${route.split("/").filter(Boolean).join("-") || "home"}-${width}-${locale}-${theme}.png`,
                   output,
                 ),
               ),

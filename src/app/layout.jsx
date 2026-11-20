@@ -6,6 +6,7 @@ import { PreferencesProvider } from "../components/preferences";
 import { DetailsDialogProvider } from "../components/details-dialog";
 import { SiteUpdates } from "../components/site-updates";
 import { LegacyLinks } from "../components/legacy-links";
+import { AcademyMenuProvider } from "../components/academy-menu";
 
 export const metadata = {
   metadataBase: new URL(origin),
@@ -19,12 +20,7 @@ export const viewport = { themeColor: "#08111f" };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="fa"
-      dir="rtl"
-      className="dark scroll-smooth overflow-x-hidden"
-      suppressHydrationWarning
-    >
+    <html lang="fa" dir="rtl" className="dark overflow-x-hidden" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -38,17 +34,19 @@ export default function RootLayout({ children }) {
         <noscript>
           <style>{`
         .pricing-card__feature-extra[hidden] { display: flex !important; }
-        .pricing-card__toggle, .academy-plan__details, .academy-tabs, #langToggle, #themeToggle, #mobileMenuBtn { display: none !important; }
+        .pricing-card__toggle, .academy-plan__details, .academy-tabs, #langToggle, #themeToggle, #mobileMenuBtn, #academyMenuButton { display: none !important; }
         .academy-page .academy-plan { display: block !important; margin-bottom: 1rem; }
       `}</style>
         </noscript>
         <PreferencesProvider>
-          <DetailsDialogProvider>
-            <Background />
-            <Header />
-            <LegacyLinks />
-            {children}
-          </DetailsDialogProvider>
+          <AcademyMenuProvider>
+            <DetailsDialogProvider>
+              <Background />
+              <Header />
+              <LegacyLinks />
+              {children}
+            </DetailsDialogProvider>
+          </AcademyMenuProvider>
           <SiteUpdates />
         </PreferencesProvider>
       </body>
