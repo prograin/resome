@@ -2,6 +2,9 @@ import assert from "node:assert/strict";
 import { randomBytes } from "node:crypto";
 import { spawn } from "node:child_process";
 import { once } from "node:events";
+import { mkdtemp, readFile, rm, rmdir } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { chromium } from "playwright";
 import { migrateStudentDatabase } from "../../src/lib/db/migrate.js";
 import { createStudentAuth } from "../../src/lib/student-auth/server.js";
@@ -53,10 +56,29 @@ export async function createStudentFixture() {
     await pool.end();
   }
 
+  const emailDirectory = await mkdtemp(join(tmpdir(), "prograin-email-test-"));
+  const emailOutbox = join(emailDirectory, "outbox.jsonl");
   const server = spawn(
     process.execPath,
-    ["node_modules/next/dist/bin/next", "start", "-H", "127.0.0.1", "-p", "4183"],
-    { stdio: ["ignore", "ignore", "inherit"] },
+    [
+      "--import",
+      "./scripts/students/email-outbox.mjs",
+      "node_modules/next/dist/bin/next",
+      "start",
+      "-H",
+      "127.0.0.1",
+      "-p",
+      "4183",
+    ],
+    {
+      stdio: ["ignore", "ignore", "inherit"],
+      env: {
+        ...process.env,
+        STUDENT_TEST_EMAIL_OUTBOX: emailOutbox,
+        RESEND_API_KEY: "re_test_fixture",
+        RESEND_FROM_EMAIL: "Prograin <noreply@example.test>",
+      },
+    },
   );
   const closed = once(server, "exit");
   let browser;
@@ -64,6 +86,8 @@ export async function createStudentFixture() {
     if (browser) await browser.close();
     server.kill();
     await closed;
+    await rm(emailOutbox, { force: true });
+    await rmdir(emailDirectory);
   };
   try {
     const login = origin + studentPaths.signIn;
@@ -95,6 +119,10 @@ export async function createStudentFixture() {
       password,
       studentId,
       otherId,
+      async readEmailCode(email) {
+        const messages = (await readFile(emailOutbox, "utf8")).trim().split("\n").map(JSON.parse);
+        return messages.findLast((message) => message.to.includes(email))?.otp;
+      },
       close,
     };
   } catch (error) {

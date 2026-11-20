@@ -1,18 +1,27 @@
 import { RateLimiterDrizzle, RateLimiterRes } from "rate-limiter-flexible";
 import { mutationLimits } from "../db/schema/security.js";
+import { studentAuthPolicy } from "../student-auth/config.js";
 
-const mutationPolicies = { write: 40, profile: 8, login: 20 };
+const mutationPolicies = {
+  write: [40, 60],
+  profile: [8, 60],
+  login: [20, 600],
+  emailSend: [3, 3600],
+  emailCooldown: [1, studentAuthPolicy.emailResendSeconds],
+  emailVerify: [10, 600],
+  directory: [60, 60],
+};
 
 export function createMutationLimits(db) {
   return Object.fromEntries(
-    Object.entries(mutationPolicies).map(([scope, points]) => [
+    Object.entries(mutationPolicies).map(([scope, [points, duration]]) => [
       scope,
       new RateLimiterDrizzle({
         storeClient: db,
         schema: mutationLimits,
         keyPrefix: scope,
         points,
-        duration: scope === "login" ? 600 : 60,
+        duration,
         clearExpiredByTimeout: false,
       }),
     ]),

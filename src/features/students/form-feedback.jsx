@@ -5,7 +5,7 @@ export function FormFeedback({ status, copy, hideSaved = false, className, id })
       id={id}
       className={className}
       data-status={status}
-      role={status === "saved" ? "status" : "alert"}
+      role={status === "saved" || status === "sent" ? "status" : "alert"}
     >
       {copy[status]}
     </p>

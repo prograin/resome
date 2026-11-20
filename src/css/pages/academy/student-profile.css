@@ -18,8 +18,55 @@
   gap: var(--ui-space-3);
 }
 
+.student-profile__links-notice {
+  grid-column: 1 / -1;
+}
+
 .student-profile__form input[readonly] {
   cursor: default;
+}
+
+.student-panel__form.student-profile__form input:disabled {
+  color: var(--ui-muted);
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.student-profile__email-field,
+.student-profile__verification {
+  display: grid;
+  gap: var(--ui-space-3);
+}
+
+.student-profile__field-heading {
+  display: flex;
+  min-height: var(--ui-control-height);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-3);
+}
+
+.student-profile__resend {
+  flex: none;
+  min-height: var(--ui-control-height);
+  padding: var(--ui-space-1);
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  cursor: pointer;
+}
+
+.student-profile__resend:focus-visible {
+  outline: var(--ui-focus-width) solid var(--ui-ring);
+  outline-offset: var(--ui-focus-offset);
+}
+
+.student-profile__resend:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }
 
 @media (width < 48rem) {

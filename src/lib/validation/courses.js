@@ -1,17 +1,7 @@
 import { z } from "zod";
 import { difficultyLevels } from "../course-options.js";
+import { secureUrl } from "./urls.js";
 
-const secureUrl = z
-  .string()
-  .trim()
-  .max(2048)
-  .pipe(z.url({ protocol: /^https$/ }))
-  .refine((value) => {
-    const url = new URL(value);
-    return !url.username && !url.password;
-  })
-  .transform((value) => new URL(value).href)
-  .pipe(z.string().max(2048));
 const optionalUrl = z.preprocess(
   (value) => (value == null || (typeof value === "string" && !value.trim()) ? null : value),
   secureUrl.nullable(),

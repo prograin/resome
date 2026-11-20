@@ -85,6 +85,12 @@ const routes = {
     body: "academy",
     noindex: true,
   },
+  "academy-links": {
+    path: studentPaths.links,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
   "contact-page": {
     path: "/contact/",
     container: "contactPage",

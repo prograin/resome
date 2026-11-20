@@ -44,6 +44,16 @@ try {
   assert.equal(runtime.pool.listenerCount("error"), listeners, "do not duplicate pool listeners");
   assert.equal(runtime.schemaVersion, databaseSchemaVersion);
   assert.equal(getStudentRuntime(), runtime, "stable schema must reuse the refreshed runtime");
+  const oldAuth = runtime;
+  oldAuth.authVersion = "before-email-otp";
+  runtime = getStudentRuntime();
+  assert.notEqual(
+    runtime.auth,
+    oldAuth.auth,
+    "refresh authentication plugins after a config change",
+  );
+  assert.equal(runtime.pool, oldAuth.pool);
+  assert.equal(typeof runtime.auth.api.requestEmailChangeEmailOTP, "function");
   const [created] = await runtime.db
     .insert(courseDefinitions)
     .values({

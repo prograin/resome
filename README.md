@@ -26,7 +26,9 @@ Backend security, shared PostgreSQL rate limits, request validation, headers and
 
 ## Student sign-in
 
-Set `DATABASE_URL`, `BETTER_AUTH_URL` and `BETTER_AUTH_SECRET` in `.env.local` locally or in the deployment environment. See `.env.example` for the variable names. Use the browser origin as `BETTER_AUTH_URL` and set the database password in `DATABASE_URL` if required. Generate a secret with `npx @better-auth/cli secret` or Node's `randomBytes(32)`.
+Set `DATABASE_URL`, `BETTER_AUTH_URL` and `BETTER_AUTH_SECRET` in `.env` locally or in the deployment environment. See `.env.example` for the variable names. Use the browser origin as `BETTER_AUTH_URL` and set the database password in `DATABASE_URL` if required. Generate a secret with `npx @better-auth/cli secret` or Node's `randomBytes(32)`.
+
+Email setup requires `RESEND_API_KEY` and `RESEND_FROM_EMAIL` in the same environment, including Vercel Production. The profile sends a four-digit code with the official Resend SDK and uses Better Auth Email OTP to save and verify the address only after a valid code. No new database migration is needed. Codes expire after five minutes, allow three attempts, and are stored hashed. `npm run test:email:otp` covers this flow with a separate test database and a mocked sender.
 
 Run `npm run auth:migrate` to create or update the authentication and student progress tables. An operator can create an account by setting `STUDENT_PASSWORD` in the shell and running `npm run student:add -- --username student01 --email student@example.com --name "Student Name"`. Clear `STUDENT_PASSWORD` from the shell afterward. Keep account creation on the operator's machine.
 

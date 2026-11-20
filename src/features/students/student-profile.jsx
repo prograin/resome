@@ -12,12 +12,15 @@ export function StudentProfile({ profile, copy, locale, admin }) {
           profile.lastName,
           profile.username,
           profile.github,
+          profile.telegram,
+          profile.linkedin,
+          profile.website,
         ])}
         profile={profile}
         copy={profileCopy[locale]}
         admin={admin}
       />
-      <ProfileEmail key={profile.email} profile={profile} copy={profileCopy[locale]} />
+      <ProfileEmail profile={profile} copy={profileCopy[locale]} locale={locale} />
       <StudentSignOut copy={copy} />
     </div>
   );

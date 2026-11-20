@@ -42,7 +42,7 @@ try {
   const adminLinks = await navigation
     .locator("a")
     .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
-  assert.equal(adminLinks.length, 4);
+  assert.equal(adminLinks.length, 5);
   assert.equal(
     await navigation
       .locator(`a[href="${studentPaths.adminStudents}"] svg`)
@@ -76,7 +76,7 @@ try {
   await page.locator('li[id^="goal-"]').first().waitFor();
   assert.equal(await page.locator('li[id^="goal-"]').count(), 5);
   assert.equal(await page.locator(".student-goal__action").count(), 0);
-  assert.equal(await navigation.locator("a").count(), 4);
+  assert.equal(await navigation.locator("a").count(), 5);
   await page.goto(url);
   await rows.first().waitFor();
   const search = page.locator(".academy-admin__search");

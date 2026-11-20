@@ -11,4 +11,5 @@ export const studentPaths = {
   history: `${dashboard}history/`,
   goals: `${dashboard}goals/`,
   profile: `${dashboard}profile/`,
+  links: `${dashboard}links/`,
 };

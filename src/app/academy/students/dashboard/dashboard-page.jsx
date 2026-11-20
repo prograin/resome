@@ -8,6 +8,7 @@ import { readStudentGoals } from "../../../../lib/student-goals";
 import { readWeeklyStats } from "../../../../lib/student-weekly";
 import { getStudentRuntime } from "../../../../lib/student-auth/server";
 import { listCourseDefinitions } from "../../../../lib/db/course-definitions";
+import { readStudentLinksPage } from "../../../../lib/db/student-links";
 import {
   adminUsername,
   isStudentAdmin,
@@ -20,7 +21,7 @@ import {
 export async function DashboardPage({ searchParams, view = "overview" }) {
   const { user } = await requireStudentSession();
   const admin = isStudentAdmin(user);
-  const studentView = admin && view !== "profile";
+  const studentView = admin && !["profile", "links"].includes(view);
   const params = studentView ? ((await searchParams) ?? {}) : {};
   if (admin && view === "overview" && !params?.student) redirect(studentPaths.admin);
   const students = studentView ? await listStudents() : [];
@@ -51,6 +52,7 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
     courses: "academy-courses",
     goals: "academy-goals",
     profile: "academy-profile",
+    links: "academy-links",
   }[view];
 
   return (
@@ -67,11 +69,19 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 github: user.github,
+                telegram: user.telegram,
+                linkedin: user.linkedin,
+                website: user.website,
               }
             : undefined
         }
         view={view}
         progress={progress}
+        studentsLinks={
+          view === "links"
+            ? await readStudentLinksPage(getStudentRuntime().db, adminUsername())
+            : undefined
+        }
         management={admin ? { students, selected, definitions } : null}
       />
     </PageFrame>

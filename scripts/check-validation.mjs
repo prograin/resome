@@ -8,6 +8,7 @@ import { progressInputs } from "../src/lib/validation/progress.js";
 import { profileInput, emailInput } from "../src/lib/validation/profile.js";
 import { signInInput } from "../src/lib/validation/sign-in.js";
 import { validateLegacySchema } from "../src/lib/db/legacy-schema.js";
+import { formatGithubProfile } from "../src/lib/github-profile.js";
 
 function form(values) {
   const result = new FormData();
@@ -81,16 +82,50 @@ assert.equal(parseForm(goalInput, goal, { percent: null }), null);
 assert.equal(parseForm(goalInput, goal, { priority: "4" }), null);
 
 const migrationsFolder = fileURLToPath(new URL("../drizzle/", import.meta.url));
-assert.deepEqual(parseForm(profileInput, form({ username: "  Student_01 ", github: "Octocat" })), {
-  firstName: "",
-  lastName: "",
-  username: "student_01",
-  github: "octocat",
-});
-for (const github of ["https://github.com/octocat", "@octocat", "-octocat", "a--b", "a-"]) {
+assert.equal(formatGithubProfile("Octocat"), "https://github.com/octocat");
+assert.equal(formatGithubProfile(""), "");
+assert.deepEqual(
+  parseForm(
+    profileInput,
+    form({ username: "  Student_01 ", github: " https://github.com/Octocat/ " }),
+  ),
+  {
+    firstName: "",
+    lastName: "",
+    username: "student_01",
+    github: "https://github.com/octocat",
+    telegram: "",
+    linkedin: "",
+    website: "",
+  },
+);
+for (const github of [
+  "octocat",
+  "@octocat",
+  "http://github.com/octocat",
+  "https://github.com.evil.test/octocat",
+  "https://github.com/octocat/project",
+  "https://github.com/-octocat",
+  "https://github.com/a--b",
+  "https://github.com/a-",
+  "https://github.com/" + "a".repeat(40),
+  "https://user:password@github.com/octocat",
+  "https://github.com/octocat?x=1",
+  "https://github.com/octocat#test",
+  "javascript:alert(1)",
+]) {
   assert.equal(parseForm(profileInput, form({ username: "student", github })), null);
 }
-for (const username of ["ab", "a b", "a".repeat(31), new Blob(["file"])]) {
+for (const username of [
+  "ab",
+  "a b",
+  "a".repeat(31),
+  "کاربر",
+  "user۱۲۳",
+  "usér",
+  "user@name",
+  new Blob(["file"]),
+]) {
   assert.equal(parseForm(profileInput, form({ username })), null);
 }
 assert.deepEqual(parseForm(emailInput, form({ email: " Student@EXAMPLE.test " })), {

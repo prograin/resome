@@ -18,6 +18,9 @@ export const users = pgTable("student_user", {
   firstName: text().notNull().default(""),
   lastName: text().notNull().default(""),
   github: text().notNull().default(""),
+  telegram: text().notNull().default(""),
+  linkedin: text().notNull().default(""),
+  website: text().notNull().default(""),
 });
 
 export const sessions = pgTable(

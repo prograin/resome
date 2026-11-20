@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import { boolean, integer, pgTable, text } from "drizzle-orm/pg-core";
 import { eq } from "drizzle-orm";
 import { createTestDatabase } from "./lib/test-database.mjs";
-import { migrateBefore } from "./lib/previous-schema.mjs";
+import { legacyUsers, migrateBefore } from "./lib/previous-schema.mjs";
 import { migrateStudentDatabase } from "../src/lib/db/migrate.js";
 import { createDatabase } from "../src/lib/db/client.js";
-import { users, courseDefinitions, courses, awards } from "../src/lib/db/schema/index.js";
+import { courseDefinitions, courses, awards } from "../src/lib/db/schema/index.js";
 
 const legacyCourses = pgTable("student_course", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -18,7 +18,7 @@ const database = await createTestDatabase("enrollment_status");
 try {
   await migrateBefore(database.db, 9);
   await database.db
-    .insert(users)
+    .insert(legacyUsers)
     .values({ id: "learner", name: "Learner", email: "learner@example.test" });
   const [definition] = await database.db
     .insert(courseDefinitions)

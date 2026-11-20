@@ -9,11 +9,13 @@ import { profileFields } from "./profile-fields.js";
 import { readAuthEnvironment } from "../security/environment.js";
 import { createMutationLimits } from "../security/mutation-limit.js";
 import { loginRateLimit } from "./login-limit.js";
+import { profileEmailOTP } from "./email-otp.js";
 
 let runtime;
+const authVersion = "email-otp-3:github-url-1:links-page-1";
 const developmentRuntime = Symbol.for("prograin.student-auth.runtime");
 
-export function createStudentAuth({ provision = false, database } = {}) {
+export function createStudentAuth({ provision = false, database, sendVerificationOTP } = {}) {
   const { DATABASE_URL, BETTER_AUTH_SECRET, BETTER_AUTH_URL } = readAuthEnvironment();
 
   const { pool, db } = database ?? createDatabase(DATABASE_URL);
@@ -42,7 +44,7 @@ export function createStudentAuth({ provision = false, database } = {}) {
     user: {
       modelName: "student_user",
       additionalFields: profileFields,
-      changeEmail: { enabled: true, updateEmailWithoutVerification: true },
+      changeEmail: { enabled: false },
     },
     account: { modelName: "student_account" },
     session: {
@@ -64,12 +66,13 @@ export function createStudentAuth({ provision = false, database } = {}) {
     database: drizzleAdapter(db, { provider: "pg", schema: authSchema, transaction: true }),
     hooks: { before: loginRateLimit(limits, BETTER_AUTH_SECRET) },
     plugins: [
+      profileEmailOTP(sendVerificationOTP),
       username({ minUsernameLength: policy.username.min, maxUsernameLength: policy.username.max }),
       nextCookies(),
     ],
   });
 
-  return { auth, pool, db, limits, schemaVersion: databaseSchemaVersion };
+  return { auth, pool, db, limits, schemaVersion: databaseSchemaVersion, authVersion };
 }
 
 export function getStudentAuth() {
@@ -79,7 +82,11 @@ export function getStudentAuth() {
 export function getStudentRuntime() {
   if (process.env.NODE_ENV === "development") {
     const cached = globalThis[developmentRuntime];
-    if (!cached || cached.schemaVersion !== databaseSchemaVersion) {
+    if (
+      !cached ||
+      cached.schemaVersion !== databaseSchemaVersion ||
+      cached.authVersion !== authVersion
+    ) {
       globalThis[developmentRuntime] = createStudentAuth({
         database: createDatabase(process.env.DATABASE_URL, cached?.pool),
       });

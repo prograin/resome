@@ -68,5 +68,10 @@
     "title": "Portfolio | Ahmadreza Rezaei",
     "description": "Selected software projects by Ahmadreza Rezaei.",
     "label": "Portfolio"
+  },
+  "academy-links": {
+    "title": "لینک‌های معرفی شاگردها | Prograin",
+    "description": "لینک‌های معرفی و پروفایل‌های ثبت‌شدهٔ شاگردهای آکادمی Prograin.",
+    "label": "لینک‌های معرفی"
   }
 }

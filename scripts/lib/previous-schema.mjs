@@ -2,6 +2,15 @@ import { mkdtemp, mkdir, copyFile, readFile, writeFile, unlink, rmdir } from "no
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
+import { pgTable, text } from "drizzle-orm/pg-core";
+
+export const legacyUsers = pgTable("student_user", {
+  id: text(),
+  name: text(),
+  email: text(),
+  username: text(),
+  github: text(),
+});
 
 export const migrateBeforeCourseDefinitions = (db) => migrateBefore(db, 5);
 

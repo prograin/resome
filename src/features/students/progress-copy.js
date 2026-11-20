@@ -2,6 +2,7 @@ export const progressCopy = {
   fa: {
     overview: "نمای کلی",
     goals: "هدف‌ها",
+    links: "لینک‌های معرفی",
     expandMenu: "باز کردن منوی داشبورد",
     collapseMenu: "جمع کردن منوی داشبورد",
     chart: "نمودار امتیازها",
@@ -61,6 +62,7 @@ export const progressCopy = {
   en: {
     overview: "Overview",
     goals: "Goals",
+    links: "Student links",
     expandMenu: "Expand dashboard menu",
     collapseMenu: "Collapse dashboard menu",
     chart: "Points chart",

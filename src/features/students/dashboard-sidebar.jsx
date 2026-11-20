@@ -26,6 +26,7 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
             copy.courses,
             ["admin-courses", "admin-grades", "admin-students"].includes(view),
           ],
+          [studentPaths.links, "external-link", copy.links, view === "links"],
         ]
       : []),
     ...(!management

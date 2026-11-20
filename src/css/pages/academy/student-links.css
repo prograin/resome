@@ -1,0 +1,52 @@
+.student-links__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  align-items: stretch;
+  gap: var(--ui-space-5);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.student-links__card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-4);
+}
+
+.student-links__identity {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-3);
+}
+
+.student-links__identity h2 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.student-links__identity > svg {
+  flex: none;
+  color: var(--ui-accent);
+}
+
+.student-links__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-space-3);
+  align-content: start;
+}
+
+.student-links__actions .ui-button {
+  min-width: 0;
+  padding-inline: var(--ui-space-2);
+  font-size: var(--ui-font-caption);
+}
+
+.student-links__load {
+  display: grid;
+  justify-items: center;
+  gap: var(--ui-space-3);
+  padding-block: var(--ui-space-5);
+}

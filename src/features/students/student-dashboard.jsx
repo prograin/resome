@@ -25,6 +25,9 @@ import { AdminCourseRoster } from "../academy-admin/course-roster";
 import { CourseEnrollmentButton } from "../academy-admin/course-enrollment-button";
 import { StudentManagementOverview } from "./student-management-overview";
 import { StudentCourseEnrollmentButton } from "./student-course-enrollment";
+import { StudentLinks } from "./student-links";
+import { studentLinksCopy } from "./student-links-copy";
+import { Icon } from "../../components/icon";
 
 export function StudentDashboard({
   userId,
@@ -36,6 +39,7 @@ export function StudentDashboard({
   directory,
   adminCourses,
   adminCourse,
+  studentsLinks,
 }) {
   const { locale, dir } = usePreferences();
   const copy = studentCopy[locale];
@@ -58,6 +62,7 @@ export function StudentDashboard({
     courses: progressLabels.courses,
     goals: progressLabels.goals,
     profile: copy.profile,
+    links: studentLinksCopy[locale].title,
   }[view];
   const courses = progress?.courses ?? [];
 
@@ -81,6 +86,12 @@ export function StudentDashboard({
             <header className="student-progress__header">
               <h1 id="student-dashboard-title">{title}</h1>
               <div className="student-progress__header-actions">
+                {view === "links" && (
+                  <Button as={SiteLink} href={studentPaths.profile} variant="soft">
+                    {studentLinksCopy[locale].edit}
+                    <Icon name="pencil" />
+                  </Button>
+                )}
                 {view === "overview" && management?.selected && (
                   <StudentCourseEnrollmentButton
                     management={management}
@@ -106,7 +117,9 @@ export function StudentDashboard({
                 )}
               </div>
             </header>
-            {view === "admin-courses" ? (
+            {view === "links" ? (
+              <StudentLinks initialPage={studentsLinks} locale={locale} />
+            ) : view === "admin-courses" ? (
               <AdminCourseCatalog courses={adminCourses} locale={locale} />
             ) : adminCourse ? (
               <AdminCourseRoster

@@ -3,15 +3,9 @@ import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { bigint, date, integer, numeric, pgTable, text } from "drizzle-orm/pg-core";
 import { createTestDatabase } from "./lib/test-database.mjs";
-import { migrateBeforeCourseDefinitions } from "./lib/previous-schema.mjs";
+import { legacyUsers, migrateBeforeCourseDefinitions } from "./lib/previous-schema.mjs";
 import { migrateStudentDatabase } from "../src/lib/db/migrate.js";
-import {
-  users,
-  courses,
-  awards,
-  courseDefinitions,
-  weeklyStats,
-} from "../src/lib/db/schema/index.js";
+import { courses, awards, courseDefinitions, weeklyStats } from "../src/lib/db/schema/index.js";
 import { readCourses, updateCourseContent } from "../src/lib/db/student-courses.js";
 import { writeProgress } from "../src/lib/db/student-writes.js";
 import { courseInput } from "../src/lib/validation/courses.js";
@@ -35,7 +29,7 @@ const { db: legacyDb, pool, close } = await createTestDatabase("course_ranks");
 let db = legacyDb;
 try {
   await migrateBeforeCourseDefinitions(db);
-  await db.insert(users).values([
+  await db.insert(legacyUsers).values([
     { id: "a", name: "Alice", username: "alice", email: "a@example.test" },
     { id: "b", name: "Bob", username: "bob", email: "b@example.test" },
   ]);

@@ -8,6 +8,7 @@ import {
 } from "../../src/lib/db/schema/index.js";
 import { internalStudentEmail } from "../../src/lib/student-auth/student-email.js";
 import { demoStudents, demoCourses, demoCourseIndexes, demoAssessments } from "./demo-data.mjs";
+import { seedDemoLinks } from "./seed-demo-links.mjs";
 
 export async function seedAcademyDemo({ auth, db, password, now = new Date() }) {
   const existing = await db
@@ -121,5 +122,6 @@ export async function seedAcademyDemo({ auth, db, password, now = new Date() }) 
     }
     return { createdCourses, createdEnrollments, createdAwards, createdVideos };
   });
-  return { createdUsers, ...added, usernames: students.map((s) => s.username) };
+  const updatedProfiles = await seedDemoLinks(db);
+  return { createdUsers, ...added, updatedProfiles, usernames: students.map((s) => s.username) };
 }

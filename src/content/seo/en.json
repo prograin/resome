@@ -68,5 +68,10 @@
     "title": "Portfolio | Ahmadreza Rezaei",
     "description": "Selected software projects by Ahmadreza Rezaei.",
     "label": "Portfolio"
+  },
+  "academy-links": {
+    "title": "Student links | Prograin",
+    "description": "Profile links shared by Prograin Academy students.",
+    "label": "Student links"
   }
 }
