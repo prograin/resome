@@ -9,7 +9,7 @@
     "format:check": "prettier --check src scripts docs .github README.md package.json vercel.json site.webmanifest.json next.config.mjs eslint.config.mjs",
     "build": "node scripts/prepare-next.mjs && next build",
     "package": "npm run build && npm run check",
-    "check": "npm run check:structure && node scripts/check-build.mjs",
+    "check": "npm run check:structure && node scripts/check-build.mjs && node scripts/check-rate-limit-deployment.mjs",
     "check:structure": "node scripts/check-structure.mjs",
     "test:performance": "node scripts/check-performance.mjs",
     "test:students": "node scripts/check-students.mjs",

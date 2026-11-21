@@ -5,6 +5,7 @@ import { consumeRateLimit } from "./mutation-limit.js";
 import { apiJson, rateLimitResponse } from "./api-response.js";
 import { trustedRequestOrigin } from "./request-origin.js";
 import { limitBackendRequest } from "./request-limit.js";
+import { serviceDiagnostic } from "./service-diagnostic.js";
 
 export { apiJson as studentApiJson } from "./api-response.js";
 export { readJsonRequest as studentApiBody } from "./json-request.js";
@@ -27,10 +28,7 @@ export async function authorizeStudentApi(request, scope) {
     if (limited.status) return rateLimitResponse(limited);
     return { ...runtime, user: session.user };
   } catch (error) {
-    console.error(
-      "Student API unavailable",
-      error.cause?.code ?? error.code ?? "STUDENT_API_FAILED",
-    );
+    console.error("Student API unavailable", serviceDiagnostic(error));
     return apiJson({ error: "Service unavailable" }, 503);
   }
 }

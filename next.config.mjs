@@ -7,7 +7,7 @@ const config = {
   devIndicators: false,
   agentRules: false,
   poweredByHeader: false,
-  serverExternalPackages: ["rate-limiter-flexible"],
+  serverExternalPackages: ["rate-limiter-flexible", "drizzle-orm"],
   experimental: { serverActions: { bodySizeLimit: "64kb" } },
   async headers() {
     return [

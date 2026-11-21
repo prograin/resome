@@ -5,6 +5,7 @@ import { trustedRequestOrigin } from "./request-origin.js";
 import { limitBackendRequest } from "./request-limit.js";
 import { apiJson } from "./api-response.js";
 import { parseQuery } from "../validation/forms.js";
+import { serviceDiagnostic } from "./service-diagnostic.js";
 
 const flag = z.enum(["true", "false"]).optional();
 const sessionQuery = z.strictObject({ disableCookieCache: flag, disableRefresh: flag });
@@ -36,7 +37,7 @@ export async function handleAuthRequest(request, endpoint) {
     if (response.status === 429 && retryAfter) response.headers.set("Retry-After", retryAfter);
     return response;
   } catch (error) {
-    console.error("Authentication unavailable", error.cause?.code ?? error.code ?? "AUTH_FAILED");
+    console.error("Authentication unavailable", serviceDiagnostic(error));
     return apiJson({ error: "Service unavailable" }, 503, { "Retry-After": "5" });
   }
 }

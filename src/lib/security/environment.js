@@ -17,11 +17,20 @@ const authEnvironment = z.object({
   }),
 });
 
+export class AuthConfigurationError extends Error {
+  constructor(fields) {
+    super(`Invalid student authentication configuration: ${fields.join(", ")}`);
+    this.name = "AuthConfigurationError";
+    this.code = "AUTH_CONFIG_INVALID";
+    this.fields = fields;
+  }
+}
+
 export function readAuthEnvironment(environment = process.env) {
   const result = authEnvironment.safeParse(environment);
   if (!result.success) {
     const fields = [...new Set(result.error.issues.map((issue) => issue.path.join(".")))];
-    throw new Error(`Invalid student authentication configuration: ${fields.join(", ")}`);
+    throw new AuthConfigurationError(fields);
   }
   return result.data;
 }

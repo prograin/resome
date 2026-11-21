@@ -9,6 +9,7 @@ import { requestLimitKey } from "../src/lib/security/request-limit.js";
 import { rateLimitResponse } from "../src/lib/security/api-response.js";
 import { parseQuery } from "../src/lib/validation/forms.js";
 import { notificationQueryInput } from "../src/lib/validation/notifications.js";
+import { serviceDiagnostic } from "../src/lib/security/service-diagnostic.js";
 
 const config = {
   DATABASE_URL: "postgresql://test@localhost/test",
@@ -23,8 +24,29 @@ for (const invalid of [
   { BETTER_AUTH_URL: "https://example.test/path" },
   { DATABASE_URL: "https://example.test" },
 ]) {
-  assert.throws(() => readAuthEnvironment({ ...config, ...invalid }), /configuration/);
+  assert.throws(
+    () => readAuthEnvironment({ ...config, ...invalid }),
+    (error) => {
+      assert.deepEqual(serviceDiagnostic(error), {
+        code: "AUTH_CONFIG_INVALID",
+        fields: Object.keys(invalid),
+      });
+      assert.ok(!JSON.stringify(serviceDiagnostic(error)).includes(Object.values(invalid)[0]));
+      return true;
+    },
+  );
 }
+assert.deepEqual(serviceDiagnostic(new TypeError("private password")), {
+  code: "SERVICE_FAILED",
+  type: "TypeError",
+});
+assert.deepEqual(
+  serviceDiagnostic(new Error("private query", { cause: { code: "ECONNREFUSED" } })),
+  {
+    code: "ECONNREFUSED",
+    type: "Error",
+  },
+);
 const request = (body, contentType = "application/json") =>
   new Request("https://example.test/api/auth/sign-in/username/", {
     method: "POST",

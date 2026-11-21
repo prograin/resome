@@ -1,6 +1,7 @@
 import { RateLimiterDrizzle, RateLimiterRes } from "rate-limiter-flexible";
 import { mutationLimits } from "../db/schema/security.js";
 import { studentAuthPolicy } from "../student-auth/config.js";
+import { serviceDiagnostic } from "./service-diagnostic.js";
 
 const mutationPolicies = {
   write: [40, 60],
@@ -47,7 +48,7 @@ export async function consumeRateLimit(limiter, key) {
   } catch (error) {
     if (error instanceof RateLimiterRes)
       return { status: "limit", retryAfter: Math.max(1, Math.ceil(error.msBeforeNext / 1000)) };
-    console.error("Mutation limiter unavailable", error.cause?.code ?? error.code);
+    console.error("Mutation limiter unavailable", serviceDiagnostic(error));
     return { status: "failed" };
   }
 }
