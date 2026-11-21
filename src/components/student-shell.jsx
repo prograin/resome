@@ -13,6 +13,7 @@ import dynamic from "next/dynamic";
 import { useAcademyApp } from "../features/academy-app/app-mode";
 import { AcademyInstallButton } from "../features/academy-app/install-button";
 import { contact } from "../config/site";
+import { ThemeToggle } from "./ui/theme-toggle";
 
 const NotificationBell = dynamic(
   () =>
@@ -49,6 +50,7 @@ export function StudentHeader({ pathname }) {
       >
         <StudentBrand />
         <div className="student-shell__links">
+          <ThemeToggle iconOnly />
           <NotificationBell />
           <Button
             as={SiteLink}

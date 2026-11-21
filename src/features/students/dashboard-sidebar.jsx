@@ -7,6 +7,7 @@ import { usePreferences } from "../../components/preferences";
 import { adminCopy } from "../academy-admin/copy";
 import { studentNavigation } from "./student-navigation";
 import { notificationCopy } from "../notifications/copy";
+import { ThemeToggle } from "../../components/ui/theme-toggle";
 
 export function DashboardSidebar({ copy, dir, view, profileLabel, management, username }) {
   const { expanded, close } = useAcademyMenu();
@@ -47,7 +48,7 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
       dir={dir}
       data-expanded={expanded}
       data-academy-menu
-      style={{ "--student-sidebar-items": links.length + 2 }}
+      style={{ "--student-sidebar-items": links.length + 3 }}
     >
       <div className="student-sidebar__anchor">
         <div className="student-sidebar__panel academy-neo">
@@ -76,6 +77,7 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
             ))}
             <div className="student-sidebar__profile">
               <hr className="student-sidebar__divider" />
+              <ThemeToggle iconOnly={!expanded} />
               <Button
                 as={Link}
                 variant="soft"

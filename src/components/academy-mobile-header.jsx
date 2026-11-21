@@ -6,6 +6,7 @@ import { Icon } from "./icon";
 import { Button } from "./ui/button";
 import { BackButton } from "./ui/back-button";
 import { useAcademyApp } from "../features/academy-app/app-mode";
+import { ThemeToggle } from "./ui/theme-toggle";
 
 export function AcademyMobileHeader({ fa, pathname, brand, notifications }) {
   const { expanded, toggle, close } = useAcademyMenu();
@@ -66,6 +67,7 @@ export function AcademyMobileHeader({ fa, pathname, brand, notifications }) {
             controls="academy-mobile-menu"
           />
           <hr className="student-sidebar__divider" />
+          <ThemeToggle />
           {links.map(([href, icon, label]) => (
             <Button
               as={Link}

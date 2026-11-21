@@ -12,7 +12,7 @@ export const metadata = {
     apple: [{ url: assetUrl("/assets/icons/academy/apple-touch-icon.png"), sizes: "180x180" }],
   },
 };
-export const viewport = { themeColor: "#142237", viewportFit: "cover" };
+export const viewport = { themeColor: "#dce5ef", viewportFit: "cover" };
 
 export default function StudentLayout({ children }) {
   return (

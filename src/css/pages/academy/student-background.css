@@ -1,0 +1,17 @@
+html:not(.dark) body:has([data-academy-app-page]) .site-background__wash {
+  background:
+    radial-gradient(ellipse at 12% 18%, rgb(66 151 172 / 12%), transparent 50%),
+    radial-gradient(ellipse at 88% 82%, rgb(91 111 171 / 12%), transparent 50%),
+    linear-gradient(135deg, #c8d6e5, #d7e1ed 55%, #c9d5e5);
+}
+
+html:not(.dark) body:has([data-academy-app-page]) .site-background__grid {
+  opacity: 0.3;
+}
+
+html:not(.dark) body:has([data-academy-app-page]) .site-background__grid > div {
+  background-image:
+    linear-gradient(rgb(49 79 115 / 16%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(49 79 115 / 16%) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

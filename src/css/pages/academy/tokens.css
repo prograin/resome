@@ -1,13 +1,13 @@
 body:has([data-site-page="academy"]) {
-  --ui-surface: #edf2f8;
+  --ui-surface: #dce5ef;
   --ui-text: #1c2c44;
   --ui-muted: #40516b;
-  --ui-line: #d4deeb;
+  --ui-line: #bdcddd;
   --ui-accent: #176c65;
   --ui-ring: #278b80;
   --academy-surface: var(--ui-surface);
-  --academy-depth-light: rgb(255 255 255 / 90%);
-  --academy-depth-dark: rgb(154 173 198 / 50%);
+  --academy-depth-light: rgb(247 251 255 / 65%);
+  --academy-depth-dark: rgb(127 149 178 / 45%);
   --academy-color-red: #9f2f46;
   --academy-color-blue: #2458a5;
   --academy-color-orange: #944008;

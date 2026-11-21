@@ -31,12 +31,12 @@ function readLocale() {
 }
 
 function readTheme() {
-  return (overrides[themeKey] ?? read(themeKey)) === "light" ? "light" : "dark";
+  return (overrides[themeKey] ?? read(themeKey)) === "dark" ? "dark" : "light";
 }
 
 export function PreferencesProvider({ children }) {
   const locale = useSyncExternalStore(subscribe, readLocale, () => "fa");
-  const theme = useSyncExternalStore(subscribe, readTheme, () => "dark");
+  const theme = useSyncExternalStore(subscribe, readTheme, () => "light");
 
   const dir = locale === "fa" ? "rtl" : "ltr";
   useEffect(() => {
