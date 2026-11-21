@@ -32,7 +32,7 @@
 
 .student-shell__brand img {
   flex: none;
-  border-radius: 50%;
+  border-radius: var(--ui-control-radius);
 }
 
 .student-shell__navigation {

@@ -1,8 +1,11 @@
+import { academyApp } from "../../src/features/academy-app/paths.js";
+
 export async function installMockPush(
   context,
   subscription,
   { locale = "fa", theme = "dark", subscribed = false, permission = "default" } = {},
 ) {
+  await context.addInitScript((key) => sessionStorage.setItem(key, "1"), academyApp.invitationKey);
   await context.addInitScript(
     ({ locale, theme, subscription, subscribed, permission }) => {
       localStorage.setItem("portfolio_locale", locale);

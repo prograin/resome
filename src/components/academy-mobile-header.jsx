@@ -5,17 +5,24 @@ import { AcademyDrawerHeader, useAcademyMenu } from "./academy-menu";
 import { Icon } from "./icon";
 import { Button } from "./ui/button";
 import { BackButton } from "./ui/back-button";
+import { useAcademyApp } from "../features/academy-app/app-mode";
 
 export function AcademyMobileHeader({ fa, pathname, brand, notifications }) {
   const { expanded, toggle, close } = useAcademyMenu();
+  const { standalone } = useAcademyApp();
   const dashboard =
     pathname.startsWith(studentPaths.dashboard) || pathname === studentPaths.dashboard.slice(0, -1);
   const menuLabel = fa ? "منوی آکادمی" : "Academy menu";
-  const links = [
-    [routes.academy.path, "graduation-cap", fa ? "آکادمی" : "Academy"],
-    [routes["academy-consultation"].path, "lightbulb", fa ? "مشاوره" : "Consultation"],
-    [studentPaths.dashboard, "layout", fa ? "داشبورد شاگردان" : "Student dashboard"],
-  ];
+  const links = standalone
+    ? [
+        [studentPaths.signIn, "graduation-cap", fa ? "ورود شاگردان" : "Student login"],
+        [studentPaths.dashboard, "layout", fa ? "داشبورد" : "Dashboard"],
+      ]
+    : [
+        [routes.academy.path, "graduation-cap", fa ? "آکادمی" : "Academy"],
+        [routes["academy-consultation"].path, "lightbulb", fa ? "مشاوره" : "Consultation"],
+        [studentPaths.dashboard, "layout", fa ? "داشبورد شاگردان" : "Student dashboard"],
+      ];
 
   return (
     <>

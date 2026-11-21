@@ -1,0 +1,52 @@
+.academy-install-guide {
+  display: grid;
+  gap: var(--ui-space-4);
+  line-height: var(--ui-body-leading);
+}
+
+.academy-install-guide ol {
+  display: grid;
+  gap: var(--ui-space-3);
+  padding-inline-start: var(--ui-space-5);
+  list-style: decimal;
+}
+
+.academy-install-invite {
+  display: grid;
+  gap: var(--ui-space-4);
+  line-height: var(--ui-body-leading);
+}
+
+.academy-install-invite img {
+  margin-inline: auto;
+  border-radius: var(--ui-radius-card);
+}
+
+.academy-install-invite__actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+}
+
+html[data-academy-app="true"] .student-shell__footer {
+  padding-bottom: calc(var(--ui-space-4) + env(safe-area-inset-bottom));
+}
+
+html[data-academy-app="true"] body {
+  --header-height: calc(4.25rem + env(safe-area-inset-top));
+}
+
+html[data-academy-app="true"]
+  .student-shell__header
+  > :is(.site-header__standard, .academy-mobile-header) {
+  padding-top: calc(0.6rem + env(safe-area-inset-top));
+}
+
+@media (display-mode: standalone) {
+  .student-shell__footer :is(a[href="/academy/"], a[href="/contact/"]),
+  .academy-mobile-menu :is(a[href="/academy/"], a[href="/academy/consultation/"]),
+  .academy-install-button {
+    display: none;
+  }
+}

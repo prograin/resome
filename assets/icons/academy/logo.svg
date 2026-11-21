@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <title>Prograin Academy</title>
+  <defs>
+    <linearGradient id="surface" x1="64" y1="0" x2="448" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172D45"/><stop offset="1" stop-color="#081322"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="136" y1="128" x2="370" y2="374" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#57E6FF"/><stop offset="1" stop-color="#68E7C0"/>
+    </linearGradient>
+    <radialGradient id="glow"><stop stop-color="#29CED6" stop-opacity=".16"/><stop offset="1" stop-color="#29CED6" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path fill="url(#surface)" d="M0 0h512v512H0z"/>
+  <rect x="32" y="32" width="448" height="448" rx="104" stroke="#80E6DC" stroke-opacity=".12" stroke-width="2"/>
+  <circle cx="256" cy="242" r="190" fill="url(#glow)"/>
+  <g stroke="url(#accent)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m256 128 134 62-134 62-134-62 134-62Z" fill="#50DEEC" fill-opacity=".07" stroke-width="16"/>
+    <path d="M164 221v55c48 36 136 36 184 0v-55M390 192v83" stroke-width="14"/>
+    <circle cx="390" cy="288" r="9" fill="#68E7C0" stroke="none"/>
+    <path d="m184 326-28 24 28 24m144-48 28 24-28 24m-57-56-29 64" stroke-width="15"/>
+  </g>
+</svg>

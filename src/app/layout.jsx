@@ -7,6 +7,7 @@ import { DetailsDialogProvider } from "../components/details-dialog";
 import { SiteUpdates } from "../components/site-updates";
 import { LegacyLinks } from "../components/legacy-links";
 import { AcademyMenuProvider } from "../components/academy-menu";
+import { AcademyAppBoundary } from "../components/academy-app-boundary";
 
 export const metadata = {
   metadataBase: new URL(origin),
@@ -14,7 +15,6 @@ export const metadata = {
     icon: [{ url: assetUrl("/assets/icons/favicon-48.png"), type: "image/png", sizes: "48x48" }],
     apple: [{ url: assetUrl("/assets/icons/apple-touch-icon.png"), sizes: "180x180" }],
   },
-  manifest: "/site.webmanifest",
 };
 export const viewport = { themeColor: "#08111f" };
 
@@ -41,10 +41,12 @@ export default function RootLayout({ children }) {
         <PreferencesProvider>
           <AcademyMenuProvider>
             <DetailsDialogProvider>
-              <Background />
-              <Header />
-              <LegacyLinks />
-              {children}
+              <AcademyAppBoundary>
+                <Background />
+                <Header />
+                <LegacyLinks />
+                {children}
+              </AcademyAppBoundary>
             </DetailsDialogProvider>
           </AcademyMenuProvider>
           <SiteUpdates />

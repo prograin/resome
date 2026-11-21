@@ -54,6 +54,7 @@ export async function clearBrowserPush() {
 export async function subscribeBrowserPush(userId, publicKey) {
   const registration = await navigator.serviceWorker.register("/academy-notifications-sw.js", {
     scope: "/academy/students/",
+    updateViaCache: "none",
   });
   if (!registration.active) {
     const worker = registration.installing ?? registration.waiting;

@@ -4,10 +4,12 @@ import { useRouter } from "next/navigation";
 import { usePreferences } from "../preferences";
 import { Button } from "./button";
 import { Icon } from "../icon";
+import { useAcademyApp } from "../../features/academy-app/app-mode";
 
 export function BackButton({ fallback, iconOnly = false }) {
   const router = useRouter();
   const { locale, dir } = usePreferences();
+  const { standalone, back } = useAcademyApp();
   return (
     <Button
       variant="soft"
@@ -15,6 +17,10 @@ export function BackButton({ fallback, iconOnly = false }) {
       aria-label={locale === "fa" ? "بازگشت" : "Back"}
       title={iconOnly ? (locale === "fa" ? "بازگشت" : "Back") : undefined}
       onClick={() => {
+        if (standalone) {
+          back();
+          return;
+        }
         if (window.history.length > 1) router.back();
         else window.location.replace(fallback);
       }}

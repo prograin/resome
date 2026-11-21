@@ -30,6 +30,8 @@ Backend security, shared PostgreSQL rate limits, request validation, headers and
 
 ## Student sign-in
 
+The installable academy app starts at student sign-in and stays within `/academy/students/`. Its manifest, installation icons, app-only navigation and network-only offline fallback are described in [the academy app guide](docs/ACADEMY-APP.md).
+
 Set `DATABASE_URL`, `BETTER_AUTH_URL` and `BETTER_AUTH_SECRET` in `.env` locally or in the deployment environment. See `.env.example` for the variable names. Use the browser origin as `BETTER_AUTH_URL` and set the database password in `DATABASE_URL` if required. Generate a secret with `npx @better-auth/cli secret` or Node's `randomBytes(32)`.
 
 Email setup requires `RESEND_API_KEY` and `RESEND_FROM_EMAIL` in the same environment, including Vercel Production. The profile sends a four-digit code with the official Resend SDK and uses Better Auth Email OTP to save and verify the address only after a valid code. No new database migration is needed. Codes expire after five minutes, allow three attempts, and are stored hashed. `npm run test:email:otp` covers this flow with a separate test database and a mocked sender.

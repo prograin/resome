@@ -18,7 +18,7 @@ const self = {
   registration: { showNotification: async (title, body) => shown.push({ title, ...body }) },
   clients: { matchAll: async () => [], openWindow: async (url) => opened.push(url) },
 };
-runInNewContext(source, { self, indexedDB: new IDBFactory(), URL });
+runInNewContext(source, { self, indexedDB: new IDBFactory(), URL, importScripts() {} });
 const payload = {
   title: "Prograin",
   body: "New score",

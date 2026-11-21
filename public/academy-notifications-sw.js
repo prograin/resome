@@ -1,4 +1,14 @@
-/* Push only. This worker never caches pages, images, or other assets. */
+/* Academy app and push. Account pages, APIs and assets are never stored in CacheStorage. */
+importScripts("/academy-offline.js");
+
+self.addEventListener("install", (event) => event.waitUntil(self.skipWaiting()));
+self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));
+self.addEventListener("fetch", (event) => {
+  const url = new URL(event.request.url);
+  if (event.request.mode !== "navigate" || url.origin !== self.location.origin ||
+      !(url.pathname === "/academy/students" || url.pathname.startsWith("/academy/students/"))) return;
+  event.respondWith(fetch(event.request, { cache: "no-store" }).catch(() => self.academyOfflineResponse()));
+});
 const databaseName = "prograin-academy-push";
 
 function updateSeenTag(tag, remove = false) {
@@ -79,6 +89,7 @@ self.addEventListener("push", (event) => {
       if (!(await updateSeenTag(payload.tag))) return;
       try {
         await self.registration.showNotification(payload.title, {
+          icon: "/assets/icons/academy/icon-192.png",
           body: typeof payload.body === "string" ? payload.body : "",
           tag: payload.tag,
           data: { url: url.href },

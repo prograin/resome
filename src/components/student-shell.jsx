@@ -10,6 +10,9 @@ import { usePreferences } from "./preferences";
 import { studentPaths } from "../lib/student-auth/paths";
 import { BackButton } from "./ui/back-button";
 import dynamic from "next/dynamic";
+import { useAcademyApp } from "../features/academy-app/app-mode";
+import { AcademyInstallButton } from "../features/academy-app/install-button";
+import { contact } from "../config/site";
 
 const NotificationBell = dynamic(
   () =>
@@ -22,7 +25,7 @@ function StudentBrand() {
     <SiteLink href={studentPaths.dashboard} className="student-shell__brand" dir="ltr">
       <Image
         unoptimized
-        src={assetUrl("/assets/icons/favicon-48.png")}
+        src={assetUrl("/assets/icons/academy/icon-192.png")}
         width={32}
         height={32}
         alt=""
@@ -71,13 +74,28 @@ export function StudentHeader({ pathname }) {
 
 export function StudentFooter() {
   const { locale, dir } = usePreferences();
+  const { standalone } = useAcademyApp();
   const fa = locale === "fa";
   return (
     <footer id="siteFooter" className="student-shell__footer" dir={dir}>
       <StudentBrand />
       <nav className="student-shell__links" aria-label={fa ? "راهنمای شاگردان" : "Student help"}>
-        <SiteLink href="/academy/">{fa ? "بازگشت به آکادمی" : "Back to academy"}</SiteLink>
-        <SiteLink href="/contact/">{fa ? "پشتیبانی" : "Support"}</SiteLink>
+        <SiteLink href={standalone ? studentPaths.dashboard : "/academy/"}>
+          {standalone
+            ? fa
+              ? "داشبورد"
+              : "Dashboard"
+            : fa
+              ? "بازگشت به آکادمی"
+              : "Back to academy"}
+        </SiteLink>
+        <SiteLink
+          href={standalone ? `https://t.me/${contact.telegram}` : "/contact/"}
+          {...(standalone ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          {fa ? "پشتیبانی" : "Support"}
+        </SiteLink>
+        <AcademyInstallButton />
       </nav>
     </footer>
   );

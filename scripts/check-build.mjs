@@ -13,6 +13,11 @@ for (const route of publicRoutes) {
   assert.match(html, /<h1[ >]/);
   assert.match(html, /id="localSeoSchema"/);
   assert.ok(!html.includes("/src/app.js"));
+  assert.doesNotMatch(
+    html,
+    /rel="manifest"/,
+    "Only the student area advertises an installable app",
+  );
 }
 for (const name of ["resume", "portfolio", "portfoilio"]) {
   const html = await read(`${name}.html`);
@@ -26,6 +31,9 @@ assert.deepEqual(
 );
 assert.ok((await read("robots.txt.body")).includes(`Sitemap: ${origin}/sitemap.xml`));
 const manifest = JSON.parse(await read("site.webmanifest.body"));
+assert.equal(manifest.scope, "/academy/students/");
+assert.equal(manifest.start_url, "/academy/students/?app=academy");
+assert.deepEqual(JSON.parse(await read("academy/students/manifest.webmanifest.body")), manifest);
 for (const icon of manifest.icons) await access(new URL(icon.src.slice(1), assets));
 const release = JSON.parse(await readFile(new URL("site-version.json", assets), "utf8"));
 assert.match(release.version, /^[a-f0-9]{12}$/);

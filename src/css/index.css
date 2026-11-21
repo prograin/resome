@@ -28,6 +28,7 @@
 @import "./components/footer/legacy-01.css";
 @import "./foundation/tokens.css";
 @import "./shared/base.css";
+@import "./shared/app-scope.css";
 @import "./shared/scrollbars.css";
 @import "./components/header.css";
 @import "./pages/home/hero-layout.css";
@@ -86,6 +87,7 @@
 @import "./pages/academy/controls.css";
 @import "./pages/academy/mobile-header.css";
 @import "./pages/academy/student-shell.css";
+@import "./pages/academy/student-app.css";
 @import "./pages/academy/student-notifications.css";
 @import "./pages/academy/student-notification-list.css";
 @import "./pages/academy/student-notification-page.css";

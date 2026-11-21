@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { isStandaloneDisplay } from "../features/academy-app/app-mode";
 
 const portfolioAnchors = new Set([
   "resumeHome",
@@ -22,6 +23,7 @@ const oldRoutes = {
 export function LegacyLinks() {
   const pathname = usePathname();
   useEffect(() => {
+    if (isStandaloneDisplay()) return;
     if (pathname !== "/" && pathname.replace(/\/$/, "") !== "/home") return;
     function checkHash() {
       const hash = location.hash.slice(1);

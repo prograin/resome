@@ -7,6 +7,7 @@ import { PurgeCSS } from "purgecss";
 import { optimizeImages, assetFingerprint } from "./lib/assets.mjs";
 import { readStyles } from "./lib/css.mjs";
 import { includeStyle } from "./lib/style-groups.mjs";
+import { generateAcademyIcons } from "./lib/academy-icons.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const source = (file) => path.join(root, file);
@@ -41,6 +42,7 @@ async function compileStyles(stylesheet, content, version) {
   return transform({ filename: "site.css", code: Buffer.from(css), minify: true }).code;
 }
 
+await generateAcademyIcons(root);
 await optimizeImages(root);
 const hash = createHash("sha256");
 hash.update(await assetFingerprint(root));
@@ -74,6 +76,7 @@ const styles = await Promise.all(
               "src/features/students",
               "src/features/academy-admin",
               "src/features/notifications",
+              "src/features/academy-app",
             ].map(collect),
           ).then((sources) => sources.flat())
         : [];

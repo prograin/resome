@@ -1,0 +1,14 @@
+.academy-app-redirect {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: var(--ui-space-4);
+  color: var(--ui-text);
+  background: var(--ui-surface);
+}
+
+@media (display-mode: standalone) {
+  body:not(:has([data-academy-app-page])) :is(.site-header, .site-main, #siteFooter) {
+    visibility: hidden;
+  }
+}
