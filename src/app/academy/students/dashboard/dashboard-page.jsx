@@ -19,17 +19,25 @@ import {
 } from "../../../../lib/student-progress";
 
 export async function DashboardPage({ searchParams, view = "overview" }) {
-  const { user } = await requireStudentSession();
+  const rawParams = (await searchParams) ?? {};
+  const { user } = await requireStudentSession(
+    {
+      notifications: studentPaths.notifications,
+      history: studentPaths.history,
+      courses: studentPaths.courses,
+    }[view],
+  );
   const admin = isStudentAdmin(user);
-  const studentView = admin && !["profile", "links"].includes(view);
-  const params = studentView ? ((await searchParams) ?? {}) : {};
+  const studentView =
+    admin && !["profile", "links", "notifications"].includes(view) && Boolean(rawParams.student);
+  const params = studentView ? rawParams : {};
   if (admin && view === "overview" && !params?.student) redirect(studentPaths.admin);
   const students = studentView ? await listStudents() : [];
   const definitions =
     admin && view === "overview" ? await listCourseDefinitions(getStudentRuntime().db) : [];
   const selected = students.find(({ id }) => id === params.student) ?? students[0];
   if (admin && params.student && selected?.id !== params.student) notFound();
-  const studentId = admin ? selected?.id : user.id;
+  const studentId = studentView ? selected?.id : user.id;
   const read = {
     overview: readStudentProgress,
     chart: readStudentProgress,
@@ -53,6 +61,7 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
     goals: "academy-goals",
     profile: "academy-profile",
     links: "academy-links",
+    notifications: "academy-notifications",
   }[view];
 
   return (

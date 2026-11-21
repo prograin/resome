@@ -58,6 +58,18 @@ export async function createStudentFixture() {
 
   const emailDirectory = await mkdtemp(join(tmpdir(), "prograin-email-test-"));
   const emailOutbox = join(emailDirectory, "outbox.jsonl");
+  const readEmailMessages = async () => {
+    try {
+      return (await readFile(emailOutbox, "utf8"))
+        .trim()
+        .split("\n")
+        .filter(Boolean)
+        .map(JSON.parse);
+    } catch (error) {
+      if (error.code === "ENOENT") return [];
+      throw error;
+    }
+  };
   const server = spawn(
     process.execPath,
     [
@@ -119,8 +131,9 @@ export async function createStudentFixture() {
       password,
       studentId,
       otherId,
+      readEmailMessages,
       async readEmailCode(email) {
-        const messages = (await readFile(emailOutbox, "utf8")).trim().split("\n").map(JSON.parse);
+        const messages = await readEmailMessages();
         return messages.findLast((message) => message.to.includes(email))?.otp;
       },
       close,

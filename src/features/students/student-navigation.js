@@ -13,6 +13,6 @@ export function studentNavigation(copy, selected, locale) {
     [studentPaths.goals + query, "tag", copy.goals, "goals"],
     [studentPaths.chart + query, "sparkles", copy.chart, "chart"],
     [studentPaths.history + query, "clock", copy.history, "history"],
-    ...(!selected ? [[studentPaths.links, "external-link", copy.links, "links"]] : []),
+    ...(!selected ? [[studentPaths.links, "link", copy.links, "links"]] : []),
   ];
 }

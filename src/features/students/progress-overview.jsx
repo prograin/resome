@@ -7,9 +7,6 @@ import { currentStudentCourse } from "../../lib/student-current-course";
 export function ProgressOverview({ progress, copy, locale, management }) {
   const course = currentStudentCourse(progress.courses);
   const labels = dashboardCopy[locale];
-  const query = management?.selected
-    ? `?student=${encodeURIComponent(management.selected.id)}`
-    : "";
   return (
     <>
       <section className="student-progress__section" aria-label={copy.overview}>
@@ -28,7 +25,6 @@ export function ProgressOverview({ progress, copy, locale, management }) {
         <DashboardGoals
           goals={progress.goals}
           locale={locale}
-          query={query}
           formCopy={copy}
           canCreate={!management}
         />

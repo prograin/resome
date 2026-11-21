@@ -6,7 +6,7 @@ import { Icon } from "./icon";
 import { Button } from "./ui/button";
 import { BackButton } from "./ui/back-button";
 
-export function AcademyMobileHeader({ fa, pathname, brand }) {
+export function AcademyMobileHeader({ fa, pathname, brand, notifications }) {
   const { expanded, toggle, close } = useAcademyMenu();
   const dashboard =
     pathname.startsWith(studentPaths.dashboard) || pathname === studentPaths.dashboard.slice(0, -1);
@@ -36,10 +36,13 @@ export function AcademyMobileHeader({ fa, pathname, brand }) {
             prograin<span>.</span>
           </Link>
         )}
-        <BackButton
-          fallback={pathname.replace(/\/$/, "") === "/academy" ? "/" : routes.academy.path}
-          iconOnly
-        />
+        <div className="student-notifications__header-actions">
+          {notifications}
+          <BackButton
+            fallback={pathname.replace(/\/$/, "") === "/academy" ? "/" : routes.academy.path}
+            iconOnly
+          />
+        </div>
       </nav>
       {!dashboard && (
         <nav

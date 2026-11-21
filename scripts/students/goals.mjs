@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { studentPaths } from "../../src/lib/student-auth/paths.js";
+import { checkFormRecovery } from "./form-recovery.mjs";
 
 export async function checkGoals({ page, origin, openDashboardPage }) {
   await openDashboardPage("هدف‌ها");
@@ -17,6 +18,13 @@ export async function checkGoals({ page, origin, openDashboardPage }) {
   await newGoal.locator('[name="title"]').fill("Fixture learning goal");
   await newGoal.locator('[name="description"]').fill(longDescription);
   await newGoal.locator('[name="priority"]').selectOption("1");
+  await checkFormRecovery(
+    page,
+    newGoal,
+    newGoal.getByRole("button", { name: "افزودن هدف", exact: true }),
+    "failed",
+    "unavailable",
+  );
   await newGoal.getByRole("button", { name: "افزودن هدف", exact: true }).click();
   await goalDialog.waitFor({ state: "hidden" });
   const goal = page

@@ -4,6 +4,11 @@ import { validateAuthRequest } from "../src/lib/security/auth-request.js";
 import { securityHeaders } from "../src/lib/security/headers.js";
 import { parseForm } from "../src/lib/validation/forms.js";
 import { goalInput } from "../src/lib/validation/goals.js";
+import { trustedRequestOrigin } from "../src/lib/security/request-origin.js";
+import { requestLimitKey } from "../src/lib/security/request-limit.js";
+import { rateLimitResponse } from "../src/lib/security/api-response.js";
+import { parseQuery } from "../src/lib/validation/forms.js";
+import { notificationQueryInput } from "../src/lib/validation/notifications.js";
 
 const config = {
   DATABASE_URL: "postgresql://test@localhost/test",
@@ -72,6 +77,44 @@ duplicate.append("priority", "3");
 duplicate.set("percent", "0");
 assert.equal(parseForm(goalInput, duplicate), null);
 assert.equal(parseForm(goalInput, {}), null);
+for (const origin of ["https://evil.example", "null", "https://example.test.evil.test"]) {
+  assert.equal(
+    trustedRequestOrigin(new Request(config.BETTER_AUTH_URL, { headers: { origin } }), config),
+    false,
+  );
+}
+assert.equal(trustedRequestOrigin(new Request(config.BETTER_AUTH_URL), config), false);
+assert.equal(
+  trustedRequestOrigin(
+    new Request(config.BETTER_AUTH_URL, { headers: { origin: config.BETTER_AUTH_URL } }),
+    config,
+  ),
+  true,
+);
+const key = (ip, extra = {}, environment = {}) =>
+  requestLimitKey(
+    new Request(config.BETTER_AUTH_URL, {
+      headers: { "x-forwarded-for": ip, ...extra },
+    }),
+    { ...config, ...environment },
+  );
+assert.equal(key("2001:db8::1"), key("2001:0db8:0000:0000:0000:0000:0000:0001"));
+assert.equal(key("bad-address"), key("another-invalid-address"));
+assert.equal(
+  key("192.0.2.1", { "x-vercel-forwarded-for": "192.0.2.8" }, { VERCEL: "1" }),
+  key("192.0.2.8"),
+);
+assert.notEqual(key("192.0.2.1"), key("192.0.2.2"));
+assert.equal(parseQuery(notificationQueryInput, new URLSearchParams("before=1&before=2")), null);
+assert.equal(parseQuery(notificationQueryInput, new URLSearchParams("before=1&admin=true")), null);
+assert.deepEqual(parseQuery(notificationQueryInput, new URLSearchParams("before=1")), {
+  before: 1,
+});
+const limited = rateLimitResponse({ status: "limit", retryAfter: 12 });
+assert.equal(limited.status, 429);
+assert.equal(limited.headers.get("retry-after"), "12");
+assert.match(limited.headers.get("cache-control"), /no-store/);
+assert.equal(rateLimitResponse({ status: "failed" }).status, 503);
 const headers = Object.fromEntries(securityHeaders().map(({ key, value }) => [key, value]));
 assert.equal(headers["X-Content-Type-Options"], "nosniff");
 assert.equal(headers["X-Frame-Options"], "DENY");

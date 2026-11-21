@@ -1,3 +1,4 @@
+import { createPreferenceContext } from "./lib/browser-preferences.mjs";
 // Responsive, bilingual UI and interaction checks; optional Playwright/axe runner.
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -14,17 +15,12 @@ try {
   for (const width of [360, 768, 1024, 1440]) {
     for (const locale of ["fa", "en"]) {
       for (const theme of ["dark", "light"]) {
-        const context = await browser.newContext({
+        const context = await createPreferenceContext(browser, {
+          locale,
+          theme,
           viewport: { width, height: 900 },
           reducedMotion: "reduce",
         });
-        await context.addInitScript(
-          ({ locale, theme }) => {
-            localStorage.setItem("portfolio_locale", locale);
-            localStorage.setItem("portfolio_theme", theme);
-          },
-          { locale, theme },
-        );
         const page = await context.newPage();
         const errors = [];
         page.on("pageerror", (error) => errors.push(error.message));
@@ -132,12 +128,14 @@ try {
               const tab = page.locator("[data-academy-tab='private']");
               await tab.focus();
               await tab.press("ArrowRight");
+              await page.locator('[data-academy-tab="group"][aria-selected="true"]').waitFor();
               assert.equal(
                 await page.locator("[data-academy-tab='group']").getAttribute("aria-selected"),
                 "true",
               );
               assert.equal(await page.locator("[data-academy-plan='group']").isVisible(), true);
               await page.locator("[data-academy-tab='group']").press("Home");
+              await page.locator('[data-academy-tab="private"][aria-selected="true"]').waitFor();
               assert.equal(await tab.getAttribute("aria-selected"), "true");
             }
           }

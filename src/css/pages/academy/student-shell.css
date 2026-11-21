@@ -1,3 +1,7 @@
+.student-shell__header {
+  z-index: var(--ui-header-layer);
+}
+
 .student-shell__header,
 .student-shell__footer {
   background: var(--academy-surface);

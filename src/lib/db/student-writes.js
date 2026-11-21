@@ -1,6 +1,7 @@
 import { and, eq } from "drizzle-orm";
-import { awards, courses, users, courseDefinitions } from "./schema/index.js";
+import { courses, users, courseDefinitions } from "./schema/index.js";
 import { eligibleStudent } from "./rankings.js";
+import { addStudentAward, addStudentCourse } from "./student-records.js";
 
 export function writeProgress(db, studentId, admin, operation, values) {
   return db.transaction(async (tx) => {
@@ -12,12 +13,14 @@ export function writeProgress(db, studentId, admin, operation, values) {
     if (!student) return false;
     if (operation === "course") {
       let definitionId = values.definitionId;
+      let title = values.course.title;
       if (definitionId) {
         const [definition] = await tx
-          .select({ id: courseDefinitions.id })
+          .select({ id: courseDefinitions.id, title: courseDefinitions.title })
           .from(courseDefinitions)
           .where(eq(courseDefinitions.id, definitionId));
         if (!definition) return false;
+        title = definition.title;
       } else {
         const [definition] = await tx
           .insert(courseDefinitions)
@@ -25,7 +28,7 @@ export function writeProgress(db, studentId, admin, operation, values) {
           .returning({ id: courseDefinitions.id });
         definitionId = definition.id;
       }
-      await tx.insert(courses).values({ studentId, ...values.course, definitionId });
+      await addStudentCourse(tx, { studentId, ...values.course, definitionId }, title);
       return true;
     }
     const ownCourse = and(eq(courses.id, values.courseId ?? 0), eq(courses.studentId, studentId));
@@ -39,21 +42,28 @@ export function writeProgress(db, studentId, admin, operation, values) {
             .returning({ id: courses.id })
         ).length === 1
       );
+    let title = null;
     if (values.courseId !== null) {
       const [course] = await tx
-        .select({ id: courses.id })
+        .select({ id: courses.id, title: courseDefinitions.title })
         .from(courses)
+        .innerJoin(courseDefinitions, eq(courseDefinitions.id, courses.definitionId))
         .where(ownCourse)
-        .for("update");
+        .for("update", { of: courses });
       if (!course) return false;
+      title = course.title;
     }
-    await tx.insert(awards).values({
-      studentId,
-      courseId: values.courseId,
-      points: values.points,
-      kind: values.kind,
-      note: values.note,
-    });
+    await addStudentAward(
+      tx,
+      {
+        studentId,
+        courseId: values.courseId,
+        points: values.points,
+        kind: values.kind,
+        note: values.note,
+      },
+      title,
+    );
     return true;
   });
 }

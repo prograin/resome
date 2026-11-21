@@ -6,6 +6,7 @@ import { studentPaths } from "../../lib/student-auth/paths";
 import { usePreferences } from "../../components/preferences";
 import { adminCopy } from "../academy-admin/copy";
 import { studentNavigation } from "./student-navigation";
+import { notificationCopy } from "../notifications/copy";
 
 export function DashboardSidebar({ copy, dir, view, profileLabel, management, username }) {
   const { expanded, close } = useAcademyMenu();
@@ -26,7 +27,7 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
             copy.courses,
             ["admin-courses", "admin-grades", "admin-students"].includes(view),
           ],
-          [studentPaths.links, "external-link", copy.links, view === "links"],
+          [studentPaths.links, "link", copy.links, view === "links"],
         ]
       : []),
     ...(!management
@@ -37,6 +38,7 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
           view === target,
         ])
       : []),
+    [studentPaths.notifications, "bell", notificationCopy[locale].title, view === "notifications"],
   ];
 
   return (

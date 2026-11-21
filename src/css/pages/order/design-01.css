@@ -50,10 +50,13 @@
   min-height: 3rem;
   border: 0 !important;
   border-radius: var(--ui-control-radius);
-  background: #087b72 !important;
-  color: white !important;
-  box-shadow: 0 6px 18px rgb(13 148 136 / 14%) !important;
+  background: var(--ui-action) !important;
+  color: var(--ui-on-action) !important;
+  box-shadow: var(--ui-shadow-control) !important;
   justify-content: center;
+}
+.order-contact-cta > a:hover {
+  background: var(--ui-action-hover) !important;
 }
 .order-clients {
   position: relative;

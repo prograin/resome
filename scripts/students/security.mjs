@@ -48,7 +48,7 @@ export async function checkSecurity({ page, origin, profile, username }) {
     (
       await page.request.post(origin + "/api/auth/sign-in/username/", {
         data: "{",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Origin: origin },
       })
     ).status(),
     400,
@@ -57,7 +57,7 @@ export async function checkSecurity({ page, origin, profile, username }) {
     (
       await page.request.post(origin + "/api/auth/sign-in/username/", {
         data: "x".repeat(9000),
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Origin: origin },
       })
     ).status(),
     413,

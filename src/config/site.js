@@ -91,6 +91,12 @@ const routes = {
     body: "academy",
     noindex: true,
   },
+  "academy-notifications": {
+    path: studentPaths.notifications,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
   "contact-page": {
     path: "/contact/",
     container: "contactPage",

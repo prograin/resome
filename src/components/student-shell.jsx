@@ -9,6 +9,13 @@ import { AcademyMobileHeader } from "./academy-mobile-header";
 import { usePreferences } from "./preferences";
 import { studentPaths } from "../lib/student-auth/paths";
 import { BackButton } from "./ui/back-button";
+import dynamic from "next/dynamic";
+
+const NotificationBell = dynamic(
+  () =>
+    import("../features/notifications/notification-bell").then((module) => module.NotificationBell),
+  { ssr: false },
+);
 
 function StudentBrand() {
   return (
@@ -39,6 +46,7 @@ export function StudentHeader({ pathname }) {
       >
         <StudentBrand />
         <div className="student-shell__links">
+          <NotificationBell />
           <Button
             as={SiteLink}
             href={login ? studentPaths.signIn : studentPaths.profile}
@@ -51,7 +59,12 @@ export function StudentHeader({ pathname }) {
           <BackButton fallback="/academy/" iconOnly />
         </div>
       </nav>
-      <AcademyMobileHeader fa={fa} pathname={pathname} brand={<StudentBrand />} />
+      <AcademyMobileHeader
+        fa={fa}
+        pathname={pathname}
+        brand={<StudentBrand />}
+        notifications={<NotificationBell />}
+      />
     </header>
   );
 }

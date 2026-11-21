@@ -1,0 +1,101 @@
+.student-weekly-change {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-2);
+  font-size: var(--ui-font-caption);
+}
+
+.student-weekly-change--positive {
+  color: var(--academy-color-green);
+}
+
+.student-weekly-change--negative {
+  color: var(--academy-color-red);
+}
+
+.student-weekly-change--neutral {
+  color: var(--ui-muted);
+}
+
+.student-weekly-change--compact {
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+
+.student-weekly-leaders {
+  --academy-card-surface: color-mix(
+    in srgb,
+    var(--academy-surface),
+    var(--academy-color-green) 10%
+  );
+  --student-table-align: center;
+  min-width: 0;
+  align-self: start;
+}
+
+.student-weekly-leaders__scroll {
+  overflow-x: auto;
+}
+
+.student-weekly-leaders tbody tr:not(:last-child) > td {
+  border-block-end: 1px solid var(--ui-line);
+}
+
+.student-weekly-leaders__scroll:focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: var(--ui-space-1);
+}
+
+.student-weekly-leaders__rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ui-space-2);
+}
+
+@media (width < 48rem) {
+  .student-weekly-leaders__scroll {
+    overscroll-behavior-x: contain;
+    padding-block-end: var(--ui-space-2);
+  }
+
+  .student-weekly-leaders .student-table {
+    min-width: max(26rem, calc(100% + 4rem));
+  }
+
+  .student-weekly-leaders :is(th, td) {
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+
+  .student-weekly-leaders__scroll--more {
+    mask-image: linear-gradient(to left, transparent, #000 1.25rem);
+  }
+
+  html[dir="rtl"] .student-weekly-leaders__scroll--more {
+    mask-image: linear-gradient(to right, transparent, #000 1.25rem);
+  }
+}
+
+@media (width >= 48rem) {
+  .student-weekly-leaders {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    gap: var(--ui-space-3);
+    min-height: 0;
+    contain: size;
+  }
+
+  .student-weekly-leaders > h2 {
+    flex: none;
+  }
+
+  .student-weekly-leaders__scroll {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+  }
+}

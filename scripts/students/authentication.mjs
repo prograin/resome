@@ -13,10 +13,12 @@ export async function checkAuthentication({
   submit,
 }) {
   await page.goto(courses);
-  await page.waitForURL(login);
-  await page.goto(profile);
-  await page.waitForURL(login);
+  await page.waitForURL((url) => url.pathname === studentPaths.signIn);
+  assert.equal(new URL(page.url()).searchParams.get("next"), studentPaths.courses);
   await page.goto(origin + studentPaths.history);
+  await page.waitForURL((url) => url.pathname === studentPaths.signIn);
+  assert.equal(new URL(page.url()).searchParams.get("next"), studentPaths.history);
+  await page.goto(profile);
   await page.waitForURL(login);
   assert.match(await page.locator('meta[name="robots"]').getAttribute("content"), /noindex/);
   assert.equal(

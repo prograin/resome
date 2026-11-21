@@ -10,13 +10,18 @@ export function GoalForm({ goal, labels, copy, locale, onSaved }) {
   const formattedPercent = new Intl.NumberFormat(locale, { style: "percent" }).format(
     percent / 100,
   );
-  const [status, action, pending] = useSavedAction(
+  const [status, action, pending, formProps] = useSavedAction(
     updateGoal.bind(null, goal?.id ?? null),
     onSaved,
   );
 
   return (
-    <form className="student-panel__form student-goal__form" data-add={!goal} action={action}>
+    <form
+      {...formProps}
+      className="student-panel__form student-goal__form"
+      data-add={!goal}
+      action={action}
+    >
       <div className="student-goal__title-field">
         <label>
           {labels.title}

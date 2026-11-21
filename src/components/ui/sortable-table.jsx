@@ -53,6 +53,25 @@ export function SortableTableHead({ column, sorting, onSort, href, locale }) {
   );
 }
 
+export function SortableTableHeader({ columns, sorting, onSort, hrefFor, locale }) {
+  return (
+    <thead>
+      <tr>
+        {columns.map((column) => (
+          <SortableTableHead
+            key={column.key ?? column.label}
+            column={column}
+            sorting={sorting}
+            onSort={onSort}
+            href={column.key && hrefFor ? hrefFor(column.key) : undefined}
+            locale={locale}
+          />
+        ))}
+      </tr>
+    </thead>
+  );
+}
+
 export function TableSortControls({ columns, sorting, onSort, locale, mobileOnly = true, label }) {
   const id = useId();
   const copy = labels[locale];

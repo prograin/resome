@@ -11,7 +11,7 @@ import { studentAuthPolicy } from "../../lib/student-auth/config";
 import { FormFeedback } from "./form-feedback";
 import { signInInput } from "../../lib/validation/sign-in";
 
-export function StudentLogin() {
+export function StudentLogin({ returnTo }) {
   const { locale, dir } = usePreferences();
   const copy = studentCopy[locale];
   const router = useRouter();
@@ -30,7 +30,7 @@ export function StudentLogin() {
         fetchOptions: {
           onSuccess: async () => {
             await refetch();
-            router.replace(studentPaths.dashboard);
+            router.replace(returnTo ?? studentPaths.dashboard);
             router.refresh();
           },
         },

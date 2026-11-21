@@ -5,6 +5,7 @@ import { studentPaths } from "./paths";
 import { getStudentAuth } from "./server";
 import { cache } from "react";
 import { studentAuthPolicy } from "./config";
+import { notificationReturnTo } from "../notifications/targets";
 
 export const readStudentSession = cache(async () => {
   const requestHeaders = await headers();
@@ -16,8 +17,13 @@ export const readStudentSession = cache(async () => {
   });
 });
 
-export async function requireStudentSession() {
+export async function requireStudentSession(returnTo) {
   const session = await readStudentSession();
-  if (!session) redirect(studentPaths.signIn);
+  if (!session) {
+    const target = notificationReturnTo(returnTo);
+    redirect(
+      target ? `${studentPaths.signIn}?next=${encodeURIComponent(target)}` : studentPaths.signIn,
+    );
+  }
   return session;
 }

@@ -23,9 +23,6 @@ export const weeklyCopy = {
     average: "میانگین",
     change: "تغییر رتبه",
     empty: "هنوز شاگرد واجد شرایطی در رتبه‌بندی نیست",
-    unchangedShort: "بدون تغییر",
-    upShort: "پله صعود",
-    downShort: "پله نزول",
   },
   en: {
     noPrevious: "No previous-week data yet",
@@ -45,35 +42,35 @@ export const weeklyCopy = {
     average: "Average score",
     change: "Weekly change",
     empty: "No eligible students in the ranking yet",
-    unchangedShort: "Unchanged",
-    upShort: "places up",
-    downShort: "places down",
   },
 };
 
 export function weeklyChange(value, previous, kind, locale, compact = false) {
   const copy = weeklyCopy[locale];
-  if (value == null || previous == null)
+  const current = Number(value),
+    baseline = Number(previous);
+  if (value == null || previous == null || !Number.isFinite(current) || !Number.isFinite(baseline))
     return { text: "—", tone: "neutral", label: copy.noPrevious };
-  const difference = Number(value) - Number(previous);
-  if (!difference) return { text: compact ? copy.unchangedShort : copy.unchanged, tone: "neutral" };
-  const positive = kind === "rank" ? difference < 0 : difference > 0;
   const numbers = new Intl.NumberFormat(locale, { maximumFractionDigits: 1 });
+  const difference = current - baseline;
+  if (!difference)
+    return {
+      text: compact ? numbers.format(0) : copy.unchanged,
+      tone: "neutral",
+      label: copy.unchanged,
+    };
+  const positive = kind === "rank" ? difference < 0 : difference > 0;
   const amount =
-    kind === "average" && Number(previous) !== 0
+    kind === "average" && baseline !== 0
       ? new Intl.NumberFormat(locale, { style: "percent", maximumFractionDigits: 1 }).format(
-          Math.abs(difference / Number(previous)),
+          Math.abs(difference / baseline),
         )
       : numbers.format(Math.abs(difference));
   const suffix =
     kind === "rank"
       ? positive
-        ? compact
-          ? copy.upShort
-          : copy.up
-        : compact
-          ? copy.downShort
-          : copy.down
+        ? copy.up
+        : copy.down
       : kind === "count"
         ? positive
           ? copy.countMore
@@ -82,7 +79,8 @@ export function weeklyChange(value, previous, kind, locale, compact = false) {
           ? copy.increase
           : copy.decrease;
   return {
-    text: `${amount} ${suffix}`,
+    text: compact ? amount : `${amount} ${suffix}`,
     tone: positive ? "positive" : "negative",
+    label: `${amount} ${suffix}`,
   };
 }

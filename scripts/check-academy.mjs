@@ -1,3 +1,4 @@
+import { createPreferenceContext } from "./lib/browser-preferences.mjs";
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import AxeBuilder from "@axe-core/playwright";
@@ -22,17 +23,12 @@ try {
   for (const locale of ["fa", "en"]) {
     for (const theme of ["light", "dark"]) {
       for (const width of [360, 768, 1440]) {
-        const context = await browser.newContext({
+        const context = await createPreferenceContext(browser, {
+          locale,
+          theme,
           viewport: { width, height: 960 },
           reducedMotion: "reduce",
         });
-        await context.addInitScript(
-          ({ locale, theme }) => {
-            localStorage.setItem("portfolio_locale", locale);
-            localStorage.setItem("portfolio_theme", theme);
-          },
-          { locale, theme },
-        );
         const page = await context.newPage();
         const errors = [];
         page.on("pageerror", (error) => errors.push(error.message));
@@ -49,6 +45,25 @@ try {
             if (width < 768) {
               await page.locator('[data-academy-tab="group"]').click();
               assert.ok(await page.locator('[data-academy-plan="group"]').isVisible());
+              const tab = page.locator('[data-academy-tab="group"]');
+              await tab.press("Home");
+              const first = page.locator('[data-academy-tab="private"]');
+              await page.locator('[data-academy-tab="private"][aria-selected="true"]').waitFor();
+              assert.equal(await first.getAttribute("aria-selected"), "true");
+              await first.press(locale === "fa" ? "ArrowLeft" : "ArrowRight");
+              await page.locator('[data-academy-tab="group"][aria-selected="true"]').waitFor();
+              assert.equal(await tab.getAttribute("aria-selected"), "true");
+              assert.equal(await tab.evaluate((node) => node === document.activeElement), true);
+              const panelId = await tab.getAttribute("aria-controls");
+              assert.equal(
+                await page.locator('[data-academy-plan="group"]').getAttribute("id"),
+                panelId,
+              );
+              await tab.press("Home");
+              await page.locator('[data-academy-tab="private"][aria-selected="true"]').waitFor();
+              await first.press("End");
+              await page.locator('[data-academy-tab="group"][aria-selected="true"]').waitFor();
+              assert.equal(await tab.getAttribute("aria-selected"), "true");
             }
             await page.locator("[data-academy-details]:visible").first().click();
             const dialog = page.getByRole("dialog");
@@ -111,6 +126,18 @@ try {
         await context.close();
       }
     }
+  }
+  const fallback = await browser.newContext();
+  try {
+    await fallback.addInitScript(() => {
+      delete window.IntersectionObserver;
+    });
+    const page = await fallback.newPage();
+    await page.goto(`${origin}/academy/consultation/`);
+    await page.locator("[data-defer-background].is-bg-ready").last().waitFor({ state: "attached" });
+    assert.equal(await page.locator("[data-defer-background]:not(.is-bg-ready)").count(), 0);
+  } finally {
+    await fallback.close();
   }
   assert.deepEqual(failures, [], "Academy accessibility regressions");
   console.log(

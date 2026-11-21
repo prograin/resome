@@ -4,6 +4,7 @@ import { Footer } from "./footer";
 import { PageMetadataSync } from "./page-metadata-sync";
 import { studentPaths } from "../lib/student-auth/paths";
 import { StudentFooter } from "./student-shell";
+import { metadata } from "../seo/metadata";
 
 export function PageFrame({ page, children }) {
   const route = routes[page];
@@ -16,7 +17,14 @@ export function PageFrame({ page, children }) {
   return (
     <>
       <link rel="stylesheet" precedence="site" href={assetUrl(`/styles/${stylesheet}.css`)} />
-      <PageMetadataSync page={page} />
+      <PageMetadataSync
+        copy={Object.fromEntries(
+          ["fa", "en"].map((locale) => {
+            const { title, description, locale: language } = metadata(page, locale);
+            return [locale, { title, description, locale: language }];
+          }),
+        )}
+      />
       {route.background &&
         [960, 1920].map((size) => (
           <link

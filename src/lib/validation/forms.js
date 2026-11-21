@@ -11,6 +11,13 @@ export const formInteger = (min, max) =>
 export const formId = formInteger(1, 2147483647);
 export const optionalText = (max) => z.string().trim().max(max).default("");
 
+export function parseQuery(schema, searchParams) {
+  const entries = [...searchParams.entries()];
+  if (new Set(entries.map(([key]) => key)).size !== entries.length) return null;
+  const result = schema.safeParse(Object.fromEntries(entries));
+  return result.success ? result.data : null;
+}
+
 export function parseForm(schema, form, overrides = {}) {
   if (!schema || !(form instanceof FormData)) return null;
   const entries = [...form.entries()];

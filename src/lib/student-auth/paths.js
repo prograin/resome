@@ -12,4 +12,5 @@ export const studentPaths = {
   goals: `${dashboard}goals/`,
   profile: `${dashboard}profile/`,
   links: `${dashboard}links/`,
+  notifications: `${dashboard}notifications/`,
 };

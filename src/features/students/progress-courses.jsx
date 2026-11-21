@@ -33,6 +33,7 @@ function CourseCard({ course, labels, copy, numbers, studentId }) {
   );
   return (
     <li
+      id={`course-${course.id}`}
       className={`student-course student-progress__card student-progress__section ${difficultyClass[course.difficulty] ?? ""}`}
     >
       <h2>

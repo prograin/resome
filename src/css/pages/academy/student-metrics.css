@@ -1,0 +1,43 @@
+.student-chart__average[data-weekly-trend] {
+  --student-trend-color: var(--ui-muted);
+  position: relative;
+  isolation: isolate;
+  padding-left: calc(var(--ui-space-5) + var(--ui-space-5));
+}
+
+.student-chart__average[data-weekly-trend="positive"] {
+  --student-trend-color: var(--academy-color-green);
+}
+
+.student-chart__average[data-weekly-trend="negative"] {
+  --student-trend-color: var(--academy-color-red);
+}
+
+.student-chart__average[data-weekly-trend]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--student-trend-color) 14%, transparent),
+    transparent 70%
+  );
+  box-shadow: inset 10px 0 16px -12px var(--student-trend-color);
+}
+
+.student-chart__average > :not(.student-chart__trend) {
+  position: relative;
+  z-index: 1;
+}
+
+.student-chart__average > .student-chart__trend {
+  position: absolute;
+  left: var(--ui-space-3);
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  color: var(--student-trend-color);
+}

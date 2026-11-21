@@ -39,10 +39,20 @@ try {
   assert.equal(await rows.count(), 2);
   assert.ok(!(await rows.allTextContents()).some((text) => text.includes(admin)));
   const navigation = page.locator("#student-dashboard-nav");
-  const adminLinks = await navigation
-    .locator("a")
-    .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
-  assert.equal(adminLinks.length, 5);
+  const readNavigation = () =>
+    navigation.locator("a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
+  const adminLinks = await readNavigation();
+  assert.deepEqual(
+    [...adminLinks].sort(),
+    [
+      studentPaths.admin,
+      studentPaths.adminStudents,
+      studentPaths.adminCourses,
+      studentPaths.links,
+      studentPaths.notifications,
+      studentPaths.profile,
+    ].sort(),
+  );
   assert.equal(
     await navigation
       .locator(`a[href="${studentPaths.adminStudents}"] svg`)
@@ -76,7 +86,7 @@ try {
   await page.locator('li[id^="goal-"]').first().waitFor();
   assert.equal(await page.locator('li[id^="goal-"]').count(), 5);
   assert.equal(await page.locator(".student-goal__action").count(), 0);
-  assert.equal(await navigation.locator("a").count(), 5);
+  assert.deepEqual(await readNavigation(), adminLinks);
   await page.goto(url);
   await rows.first().waitFor();
   const search = page.locator(".academy-admin__search");

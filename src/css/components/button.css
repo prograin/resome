@@ -12,6 +12,7 @@
   font-family: inherit;
   line-height: 1.6;
   text-decoration: none;
+  transition: opacity var(--ui-interaction-duration) ease;
 }
 
 .ui-button--primary {

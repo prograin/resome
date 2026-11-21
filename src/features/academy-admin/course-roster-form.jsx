@@ -16,12 +16,12 @@ export function RosterForm({
   onSaved,
   dialog = false,
 }) {
-  const [status, action, pending] = useSavedAction(
+  const [status, action, pending, formProps] = useSavedAction(
     updateAdminCourse.bind(null, definitionId, operation, assignmentId),
     onSaved,
   );
   return (
-    <form action={action} className={`student-panel__form ${className}`} aria-busy={pending}>
+    <form {...formProps} action={action} className={`student-panel__form ${className}`}>
       <fieldset
         className={dialog ? "academy-admin__enrollment-fields" : "academy-admin__roster-fields"}
         disabled={pending}

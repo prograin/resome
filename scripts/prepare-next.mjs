@@ -70,7 +70,11 @@ const styles = await Promise.all(
     const students =
       name === "students"
         ? await Promise.all(
-            ["src/features/students", "src/features/academy-admin"].map(collect),
+            [
+              "src/features/students",
+              "src/features/academy-admin",
+              "src/features/notifications",
+            ].map(collect),
           ).then((sources) => sources.flat())
         : [];
     const code = await compileStyles(

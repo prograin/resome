@@ -2,6 +2,7 @@ import { useId, useState } from "react";
 import { ProfileForm } from "./profile-form";
 import { saveProfileEmail } from "./profile-email-actions";
 import { useEmailCooldown } from "./use-email-cooldown";
+import { FormFeedback } from "./form-feedback";
 
 export function ProfileEmail({ profile, copy, locale }) {
   const cooldown = useEmailCooldown();
@@ -29,6 +30,7 @@ export function ProfileEmail({ profile, copy, locale }) {
       copy={{ ...copy, saved: copy.emailSaved }}
       locked={Boolean(registeredEmail)}
       clearOnLeave
+      inlineFeedback={sent}
       onEdit={reset}
       onCancel={reset}
       submitLabel={
@@ -58,7 +60,7 @@ export function ProfileEmail({ profile, copy, locale }) {
         if (result === "emailLimit" && !cooldown.remaining) cooldown.start();
       }}
     >
-      {(editing) => (
+      {(editing, status) => (
         <>
           <div className="student-profile__email-field">
             <div className="student-profile__field-heading">
@@ -104,6 +106,7 @@ export function ProfileEmail({ profile, copy, locale }) {
                 inputMode="numeric"
                 autoComplete="one-time-code"
                 aria-describedby={`${hintId}-code`}
+                aria-invalid={Boolean(status && status !== "saved") || undefined}
                 pattern="[0-9۰-۹٠-٩]{4}"
                 minLength={4}
                 maxLength={4}
@@ -111,9 +114,13 @@ export function ProfileEmail({ profile, copy, locale }) {
                 value={otp}
                 onChange={(event) => setOTP(event.target.value)}
               />
-              <small id={`${hintId}-code`} role="status">
-                {copy.codeHint}
-              </small>
+              {status && status !== "saved" ? (
+                <FormFeedback id={`${hintId}-code`} status={status} copy={copy} />
+              ) : (
+                <small id={`${hintId}-code`} role="status">
+                  {copy.codeHint}
+                </small>
+              )}
             </div>
           )}
         </>

@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
-import { metadata } from "../seo/metadata";
 import { usePreferences } from "./preferences";
 
-export function PageMetadataSync({ page }) {
+export function PageMetadataSync({ copy }) {
   const { locale } = usePreferences();
   useEffect(() => {
-    const seo = metadata(page, locale);
+    const seo = copy[locale] || copy.fa;
     document.title = seo.title;
     const fields = {
       'meta[name="description"]': seo.description,
@@ -20,6 +19,6 @@ export function PageMetadataSync({ page }) {
     for (const [selector, value] of Object.entries(fields)) {
       document.head.querySelector(selector)?.setAttribute("content", value);
     }
-  }, [page, locale]);
+  }, [copy, locale]);
   return null;
 }

@@ -1,0 +1,38 @@
+.student-notifications-page {
+  min-width: 0;
+  padding: var(--ui-space-3);
+  border-radius: var(--ui-radius);
+}
+
+.student-notifications-page .student-notifications__list {
+  overflow: visible;
+}
+
+.student-notifications-page .student-notifications__item {
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--ui-space-4);
+}
+
+.student-notifications-page .student-notifications__item > :not(time) {
+  grid-column: 1;
+}
+
+.student-notifications-page .student-notifications__item time {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  justify-self: end;
+  white-space: nowrap;
+}
+
+.student-notifications__separator {
+  margin: 0 var(--ui-space-3);
+  border: 0;
+  border-block-start: 1px solid var(--ui-line);
+}
+
+.student-notifications-page .student-notifications__list > .ui-button {
+  display: flex;
+  margin-inline: auto;
+  margin-block: var(--ui-space-3);
+}

@@ -38,12 +38,12 @@
   border-radius: var(--ui-control-radius);
   box-shadow: var(--ui-shadow-control);
   color: var(--ui-on-raised);
-  font-size: 0.9rem;
+  font-size: var(--ui-font-control);
   font-weight: var(--ui-weight-control);
 }
 .contact-shell--centered .contact-final-stack h2 {
   max-width: 30rem;
-  font-size: 0.9rem;
+  font-size: var(--ui-font-control);
   font-weight: 500;
   line-height: 2;
 }

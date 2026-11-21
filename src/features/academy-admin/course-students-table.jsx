@@ -1,5 +1,5 @@
 import {
-  SortableTableHead,
+  SortableTableHeader,
   TableSortControls,
   useTableSorting,
 } from "../../components/ui/sortable-table";
@@ -55,19 +55,7 @@ export function CourseStudentsTable({ course, locale }) {
         label={locale === "fa" ? "مرتب‌سازی" : "Sort"}
       />
       <table className="student-table student-table--stacked">
-        <thead>
-          <tr>
-            {columns.map((column) => (
-              <SortableTableHead
-                key={column.label}
-                column={column}
-                sorting={sorting}
-                onSort={onSort}
-                locale={locale}
-              />
-            ))}
-          </tr>
-        </thead>
+        <SortableTableHeader columns={columns} sorting={sorting} onSort={onSort} locale={locale} />
         <tbody>
           {rows.map((student) => (
             <tr key={student.id}>

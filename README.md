@@ -22,6 +22,10 @@ To test the production build, run `npm run preview` after packaging and open por
 
 Use `npm run lint` and `npm run format:check` to check code style. Use `npm run format` to apply formatting.
 
+Keep initial page work small: `PageFrame` passes only the current route's bilingual metadata to the client, and the optional update controller loads during browser idle time. Public bundles exclude private portfolio data. `test:performance` checks route CSS and JavaScript budgets and the mobile background request; measure Lighthouse separately against a production preview, without running other browser tests concurrently.
+
+Use `src/css/foundation/tokens.css` for shared colors, typography, control sizes, focus and interaction timing. Base buttons live in `src/css/components/button.css`; academy depth overrides stay in the academy modules so public-page controls and alternating neumorphic surfaces remain consistent.
+
 Backend security, shared PostgreSQL rate limits, request validation, headers and deployment requirements are documented in [the security guide](docs/SECURITY.md). Run `npm run test:security` for checks without a database, and `npm run test:security:db` against an isolated PostgreSQL test server.
 
 ## Student sign-in

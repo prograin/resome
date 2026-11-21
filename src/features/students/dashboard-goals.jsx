@@ -1,12 +1,10 @@
-import { SiteLink as Link } from "../../components/site-link";
-import { Button } from "../../components/ui/button";
-import { studentPaths } from "../../lib/student-auth/paths";
 import { goalCopy } from "./goal-copy";
 import { dashboardCopy } from "./dashboard-copy";
 import { GoalProgress } from "./goal-progress";
 import { GoalDialogButton } from "./student-goals";
+import { GoalPreviewButton } from "./goal-preview";
 import {
-  SortableTableHead,
+  SortableTableHeader,
   TableSortControls,
   useTableSorting,
 } from "../../components/ui/sortable-table";
@@ -20,7 +18,6 @@ const priorityClass = {
 export function DashboardGoals({
   goals = [],
   locale,
-  query = "",
   formCopy,
   canCreate,
   limit,
@@ -29,7 +26,6 @@ export function DashboardGoals({
   const copy = goalCopy[locale];
   const labels = dashboardCopy[locale];
   const percentages = new Intl.NumberFormat(locale, { style: "percent" });
-  const href = studentPaths.goals + query;
   const columns = [
     { key: "title", label: copy.title, value: (row) => row.title },
     { key: "priority", label: copy.priority, value: (row) => row.priority },
@@ -56,19 +52,12 @@ export function DashboardGoals({
                 locale={locale}
               />
               <table className="student-table student-table--stacked student-summary__table">
-                <thead>
-                  <tr>
-                    {columns.map((column) => (
-                      <SortableTableHead
-                        key={column.label}
-                        column={column}
-                        sorting={sorting}
-                        onSort={onSort}
-                        locale={locale}
-                      />
-                    ))}
-                  </tr>
-                </thead>
+                <SortableTableHeader
+                  columns={columns}
+                  sorting={sorting}
+                  onSort={onSort}
+                  locale={locale}
+                />
                 <tbody>
                   {(limit == null ? rows : rows.slice(0, limit)).map((goal) => (
                     <tr key={goal.id} className={priorityClass[goal.priority]}>
@@ -89,15 +78,13 @@ export function DashboardGoals({
                         />
                       </td>
                       <td data-label={labels.actions}>
-                        <Button
-                          as={Link}
-                          href={`${href}#goal-${goal.id}`}
-                          prefetch={false}
-                          variant="soft"
-                          aria-label={`${labels.view}: ${goal.title}`}
-                        >
-                          {labels.view}
-                        </Button>
+                        <GoalPreviewButton
+                          goal={goal}
+                          copy={formCopy}
+                          locale={locale}
+                          canEdit={canCreate}
+                          label={labels.view}
+                        />
                       </td>
                     </tr>
                   ))}

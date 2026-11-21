@@ -1,18 +1,14 @@
-import { ICONS } from "./icon-paths";
+import { Icon as LucideIcon } from "lucide-react";
+import { getIconNode } from "./icon-nodes";
 export function Icon({ name, className = "h-5 w-5" }) {
+  const node = getIconNode(name).map(([tag, attributes], key) => [tag, { ...attributes, key }]);
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+    <LucideIcon
+      icon={{ name, node }}
       aria-hidden="true"
       data-lucide={name}
       data-rendered-icon={name}
       className={className}
-      dangerouslySetInnerHTML={{ __html: ICONS[name] || ICONS.circle }}
     />
   );
 }

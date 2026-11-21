@@ -21,7 +21,7 @@ button:disabled {
 svg {
   flex-shrink: 0;
 }
-:where(a, button, select, [tabindex]):focus-visible {
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
   outline: var(--ui-focus-width) solid var(--ui-ring);
   outline-offset: var(--ui-focus-offset);
 }

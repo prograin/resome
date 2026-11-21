@@ -33,6 +33,7 @@
   --ui-shadow-dialog: 0 24px 80px rgb(0 0 0 / 30%);
   --ui-dialog-width: 48rem;
   --ui-dialog-layer: 60;
+  --ui-header-layer: 50;
   --ui-text: #172338;
   --ui-muted: #526278;
   --ui-scrollbar-thumb: #738399;
@@ -46,6 +47,7 @@
   --ui-title-leading: 1.6;
   --ui-body-size: 0.95rem;
   --ui-body-leading: 2.1;
+  --ui-interaction-duration: 160ms;
   --ui-control-radius: 0.8rem;
 }
 @media (width <= 48rem) {

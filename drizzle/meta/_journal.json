@@ -85,6 +85,20 @@
       "when": 1795209057727,
       "tag": "0011_student_profile_links",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1795253904789,
+      "tag": "0012_student_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1795256291327,
+      "tag": "0013_normalize_internal_email",
+      "breakpoints": true
     }
   ]
 }

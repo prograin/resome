@@ -1,0 +1,47 @@
+name: Retry academy notifications
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: academy-notification-deliveries
+  cancel-in-progress: false
+
+jobs:
+  retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      ACADEMY_URL: ${{ vars.ACADEMY_URL }}
+      CRON_SECRET: ${{ secrets.CRON_SECRET }}
+    steps:
+      - name: Validate scheduler configuration
+        shell: bash
+        run: |
+          case "$ACADEMY_URL" in
+            https://*) ;;
+            *) echo "::error::Set repository variable ACADEMY_URL to the production HTTPS origin."; exit 1 ;;
+          esac
+          if [ "${#CRON_SECRET}" -lt 32 ]; then
+            echo "::error::Set repository secret CRON_SECRET to the same value used by Vercel."
+            exit 1
+          fi
+      - name: Process queued notifications
+        shell: bash
+        run: |
+          response="$RUNNER_TEMP/student-notifications.json"
+          status="$(curl --fail-with-body --silent --show-error \
+            --connect-timeout 10 --max-time 65 \
+            --retry 2 --retry-delay 10 --retry-max-time 180 --retry-all-errors \
+            --output "$response" --write-out '%{http_code}' \
+            --header "Authorization: Bearer $CRON_SECRET" \
+            "${ACADEMY_URL%/}/api/cron/student-notifications/")"
+          if [ "$status" != "200" ]; then
+            echo "::error::Notification endpoint did not return HTTP 200."
+            exit 1
+          fi
+          cat "$response"

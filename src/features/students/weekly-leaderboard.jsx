@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { weeklyChange, weeklyCopy } from "./weekly-copy";
 import { WeeklyChange } from "./weekly-change";
-import { SortableTableHead, useTableSorting } from "../../components/ui/sortable-table";
+import { SortableTableHeader, useTableSorting } from "../../components/ui/sortable-table";
 
 const podiumMedals = { 1: "🥇", 2: "🥈", 3: "🥉" };
 
@@ -48,19 +48,12 @@ export function WeeklyLeaderboard({ weekly, locale }) {
           tabIndex={0}
         >
           <table className="student-table">
-            <thead>
-              <tr>
-                {columns.map((column) => (
-                  <SortableTableHead
-                    key={column.label}
-                    column={column}
-                    sorting={sorting}
-                    onSort={onSort}
-                    locale={locale}
-                  />
-                ))}
-              </tr>
-            </thead>
+            <SortableTableHeader
+              columns={columns}
+              sorting={sorting}
+              onSort={onSort}
+              locale={locale}
+            />
             <tbody>
               {rows.map((student) => {
                 const rank = Number(student.overallRank);
@@ -91,7 +84,7 @@ export function WeeklyLeaderboard({ weekly, locale }) {
                       {student.average == null ? "—" : numbers.format(Number(student.average))}
                     </td>
                     <td>
-                      <WeeklyChange change={change} />
+                      <WeeklyChange change={change} className="student-weekly-change--compact" />
                     </td>
                   </tr>
                 );

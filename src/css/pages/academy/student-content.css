@@ -1,4 +1,10 @@
-.page-view:is([data-page="academy-goals"], [data-page="academy-history"]) .student-progress {
+.page-view:is(
+    [data-page="academy-goals"],
+    [data-page="academy-history"],
+    [data-page="academy-profile"],
+    [data-page="academy-notifications"]
+  )
+  .student-progress {
   width: min(100%, var(--ui-content-width));
   margin-inline: auto;
 }

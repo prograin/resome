@@ -1,0 +1,47 @@
+.student-notifications__list {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.student-notifications__list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.student-notifications__item {
+  position: relative;
+  display: grid;
+  gap: var(--ui-space-1);
+  padding: var(--ui-space-3);
+  margin: var(--ui-space-2);
+  border-radius: var(--ui-control-radius);
+  color: var(--ui-text);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.student-notifications__item[data-unread="true"] {
+  background: color-mix(in srgb, var(--ui-accent) 9%, var(--academy-surface));
+}
+
+.student-notifications__item strong {
+  padding-inline-end: var(--ui-space-3);
+}
+
+.student-notifications__item time,
+.student-notifications__push p {
+  color: var(--ui-muted);
+  font-size: var(--ui-font-caption);
+}
+
+.student-notifications__dot {
+  position: absolute;
+  inset-inline-end: var(--ui-space-3);
+  inset-block-start: var(--ui-space-4);
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--ui-accent);
+}

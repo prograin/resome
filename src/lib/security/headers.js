@@ -9,6 +9,7 @@ export function securityHeaders(development = false, nonce) {
     "frame-src https://www.youtube.com https://www.youtube-nocookie.com",
     "frame-ancestors 'none'",
     "object-src 'none'",
+    "worker-src 'self'",
     "base-uri 'self'",
     "form-action 'self'",
   ].join("; ");

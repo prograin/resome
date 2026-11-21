@@ -7,12 +7,12 @@ import { courseCopy } from "../students/course-copy";
 import { saveAdminCourse, saveAdminVideo } from "./course-actions";
 
 export function AdminCourseEditor({ course, copy, locale, onSaved }) {
-  const [status, action, pending] = useSavedAction(
+  const [status, action, pending, formProps] = useSavedAction(
     saveAdminCourse.bind(null, course?.id ?? null),
     onSaved,
   );
   return (
-    <form action={action} className="student-panel__form student-course__form" aria-busy={pending}>
+    <form {...formProps} action={action} className="student-panel__form student-course__form">
       <fieldset className="student-course__wide-field academy-admin__fields" disabled={pending}>
         <CourseFormFields labels={courseCopy[locale]} course={course} />
       </fieldset>
@@ -27,12 +27,12 @@ export function AdminCourseEditor({ course, copy, locale, onSaved }) {
 }
 
 export function AdminVideoEditor({ definitionId, video, copy, locale, onSaved }) {
-  const [status, action, pending] = useSavedAction(
+  const [status, action, pending, formProps] = useSavedAction(
     saveAdminVideo.bind(null, definitionId, video?.id ?? null),
     onSaved,
   );
   return (
-    <form action={action} className="student-panel__form student-course__form" aria-busy={pending}>
+    <form {...formProps} action={action} className="student-panel__form student-course__form">
       <p className="student-course__wide-field">{copy.sharedHint}</p>
       <fieldset className="student-course__wide-field academy-admin__fields" disabled={pending}>
         <VideoFormFields labels={courseCopy[locale]} video={video} />

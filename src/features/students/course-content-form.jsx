@@ -6,13 +6,13 @@ import { CourseFormFields } from "./course-form-fields";
 import { VideoFormFields } from "./video-form-fields";
 
 export function CourseContentForm({ studentId, course, operation, labels, copy, onSaved }) {
-  const [status, action, pending] = useSavedAction(
+  const [status, action, pending, formProps] = useSavedAction(
     saveCourseContent.bind(null, studentId, course.id, operation),
     onSaved,
   );
 
   return (
-    <form className="student-panel__form student-course__form" action={action}>
+    <form {...formProps} className="student-panel__form student-course__form" action={action}>
       {course.sharedContent && <p className="student-course__wide-field">{labels.sharedHint}</p>}
       {operation === "course" ? (
         <CourseFormFields labels={labels} course={course} />

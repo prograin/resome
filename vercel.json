@@ -2,8 +2,15 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "crons": [{ "path": "/api/cron/student-weekly/", "schedule": "30 20 * * 5" }],
+  "crons": [
+    { "path": "/api/cron/student-weekly/", "schedule": "30 20 * * 5" },
+    { "path": "/api/cron/student-notifications/", "schedule": "0 7 * * *" }
+  ],
   "headers": [
+    {
+      "source": "/academy-notifications-sw.js",
+      "headers": [{ "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" }]
+    },
     {
       "source": "/site-version.json",
       "headers": [

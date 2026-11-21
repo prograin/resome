@@ -37,14 +37,23 @@ export async function checkStudentReview({
   const goalSummary = page.locator(".student-dashboard-goals tbody tr");
   assert.equal(await goalSummary.count(), 1);
   assert.equal(await goalSummary.getByRole("progressbar").getAttribute("aria-valuenow"), "45");
-  await goalSummary.getByRole("link", { name: "مشاهده: Fixture learning goal" }).click();
-  await page.waitForURL(/\/goals\/#goal-\d+$/);
-  const goalAnchor = new URL(page.url()).hash.slice(1);
-  await page.locator(`[id="${goalAnchor}"]`).waitFor();
-  assert.equal(
-    await page.locator(`[id="${goalAnchor}"]`).getByRole("heading").innerText(),
-    "Fixture learning goal",
-  );
+  const viewGoal = goalSummary.getByRole("button", { name: "مشاهده: Fixture learning goal" });
+  assert.ok((await viewGoal.boundingBox()).height <= 36);
+  await viewGoal.click();
+  const preview = page.getByRole("dialog", { name: "Fixture learning goal", exact: true });
+  await preview.getByText("Updated goal description", { exact: true }).waitFor();
+  assert.equal(page.url(), dashboard);
+  assert.equal(await preview.getByRole("progressbar").getAttribute("aria-valuenow"), "45");
+  await page.screenshot({ path: ".backup/goal-preview-mobile.png" });
+  await preview.getByRole("button", { name: "ویرایش", exact: true }).click();
+  await preview.locator('[name="description"]').fill("Goal updated from dashboard");
+  await preview.getByRole("button", { name: "ذخیره", exact: true }).click();
+  await preview.waitFor({ state: "hidden" });
+  assert.equal(page.url(), dashboard);
+  await viewGoal.click();
+  await preview.getByText("Goal updated from dashboard", { exact: true }).waitFor();
+  await page.keyboard.press("Escape");
+  await preview.waitFor({ state: "hidden" });
   await page.goto(dashboard);
   const chart = page.getByRole("img", { name: "نمودار امتیازها" });
   await chart.waitFor();

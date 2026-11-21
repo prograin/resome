@@ -24,7 +24,6 @@ export function StudentManagementOverview({ management, progress, copy, locale }
           <DashboardGoals
             goals={progress?.goals}
             locale={locale}
-            query={query}
             formCopy={copy}
             canCreate={false}
             limit={3}

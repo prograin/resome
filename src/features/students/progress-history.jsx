@@ -1,7 +1,7 @@
 import { Button } from "../../components/ui/button";
 import { useDetailsDialog } from "../../components/details-dialog";
 import {
-  SortableTableHead,
+  SortableTableHeader,
   TableSortControls,
   useTableSorting,
 } from "../../components/ui/sortable-table";
@@ -39,19 +39,12 @@ export function ProgressHistory({ history = [], copy, locale }) {
             locale={locale}
           />
           <table className="student-table student-table--stacked student-history__table">
-            <thead>
-              <tr>
-                {columns.map((column) => (
-                  <SortableTableHead
-                    key={column.label}
-                    column={column}
-                    sorting={sorting}
-                    onSort={onSort}
-                    locale={locale}
-                  />
-                ))}
-              </tr>
-            </thead>
+            <SortableTableHeader
+              columns={columns}
+              sorting={sorting}
+              onSort={onSort}
+              locale={locale}
+            />
             <tbody>
               {rows.map((award) => {
                 const date = new Date(award.recordedAt);
@@ -59,7 +52,7 @@ export function ProgressHistory({ history = [], copy, locale }) {
                 const registrationNumber = award.registrationNumber;
                 const courseName = award.course ?? copy.noCourse;
                 return (
-                  <tr key={award.id}>
+                  <tr key={award.id} id={`award-${award.id}`}>
                     <th scope="row" data-label={copy.entryNumber}>
                       <bdi>{numbers.format(registrationNumber)}</bdi>
                     </th>

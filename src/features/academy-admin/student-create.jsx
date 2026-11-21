@@ -8,9 +8,9 @@ import { createAcademyStudent } from "./actions";
 import { DialogFormActions } from "../students/dialog-form-actions";
 
 function StudentCreateForm({ copy, onSaved }) {
-  const [status, action, pending] = useSavedAction(createAcademyStudent, onSaved);
+  const [status, action, pending, formProps] = useSavedAction(createAcademyStudent, onSaved);
   return (
-    <form action={action} className="student-panel__form" aria-busy={pending}>
+    <form {...formProps} action={action} className="student-panel__form">
       <p>{copy.accountHint}</p>
       <fieldset className="academy-admin__fields" disabled={pending}>
         <label>

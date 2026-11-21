@@ -69,6 +69,11 @@
     "description": "Selected software projects by Ahmadreza Rezaei.",
     "label": "Portfolio"
   },
+  "academy-notifications": {
+    "title": "Notifications | Prograin",
+    "description": "Score and course notifications for your Prograin Academy account.",
+    "label": "Notifications"
+  },
   "academy-links": {
     "title": "Student links | Prograin",
     "description": "Profile links shared by Prograin Academy students.",

@@ -4,14 +4,14 @@ import { FormFeedback } from "../students/form-feedback";
 import { updateAdminCourse } from "./course-actions";
 
 export function CourseEnrollmentStatus({ student, definitionId, copy }) {
-  const [status, action, pending] = useSavedAction(
+  const [status, action, pending, formProps] = useSavedAction(
     updateAdminCourse.bind(null, definitionId, "status", student.id),
   );
   return (
     <form
+      {...formProps}
       action={action}
       className="student-panel__form academy-admin__status-control"
-      aria-busy={pending}
     >
       <select
         name="status"

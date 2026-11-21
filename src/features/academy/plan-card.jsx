@@ -3,7 +3,7 @@ import { SiteLink as Link } from "../../components/site-link";
 import { Icon } from "../../components/icon";
 import { useDetailsDialog } from "../../components/details-dialog";
 
-export function PlanCard({ plan, active, copy, dir }) {
+export function PlanCard({ plan, copy, dir, ...props }) {
   const { open, close } = useDetailsDialog();
   const column = plan.key === "private" ? 2 : 1;
   function showDetails() {
@@ -40,11 +40,10 @@ export function PlanCard({ plan, active, copy, dir }) {
   }
   return (
     <article
-      id={`academy-plan-${plan.key}`}
-      className={`academy-plan academy-neo ${plan.featured ? "is-featured" : ""} ${active ? "is-active" : ""}`}
+      {...props}
+      className={`academy-plan academy-neo ${plan.featured ? "is-featured" : ""}`}
       data-academy-plan={plan.key}
       data-tone={plan.tone}
-      aria-current={active}
     >
       <div className="academy-plan__top">
         <span className="academy-plan__icon academy-neo">

@@ -21,10 +21,13 @@ function CourseSelect({ courses, copy, optional = false }) {
 
 export function ProgressManagement({ management, courses, copy }) {
   const studentId = management.selected?.id;
-  const [status, action, pending] = useSavedAction(updateProgress.bind(null, studentId, "award"));
+  const [status, action, pending, formProps] = useSavedAction(
+    updateProgress.bind(null, studentId, "award"),
+  );
   if (!studentId) return <p>{copy.noStudents}</p>;
   return (
     <form
+      {...formProps}
       className="student-panel__form student-progress__card student-management__award"
       action={action}
       aria-labelledby="progress-admin-title"

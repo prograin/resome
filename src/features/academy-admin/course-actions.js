@@ -16,6 +16,7 @@ import { videoInput } from "../../lib/validation/courses";
 import { saveDefinitionContent, saveDefinitionVideo } from "../../lib/db/admin-course-content";
 import { writeAdminCourse } from "../../lib/db/admin-courses";
 import { studentPaths } from "../../lib/student-auth/paths";
+import { scheduleNotificationDeliveries } from "../../lib/notifications/schedule";
 
 export async function saveAdminCourse(definitionId, _previous, form) {
   const { user } = await requireStudentSession();
@@ -95,6 +96,9 @@ export async function updateAdminCourse(definitionId, operation, assignmentId, _
     console.error("Course roster update failed", error.cause?.code ?? error.code);
     return "failed";
   }
-  if (status === "saved") revalidatePath(studentPaths.dashboard, "layout");
+  if (status === "saved") {
+    revalidatePath(studentPaths.dashboard, "layout");
+    if (operation === "grade") scheduleNotificationDeliveries();
+  }
   return status;
 }

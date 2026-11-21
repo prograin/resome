@@ -98,7 +98,12 @@ try {
   assert.ok(!weeklyChange(4, 0, "average", "en").text.includes("Infinity"));
   assert.equal(weeklyChange(1, null, "rank", "fa").tone, "neutral");
   assert.equal(weeklyChange(1, 1, "rank", "fa").tone, "neutral");
-  assert.ok(weeklyChange(1, 3, "rank", "en", true).text.endsWith("places up"));
+  assert.equal(weeklyChange(1, 3, "rank", "en", true).text, "2");
+  assert.equal(weeklyChange(1, 3, "rank", "fa", true).text, "۲");
+  assert.equal(weeklyChange(1, 3, "rank", "en", true).label, "2 places up from last week");
+  assert.equal(weeklyChange(1, 1, "rank", "fa", true).text, "۰");
+  assert.equal(weeklyChange(1, null, "rank", "fa", true).text, "—");
+  assert.equal(weeklyChange(NaN, 1, "rank", "fa", true).tone, "neutral");
   assert.equal(
     currentStudentCourse([
       { id: b.id, status: "completed" },

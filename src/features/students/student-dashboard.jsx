@@ -1,51 +1,31 @@
 "use client";
 
+import { DashboardContent } from "./dashboard-content";
 import { usePreferences } from "../../components/preferences";
 import { Button } from "../../components/ui/button";
 import { SiteLink } from "../../components/site-link";
 import { studentPaths } from "../../lib/student-auth/paths";
 import { studentCopy } from "./content";
 import { progressCopy } from "./progress-copy";
-import { ProgressOverview } from "./progress-overview";
-import { ProgressChart } from "./progress-chart";
 import { WeeklyUpdated } from "./weekly-updated";
-import { ProgressHistory } from "./progress-history";
-import { ProgressCourses } from "./progress-courses";
 import { DashboardSidebar } from "./dashboard-sidebar";
-import { StudentProfile } from "./student-profile";
-import { GoalDialogButton, StudentGoals } from "./student-goals";
+import { GoalDialogButton } from "./student-goals";
 import { SessionGuard } from "./session-guard";
-import { AcademyAdminOverview } from "../academy-admin/overview";
 import { adminCopy } from "../academy-admin/copy";
 import { adminCourseCopy } from "../academy-admin/course-copy";
-import { AdminCourseCatalog } from "../academy-admin/course-catalog";
 import { AdminCourseButton } from "../academy-admin/course-dialog-button";
 import { StudentCreateButton } from "../academy-admin/student-create";
-import { AdminCourseRoster } from "../academy-admin/course-roster";
 import { CourseEnrollmentButton } from "../academy-admin/course-enrollment-button";
-import { StudentManagementOverview } from "./student-management-overview";
 import { StudentCourseEnrollmentButton } from "./student-course-enrollment";
-import { StudentLinks } from "./student-links";
 import { studentLinksCopy } from "./student-links-copy";
 import { Icon } from "../../components/icon";
+import { notificationCopy } from "../notifications/copy";
 
-export function StudentDashboard({
-  userId,
-  username,
-  profile,
-  progress,
-  management,
-  view,
-  directory,
-  adminCourses,
-  adminCourse,
-  studentsLinks,
-}) {
+export function StudentDashboard(props) {
+  const { userId, username, progress, management, view, adminCourse } = props;
   const { locale, dir } = usePreferences();
   const copy = studentCopy[locale];
   const progressLabels = progressCopy[locale];
-  const coursesView = view === "courses";
-  const profileView = view === "profile";
   const title = {
     "admin-courses": adminCourseCopy[locale].title,
     "admin-directory": adminCopy[locale].students,
@@ -63,6 +43,7 @@ export function StudentDashboard({
     goals: progressLabels.goals,
     profile: copy.profile,
     links: studentLinksCopy[locale].title,
+    notifications: notificationCopy[locale].title,
   }[view];
   const courses = progress?.courses ?? [];
 
@@ -117,56 +98,12 @@ export function StudentDashboard({
                 )}
               </div>
             </header>
-            {view === "links" ? (
-              <StudentLinks initialPage={studentsLinks} locale={locale} />
-            ) : view === "admin-courses" ? (
-              <AdminCourseCatalog courses={adminCourses} locale={locale} />
-            ) : adminCourse ? (
-              <AdminCourseRoster
-                course={adminCourse}
-                locale={locale}
-                gradesOnly={view === "admin-grades"}
-              />
-            ) : view === "admin" || view === "admin-directory" ? (
-              <AcademyAdminOverview
-                directory={directory}
-                locale={locale}
-                studentsOnly={view === "admin-directory"}
-              />
-            ) : management?.selected && view === "overview" ? (
-              <StudentManagementOverview
-                management={management}
-                progress={progress}
-                copy={progressLabels}
-                locale={locale}
-              />
-            ) : coursesView ? (
-              <ProgressCourses courses={courses} copy={progressLabels} locale={locale} />
-            ) : view === "chart" ? (
-              <ProgressChart progress={progress} copy={progressLabels} locale={locale} />
-            ) : view === "history" ? (
-              <ProgressHistory history={progress?.history} copy={progressLabels} locale={locale} />
-            ) : view === "goals" ? (
-              <StudentGoals
-                goals={progress?.goals ?? []}
-                management={management}
-                copy={progressLabels}
-                locale={locale}
-              />
-            ) : profileView ? (
-              <StudentProfile profile={profile} copy={copy} locale={locale} admin={!!management} />
-            ) : (
-              <>
-                {progress && (
-                  <ProgressOverview
-                    progress={progress}
-                    copy={progressLabels}
-                    locale={locale}
-                    management={management}
-                  />
-                )}
-              </>
-            )}
+            <DashboardContent
+              {...props}
+              copy={copy}
+              progressLabels={progressLabels}
+              locale={locale}
+            />
           </section>
         </div>
       </div>

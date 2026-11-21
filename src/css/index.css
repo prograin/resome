@@ -14,6 +14,7 @@
 @import "./shared/legacy-08.css";
 @import "./shared/legacy-09.css";
 @import "./pages/order/legacy-01.css";
+@import "./pages/order/clients-legacy.css";
 @import "./pages/order/legacy-02.css";
 @import "./pages/order/legacy-03.css";
 @import "./pages/order/legacy-04.css";
@@ -67,6 +68,8 @@
 @import "./pages/academy/student-profile.css";
 @import "./pages/academy/student-links.css";
 @import "./pages/academy/student-chart.css";
+@import "./pages/academy/student-metrics.css";
+@import "./pages/academy/student-leaderboard.css";
 @import "./pages/academy/student-courses.css";
 @import "./pages/academy/student-goals.css";
 @import "./pages/academy/goal-slider.css";
@@ -83,3 +86,6 @@
 @import "./pages/academy/controls.css";
 @import "./pages/academy/mobile-header.css";
 @import "./pages/academy/student-shell.css";
+@import "./pages/academy/student-notifications.css";
+@import "./pages/academy/student-notification-list.css";
+@import "./pages/academy/student-notification-page.css";

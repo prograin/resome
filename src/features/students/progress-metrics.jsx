@@ -44,6 +44,7 @@ export function ProgressMetrics({ progress, copy, locale }) {
           <div
             key={label}
             className="student-progress__card student-chart__average"
+            data-weekly-trend={change.tone}
             style={
               kind === "average" && value != null
                 ? {
@@ -52,6 +53,7 @@ export function ProgressMetrics({ progress, copy, locale }) {
                 : undefined
             }
           >
+            <WeeklyChange change={change} iconOnly className="student-chart__trend" />
             <p>
               {label}{" "}
               {label === copy.rank &&
@@ -67,7 +69,7 @@ export function ProgressMetrics({ progress, copy, locale }) {
             <bdi className="student-chart__average-value">
               {value == null ? "—" : numbers.format(Number(value))}
             </bdi>
-            <WeeklyChange change={change} />
+            <WeeklyChange change={change} showIcon={false} />
             {kind === "average" && penalty > 0 && (
               <small>
                 {locale === "fa"

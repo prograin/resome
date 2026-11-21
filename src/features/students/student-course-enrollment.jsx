@@ -16,13 +16,13 @@ function StudentCourseEnrollment({ studentId, definitions, courses, locale, titl
   const selectedId = available.some((definition) => String(definition.id) === definitionId)
     ? definitionId
     : "";
-  const [status, action, pending] = useSavedAction(
+  const [status, action, pending, formProps] = useSavedAction(
     updateAdminCourse.bind(null, Number(selectedId), "enroll", null),
     onSaved,
   );
   const copy = adminCourseCopy[locale];
   return (
-    <form className="student-panel__form" action={action}>
+    <form {...formProps} className="student-panel__form" action={action}>
       <input type="hidden" name="studentId" value={studentId} />
       {available.length ? (
         <>

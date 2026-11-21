@@ -59,8 +59,9 @@ html[dir="rtl"] .student-summary > section {
 }
 
 .student-summary__table .ui-button {
-  width: 100%;
-  padding-inline: 0.25rem;
+  width: auto;
+  min-height: 2rem;
+  padding: var(--ui-space-1) var(--ui-space-2);
   font-size: inherit;
 }
 
@@ -124,6 +125,7 @@ html[dir="rtl"] .student-summary > section {
     flex: 1;
     min-height: 0;
     overflow: auto;
+    padding-left: var(--ui-space-3);
   }
 
   .student-dashboard-goals__content:has(.student-dashboard-goals__empty) {

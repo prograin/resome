@@ -83,7 +83,7 @@
 .academy-tab {
   width: 100%;
 }
-.academy-tab.is-active {
+.academy-tab[data-state="active"] {
   color: var(--ui-accent);
   font-weight: var(--ui-weight-heading);
 }
@@ -99,7 +99,7 @@
   .academy-comparison {
     grid-template-columns: minmax(0, 1fr);
   }
-  .academy-plan:not(.is-active) {
+  .academy-plan[data-state="inactive"] {
     display: none;
   }
 }

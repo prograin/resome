@@ -1,17 +1,10 @@
-import { Resend } from "resend";
-import { z } from "zod";
-
-const environment = z.object({
-  RESEND_API_KEY: z.string().min(1),
-  RESEND_FROM_EMAIL: z.string().min(1),
-});
+import { emailSender } from "./sender.js";
 
 export async function sendEmailOTP({ email, otp, type }) {
   if (type !== "change-email") throw new Error("Unsupported email verification operation.");
-  const config = environment.safeParse(process.env);
-  if (!config.success) throw new Error("Email service is not configured.");
-  const { error } = await new Resend(config.data.RESEND_API_KEY).emails.send({
-    from: config.data.RESEND_FROM_EMAIL,
+  const { client, from } = emailSender();
+  const { error } = await client.emails.send({
+    from,
     to: [email],
     subject: "Prograin | کد تأیید ایمیل",
     text: `کد تأیید ایمیل شما: ${otp}\nاین کد تا ۵ دقیقه معتبر است. اگر این درخواست از شما نبوده، این ایمیل را نادیده بگیرید.`,

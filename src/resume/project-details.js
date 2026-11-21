@@ -1,3 +1,5 @@
+import { projectRoles, projectStack } from "./project-badges.js";
+
 // project details behavior for the private portfolio.
 export function createProjectDetails(context) {
   const { state, getData, openModal } = context;
@@ -9,29 +11,9 @@ export function createProjectDetails(context) {
 
     const isPrivate = !!project.isPrivate;
 
-    const roles = (project.roles || [])
-      .map(
-        (key) =>
-          `<span class="${context.badgeClass()}">${context.escapeHtml(context.roleNameByKey(key))}</span>`,
-      )
-      .join("");
+    const roles = projectRoles(context, project);
 
-    const stackBlock = (() => {
-      if (isPrivate) return "";
-
-      const tags = (project.tags || [])
-        .map((t) => `<span class="${context.badgeClass()}">${context.escapeHtml(t)}</span>`)
-        .join("");
-
-      if (!tags) return "";
-
-      return `
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${context.escapeHtml(labels.stack || "Stack")}</p>
-            <div class="mt-2 flex flex-wrap gap-2">${tags}</div>
-          </div>
-      `;
-    })();
+    const stackBlock = projectStack(context, project, labels.stack);
 
     const detailsBlock = (() => {
       if (isPrivate) return "";

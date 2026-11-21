@@ -1,7 +1,8 @@
 import { and, asc, eq, getTableColumns, notExists, sql } from "drizzle-orm";
-import { awards, courseDefinitions, courses, users } from "./schema/index.js";
+import { courseDefinitions, courses, users } from "./schema/index.js";
 import { eligibleStudent, courseRankings } from "./rankings.js";
 import { attachDefinitionVideos } from "./admin-course-content.js";
+import { addStudentAward, addStudentCourse } from "./student-records.js";
 
 export async function readAdminCourses(db, admin) {
   const definitions = await db
@@ -98,9 +99,7 @@ export function writeAdminCourse(db, admin, definitionId, operation, assignmentI
         .where(and(eq(courses.definitionId, definitionId), eq(courses.studentId, student.id)))
         .limit(1);
       if (existing) return "duplicateEnrollment";
-      await tx
-        .insert(courses)
-        .values({ studentId: student.id, definitionId, title: definition.title });
+      await addStudentCourse(tx, { studentId: student.id, definitionId, title: definition.title });
       return "saved";
     }
     const [assignment] = await tx
@@ -115,13 +114,17 @@ export function writeAdminCourse(db, admin, definitionId, operation, assignmentI
       return "saved";
     }
     if (operation !== "grade" || assignment.status !== "active") return "inactiveEnrollment";
-    await tx.insert(awards).values({
-      studentId: assignment.studentId,
-      courseId: assignment.id,
-      points: values.points,
-      note: values.note,
-      kind: values.kind,
-    });
+    await addStudentAward(
+      tx,
+      {
+        studentId: assignment.studentId,
+        courseId: assignment.id,
+        points: values.points,
+        note: values.note,
+        kind: values.kind,
+      },
+      definition.title,
+    );
     return "saved";
   });
 }

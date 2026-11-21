@@ -6,10 +6,16 @@ const mutationPolicies = {
   write: [40, 60],
   profile: [8, 60],
   login: [20, 600],
+  loginRequest: [30, 60],
+  authRequest: [180, 60],
+  apiRequest: [240, 60],
   emailSend: [3, 3600],
   emailCooldown: [1, studentAuthPolicy.emailResendSeconds],
   emailVerify: [10, 600],
   directory: [60, 60],
+  notificationsRead: [120, 60],
+  notificationsWrite: [30, 60],
+  push: [10, 60],
 };
 
 export function createMutationLimits(db) {

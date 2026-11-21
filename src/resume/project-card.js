@@ -1,3 +1,5 @@
+import { projectRoles, projectStack } from "./project-badges.js";
+
 // project card behavior for the private portfolio.
 export function createProjectCard(context) {
   const { state, getData } = context;
@@ -26,33 +28,9 @@ export function createProjectCard(context) {
         </span>`
       : "";
 
-    const roles = (project.roles || [])
-      .map(
-        (key) =>
-          `<span class="${context.badgeClass()}">${context.escapeHtml(context.roleNameByKey(key))}</span>`,
-      )
-      .join("");
+    const roles = projectRoles(context, project);
 
-    const stackBlock = (() => {
-      if (isPrivate) return "";
-
-      const tags = (project.tags || [])
-        .slice(0, 6)
-        .map((t) => `<span class="${context.badgeClass()}">${context.escapeHtml(t)}</span>`)
-        .join("");
-
-      const extra = Math.max(0, (project.tags || []).length - 6);
-      const extraTags = extra ? `<span class="${context.badgeClass()}">+${extra}</span>` : "";
-
-      if (!tags && !extraTags) return "";
-
-      return `
-        <div class="mt-4">
-          <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">${context.escapeHtml(labels.stack || "Stack")}</p>
-          <div class="mt-2 flex flex-wrap gap-2">${tags}${extraTags}</div>
-        </div>
-      `;
-    })();
+    const stackBlock = projectStack(context, project, labels.stack, { limit: 6, spaced: true });
 
     const actions = (() => {
       const parts = [];

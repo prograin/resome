@@ -80,6 +80,17 @@ export async function checkAdministration({
   await checkHistoryNote(1, "Fixture general award");
   await checkHistoryNote(2, "Fixture follow-up");
 
+  await page.goto(dashboard + "?student=" + studentId);
+  await page
+    .locator(".student-dashboard-goals")
+    .getByRole("button", { name: "مشاهده: Fixture learning goal" })
+    .click();
+  const goalPreview = page.getByRole("dialog", { name: "Fixture learning goal", exact: true });
+  await goalPreview.getByText("Updated goal description", { exact: true }).waitFor();
+  assert.equal(await goalPreview.getByRole("button", { name: "ویرایش", exact: true }).count(), 0);
+  assert.equal(await goalPreview.locator("form").count(), 0);
+  await page.keyboard.press("Escape");
+  await goalPreview.waitFor({ state: "hidden" });
   await page.goto(origin + studentPaths.goals + "?student=" + studentId);
   await goal.getByText(/اولویت.*زیاد/).waitFor();
   await goal.getByText("Updated goal description", { exact: true }).waitFor();

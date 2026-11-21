@@ -2,9 +2,8 @@ import { StudentDirectoryPagination } from "./student-directory-pagination";
 import { SiteLink as Link } from "../../components/site-link";
 import { Button } from "../../components/ui/button";
 import { studentPaths } from "../../lib/student-auth/paths";
-import { visibleStudentEmail } from "../../lib/student-auth/student-email";
 import { useRouter } from "next/navigation";
-import { SortableTableHead, TableSortControls } from "../../components/ui/sortable-table";
+import { SortableTableHeader, TableSortControls } from "../../components/ui/sortable-table";
 import { nextTableSort } from "../../lib/table-sorting";
 import { StudentCreateButton } from "./student-create";
 
@@ -79,31 +78,17 @@ export function StudentDirectory({
       {students.length ? (
         <>
           <table className="student-table student-table--stacked">
-            <thead>
-              <tr>
-                {columns.map((column) => (
-                  <SortableTableHead
-                    key={column.label}
-                    column={column}
-                    sorting={sorting}
-                    href={column.key ? sortLink(column.key) : undefined}
-                    locale={locale}
-                  />
-                ))}
-              </tr>
-            </thead>
+            <SortableTableHeader
+              columns={columns}
+              sorting={sorting}
+              hrefFor={sortLink}
+              locale={locale}
+            />
             <tbody>
               {students.map((student) => (
                 <tr key={student.id}>
                   <th scope="row" data-label={copy.name}>
-                    <span>
-                      <bdi>{student.name}</bdi>
-                      {visibleStudentEmail(student.email) && (
-                        <small>
-                          <bdi>{student.email}</bdi>
-                        </small>
-                      )}
-                    </span>
+                    <bdi>{student.name}</bdi>
                   </th>
                   <td data-label={copy.username}>
                     <bdi>{student.username}</bdi>

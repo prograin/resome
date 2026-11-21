@@ -7,6 +7,7 @@ import { isStudentAdmin, writeStudentProgress } from "../../lib/student-progress
 import { parseOperation, studentIdInput } from "../../lib/validation/forms";
 import { progressInputs } from "../../lib/validation/progress";
 import { limitStudentAction } from "../../lib/student-auth/action-limit";
+import { scheduleNotificationDeliveries } from "../../lib/notifications/schedule";
 
 export async function updateProgress(studentId, operation, _previous, form) {
   const { user } = await requireStudentSession();
@@ -29,5 +30,6 @@ export async function updateProgress(studentId, operation, _previous, form) {
   revalidatePath(studentPaths.history);
   revalidatePath(studentPaths.courses);
   revalidatePath(studentPaths.admin);
+  if (operation === "award") scheduleNotificationDeliveries();
   return "saved";
 }

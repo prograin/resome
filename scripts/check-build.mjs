@@ -33,6 +33,8 @@ assert.ok((await read("index.html")).includes(`styles/home.css?v=${release.versi
 const studentStyles = await readFile(new URL("styles/students.css", assets), "utf8");
 assert.match(studentStyles, /\.academy-admin__catalog/);
 assert.match(studentStyles, /\.student-login/);
+assert.match(studentStyles, /\.student-notifications\{/);
+assert.match(studentStyles, /\.student-notifications__item/);
 for (const group of ["home", "academy", "order", "contact"]) {
   const styles = await readFile(new URL(`styles/${group}.css`, assets), "utf8");
   assert.doesNotMatch(styles, /\.academy-admin__catalog|\.student-login/, group);
