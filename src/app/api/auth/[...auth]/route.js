@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 export async function POST(request, { params }) {
   const { auth: segments } = await params;
   const endpoint = segments.join("/");
-  if (!["sign-in/username", "sign-out", "get-session"].includes(endpoint)) {
+  if (!["sign-in/username", "sign-out", "get-session", "change-password"].includes(endpoint)) {
     return new Response(null, { status: 404 });
   }
   return handleAuthRequest(request, endpoint);

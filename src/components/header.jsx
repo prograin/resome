@@ -123,15 +123,17 @@ export function Header() {
               {fa ? "EN" : "FA"}
             </span>
           </Button>
-          <Button
-            id="themeToggle"
-            type="button"
-            aria-label={fa ? "تغییر پوسته" : "Toggle theme"}
-            onClick={toggleTheme}
-          >
-            <Icon name={theme === "dark" ? "sun" : "moon"} className="h-4 w-4" />
-            <span className="hidden sm:inline">{fa ? "پوسته" : "Theme"}</span>
-          </Button>
+          {academy && (
+            <Button
+              id="themeToggle"
+              type="button"
+              aria-label={fa ? "تغییر پوسته" : "Toggle theme"}
+              onClick={toggleTheme}
+            >
+              <Icon name={theme === "dark" ? "sun" : "moon"} className="h-4 w-4" />
+              <span className="hidden sm:inline">{fa ? "پوسته" : "Theme"}</span>
+            </Button>
+          )}
           <Button
             ref={mobileButton}
             id="mobileMenuBtn"

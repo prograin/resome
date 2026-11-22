@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { setTimeout as delay } from "node:timers/promises";
 import { studentPaths } from "../../src/lib/student-auth/paths.js";
+import { createStudentContext } from "../lib/student-browser-context.mjs";
 
 export async function checkAccountBoundaries({
   browser,
@@ -14,7 +15,7 @@ export async function checkAccountBoundaries({
   otherId,
   studentId,
 }) {
-  const context = await browser.newContext({ viewport: { width: 390, height: 850 } });
+  const context = await createStudentContext(browser, { viewport: { width: 390, height: 850 } });
   try {
     const first = await context.newPage();
     const second = await context.newPage();

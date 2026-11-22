@@ -32,10 +32,13 @@ try {
     await page.goto(origin);
     await page.locator("#langToggle").click();
     assert.equal(await page.locator("html").getAttribute("lang"), "en");
+    assert.equal(await page.locator("#themeToggle").count(), 0);
+    await page.locator("#navAcademyPage").click();
+    await page.waitForFunction(() => !document.documentElement.classList.contains("dark"));
     await page.locator("#themeToggle").click();
     assert.equal(
       await page.locator("html").evaluate((element) => element.classList.contains("dark")),
-      false,
+      true,
     );
     assert.deepEqual(errors, []);
   });

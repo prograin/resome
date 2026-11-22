@@ -74,6 +74,11 @@
     "description": "اعلان‌های امتیاز و دوره‌های حساب شما در آکادمی Prograin.",
     "label": "اعلان‌ها"
   },
+  "academy-password": {
+    "title": "تغییر رمز عبور | Prograin",
+    "description": "تغییر امن رمز عبور حساب آکادمی Prograin.",
+    "label": "تغییر رمز عبور"
+  },
   "academy-links": {
     "title": "لینک‌های معرفی شاگردها | Prograin",
     "description": "لینک‌های معرفی و پروفایل‌های ثبت‌شدهٔ شاگردهای آکادمی Prograin.",

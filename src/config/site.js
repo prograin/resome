@@ -85,6 +85,12 @@ const routes = {
     body: "academy",
     noindex: true,
   },
+  "academy-password": {
+    path: studentPaths.password,
+    container: "academyPage",
+    body: "academy",
+    noindex: true,
+  },
   "academy-links": {
     path: studentPaths.links,
     container: "academyPage",

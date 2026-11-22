@@ -39,7 +39,7 @@
   font-size: var(--ui-font-caption);
 }
 
-.student-table__sort-tools select {
+.student-table__sort-tools :is(select, .ui-select) {
   min-width: 0;
   max-width: 100%;
   min-height: var(--ui-control-height);
@@ -50,15 +50,30 @@
   color: var(--ui-text);
   font: inherit;
   box-shadow: var(--academy-neo-shadow, var(--academy-shadow-inset));
+  width: auto;
 }
 
 .student-table__sort-tools--mobile {
   display: none;
 }
 
+.student-table__filter-divider {
+  width: 100%;
+  border: 0;
+  border-block-start: 1px solid var(--ui-line);
+  margin-block: var(--ui-space-3) var(--ui-space-4);
+}
+
+.student-table__filter-divider--mobile {
+  display: none;
+}
+
 @media (width < 48rem) {
   .student-table__sort-tools--mobile {
     display: flex;
+  }
+  .student-table__filter-divider--mobile {
+    display: block;
   }
   .student-table--stacked .student-table__sort {
     display: none;

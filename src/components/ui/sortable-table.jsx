@@ -1,5 +1,7 @@
 "use client";
 
+import { Select } from "./select";
+
 import { useId, useState } from "react";
 import { SiteLink } from "../site-link";
 import { Icon } from "../icon";
@@ -72,31 +74,50 @@ export function SortableTableHeader({ columns, sorting, onSort, hrefFor, locale 
   );
 }
 
-export function TableSortControls({ columns, sorting, onSort, locale, mobileOnly = true, label }) {
+export function TableFilterDivider({ mobileOnly = false }) {
+  return (
+    <hr
+      className={`student-table__filter-divider${mobileOnly ? " student-table__filter-divider--mobile" : ""}`}
+    />
+  );
+}
+
+export function TableSortControls({
+  columns,
+  sorting,
+  onSort,
+  locale,
+  mobileOnly = true,
+  label,
+  divider = true,
+}) {
   const id = useId();
   const copy = labels[locale];
   return (
-    <div
-      className={`student-table__sort-tools${mobileOnly ? " student-table__sort-tools--mobile" : ""}`}
-    >
-      <label htmlFor={id}>{label ?? copy.by}</label>
-      <select id={id} value={sorting.key} onChange={(event) => onSort(event.target.value)}>
-        {columns
-          .filter((column) => column.key)
-          .map((column) => (
-            <option key={column.key} value={column.key}>
-              {column.label}
-            </option>
-          ))}
-      </select>
-      <Button
-        variant="soft"
-        onClick={() => onSort(sorting.key)}
-        aria-label={`${copy.by} ${columns.find((c) => c.key === sorting.key)?.label}؛ ${copy[sorting.direction === "asc" ? "desc" : "asc"]}`}
+    <>
+      <div
+        className={`student-table__sort-tools${mobileOnly ? " student-table__sort-tools--mobile" : ""}`}
       >
-        <Icon name={sorting.direction === "asc" ? "arrow-up" : "arrow-down"} />
-        <span>{copy[sorting.direction]}</span>
-      </Button>
-    </div>
+        <label htmlFor={id}>{label ?? copy.by}</label>
+        <Select id={id} value={sorting.key} onValueChange={onSort}>
+          {columns
+            .filter((column) => column.key)
+            .map((column) => (
+              <option key={column.key} value={column.key}>
+                {column.label}
+              </option>
+            ))}
+        </Select>
+        <Button
+          variant="soft"
+          onClick={() => onSort(sorting.key)}
+          aria-label={`${copy.by} ${columns.find((c) => c.key === sorting.key)?.label}؛ ${copy[sorting.direction === "asc" ? "desc" : "asc"]}`}
+        >
+          <Icon name={sorting.direction === "asc" ? "arrow-up" : "arrow-down"} />
+          <span>{copy[sorting.direction]}</span>
+        </Button>
+      </div>
+      {divider && <TableFilterDivider mobileOnly={mobileOnly} />}
+    </>
   );
 }

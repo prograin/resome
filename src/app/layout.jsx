@@ -16,11 +16,11 @@ export const metadata = {
     apple: [{ url: assetUrl("/assets/icons/apple-touch-icon.png"), sizes: "180x180" }],
   },
 };
-export const viewport = { themeColor: "#f8fafc" };
+export const viewport = { themeColor: "#08111f" };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fa" dir="rtl" className="overflow-x-hidden" suppressHydrationWarning>
+    <html lang="fa" dir="rtl" className="dark overflow-x-hidden" suppressHydrationWarning>
       <head>
         <link
           rel="preload"

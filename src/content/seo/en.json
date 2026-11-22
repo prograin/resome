@@ -74,6 +74,11 @@
     "description": "Score and course notifications for your Prograin Academy account.",
     "label": "Notifications"
   },
+  "academy-password": {
+    "title": "Change password | Prograin",
+    "description": "Securely change your Prograin Academy account password.",
+    "label": "Change password"
+  },
   "academy-links": {
     "title": "Student links | Prograin",
     "description": "Profile links shared by Prograin Academy students.",

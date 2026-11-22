@@ -1,3 +1,4 @@
+import { ChangePassword } from "./change-password";
 import { AcademyAdminOverview } from "../academy-admin/overview";
 import { AdminCourseCatalog } from "../academy-admin/course-catalog";
 import { AdminCourseRoster } from "../academy-admin/course-roster";
@@ -55,6 +56,8 @@ export function DashboardContent({
       />
     );
   switch (view) {
+    case "password":
+      return <ChangePassword locale={locale} />;
     case "courses":
       return (
         <ProgressCourses courses={progress?.courses ?? []} copy={progressLabels} locale={locale} />

@@ -33,7 +33,7 @@ export async function checkStudentLinks(fixture, db) {
       await context.addInitScript(
         ({ locale, theme }) => {
           localStorage.setItem("portfolio_locale", locale);
-          localStorage.setItem("portfolio_theme", theme);
+          localStorage.setItem("academy_theme", theme);
         },
         { locale, theme },
       );

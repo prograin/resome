@@ -3,7 +3,11 @@ import { SiteLink as Link } from "../../components/site-link";
 import { Button } from "../../components/ui/button";
 import { studentPaths } from "../../lib/student-auth/paths";
 import { useRouter } from "next/navigation";
-import { SortableTableHeader, TableSortControls } from "../../components/ui/sortable-table";
+import {
+  SortableTableHeader,
+  TableSortControls,
+  TableFilterDivider,
+} from "../../components/ui/sortable-table";
 import { nextTableSort } from "../../lib/table-sorting";
 import { StudentCreateButton } from "./student-create";
 
@@ -72,9 +76,11 @@ export function StudentDirectory({
           onSort={(key) => router.push(sortLink(key))}
           locale={locale}
           mobileOnly={false}
+          divider={false}
           label={locale === "fa" ? "مرتب‌سازی" : "Sort"}
         />
       </div>
+      <TableFilterDivider />
       {students.length ? (
         <>
           <table className="student-table student-table--stacked">
@@ -124,6 +130,7 @@ export function StudentDirectory({
         pageLink={pageLink}
         copy={copy}
         numbers={numbers}
+        locale={locale}
       />
     </section>
   );

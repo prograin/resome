@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
 
 const Preferences = createContext(null);
 
@@ -15,7 +16,7 @@ function read(key) {
 const listeners = new Set();
 const overrides = {};
 const localeKey = "portfolio_locale";
-const themeKey = "portfolio_theme";
+const themeKey = "academy_theme";
 
 function subscribe(listener) {
   listeners.add(listener);
@@ -35,8 +36,14 @@ function readTheme() {
 }
 
 export function PreferencesProvider({ children }) {
+  const pathname = usePathname();
+  const academy = pathname === "/academy" || pathname.startsWith("/academy/");
   const locale = useSyncExternalStore(subscribe, readLocale, () => "fa");
-  const theme = useSyncExternalStore(subscribe, readTheme, () => "light");
+  const theme = useSyncExternalStore(
+    subscribe,
+    () => (academy ? readTheme() : "dark"),
+    () => (academy ? "light" : "dark"),
+  );
 
   const dir = locale === "fa" ? "rtl" : "ltr";
   useEffect(() => {
@@ -62,6 +69,7 @@ export function PreferencesProvider({ children }) {
   }
 
   function toggleTheme() {
+    if (!academy) return;
     const next = theme === "dark" ? "light" : "dark";
     save(themeKey, next);
   }

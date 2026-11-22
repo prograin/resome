@@ -33,6 +33,7 @@
 @import "./components/header.css";
 @import "./pages/home/hero-layout.css";
 @import "./components/button.css";
+@import "./components/select.css";
 @import "./pages/home/design-01.css";
 @import "./pages/order/design-01.css";
 @import "./pages/order/showcase.css";
@@ -68,6 +69,7 @@
 @import "./pages/academy/student-sidebar.css";
 @import "./pages/academy/student-content.css";
 @import "./pages/academy/student-profile.css";
+@import "./pages/academy/student-password.css";
 @import "./pages/academy/student-links.css";
 @import "./pages/academy/student-chart.css";
 @import "./pages/academy/student-metrics.css";

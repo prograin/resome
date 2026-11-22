@@ -12,7 +12,7 @@ import { studentPaths } from "../../src/lib/student-auth/paths.js";
 import { internalStudentEmail } from "../../src/lib/student-auth/student-email.js";
 
 import pRetry from "p-retry";
-import { academyApp } from "../../src/features/academy-app/paths.js";
+import { createStudentContext } from "../lib/student-browser-context.mjs";
 export async function createStudentFixture({ showInstallInvitation = false } = {}) {
   const scratch = process.env.STUDENT_TEST_DATABASE_URL;
   assert.ok(
@@ -115,12 +115,10 @@ export async function createStudentFixture({ showInstallInvitation = false } = {
     );
 
     browser = await chromium.launch({ channel: "msedge" });
-    const context = await browser.newContext({ viewport: { width: 390, height: 850 } });
-    if (!showInstallInvitation)
-      await context.addInitScript(
-        (key) => sessionStorage.setItem(key, "1"),
-        academyApp.invitationKey,
-      );
+    const options = { viewport: { width: 390, height: 850 } };
+    const context = showInstallInvitation
+      ? await browser.newContext(options)
+      : await createStudentContext(browser, options);
     const page = await context.newPage();
     return {
       page,

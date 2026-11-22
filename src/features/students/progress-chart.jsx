@@ -1,3 +1,4 @@
+import { Select } from "../../components/ui/select";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
@@ -45,34 +46,30 @@ export function ProgressChart({ progress, copy, locale }) {
                 </Button>
               ))}
             </div>
-            <label className="student-panel__form student-chart__mode-select">
-              <select
-                aria-label={copy.chartMode}
-                value={mode}
-                onChange={(event) => setMode(event.target.value)}
-              >
+            <div className="student-panel__form student-chart__mode-select">
+              <Select aria-label={copy.chartMode} value={mode} onValueChange={setMode}>
                 {modes.map(([key, label]) => (
                   <option key={key} value={key}>
                     {label}
                   </option>
                 ))}
-              </select>
-            </label>
-            <label className="student-panel__form">
-              <select
+              </Select>
+            </div>
+            <div className="student-panel__form">
+              <Select
                 aria-label={copy.timeRange}
                 value={range}
-                onChange={(event) => {
+                onValueChange={(value) => {
                   setNow(Date.now());
-                  setRange(event.target.value);
+                  setRange(value);
                 }}
               >
                 <option value="all">{copy.allTime}</option>
                 <option value="7">{copy.lastWeek}</option>
                 <option value="30">{copy.lastMonth}</option>
                 <option value="90">{copy.lastQuarter}</option>
-              </select>
-            </label>
+              </Select>
+            </div>
           </div>
           {entries.length ? (
             <PointsChart history={entries} copy={copy} locale={locale} mode={mode} />

@@ -29,7 +29,9 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
   );
   const admin = isStudentAdmin(user);
   const studentView =
-    admin && !["profile", "links", "notifications"].includes(view) && Boolean(rawParams.student);
+    admin &&
+    !["profile", "password", "links", "notifications"].includes(view) &&
+    Boolean(rawParams.student);
   const params = studentView ? rawParams : {};
   if (admin && view === "overview" && !params?.student) redirect(studentPaths.admin);
   const students = studentView ? await listStudents() : [];
@@ -60,6 +62,7 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
     courses: "academy-courses",
     goals: "academy-goals",
     profile: "academy-profile",
+    password: "academy-password",
     links: "academy-links",
     notifications: "academy-notifications",
   }[view];

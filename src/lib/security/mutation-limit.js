@@ -8,6 +8,7 @@ const mutationPolicies = {
   profile: [8, 60],
   login: [20, 600],
   loginRequest: [30, 60],
+  passwordChange: [5, 600],
   authRequest: [180, 60],
   apiRequest: [240, 60],
   emailSend: [3, 3600],

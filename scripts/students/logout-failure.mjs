@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
 import { studentAuthPolicy } from "../../src/lib/student-auth/config.js";
 import { studentCopy } from "../../src/features/students/content.js";
+import { createStudentContext } from "../lib/student-browser-context.mjs";
 
 export async function checkLogoutFailure({ browser, context: originalContext, origin, profile }) {
-  const context = await browser.newContext({ storageState: await originalContext.storageState() });
+  const context = await createStudentContext(browser, {
+    storageState: await originalContext.storageState(),
+  });
   const pattern = /\/api\/auth\/sign-out\/?$/;
   let held;
   try {

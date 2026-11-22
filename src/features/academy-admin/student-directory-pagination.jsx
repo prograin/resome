@@ -1,7 +1,9 @@
 import { SiteLink } from "../../components/site-link";
 import { Button } from "../../components/ui/button";
+import { Icon } from "../../components/icon";
 
-export function StudentDirectoryPagination({ page, pages, pageLink, copy, numbers }) {
+export function StudentDirectoryPagination({ page, pages, pageLink, copy, numbers, locale }) {
+  const rtl = locale === "fa";
   const start = Math.max(1, Math.min(page - 1, pages - 2));
   const visible = [
     ...new Set([1, ...Array.from({ length: Math.min(3, pages) }, (_, i) => start + i), pages]),
@@ -21,8 +23,10 @@ export function StudentDirectoryPagination({ page, pages, pageLink, copy, number
           href={page > 1 ? pageLink(page - 1) : undefined}
           disabled={page === 1}
           variant="soft"
+          aria-label={copy.previous}
+          title={copy.previous}
         >
-          {copy.previous}
+          <Icon name={rtl ? "chevron-right" : "chevron-left"} />
         </Button>
         <div className="academy-admin__pagination-pages">
           {items.map((item) =>
@@ -50,8 +54,10 @@ export function StudentDirectoryPagination({ page, pages, pageLink, copy, number
           href={page < pages ? pageLink(page + 1) : undefined}
           disabled={page === pages}
           variant="soft"
+          aria-label={copy.next}
+          title={copy.next}
         >
-          {copy.next}
+          <Icon name={rtl ? "chevron-left" : "chevron-right"} />
         </Button>
       </div>
     </nav>

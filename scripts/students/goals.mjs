@@ -1,3 +1,4 @@
+import { selectOption } from "../lib/select-option.mjs";
 import assert from "node:assert/strict";
 import { studentPaths } from "../../src/lib/student-auth/paths.js";
 import { checkFormRecovery } from "./form-recovery.mjs";
@@ -17,7 +18,7 @@ export async function checkGoals({ page, origin, openDashboardPage }) {
   assert.equal(await newGoal.locator('[name="percent"]').count(), 0);
   await newGoal.locator('[name="title"]').fill("Fixture learning goal");
   await newGoal.locator('[name="description"]').fill(longDescription);
-  await newGoal.locator('[name="priority"]').selectOption("1");
+  await selectOption(newGoal, "priority", "1");
   await checkFormRecovery(
     page,
     newGoal,

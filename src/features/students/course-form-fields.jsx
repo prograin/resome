@@ -1,3 +1,4 @@
+import { Select } from "../../components/ui/select";
 import { difficultyLevels } from "../../lib/course-options";
 
 export function CourseFormFields({ labels, course }) {
@@ -9,14 +10,14 @@ export function CourseFormFields({ labels, course }) {
       </label>
       <label>
         {labels.difficulty}
-        <select name="difficulty" defaultValue={course?.difficulty ?? ""}>
+        <Select name="difficulty" defaultValue={course?.difficulty ?? ""}>
           <option value="">{labels.unknown}</option>
           {difficultyLevels.map((level) => (
             <option key={level} value={level}>
               {labels.levels[level]}
             </option>
           ))}
-        </select>
+        </Select>
       </label>
       <label>
         {labels.github}

@@ -5,6 +5,7 @@ import { users, courseDefinitions, awards, courses } from "../../src/lib/db/sche
 import { writeAdminCourse } from "../../src/lib/db/admin-courses.js";
 import { studentPaths } from "../../src/lib/student-auth/paths.js";
 import { notificationHref } from "../../src/lib/notifications/targets.js";
+import { createStudentContext } from "../lib/student-browser-context.mjs";
 
 export async function checkNotificationUI(fixture, db) {
   const { browser, context, origin, studentId, username, password, admin } = fixture;
@@ -17,7 +18,7 @@ export async function checkNotificationUI(fixture, db) {
     .returning();
   await writeAdminCourse(db, admin, definition.id, "enroll", null, { studentId });
   const [assignment] = await db.select().from(courses).where(eq(courses.studentId, studentId));
-  const teacher = await browser.newContext({ viewport: { width: 1440, height: 960 } });
+  const teacher = await createStudentContext(browser, { viewport: { width: 1440, height: 960 } });
   const login = async (target, account) =>
     assert.equal(
       (

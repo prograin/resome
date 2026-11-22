@@ -3,7 +3,8 @@ import { getStudentRuntime } from "../student-auth/server.js";
 import { validateAuthRequest } from "./auth-request.js";
 import { trustedRequestOrigin } from "./request-origin.js";
 import { limitBackendRequest } from "./request-limit.js";
-import { apiJson } from "./api-response.js";
+import { apiJson, rateLimitResponse } from "./api-response.js";
+import { consumeRateLimit } from "./mutation-limit.js";
 import { parseQuery } from "../validation/forms.js";
 import { serviceDiagnostic } from "./service-diagnostic.js";
 
@@ -31,6 +32,17 @@ export async function handleAuthRequest(request, endpoint) {
     const validated =
       request.method === "GET" ? request : await validateAuthRequest(request, endpoint);
     if (validated instanceof Response) return validated;
+    if (endpoint === "change-password") {
+      const session = await runtime.auth.api.getSession({
+        headers: request.headers,
+        query: { disableRefresh: true },
+      });
+      if (!session) return apiJson({ error: "Unauthorized" }, 401);
+      const passwordLimit = rateLimitResponse(
+        await consumeRateLimit(runtime.limits.passwordChange, session.user.id),
+      );
+      if (passwordLimit) return passwordLimit;
+    }
     const response = await runtime.auth.handler(validated);
     response.headers.set("Cache-Control", "private, no-store");
     const retryAfter = response.headers.get("X-Retry-After");

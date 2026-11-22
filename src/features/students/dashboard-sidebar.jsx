@@ -83,7 +83,7 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
                 variant="soft"
                 href={studentPaths.profile}
                 prefetch={false}
-                aria-current={view === "profile" ? "page" : undefined}
+                aria-current={["profile", "password"].includes(view) ? "page" : undefined}
                 aria-label={profileLabel}
                 title={profileLabel}
                 onClick={close}

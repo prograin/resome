@@ -1,3 +1,4 @@
+import { Select } from "../../components/ui/select";
 import { useId, useState } from "react";
 import { DialogFormActions } from "./dialog-form-actions";
 import { updateGoal } from "./goal-actions";
@@ -31,13 +32,13 @@ export function GoalForm({ goal, labels, copy, locale, onSaved }) {
       <div className="student-goal__priority-field">
         <label>
           {labels.priority}
-          <select name="priority" defaultValue={goal?.priority ?? 2}>
+          <Select name="priority" defaultValue={goal?.priority ?? 2}>
             {labels.priorities.map((label, index) => (
               <option key={label} value={index + 1}>
                 {label}
               </option>
             ))}
-          </select>
+          </Select>
         </label>
       </div>
       {goal && (

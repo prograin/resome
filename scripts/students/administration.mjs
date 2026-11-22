@@ -1,3 +1,4 @@
+import { selectOption } from "../lib/select-option.mjs";
 import { seedManagedCourse } from "./management-fixtures.mjs";
 import assert from "node:assert/strict";
 import { studentPaths } from "../../src/lib/student-auth/paths.js";
@@ -44,25 +45,24 @@ export async function checkAdministration({
   const enrollmentDialog = page.getByRole("dialog", { name: "افزودن به دوره", exact: true });
   const enrollment = enrollmentDialog.locator("form");
   assert.equal(await page.locator('input[name="title"], select[name="status"]').count(), 0);
-  await enrollment.locator('[name="definitionId"]').selectOption(String(definitionId));
+  await selectOption(enrollment, "definitionId", String(definitionId));
   await enrollment.getByRole("button", { name: "افزودن به دوره", exact: true }).click();
   await enrollmentDialog.waitFor({ state: "hidden" });
-  const courseOption = award
-    .locator('select[name="course"] option')
-    .getByText("Fixture Course", { exact: true });
-  await courseOption.waitFor({ state: "attached" });
-  const courseId = await courseOption.getAttribute("value");
+  await award.locator('button[data-select-name="course"]').click();
+  const courseOption = page.getByRole("option", { name: "Fixture Course", exact: true });
+  const courseId = await courseOption.getAttribute("data-select-value");
+  await courseOption.click();
   const courseCard = page.getByRole("listitem").filter({
     has: page.getByRole("heading", { name: "Fixture Course", exact: true }),
   });
 
-  await award.locator('select[name="course"]').selectOption(courseId);
+  await selectOption(award, "course", courseId);
   await award.locator('input[name="points"]').fill("4");
-  await award.locator('select[name="kind"]').selectOption("followup");
+  await selectOption(award, "kind", "followup");
   await award.locator('textarea[name="note"]').fill("Fixture follow-up");
   await save(award);
   assert.equal(await page.getByText("Fixture follow-up", { exact: true }).count(), 0);
-  await award.locator('select[name="course"]').selectOption("");
+  await selectOption(award, "course", "");
   await award.locator('input[name="points"]').fill("1");
   await award.locator('textarea[name="note"]').fill("Fixture general award");
   await save(award);

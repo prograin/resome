@@ -1,3 +1,4 @@
+import { Select } from "../../components/ui/select";
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { updateAdminCourse } from "../academy-admin/course-actions";
@@ -28,12 +29,7 @@ function StudentCourseEnrollment({ studentId, definitions, courses, locale, titl
         <>
           <label>
             {locale === "fa" ? "انتخاب دوره" : "Choose a course"}
-            <select
-              name="definitionId"
-              required
-              value={selectedId}
-              onChange={(event) => setDefinitionId(event.target.value)}
-            >
+            <Select name="definitionId" required value={selectedId} onValueChange={setDefinitionId}>
               <option value="" disabled>
                 {locale === "fa" ? "یک دوره انتخاب کنید" : "Select a course"}
               </option>
@@ -42,7 +38,7 @@ function StudentCourseEnrollment({ studentId, definitions, courses, locale, titl
                   {definition.title}
                 </option>
               ))}
-            </select>
+            </Select>
           </label>
         </>
       ) : (

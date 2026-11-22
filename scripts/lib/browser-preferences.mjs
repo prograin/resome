@@ -5,7 +5,7 @@ export async function createPreferenceContext(browser, { locale, theme, ...optio
   await context.addInitScript(
     ({ locale, theme, invitationKey }) => {
       localStorage.setItem("portfolio_locale", locale);
-      localStorage.setItem("portfolio_theme", theme);
+      localStorage.setItem("academy_theme", theme);
       sessionStorage.setItem(invitationKey, "1");
     },
     { locale, theme, invitationKey: academyApp.invitationKey },

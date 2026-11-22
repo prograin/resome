@@ -20,6 +20,7 @@ import { StudentCourseEnrollmentButton } from "./student-course-enrollment";
 import { studentLinksCopy } from "./student-links-copy";
 import { Icon } from "../../components/icon";
 import { notificationCopy } from "../notifications/copy";
+import { passwordCopy } from "./password-copy";
 
 export function StudentDashboard(props) {
   const { userId, username, progress, management, view, adminCourse } = props;
@@ -42,6 +43,7 @@ export function StudentDashboard(props) {
     courses: progressLabels.courses,
     goals: progressLabels.goals,
     profile: copy.profile,
+    password: passwordCopy[locale].title,
     links: studentLinksCopy[locale].title,
     notifications: notificationCopy[locale].title,
   }[view];

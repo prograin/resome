@@ -1,3 +1,4 @@
+import { Select } from "../../components/ui/select";
 import { Button } from "../../components/ui/button";
 import { Icon } from "../../components/icon";
 import { useDetailsDialog } from "../../components/details-dialog";
@@ -27,7 +28,7 @@ export function CourseEnrollmentButton({ course, locale }) {
             >
               <label>
                 {copy.choose}
-                <select name="studentId" required defaultValue="">
+                <Select name="studentId" required defaultValue="">
                   <option value="" disabled>
                     {copy.choose}
                   </option>
@@ -36,7 +37,7 @@ export function CourseEnrollmentButton({ course, locale }) {
                       {student.name}
                     </option>
                   ))}
-                </select>
+                </Select>
               </label>
             </RosterForm>
           ) : (

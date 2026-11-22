@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import AxeBuilder from "@axe-core/playwright";
 import { studentPaths } from "../../src/lib/student-auth/paths.js";
+import { selectOption } from "../lib/select-option.mjs";
 import {
   checkAdminCourseResources,
   checkStudentCourseResources,
@@ -13,7 +14,7 @@ export async function checkAdminCourseWorkflow({ page, origin, student, studentI
   await page.getByRole("button", { name: "افزودن دوره", exact: true }).click();
   const dialog = page.getByRole("dialog", { name: "افزودن دوره" });
   await dialog.locator('[name="title"]').fill("Roster fixture course");
-  await dialog.locator('[name="difficulty"]').selectOption("intermediate");
+  await selectOption(dialog, "difficulty", "intermediate");
   await dialog.locator('[name="github"]').fill("https://github.com/prograin/course");
   await dialog.locator('[name="playlist"]').fill("https://www.youtube.com/playlist?list=example");
   await dialog.locator('[name="syllabus"]').fill("Basics\nAPIs");
@@ -31,8 +32,10 @@ export async function checkAdminCourseWorkflow({ page, origin, student, studentI
   await enrollment.getByRole("button", { name: "انصراف", exact: true }).click();
   await enrollment.waitFor({ state: "hidden" });
   await page.getByRole("button", { name: "افزودن شاگرد", exact: true }).click();
-  const add = page.locator("form").filter({ has: page.locator('select[name="studentId"]') });
-  await add.locator('select[name="studentId"]').selectOption(studentId);
+  const add = page
+    .locator("form")
+    .filter({ has: page.locator('button[data-select-name="studentId"]') });
+  await selectOption(add, "studentId", studentId);
   await add.getByRole("button", { name: "افزودن شاگرد", exact: true }).click();
   await enrollment.waitFor({ state: "hidden" });
   const row = page
@@ -93,16 +96,15 @@ export async function checkAdminCourseWorkflow({ page, origin, student, studentI
   await page.goto(manageUrl);
   await row.getByRole("button", { name: "فعال‌کردن دوباره", exact: true }).click();
   await row.getByRole("button", { name: "اتمام دوره", exact: true }).waitFor();
-  const statusSelect = row.locator('select[name="status"]');
-  await statusSelect.selectOption("inactive");
-  await row.locator('select[data-enrollment-status="inactive"]').waitFor();
+  await selectOption(row, "status", "inactive");
+  await row.locator('button[data-enrollment-status="inactive"]').waitFor();
   assert.equal(
     await row.getByRole("button", { name: "امتیاز دادن", exact: true }).isDisabled(),
     true,
   );
   assert.equal(await row.getByRole("status").count(), 0);
-  await statusSelect.selectOption("active");
-  await row.locator('select[data-enrollment-status="active"]').waitFor();
+  await selectOption(row, "status", "active");
+  await row.locator('button[data-enrollment-status="active"]').waitFor();
   await row.getByRole("button", { name: "امتیاز دادن", exact: true }).click();
   const gradeDialog = page.getByRole("dialog", { name: "ثبت امتیاز", exact: true });
   await gradeDialog.locator('[name="points"]').fill("4");

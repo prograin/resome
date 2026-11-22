@@ -9,7 +9,7 @@ export async function installMockPush(
   await context.addInitScript(
     ({ locale, theme, subscription, subscribed, permission }) => {
       localStorage.setItem("portfolio_locale", locale);
-      localStorage.setItem("portfolio_theme", theme);
+      localStorage.setItem("academy_theme", theme);
       const state = { requests: 0, lookups: 0, subscribed, permission };
       window.__pushTest = state;
       class MockNotification {

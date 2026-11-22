@@ -2,6 +2,11 @@ import { ProfileDetails } from "./profile-details";
 import { ProfileEmail } from "./profile-email";
 import { profileCopy } from "./profile-copy";
 import { StudentSignOut } from "./student-sign-out";
+import { Button } from "../../components/ui/button";
+import { SiteLink } from "../../components/site-link";
+import { Icon } from "../../components/icon";
+import { studentPaths } from "../../lib/student-auth/paths";
+import { passwordCopy } from "./password-copy";
 
 export function StudentProfile({ profile, copy, locale, admin }) {
   return (
@@ -21,6 +26,12 @@ export function StudentProfile({ profile, copy, locale, admin }) {
         admin={admin}
       />
       <ProfileEmail profile={profile} copy={profileCopy[locale]} locale={locale} />
+      <div className="student-profile__actions">
+        <Button as={SiteLink} href={studentPaths.password} variant="soft">
+          <Icon name="lock" />
+          {passwordCopy[locale].title}
+        </Button>
+      </div>
       <StudentSignOut copy={copy} />
     </div>
   );

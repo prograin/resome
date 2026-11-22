@@ -1,3 +1,4 @@
+import { Select } from "../../components/ui/select";
 import { useSavedAction } from "./use-saved-action";
 import { FormFeedback } from "./form-feedback";
 import { Button } from "../../components/ui/button";
@@ -7,14 +8,14 @@ function CourseSelect({ courses, copy, optional = false }) {
   return (
     <label>
       {copy.course}
-      <select name="course" required={!optional}>
+      <Select name="course" required={!optional}>
         {optional && <option value="">{copy.general}</option>}
         {courses.map(({ id, title }) => (
           <option key={id} value={id}>
             {title}
           </option>
         ))}
-      </select>
+      </Select>
     </label>
   );
 }
@@ -41,13 +42,13 @@ export function ProgressManagement({ management, courses, copy }) {
         </label>
         <label>
           {copy.reason}
-          <select name="kind">
+          <Select name="kind">
             {Object.entries(copy.kinds).map(([key, label]) => (
               <option key={key} value={key}>
                 {label}
               </option>
             ))}
-          </select>
+          </Select>
         </label>
         <Button type="submit" variant="primary" disabled={pending}>
           {copy.save}

@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { studentAuthPolicy } from "../../src/lib/student-auth/config.js";
 import { studentCopy } from "../../src/features/students/content.js";
+import { createStudentContext } from "../lib/student-browser-context.mjs";
 
 export async function checkLoginFailure({ browser, login, username, password }) {
-  const context = await browser.newContext();
+  const context = await createStudentContext(browser);
   let held;
   const pattern = /\/api\/auth\/sign-in\/username\/?$/;
   try {

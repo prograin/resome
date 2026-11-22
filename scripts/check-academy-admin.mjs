@@ -148,13 +148,30 @@ try {
         await page.evaluate(
           ({ locale, theme }) => {
             localStorage.setItem("portfolio_locale", locale);
-            localStorage.setItem("portfolio_theme", theme);
+            localStorage.setItem("academy_theme", theme);
           },
           { locale, theme },
         );
         await page.setViewportSize({ width, height: 960 });
         await page.reload();
         await rows.first().waitFor();
+        const previous = page.locator(".academy-admin__pagination-previous");
+        const next = page.locator(".academy-admin__pagination-next");
+        assert.equal((await previous.innerText()).trim(), "");
+        assert.equal((await next.innerText()).trim(), "");
+        assert.equal(
+          await previous.locator("svg").getAttribute("data-rendered-icon"),
+          locale === "fa" ? "chevron-right" : "chevron-left",
+        );
+        assert.equal(
+          await next.locator("svg").getAttribute("data-rendered-icon"),
+          locale === "fa" ? "chevron-left" : "chevron-right",
+        );
+        assert.ok(
+          await page
+            .locator(".academy-admin__directory > .student-table__filter-divider")
+            .isVisible(),
+        );
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         const result = await new AxeBuilder({ page })
           .include("main")

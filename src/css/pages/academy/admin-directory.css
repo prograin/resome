@@ -100,7 +100,8 @@
   white-space: nowrap;
 }
 
-.academy-admin__pagination-pages .ui-button {
+.academy-admin__pagination-pages .ui-button,
+.academy-admin__pagination-controls > .ui-button {
   flex: 0 0 var(--ui-control-height);
   width: var(--ui-control-height);
   padding-inline: 0;
