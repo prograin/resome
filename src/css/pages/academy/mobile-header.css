@@ -88,8 +88,6 @@
 
   .student-sidebar__anchor {
     position: relative;
-    top: auto;
-    max-height: none;
   }
 
   .student-sidebar[data-expanded="true"] .student-sidebar__panel {

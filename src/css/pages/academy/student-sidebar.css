@@ -1,25 +1,13 @@
 .student-sidebar {
   flex: none;
-  width: var(--student-sidebar-width);
-  min-height: calc(
-    var(--student-sidebar-items) * (var(--ui-control-height) + var(--ui-space-2)) + 2 *
-      var(--ui-space-2) + 1px
-  );
 }
 
 .student-sidebar__anchor {
-  position: sticky;
-  top: var(--student-sidebar-top);
   height: 100%;
-  max-height: calc(100vh - var(--student-sidebar-top) - var(--ui-space-4));
-  max-height: calc(100dvh - var(--student-sidebar-top) - var(--ui-space-4));
-}
-
-.student-sidebar[data-expanded="true"] .student-sidebar__anchor {
-  z-index: 2;
 }
 
 .student-sidebar__panel {
+  --academy-card-surface: var(--academy-sidebar-surface);
   position: absolute;
   inset: 0 0 0 auto;
   display: flex;
@@ -32,20 +20,24 @@
   background: var(--ui-surface);
 }
 
-.student-sidebar[data-expanded="true"] .student-sidebar__panel {
-  width: var(--student-sidebar-expanded-width);
+.student-sidebar__brand {
+  display: none;
 }
 
 .student-sidebar nav {
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: var(--ui-space-2);
+  gap: 0;
+}
+
+.student-sidebar nav > .student-sidebar__divider {
+  margin: var(--ui-space-1) var(--ui-space-2);
 }
 
 .student-sidebar__profile {
   display: grid;
-  gap: var(--ui-space-3);
+  gap: var(--ui-space-2);
   margin-block-start: auto;
   padding-block-start: var(--ui-space-3);
 }
@@ -59,7 +51,7 @@
   direction: rtl;
 }
 
-.student-sidebar[data-expanded="true"] .student-sidebar__profile > .ui-button {
+.student-sidebar .student-sidebar__profile > .ui-button {
   justify-content: space-between;
 }
 
@@ -89,13 +81,13 @@
 }
 
 .student-sidebar__toggle {
-  width: calc(var(--student-sidebar-width, 3.5rem) - 2 * var(--ui-space-2));
+  width: var(--ui-control-height);
   flex: none;
 }
 
 .student-sidebar__divider {
   border: 0;
-  border-block-start: 1px solid var(--ui-line);
+  border-block-start: 1px solid var(--academy-sidebar-line);
 }
 
 .student-sidebar .ui-button {
@@ -108,11 +100,12 @@
   box-shadow: none;
 }
 
-.student-sidebar nav .ui-button:hover {
-  color: var(--ui-accent);
+.student-sidebar nav .ui-button:hover,
+.student-sidebar nav .ui-button[aria-current="page"] {
+  color: var(--academy-sidebar-accent);
 }
 
-.student-sidebar[data-expanded="true"] nav .ui-button {
+.student-sidebar nav .ui-button {
   justify-content: flex-start;
   text-align: start;
 }

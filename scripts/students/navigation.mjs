@@ -24,14 +24,18 @@ export async function checkDashboardNavigation({ page, dashboard, origin, userna
         .count(),
       0,
     );
-    const toggle =
-      width < 768
-        ? page.locator("#academyMenuButton")
-        : page.locator(".student-sidebar:visible .student-sidebar__toggle");
-    await toggle.click();
+    if (width < 768) await page.locator("#academyMenuButton").click();
     const sidebar = page.locator(".student-sidebar:visible");
+    if (width >= 768) {
+      assert.equal(await sidebar.locator(".student-sidebar__toggle").isVisible(), false);
+      await sidebar.locator(".student-sidebar__brand").waitFor();
+      const bounds = await sidebar.boundingBox();
+      assert.equal(bounds.y, 0);
+      assert.equal(bounds.height, 850);
+      assert.equal(bounds.x + bounds.width, width);
+    }
     const profile = sidebar.locator(".student-sidebar__profile");
-    await profile.locator("hr").waitFor();
+    await profile.locator("hr").first().waitFor();
     assert.equal(await profile.locator("bdi").innerText(), username);
     assert.equal(
       await sidebar.locator("#student-dashboard-nav a").last().getAttribute("href"),
@@ -39,7 +43,9 @@ export async function checkDashboardNavigation({ page, dashboard, origin, userna
     );
     const panel = await sidebar.locator(".student-sidebar__panel").boundingBox();
     const footer = await profile.boundingBox();
-    assert.ok(Math.abs(panel.y + panel.height - footer.y - footer.height) <= 12);
+    assert.ok(
+      Math.abs(panel.y + panel.height - footer.y - footer.height) <= (width < 768 ? 12 : 20),
+    );
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.screenshot({ path: `.backup/qa/sidebar-profile-${width}.png` });
     await profile.getByRole("link").click();

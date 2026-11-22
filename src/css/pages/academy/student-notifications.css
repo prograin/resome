@@ -102,7 +102,7 @@
   .student-shell__header .academy-mobile-header {
     grid-template-columns: auto minmax(0, 1fr) auto;
     gap: var(--ui-space-2);
-    padding-inline: var(--ui-space-2);
+    padding-inline: var(--ui-space-3);
   }
 
   .student-shell__header .academy-mobile-header .student-shell__brand {

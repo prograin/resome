@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { assetUrl } from "../config/assets";
+import { AcademyBrand } from "./academy-brand";
 import { SiteLink } from "./site-link";
 import { Button } from "./ui/button";
 import { Icon } from "./icon";
@@ -20,21 +19,10 @@ const NotificationBell = dynamic(
     import("../features/notifications/notification-bell").then((module) => module.NotificationBell),
   { ssr: false },
 );
-
-function StudentBrand() {
-  return (
-    <SiteLink href={studentPaths.dashboard} className="student-shell__brand" dir="ltr">
-      <Image
-        unoptimized
-        src={assetUrl("/assets/icons/academy/icon-192.png")}
-        width={32}
-        height={32}
-        alt=""
-      />
-      <span>Prograin Academy</span>
-    </SiteLink>
-  );
-}
+const HeaderGreeting = dynamic(
+  () => import("../features/students/header-greeting").then((module) => module.HeaderGreeting),
+  { ssr: false },
+);
 
 export function StudentHeader({ pathname }) {
   const { locale } = usePreferences();
@@ -48,7 +36,8 @@ export function StudentHeader({ pathname }) {
         dir="rtl"
         aria-label={fa ? "بخش شاگردان" : "Student area"}
       >
-        <StudentBrand />
+        <AcademyBrand />
+        {!login && <HeaderGreeting />}
         <div className="student-shell__links">
           <ThemeToggle iconOnly />
           <NotificationBell />
@@ -67,7 +56,7 @@ export function StudentHeader({ pathname }) {
       <AcademyMobileHeader
         fa={fa}
         pathname={pathname}
-        brand={<StudentBrand />}
+        brand={<AcademyBrand />}
         notifications={<NotificationBell />}
       />
     </header>
@@ -80,17 +69,11 @@ export function StudentFooter() {
   const fa = locale === "fa";
   return (
     <footer id="siteFooter" className="student-shell__footer" dir={dir}>
-      <StudentBrand />
+      <AcademyBrand />
       <nav className="student-shell__links" aria-label={fa ? "راهنمای شاگردان" : "Student help"}>
-        <SiteLink href={standalone ? studentPaths.dashboard : "/academy/"}>
-          {standalone
-            ? fa
-              ? "داشبورد"
-              : "Dashboard"
-            : fa
-              ? "بازگشت به آکادمی"
-              : "Back to academy"}
-        </SiteLink>
+        {standalone && (
+          <SiteLink href={studentPaths.dashboard}>{fa ? "داشبورد" : "Dashboard"}</SiteLink>
+        )}
         <SiteLink
           href={standalone ? `https://t.me/${contact.telegram}` : "/contact/"}
           {...(standalone ? { target: "_blank", rel: "noopener noreferrer" } : {})}

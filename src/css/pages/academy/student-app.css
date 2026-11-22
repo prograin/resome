@@ -37,14 +37,25 @@ html[data-academy-app="true"] body {
   --header-height: calc(4.25rem + env(safe-area-inset-top));
 }
 
-html[data-academy-app="true"]
-  .student-shell__header
-  > :is(.site-header__standard, .academy-mobile-header) {
-  padding-top: calc(0.6rem + env(safe-area-inset-top));
+@media (width < 48rem) {
+  html[data-academy-app="true"]
+    .student-shell__header
+    > :is(.site-header__standard, .academy-mobile-header) {
+    padding-top: calc(0.6rem + env(safe-area-inset-top));
+  }
+}
+
+.academy-install-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 @media (display-mode: standalone) {
-  .student-shell__footer :is(a[href="/academy/"], a[href="/contact/"]),
+  .student-shell__footer a[href="/contact/"],
   .academy-mobile-menu :is(a[href="/academy/"], a[href="/academy/consultation/"]),
   .academy-install-button {
     display: none;

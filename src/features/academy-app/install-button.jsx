@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button } from "../../components/ui/button";
-import { Icon } from "../../components/icon";
 import { usePreferences } from "../../components/preferences";
 import { useDetailsDialog } from "../../components/details-dialog";
 import { useAcademyApp } from "./app-mode";
@@ -81,9 +79,8 @@ export function AcademyInstallButton() {
   }
   if (standalone || installed) return null;
   return (
-    <Button variant="soft" onClick={install} className="academy-install-button">
-      <Icon name="download" />
+    <button type="button" onClick={install} className="academy-install-button">
       {label}
-    </Button>
+    </button>
   );
 }

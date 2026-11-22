@@ -1,6 +1,9 @@
 export const profileCopy = {
   fa: {
     details: "اطلاعات فردی",
+    security: "امنیت و دسترسی",
+    passwordAction: "مدیریت رمز عبور",
+    signOutAction: "پایان نشست فعلی",
     edit: "ویرایش",
     cancel: "لغو",
     emailLocked: "ایمیل ثبت‌شده قابل تغییر نیست.",
@@ -37,6 +40,9 @@ export const profileCopy = {
     adminUsername: "نام کاربری استاد از تنظیمات مدیریت تعیین می‌شود.",
   },
   en: {
+    security: "Security and access",
+    passwordAction: "Manage your password",
+    signOutAction: "End your current session",
     details: "Personal information",
     edit: "Edit",
     cancel: "Cancel",

@@ -39,6 +39,10 @@
   margin-inline: auto;
 }
 
+.student-shell__greeting {
+  display: none;
+}
+
 .student-shell__brand span {
   color: var(--ui-muted);
 }
@@ -54,6 +58,10 @@
   text-decoration: none;
 }
 
+.student-shell__header .student-shell__links {
+  gap: var(--ui-space-2);
+}
+
 .student-shell__header .student-shell__links .ui-button,
 .student-shell__header .academy-mobile-header > .ui-button {
   width: var(--ui-control-height);
@@ -64,6 +72,12 @@
   margin-block-start: var(--ui-space-4);
   flex-wrap: wrap;
   font-size: var(--ui-font-caption);
+}
+
+:where(.student-shell__footer .student-shell__links) > :is(a, button) {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--ui-control-height);
 }
 
 @media (width < 48rem) {

@@ -8,7 +8,7 @@ import { studentAuth } from "../../lib/student-auth/client";
 import { FormFeedback } from "./form-feedback";
 import { clearBrowserPush } from "../notifications/browser-push";
 
-export function StudentSignOut({ copy }) {
+export function StudentSignOut({ copy, description }) {
   const router = useRouter();
   const feedbackId = useId();
   const [status, signOut, pending] = useActionState(async () => {
@@ -30,10 +30,11 @@ export function StudentSignOut({ copy }) {
 
   return (
     <form
-      className="student-panel__form student-profile__actions"
+      className={`student-panel__form student-profile__actions${description ? " student-profile__security-row" : ""}`}
       action={signOut}
       aria-busy={pending}
     >
+      {description && <p>{description}</p>}
       <Button type="submit" disabled={pending} aria-describedby={status ? feedbackId : undefined}>
         {pending ? copy.pending : copy.signOut}
       </Button>

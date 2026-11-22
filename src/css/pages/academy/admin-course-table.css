@@ -63,9 +63,4 @@
   .academy-admin__course-table .academy-admin__username-column {
     display: none;
   }
-
-  .academy-admin__course-table tbody tr {
-    padding-block: var(--ui-space-3);
-    border-block-end: 1px solid var(--ui-line);
-  }
 }

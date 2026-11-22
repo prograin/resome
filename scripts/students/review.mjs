@@ -79,11 +79,8 @@ export async function checkStudentReview({
       assert.ok(current.x > goalsBox.x);
       assert.ok(Math.abs(current.y - goalsBox.y) < 2);
     }
-    const toggle = mobile
-      ? page.locator("#academyMenuButton")
-      : sidebar.locator(".student-sidebar__toggle");
     if (mobile) assert.equal(compact, null);
-    await toggle.click();
+    if (mobile) await page.locator("#academyMenuButton").click();
     const expanded = await sidebar.boundingBox();
     assert.equal((await main.boundingBox()).width, mainWidth);
     if (mobile) {
@@ -93,10 +90,10 @@ export async function checkStudentReview({
       const brand = await sidebar.locator(".site-wordmark").boundingBox();
       assert.ok(close.x + close.width < brand.x);
     } else {
-      assert.ok(expanded.width > compact.width);
-      assert.ok(Math.abs(expanded.x + expanded.width - compact.x - compact.width) < 1);
+      assert.deepEqual(expanded, compact);
+      assert.equal(await sidebar.locator(".student-sidebar__toggle").isVisible(), false);
     }
-    await sidebar.locator(".student-sidebar__toggle").click();
+    if (mobile) await sidebar.locator(".student-sidebar__toggle").click();
     assert.equal((await sidebar.boundingBox())?.width, compact?.width);
     await page.screenshot({ path: `.backup/dashboard-tasks-5-10-${width}.png`, fullPage: true });
   }

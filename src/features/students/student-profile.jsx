@@ -26,13 +26,20 @@ export function StudentProfile({ profile, copy, locale, admin }) {
         admin={admin}
       />
       <ProfileEmail profile={profile} copy={profileCopy[locale]} locale={locale} />
-      <div className="student-profile__actions">
-        <Button as={SiteLink} href={studentPaths.password} variant="soft">
-          <Icon name="lock" />
-          {passwordCopy[locale].title}
-        </Button>
-      </div>
-      <StudentSignOut copy={copy} />
+      <section
+        className="student-progress__card student-profile__security"
+        aria-label={profileCopy[locale].security}
+      >
+        <h2>{profileCopy[locale].security}</h2>
+        <div className="student-profile__security-row">
+          <p>{profileCopy[locale].passwordAction}</p>
+          <Button as={SiteLink} href={studentPaths.password} variant="soft">
+            <Icon name="lock" />
+            {passwordCopy[locale].title}
+          </Button>
+        </div>
+        <StudentSignOut copy={copy} description={profileCopy[locale].signOutAction} />
+      </section>
     </div>
   );
 }

@@ -90,6 +90,7 @@
 @import "./pages/academy/controls.css";
 @import "./pages/academy/mobile-header.css";
 @import "./pages/academy/student-shell.css";
+@import "./pages/academy/student-desktop-shell.css";
 @import "./pages/academy/student-app.css";
 @import "./pages/academy/student-notifications.css";
 @import "./pages/academy/student-notification-list.css";

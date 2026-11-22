@@ -8,6 +8,8 @@ import { adminCopy } from "../academy-admin/copy";
 import { studentNavigation } from "./student-navigation";
 import { notificationCopy } from "../notifications/copy";
 import { ThemeToggle } from "../../components/ui/theme-toggle";
+import { AcademyBrand } from "../../components/academy-brand";
+import { Fragment } from "react";
 
 export function DashboardSidebar({ copy, dir, view, profileLabel, management, username }) {
   const { expanded, close } = useAcademyMenu();
@@ -43,41 +45,45 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
   ];
 
   return (
-    <aside
-      className="student-sidebar"
-      dir={dir}
-      data-expanded={expanded}
-      data-academy-menu
-      style={{ "--student-sidebar-items": links.length + 3 }}
-    >
+    <aside className="student-sidebar" dir={dir} data-expanded={expanded} data-academy-menu>
       <div className="student-sidebar__anchor">
         <div className="student-sidebar__panel academy-neo">
-          <AcademyDrawerHeader
-            openLabel={copy.expandMenu}
-            closeLabel={copy.collapseMenu}
-            controls="student-dashboard-nav"
-          />
-          {expanded && <hr className="student-sidebar__divider" />}
+          <div className="student-sidebar__brand">
+            <AcademyBrand dir="rtl" />
+          </div>
+          <div className="student-sidebar__mobile-header">
+            <AcademyDrawerHeader
+              openLabel={copy.expandMenu}
+              closeLabel={copy.collapseMenu}
+              controls="student-dashboard-nav"
+            />
+          </div>
+          <hr className="student-sidebar__divider" />
           <nav id="student-dashboard-nav" aria-label={copy.overview}>
-            {links.map(([href, icon, label, current]) => (
-              <Button
-                as={Link}
-                variant="soft"
-                key={href}
-                href={href}
-                prefetch={false}
-                aria-current={current ? "page" : undefined}
-                aria-label={label}
-                title={label}
-                onClick={close}
-              >
-                <Icon name={icon} />
-                {expanded && <span>{label}</span>}
-              </Button>
+            {links.map(([href, icon, label, current], index) => (
+              <Fragment key={href}>
+                <Button
+                  as={Link}
+                  variant="soft"
+                  href={href}
+                  prefetch={false}
+                  aria-current={current ? "page" : undefined}
+                  aria-label={label}
+                  title={label}
+                  onClick={close}
+                >
+                  <Icon name={icon} />
+                  <span>{label}</span>
+                </Button>
+                {index < links.length - 1 && (
+                  <hr className="student-sidebar__divider" aria-hidden="true" />
+                )}
+              </Fragment>
             ))}
             <div className="student-sidebar__profile">
               <hr className="student-sidebar__divider" />
-              <ThemeToggle iconOnly={!expanded} />
+              <ThemeToggle />
+              <hr className="student-sidebar__divider" aria-hidden="true" />
               <Button
                 as={Link}
                 variant="soft"
@@ -89,7 +95,7 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
                 onClick={close}
               >
                 <Icon name="user-round" />
-                {expanded && <bdi className="student-sidebar__identity">{username}</bdi>}
+                <bdi className="student-sidebar__identity">{username}</bdi>
               </Button>
             </div>
           </nav>

@@ -28,24 +28,26 @@ export function AcademyMobileHeader({ fa, pathname, brand, notifications }) {
   return (
     <>
       <nav className="academy-mobile-header" aria-label={fa ? "نوار آکادمی" : "Academy navigation"}>
-        <Button
-          id="academyMenuButton"
-          data-academy-menu
-          variant="soft"
-          aria-label={menuLabel}
-          aria-expanded={expanded}
-          aria-controls={dashboard ? "student-dashboard-nav" : "academy-mobile-menu"}
-          onClick={toggle}
-        >
-          <Icon name={expanded ? "x" : "menu"} />
-        </Button>
+        <div className="student-notifications__header-actions">
+          <Button
+            id="academyMenuButton"
+            data-academy-menu
+            variant="soft"
+            aria-label={menuLabel}
+            aria-expanded={expanded}
+            aria-controls={dashboard ? "student-dashboard-nav" : "academy-mobile-menu"}
+            onClick={toggle}
+          >
+            <Icon name={expanded ? "x" : "menu"} />
+          </Button>
+          {notifications}
+        </div>
         {brand ?? (
           <Link prefetch={false} href={routes.academy.path} className="site-wordmark" dir="ltr">
             prograin<span>.</span>
           </Link>
         )}
         <div className="student-notifications__header-actions">
-          {notifications}
           <BackButton
             fallback={pathname.replace(/\/$/, "") === "/academy" ? "/" : routes.academy.path}
             iconOnly

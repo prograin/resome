@@ -136,26 +136,21 @@
   }
 
   .academy-admin__pagination {
-    flex-direction: column;
-    align-items: stretch;
+    justify-content: center;
   }
 
   .academy-admin__pagination-summary {
-    text-align: center;
+    display: none;
   }
 
   .academy-admin__pagination-controls {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    flex-wrap: nowrap;
   }
 
   .academy-admin__pagination-pages {
-    grid-column: 1 / -1;
-    grid-row: 1;
-  }
-
-  .academy-admin__directory tbody tr {
-    padding-block: var(--ui-space-3);
-    border-block-end: 1px solid var(--ui-line);
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
 }

@@ -52,10 +52,3 @@
     border-block-end: 1px solid var(--ui-line);
   }
 }
-
-@media (width < 48rem) {
-  .student-history__table tbody tr:not(:last-child) {
-    padding-block-end: var(--ui-space-4);
-    border-block-end: 1px solid var(--ui-line);
-  }
-}

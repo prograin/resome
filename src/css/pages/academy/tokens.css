@@ -6,6 +6,9 @@ body:has([data-site-page="academy"]) {
   --ui-accent: #176c65;
   --ui-ring: #278b80;
   --academy-surface: var(--ui-surface);
+  --academy-sidebar-surface: color-mix(in srgb, var(--academy-surface) 88%, var(--ui-accent));
+  --academy-sidebar-accent: color-mix(in srgb, var(--ui-accent) 80%, var(--ui-text));
+  --academy-sidebar-line: color-mix(in srgb, var(--ui-text) 22%, var(--academy-sidebar-surface));
   --academy-depth-light: rgb(247 251 255 / 65%);
   --academy-depth-dark: rgb(127 149 178 / 45%);
   --academy-color-red: #9f2f46;

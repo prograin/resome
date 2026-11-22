@@ -82,8 +82,8 @@ export async function checkAccountBoundaries({
     await first.evaluate(() => {
       window.boundaryProbe = true;
     });
-    await first.locator('.student-shell__footer:visible nav a[href="/academy/"]').click();
-    await first.waitForURL(origin + "/academy/");
+    await first.locator('.student-shell__footer:visible nav a[href="/contact/"]').click();
+    await first.waitForURL(origin + "/contact/");
     assert.equal(await first.evaluate(() => window.boundaryProbe), undefined);
   } finally {
     await context.close();

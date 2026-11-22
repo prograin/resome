@@ -164,9 +164,6 @@ html[dir="rtl"] .student-summary > section {
   }
 
   .student-summary__table tbody tr {
-    padding: var(--ui-space-3);
-    border-radius: var(--ui-control-radius);
-    overflow: hidden;
     background: color-mix(in srgb, var(--academy-surface), var(--goal-priority-color) 24%);
   }
 }

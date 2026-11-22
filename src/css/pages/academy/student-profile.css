@@ -22,6 +22,33 @@
   grid-column: 1 / -1;
 }
 
+.student-profile__security {
+  display: grid;
+  gap: var(--ui-space-4);
+}
+
+.student-profile__security-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--ui-space-3);
+}
+
+.student-profile__security-row > p:not([role]) {
+  flex: 1;
+  min-width: 0;
+  color: var(--ui-muted);
+}
+
+.student-profile__security-row > .ui-button {
+  flex: none;
+}
+
+.student-profile__security-row > [role="alert"] {
+  flex-basis: 100%;
+}
+
 .student-profile__form input[readonly] {
   cursor: default;
 }
