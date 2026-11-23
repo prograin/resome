@@ -7,14 +7,19 @@ import { getStudentAuth } from "../../lib/student-auth/server";
 import { studentPaths } from "../../lib/student-auth/paths";
 import { adminUsername, isStudentAdmin } from "../../lib/student-progress";
 import { parseOperation } from "../../lib/validation/forms";
-import { profileInput } from "../../lib/validation/profile";
+import { profileInput, studentProfileInput } from "../../lib/validation/profile";
 import { limitStudentAction } from "../../lib/student-auth/action-limit";
 
 export async function saveStudentProfile(operation, _previous, form) {
   const { user } = await requireStudentSession();
   const limited = await limitStudentAction(user.id, "profile");
   if (limited) return limited;
-  const values = parseOperation({ details: profileInput }, operation, form);
+  const admin = isStudentAdmin(user);
+  const values = parseOperation(
+    { details: admin ? profileInput : studentProfileInput },
+    operation,
+    form,
+  );
   if (!values) return "invalid";
   const auth = getStudentAuth();
   const requestHeaders = await headers();
@@ -23,8 +28,13 @@ export async function saveStudentProfile(operation, _previous, form) {
       if (isStudentAdmin(user)) return "adminUsername";
       if (values.username === adminUsername()) return "usernameTaken";
     }
-    const name = [values.firstName, values.lastName].filter(Boolean).join(" ") || user.name;
-    await auth.api.updateUser({ headers: requestHeaders, body: { ...values, name } });
+    const body = admin
+      ? {
+          ...values,
+          name: [values.firstName, values.lastName].filter(Boolean).join(" ") || user.name,
+        }
+      : values;
+    await auth.api.updateUser({ headers: requestHeaders, body });
   } catch (error) {
     const code = error.body?.code ?? error.cause?.code ?? error.code;
     if (code === "USERNAME_IS_ALREADY_TAKEN") return "usernameTaken";

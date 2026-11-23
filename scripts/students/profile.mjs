@@ -26,6 +26,7 @@ export async function checkProfile({
     await form.locator('button[type="submit"]:disabled').waitFor({ state: "hidden" });
   };
   const session = async () => (await page.request.get(origin + "/api/auth/get-session/")).json();
+  const originalUser = (await session()).user;
   assert.equal(await details.locator('[name="firstName"]').isEditable(), false);
   assert.equal(await email.locator('[name="email"]').isEditable(), false);
   assert.equal(await details.locator('[name="firstName"]').isDisabled(), true);
@@ -33,13 +34,20 @@ export async function checkProfile({
   assert.equal(await details.locator('button[type="submit"]').count(), 0);
   await details.getByRole("button", { name: "ویرایش اطلاعات فردی", exact: true }).click();
   assert.equal(await details.locator('[name="firstName"]').isDisabled(), false);
-  const beforeName = await details.locator('[name="firstName"]').inputValue();
-  await details.locator('[name="firstName"]').fill("Discarded");
+  assert.equal(await details.locator('[name="firstName"]').isEditable(), false);
+  assert.equal(await details.locator('[name="lastName"]').isEditable(), false);
+  await details.locator('[name="username"]').fill("discarded_username");
   await details.getByRole("button", { name: "لغو", exact: true }).click();
-  assert.equal(await details.locator('[name="firstName"]').inputValue(), beforeName);
+  assert.equal(await details.locator('[name="username"]').inputValue(), originalUser.username);
   assert.equal(await details.locator('[name="firstName"]').isEditable(), false);
   assert.equal(await details.locator('[name="firstName"]').isDisabled(), true);
   await details.getByRole("button", { name: "ویرایش اطلاعات فردی", exact: true }).click();
+  // A forged form must not turn read-only identity fields into student-editable data.
+  await details.locator('[name="firstName"], [name="lastName"]').evaluateAll((inputs) => {
+    inputs.forEach((input) => {
+      input.readOnly = false;
+    });
+  });
   await details.locator('[name="firstName"]').fill("Test");
   await details.locator('[name="lastName"]').fill("Learner");
   await details.locator('[name="github"]').fill("https://github.com/octocat");
@@ -65,7 +73,9 @@ export async function checkProfile({
   let user = (await session()).user;
   assert.equal(user.id, otherId);
   assert.equal(user.username, renamed);
-  assert.equal(user.name, "Test Learner");
+  assert.equal(user.name, originalUser.name);
+  assert.equal(user.firstName, originalUser.firstName);
+  assert.equal(user.lastName, originalUser.lastName);
   assert.equal(user.github, "https://github.com/octocat");
   assert.equal(user.telegram, "https://t.me/learner_test");
   assert.equal(user.linkedin, "https://www.linkedin.com/in/learner-test");
@@ -130,8 +140,8 @@ export async function checkProfile({
   await page.reload();
   assert.equal(await email.getByText("ایمیل شما با موفقیت ثبت شد.", { exact: true }).count(), 0);
   assert.equal(await email.locator('[name="email"]').isDisabled(), true);
-  assert.equal(await details.locator('[name="firstName"]').inputValue(), "Test");
-  assert.equal(await details.locator('[name="lastName"]').inputValue(), "Learner");
+  assert.equal(await details.locator('[name="firstName"]').inputValue(), originalUser.firstName);
+  assert.equal(await details.locator('[name="lastName"]').inputValue(), originalUser.lastName);
   assert.equal(await details.locator('[name="github"]').inputValue(), "https://github.com/octocat");
   assert.equal(await details.locator('[name="username"]').inputValue(), renamed);
   assert.equal(await email.locator('[name="email"]').inputValue(), newEmail);

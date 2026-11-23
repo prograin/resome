@@ -93,14 +93,12 @@ export function writeAdminCourse(db, admin, definitionId, operation, assignmentI
         .where(and(eq(users.id, values.studentId), eligibleStudent(admin)))
         .for("update");
       if (!student) return "invalid";
-      const [existing] = await tx
-        .select({ id: courses.id })
-        .from(courses)
-        .where(and(eq(courses.definitionId, definitionId), eq(courses.studentId, student.id)))
-        .limit(1);
-      if (existing) return "duplicateEnrollment";
-      await addStudentCourse(tx, { studentId: student.id, definitionId, title: definition.title });
-      return "saved";
+      const assignment = await addStudentCourse(tx, {
+        studentId: student.id,
+        definitionId,
+        title: definition.title,
+      });
+      return assignment ? "saved" : "duplicateEnrollment";
     }
     const [assignment] = await tx
       .select({ id: courses.id, studentId: courses.studentId, status: courses.status })

@@ -8,7 +8,7 @@ export function PlanCard({ plan, copy, dir, ...props }) {
   const column = plan.key === "private" ? 2 : 1;
   function showDetails() {
     open({
-      kind: "academy",
+      kind: "public-academy",
       kicker: copy.detailsTitle,
       title: plan.title,
       content: (
@@ -16,7 +16,7 @@ export function PlanCard({ plan, copy, dir, ...props }) {
           <p className="package-details__price">
             {plan.price} <span>{plan.suffix}</span>
           </p>
-          <dl className="academy-details__list academy-inset">
+          <dl className="academy-details__list">
             {copy.comparison.map((row) => (
               <div key={row[0]}>
                 <dt>{row[0]}</dt>
@@ -41,22 +41,22 @@ export function PlanCard({ plan, copy, dir, ...props }) {
   return (
     <article
       {...props}
-      className={`academy-plan academy-neo ${plan.featured ? "is-featured" : ""}`}
+      className={`academy-plan ${plan.featured ? "is-featured" : ""}`}
       data-academy-plan={plan.key}
       data-tone={plan.tone}
     >
       <div className="academy-plan__top">
-        <span className="academy-plan__icon academy-neo">
+        <span className="academy-plan__icon">
           <Icon name={plan.icon} />
         </span>
-        <span className="academy-plan__badge academy-neo">{plan.badge}</span>
+        <span className="academy-plan__badge">{plan.badge}</span>
       </div>
       <h3>{plan.title}</h3>
       <p className="academy-plan__price">
         {plan.price} {plan.suffix && <span>{plan.suffix}</span>}
       </p>
       <p className="academy-plan__fit">{plan.fit}</p>
-      <ul className="academy-inset">
+      <ul>
         {plan.features.map((feature) => (
           <li key={feature}>
             <Icon name="check-circle-2" className="h-4 w-4" />

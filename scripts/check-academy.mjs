@@ -40,7 +40,18 @@ try {
             await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
             `${path} ${width}: overflow`,
           );
-          await checkAcademyDepth(page);
+          if (path.startsWith("/academy/students")) await checkAcademyDepth(page);
+          else {
+            await page.waitForFunction(() => document.documentElement.classList.contains("dark"));
+            assert.equal(await page.locator("#themeToggle").count(), 0);
+            const inset = await page
+              .locator(".academy-page :is(.ui-button, .academy-plan, .learning-path, .faq-item)")
+              .evaluateAll(
+                (nodes) =>
+                  nodes.filter((node) => getComputedStyle(node).boxShadow.includes("inset")).length,
+              );
+            assert.equal(inset, 0, "Public academy pages use the main site design");
+          }
           if (path.includes("consultation")) {
             if (width < 768) {
               await page.locator('[data-academy-tab="group"]').click();
@@ -69,9 +80,8 @@ try {
             const dialog = page.getByRole("dialog");
             await dialog.waitFor();
             assert.ok(
-              await dialog.evaluate((node) => getComputedStyle(node).boxShadow.includes("inset")),
+              await dialog.evaluate((node) => !getComputedStyle(node).boxShadow.includes("inset")),
             );
-            await checkAcademyDepth(page);
             await page.keyboard.press("Escape");
             await dialog.waitFor({ state: "hidden" });
           }

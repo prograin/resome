@@ -10,6 +10,8 @@ export const profileInput = z.object({
   username: usernameInput,
 });
 
+export const studentProfileInput = profileInput.omit({ firstName: true, lastName: true });
+
 export const emailInput = z.object({
   email: z
     .string()

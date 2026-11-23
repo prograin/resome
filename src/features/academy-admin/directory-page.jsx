@@ -20,7 +20,7 @@ export async function AdminDirectoryPage({ searchParams, studentsOnly = false })
         username={user.username}
         view={studentsOnly ? "admin-directory" : "admin"}
         directory={directory}
-        management={{ students: [] }}
+        management={{}}
       />
     </PageFrame>
   );

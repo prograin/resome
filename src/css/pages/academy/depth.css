@@ -1,5 +1,5 @@
 /* Each nested neumorphic surface reverses the depth of its nearest surface. */
-body:has([data-site-page="academy"]) {
+body:has([data-academy-app-page]) {
   :is(
     .academy-neo,
     .academy-inset,

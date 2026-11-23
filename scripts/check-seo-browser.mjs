@@ -19,6 +19,16 @@ try {
     if (route === "/academy/") {
       assert.equal(await view.locator("h1").textContent(), "Prograin Academy");
       assert.equal(await view.locator(".academy-hero__actions a").count(), 2);
+      assert.match(await page.title(), /Prograin Academy/);
+      assert.doesNotMatch(await page.title(), /آموزش برنامه/);
+      const image = await page.locator('meta[property="og:image"]').getAttribute("content");
+      assert.match(image, /\/assets\/images\/social\/academy-panel\.jpg\?v=/);
+      assert.equal(await page.locator('meta[name="twitter:image"]').getAttribute("content"), image);
+      const asset = await context.request.get(
+        origin + new URL(image).pathname + new URL(image).search,
+      );
+      assert.equal(asset.status(), 200);
+      assert.match(asset.headers()["content-type"], /image\/jpeg/);
     } else {
       assert.ok((await view.innerText()).trim().length > 250);
     }

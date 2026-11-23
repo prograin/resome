@@ -8,6 +8,7 @@ import { createDatabase } from "../src/lib/db/client.js";
 import { readAcademyAdmin } from "../src/lib/db/academy-admin.js";
 import { createStudentInput } from "../src/lib/validation/admin.js";
 import { checkAdminCourseWorkflow } from "./students/admin-courses.mjs";
+import { checkStudentName } from "./students/admin-name.mjs";
 
 const database = await createTestDatabase("academy_admin");
 let fixture;
@@ -67,6 +68,7 @@ try {
   await rows.locator(`a[href="${studentPaths.dashboard}?student=${studentId}"]`).click();
   await page.locator(".student-chart__metrics").waitFor();
   assert.equal(await page.locator(".student-chart__average").count(), 4);
+  await checkStudentName({ page, student, origin });
   assert.equal(await page.locator(".student-dashboard-goals tbody tr").count(), 3);
   assert.equal(
     await page

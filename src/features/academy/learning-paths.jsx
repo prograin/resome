@@ -9,20 +9,20 @@ export function LearningPaths({ locale, dir }) {
 
   function showDetails({ title: pathTitle, steps, branches, note }) {
     open({
-      kind: "academy",
+      kind: "public-academy",
       kicker: title,
       title: pathTitle,
       content: (
         <div className="learning-path__details" dir={dir}>
           {steps && (
-            <ol className="academy-inset">
+            <ol>
               {steps.map((step) => (
                 <li key={step}>{step}</li>
               ))}
             </ol>
           )}
           {branches?.map(({ title, description }) => (
-            <section className="learning-path__branch academy-inset" key={title}>
+            <section className="learning-path__branch" key={title}>
               <h3>{title}</h3>
               <p>{description}</p>
             </section>
@@ -39,7 +39,7 @@ export function LearningPaths({ locale, dir }) {
         <h2 id="learning-paths-title">{title}</h2>
         <div className="learning-paths__cards">
           {paths.map((path) => (
-            <article className="learning-path academy-neo" key={path.title}>
+            <article className="learning-path" key={path.title}>
               <h3>{path.title}</h3>
               <p>{path.description}</p>
               <Button variant="soft" aria-haspopup="dialog" onClick={() => showDetails(path)}>

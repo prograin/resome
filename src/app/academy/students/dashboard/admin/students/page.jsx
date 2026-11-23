@@ -1,7 +1,8 @@
 import { AdminDirectoryPage } from "../../../../../../features/academy-admin/directory-page";
+import { routeMetadata } from "../../../../../../seo/next-metadata";
 
 export const metadata = {
-  title: "شاگردان | مدیریت آکادمی Prograin",
+  ...routeMetadata("academy-admin"),
   robots: { index: false, follow: false },
 };
 

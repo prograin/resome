@@ -9,10 +9,10 @@ import { readWeeklyStats } from "../../../../lib/student-weekly";
 import { getStudentRuntime } from "../../../../lib/student-auth/server";
 import { listCourseDefinitions } from "../../../../lib/db/course-definitions";
 import { readStudentLinksPage } from "../../../../lib/db/student-links";
+import { readManagedStudent } from "../../../../lib/db/managed-student";
 import {
   adminUsername,
   isStudentAdmin,
-  listStudents,
   readStudentCourses,
   readStudentHistory,
   readStudentProgress,
@@ -34,11 +34,12 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
     Boolean(rawParams.student);
   const params = studentView ? rawParams : {};
   if (admin && view === "overview" && !params?.student) redirect(studentPaths.admin);
-  const students = studentView ? await listStudents() : [];
+  const selected = studentView
+    ? await readManagedStudent(getStudentRuntime().db, params.student, adminUsername())
+    : null;
+  if (studentView && !selected) notFound();
   const definitions =
     admin && view === "overview" ? await listCourseDefinitions(getStudentRuntime().db) : [];
-  const selected = students.find(({ id }) => id === params.student) ?? students[0];
-  if (admin && params.student && selected?.id !== params.student) notFound();
   const studentId = studentView ? selected?.id : user.id;
   const read = {
     overview: readStudentProgress,
@@ -94,7 +95,7 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
             ? await readStudentLinksPage(getStudentRuntime().db, adminUsername())
             : undefined
         }
-        management={admin ? { students, selected, definitions } : null}
+        management={admin ? { selected, definitions } : null}
       />
     </PageFrame>
   );

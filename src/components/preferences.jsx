@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
+import { isAcademyAppPath } from "../features/academy-app/paths";
 
 const Preferences = createContext(null);
 
@@ -37,7 +38,7 @@ function readTheme() {
 
 export function PreferencesProvider({ children }) {
   const pathname = usePathname();
-  const academy = pathname === "/academy" || pathname.startsWith("/academy/");
+  const academy = isAcademyAppPath(pathname);
   const locale = useSyncExternalStore(subscribe, readLocale, () => "fa");
   const theme = useSyncExternalStore(
     subscribe,

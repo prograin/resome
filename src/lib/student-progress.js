@@ -1,8 +1,8 @@
 import { desc, eq } from "drizzle-orm";
 import { getStudentRuntime } from "./student-auth/server.js";
-import { awards, courses, courseDefinitions, users } from "./db/schema/index.js";
+import { awards, courses, courseDefinitions } from "./db/schema/index.js";
 import { courseTitle } from "./db/course-title.js";
-import { eligibleStudent, studentRankings } from "./db/rankings.js";
+import { studentRankings } from "./db/rankings.js";
 import { readCourses } from "./db/student-courses.js";
 import { writeProgress } from "./db/student-writes.js";
 
@@ -12,14 +12,6 @@ export function adminUsername() {
 
 export function isStudentAdmin(user) {
   return Boolean(adminUsername() && user.username === adminUsername());
-}
-
-export function listStudents() {
-  return getStudentRuntime()
-    .db.select({ id: users.id, name: users.name, username: users.username })
-    .from(users)
-    .where(eligibleStudent(adminUsername()))
-    .orderBy(users.name, users.id);
 }
 
 export function readStudentCourses(studentId) {

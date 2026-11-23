@@ -119,7 +119,7 @@ try {
       await page.locator("#langToggle").click();
       assert.equal(await page.locator(".academy-page").getAttribute("dir"), "ltr");
       await page.locator("#langToggle").click();
-      await page.locator("#themeToggle").click();
+      assert.equal(await page.locator("#themeToggle").count(), 0);
     }
     await page.evaluate(() => scrollTo({ top: 0, behavior: "instant" }));
     await page.screenshot({

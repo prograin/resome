@@ -21,6 +21,7 @@ import { studentLinksCopy } from "./student-links-copy";
 import { Icon } from "../../components/icon";
 import { notificationCopy } from "../notifications/copy";
 import { passwordCopy } from "./password-copy";
+import { StudentNameButton } from "../academy-admin/student-name";
 
 export function StudentDashboard(props) {
   const { userId, username, progress, management, view, adminCourse } = props;
@@ -76,11 +77,14 @@ export function StudentDashboard(props) {
                   </Button>
                 )}
                 {view === "overview" && management?.selected && (
-                  <StudentCourseEnrollmentButton
-                    management={management}
-                    courses={courses}
-                    locale={locale}
-                  />
+                  <>
+                    <StudentNameButton student={management.selected} locale={locale} />
+                    <StudentCourseEnrollmentButton
+                      management={management}
+                      courses={courses}
+                      locale={locale}
+                    />
+                  </>
                 )}
                 {view === "admin" && (
                   <Button as={SiteLink} href={studentPaths.adminCourses} variant="soft">

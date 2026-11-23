@@ -3,8 +3,9 @@ import { AcademyAppSetup } from "../../../features/academy-app/app-setup";
 import { academyApp } from "../../../features/academy-app/paths";
 
 export const metadata = {
+  title: academyApp.name,
   manifest: academyApp.manifest,
-  appleWebApp: { capable: true, title: "Prograin Academy", statusBarStyle: "default" },
+  appleWebApp: { capable: true, title: academyApp.name, statusBarStyle: "default" },
   icons: {
     icon: [
       { url: assetUrl("/assets/icons/academy/favicon-48.png"), type: "image/png", sizes: "48x48" },

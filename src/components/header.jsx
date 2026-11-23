@@ -23,7 +23,7 @@ const pages = [
 const normalize = (path) => path.replace(/\/$/, "") || "/";
 
 export function Header() {
-  const { locale, theme, toggleLocale, toggleTheme } = usePreferences();
+  const { locale, toggleLocale } = usePreferences();
   const pathname = usePathname();
   const academy = pathname === "/academy" || pathname.startsWith("/academy/");
   const [openedPath, setOpenedPath] = useState(null);
@@ -123,17 +123,6 @@ export function Header() {
               {fa ? "EN" : "FA"}
             </span>
           </Button>
-          {academy && (
-            <Button
-              id="themeToggle"
-              type="button"
-              aria-label={fa ? "تغییر پوسته" : "Toggle theme"}
-              onClick={toggleTheme}
-            >
-              <Icon name={theme === "dark" ? "sun" : "moon"} className="h-4 w-4" />
-              <span className="hidden sm:inline">{fa ? "پوسته" : "Theme"}</span>
-            </Button>
-          )}
           <Button
             ref={mobileButton}
             id="mobileMenuBtn"

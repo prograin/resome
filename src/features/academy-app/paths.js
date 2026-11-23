@@ -1,6 +1,7 @@
 import { studentPaths } from "../../lib/student-auth/paths.js";
 
 export const academyApp = {
+  name: "Prograin Academy",
   scope: studentPaths.signIn,
   start: `${studentPaths.signIn}?app=academy`,
   manifest: `${studentPaths.signIn}manifest.webmanifest`,

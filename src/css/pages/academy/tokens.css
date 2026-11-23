@@ -1,10 +1,13 @@
-body:has([data-site-page="academy"]) {
+body:has([data-academy-app-page]) {
   --ui-surface: #dce5ef;
   --ui-text: #1c2c44;
   --ui-muted: #40516b;
   --ui-line: #bdcddd;
   --ui-accent: #176c65;
   --ui-ring: #278b80;
+}
+
+body:has([data-site-page="academy"]) {
   --academy-surface: var(--ui-surface);
   --academy-sidebar-surface: color-mix(in srgb, var(--academy-surface) 88%, var(--ui-accent));
   --academy-sidebar-accent: color-mix(in srgb, var(--ui-accent) 80%, var(--ui-text));
@@ -29,12 +32,6 @@ body:has([data-site-page="academy"]) {
 }
 
 .dark body:has([data-site-page="academy"]) {
-  --ui-surface: #142237;
-  --ui-text: #edf3fd;
-  --ui-muted: #b5c3d8;
-  --ui-line: #2d405a;
-  --ui-accent: #7bd8c5;
-  --ui-ring: #7bd8c5;
   --academy-depth-light: rgb(128 159 205 / 12%);
   --academy-depth-dark: rgb(2 9 21 / 65%);
   --academy-color-red: #ff9cae;
@@ -46,4 +43,13 @@ body:has([data-site-page="academy"]) {
   --academy-score-3: #e4bf64;
   --academy-score-4: #9acf96;
   --academy-score-5: #75d8b0;
+}
+
+.dark body:has([data-academy-app-page]) {
+  --ui-surface: #142237;
+  --ui-text: #edf3fd;
+  --ui-muted: #b5c3d8;
+  --ui-line: #2d405a;
+  --ui-accent: #7bd8c5;
+  --ui-ring: #7bd8c5;
 }

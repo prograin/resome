@@ -26,7 +26,8 @@ export async function checkAcademyTheme(fixture) {
     assert.equal(await page.locator("#themeToggle").count(), 0);
     await page.locator("#navAcademyPage").click();
     await page.waitForURL(fixture.origin + "/academy/");
-    await page.waitForFunction(() => !document.documentElement.classList.contains("dark"));
+    await page.waitForFunction(() => document.documentElement.classList.contains("dark"));
+    assert.equal(await page.locator("#themeToggle").count(), 0);
     await page.locator("#navHomePage").click();
     await page.waitForURL(fixture.origin + "/");
     await page.waitForFunction(() => document.documentElement.classList.contains("dark"));
@@ -55,9 +56,9 @@ export async function checkAcademyTheme(fixture) {
     await page.goto(fixture.dashboard);
     await page.locator(".student-sidebar").waitFor({ state: "attached" });
     await page.locator("#academyMenuButton").click();
-    await page.locator('.student-sidebar button[aria-label="حالت تیره"]').click();
+    await page.locator('.student-sidebar:visible button[aria-label="حالت تیره"]').click();
     await page.waitForFunction(() => document.documentElement.classList.contains("dark"));
-    await page.locator('.student-sidebar button[aria-label="حالت روشن"]').click();
+    await page.locator('.student-sidebar:visible button[aria-label="حالت روشن"]').click();
     await page.keyboard.press("Escape");
     await checkLight();
     await page.setViewportSize({ width: 1440, height: 960 });
@@ -70,6 +71,9 @@ export async function checkAcademyTheme(fixture) {
     await page.waitForFunction(() => document.documentElement.classList.contains("dark"));
     await page.locator('.site-header__standard button[aria-label="حالت روشن"]').click();
     await page.goto(fixture.origin + "/contact/");
+    await page.waitForFunction(() => document.documentElement.classList.contains("dark"));
+    assert.equal(await page.locator("#themeToggle").count(), 0);
+    await page.goto(fixture.origin + "/academy/consultation/");
     await page.waitForFunction(() => document.documentElement.classList.contains("dark"));
     assert.equal(await page.locator("#themeToggle").count(), 0);
     await page.goto(fixture.login);

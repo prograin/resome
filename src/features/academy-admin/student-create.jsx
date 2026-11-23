@@ -6,6 +6,7 @@ import { FormFeedback } from "../students/form-feedback";
 import { studentAuthPolicy } from "../../lib/student-auth/config";
 import { createAcademyStudent } from "./actions";
 import { DialogFormActions } from "../students/dialog-form-actions";
+import { StudentNameFields } from "./student-name-fields";
 
 function StudentCreateForm({ copy, onSaved }) {
   const [status, action, pending, formProps] = useSavedAction(createAcademyStudent, onSaved);
@@ -13,14 +14,7 @@ function StudentCreateForm({ copy, onSaved }) {
     <form {...formProps} action={action} className="student-panel__form">
       <p>{copy.accountHint}</p>
       <fieldset className="academy-admin__fields" disabled={pending}>
-        <label>
-          {copy.firstName}
-          <input name="firstName" autoComplete="given-name" required maxLength={80} />
-        </label>
-        <label>
-          {copy.lastName}
-          <input name="lastName" autoComplete="family-name" required maxLength={80} />
-        </label>
+        <StudentNameFields copy={copy} />
         <label>
           {copy.username}
           <input

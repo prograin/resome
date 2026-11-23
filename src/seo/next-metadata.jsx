@@ -5,7 +5,7 @@ import { routes } from "../config/site";
 export function routeMetadata(page) {
   const seo = metadata(page);
   const images = [
-    { url: seo.image, width: seo.imageWidth, height: seo.imageHeight, alt: "Prograin" },
+    { url: seo.image, width: seo.imageWidth, height: seo.imageHeight, alt: seo.imageAlt },
   ];
   const privatePage = routes[page].private;
   return {

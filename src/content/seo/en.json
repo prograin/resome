@@ -10,9 +10,9 @@
     "label": "Home"
   },
   "academy": {
-    "title": "Programming Classes in Arak, Markazi | Prograin",
-    "description": "Private programming classes in Arak, Markazi Province, in person or online, plus a 16-session semi-private online course with practical exercises and code review.",
-    "label": "Programming training"
+    "title": "Prograin Academy | Student Portal & Academy Management",
+    "description": "The Prograin Academy student and management portal: courses, scores, goals and student progress in one place.",
+    "label": "Prograin Academy"
   },
   "academy-consultation": {
     "title": "Programming Training Consultation in Arak | Prograin",
@@ -20,8 +20,8 @@
     "label": "Training consultation"
   },
   "academy-students": {
-    "title": "Student Page | Prograin",
-    "description": "The Prograin academy student page.",
+    "title": "Student Portal Sign In | Prograin Academy",
+    "description": "Sign in to Prograin Academy to view courses, scores, goals and student progress.",
     "label": "Student page"
   },
   "academy-dashboard": {

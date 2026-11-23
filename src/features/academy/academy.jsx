@@ -35,7 +35,7 @@ export function Academy() {
           <LearningPaths locale={locale} dir={dir} />
           <BackgroundSection className="academy-picker" data-academy-plans>
             <p className="academy-picker__label">{copy.selectorTitle}</p>
-            <Tabs.List className="academy-tabs academy-neo" aria-label={copy.selectorTitle}>
+            <Tabs.List className="academy-tabs" aria-label={copy.selectorTitle}>
               {keys.map((key) => (
                 <Tabs.Trigger key={key} value={key} asChild>
                   <Button variant="soft" className="academy-tab" data-academy-tab={key}>
@@ -54,7 +54,7 @@ export function Academy() {
             </div>
           </BackgroundSection>
           <BackgroundSection className="academy-youtube-section">
-            <div className="academy-youtube-card academy-neo">
+            <div className="academy-youtube-card">
               <span className="academy-youtube-card__icon">
                 <Icon name="youtube" />
                 <span>YouTube</span>

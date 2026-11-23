@@ -19,8 +19,8 @@ export function ProfileDetails({ profile, copy, admin }) {
   };
   const [values, setValues] = useState(initial);
   const fields = [
-    { name: "firstName", autoComplete: "given-name", maxLength: 80 },
-    { name: "lastName", autoComplete: "family-name", maxLength: 80 },
+    { name: "firstName", autoComplete: "given-name", maxLength: 80, readOnly: !admin },
+    { name: "lastName", autoComplete: "family-name", maxLength: 80, readOnly: !admin },
     {
       name: "username",
       dir: "ltr",

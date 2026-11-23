@@ -28,8 +28,9 @@ export function writeProgress(db, studentId, admin, operation, values) {
           .returning({ id: courseDefinitions.id });
         definitionId = definition.id;
       }
-      await addStudentCourse(tx, { studentId, ...values.course, definitionId }, title);
-      return true;
+      return Boolean(
+        await addStudentCourse(tx, { studentId, ...values.course, definitionId }, title),
+      );
     }
     const ownCourse = and(eq(courses.id, values.courseId ?? 0), eq(courses.studentId, studentId));
     if (operation === "status")

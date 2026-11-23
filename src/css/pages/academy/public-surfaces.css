@@ -1,0 +1,14 @@
+.academy-page :is(.academy-plan, .academy-youtube-card, .learning-path, .academy-tabs) {
+  border: 1px solid var(--ui-line);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow);
+}
+
+.academy-page :is(.academy-plan__icon, .academy-plan__badge) {
+  background: color-mix(in srgb, var(--academy-accent, var(--ui-accent)) 12%, transparent);
+}
+
+.academy-page .academy-tab[data-state="active"] {
+  background: color-mix(in srgb, var(--ui-accent) 18%, transparent);
+  color: var(--ui-accent);
+}

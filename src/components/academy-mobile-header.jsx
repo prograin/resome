@@ -6,6 +6,7 @@ import { Icon } from "./icon";
 import { Button } from "./ui/button";
 import { BackButton } from "./ui/back-button";
 import { useAcademyApp } from "../features/academy-app/app-mode";
+import { isAcademyAppPath } from "../features/academy-app/paths";
 import { ThemeToggle } from "./ui/theme-toggle";
 
 export function AcademyMobileHeader({ fa, pathname, brand, notifications }) {
@@ -57,7 +58,7 @@ export function AcademyMobileHeader({ fa, pathname, brand, notifications }) {
       {!dashboard && (
         <nav
           id="academy-mobile-menu"
-          className="academy-mobile-menu academy-neo"
+          className={`academy-mobile-menu${isAcademyAppPath(pathname) ? " academy-neo" : ""}`}
           data-academy-menu
           data-expanded={expanded}
           aria-label={menuLabel}
@@ -69,7 +70,7 @@ export function AcademyMobileHeader({ fa, pathname, brand, notifications }) {
             controls="academy-mobile-menu"
           />
           <hr className="student-sidebar__divider" />
-          <ThemeToggle />
+          {isAcademyAppPath(pathname) && <ThemeToggle />}
           {links.map(([href, icon, label]) => (
             <Button
               as={Link}

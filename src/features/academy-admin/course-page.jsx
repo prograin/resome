@@ -6,9 +6,10 @@ import { getStudentRuntime } from "../../lib/student-auth/server";
 import { adminUsername } from "../../lib/student-progress";
 import { databaseId } from "../../lib/validation/forms";
 import { readAdminCourse, readAdminCourses } from "../../lib/db/admin-courses";
+import { routeMetadata } from "../../seo/next-metadata";
 
 export const adminCourseMetadata = {
-  title: "دوره‌ها | مدیریت آکادمی Prograin",
+  ...routeMetadata("academy-admin"),
   robots: { index: false, follow: false },
 };
 
@@ -34,7 +35,7 @@ export async function AdminCoursesPage({ params }) {
         view={route ? `admin-${route.view}` : "admin-courses"}
         adminCourses={catalog}
         adminCourse={course}
-        management={{ students: [] }}
+        management={{}}
       />
     </PageFrame>
   );

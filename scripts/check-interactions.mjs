@@ -1,12 +1,13 @@
 // Regression checks for browser history, native links and restricted storage.
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
+import { createStudentContext } from "./lib/student-browser-context.mjs";
 
 const origin = process.env.SITE_URL || "http://127.0.0.1:4173";
 const browser = await chromium.launch({ channel: "msedge", headless: true });
 const failures = [];
 async function check(name, run, options = {}) {
-  const context = await browser.newContext(options);
+  const context = await createStudentContext(browser, options);
   try {
     await run(context);
     console.log(`PASS ${name}`);
@@ -34,8 +35,11 @@ try {
     assert.equal(await page.locator("html").getAttribute("lang"), "en");
     assert.equal(await page.locator("#themeToggle").count(), 0);
     await page.locator("#navAcademyPage").click();
+    await page.waitForFunction(() => document.documentElement.classList.contains("dark"));
+    assert.equal(await page.locator("#themeToggle").count(), 0);
+    await page.goto(origin + "/academy/students/");
     await page.waitForFunction(() => !document.documentElement.classList.contains("dark"));
-    await page.locator("#themeToggle").click();
+    await page.locator('.student-shell__navigation button[aria-label="حالت تیره"]').click();
     assert.equal(
       await page.locator("html").evaluate((element) => element.classList.contains("dark")),
       true,
