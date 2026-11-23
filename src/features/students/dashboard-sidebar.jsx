@@ -11,7 +11,15 @@ import { ThemeToggle } from "../../components/ui/theme-toggle";
 import { AcademyBrand } from "../../components/academy-brand";
 import { Fragment } from "react";
 
-export function DashboardSidebar({ copy, dir, view, profileLabel, management, username }) {
+export function DashboardSidebar({
+  copy,
+  dir,
+  view,
+  profileLabel,
+  management,
+  username,
+  statisticsVisible = true,
+}) {
   const { expanded, close } = useAcademyMenu();
   const { locale } = usePreferences();
   const links = [
@@ -34,12 +42,9 @@ export function DashboardSidebar({ copy, dir, view, profileLabel, management, us
         ]
       : []),
     ...(!management
-      ? studentNavigation(copy, null, locale).map(([href, icon, label, target]) => [
-          href,
-          icon,
-          label,
-          view === target,
-        ])
+      ? studentNavigation(copy, null, locale)
+          .filter(([, , , target]) => statisticsVisible || !["chart", "history"].includes(target))
+          .map(([href, icon, label, target]) => [href, icon, label, view === target])
       : []),
     [studentPaths.notifications, "bell", notificationCopy[locale].title, view === "notifications"],
   ];

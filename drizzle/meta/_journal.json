@@ -99,6 +99,13 @@
       "when": 1795256291327,
       "tag": "0013_normalize_internal_email",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1795431967228,
+      "tag": "0014_student_academy_activity",
+      "breakpoints": true
     }
   ]
 }

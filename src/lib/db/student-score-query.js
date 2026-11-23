@@ -1,6 +1,6 @@
 import { and, avg, count, eq, lte, max, sql } from "drizzle-orm";
 import { awards, courses, users } from "./schema/index.js";
-import { eligibleStudent } from "./ranking-filters.js";
+import { rankedStudent } from "./ranking-filters.js";
 import { inactivityScore } from "./inactivity-score.js";
 import { rankingPolicy } from "../scoring/policy.js";
 import { scoreTime } from "./score-time.js";
@@ -30,7 +30,7 @@ export function studentScoreQuery(db, admin, now) {
       .from(users)
       .leftJoin(awards, and(eq(awards.studentId, users.id), lte(awards.recordedAt, scoreTime(now))))
       .leftJoin(courseCounts, eq(courseCounts.studentId, users.id))
-      .where(eligibleStudent(admin))
+      .where(rankedStudent(admin))
       .groupBy(users.id, courseCounts.courseCount, courseCounts.courseId),
   );
   const scores = db.$with("student_scores").as(

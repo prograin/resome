@@ -13,7 +13,7 @@ import { profileEmailOTP } from "./email-otp.js";
 
 let runtime;
 const authVersion =
-  "email-otp-3:github-url-1:links-page-1:notifications-1:request-guards-2:password-1";
+  "email-otp-3:github-url-1:links-page-1:notifications-1:request-guards-2:password-1:activity-1";
 const developmentRuntime = Symbol.for("prograin.student-auth.runtime");
 
 export function createStudentAuth({ provision = false, database, sendVerificationOTP } = {}) {
@@ -44,7 +44,10 @@ export function createStudentAuth({ provision = false, database, sendVerificatio
     },
     user: {
       modelName: "student_user",
-      additionalFields: profileFields,
+      additionalFields: {
+        ...profileFields,
+        academyActive: { type: "boolean", required: false, defaultValue: true, input: false },
+      },
       changeEmail: { enabled: false },
     },
     account: { modelName: "student_account" },

@@ -22,9 +22,18 @@ import { Icon } from "../../components/icon";
 import { notificationCopy } from "../notifications/copy";
 import { passwordCopy } from "./password-copy";
 import { StudentNameButton } from "../academy-admin/student-name";
+import { StudentActivityButton } from "../academy-admin/student-activity";
 
 export function StudentDashboard(props) {
-  const { userId, username, progress, management, view, adminCourse } = props;
+  const {
+    userId,
+    username,
+    progress,
+    management,
+    view,
+    adminCourse,
+    statisticsVisible = true,
+  } = props;
   const { locale, dir } = usePreferences();
   const copy = studentCopy[locale];
   const progressLabels = progressCopy[locale];
@@ -51,7 +60,7 @@ export function StudentDashboard(props) {
   const courses = progress?.courses ?? [];
 
   return (
-    <SessionGuard userId={userId}>
+    <SessionGuard userId={userId} statisticsVisible={statisticsVisible}>
       <div className="student-dashboard" dir={dir}>
         <DashboardSidebar
           copy={progressLabels}
@@ -60,6 +69,7 @@ export function StudentDashboard(props) {
           profileLabel={copy.profile}
           management={management}
           username={username}
+          statisticsVisible={statisticsVisible}
         />
         <div className="student-dashboard__main" dir={dir}>
           <section
@@ -79,6 +89,7 @@ export function StudentDashboard(props) {
                 {view === "overview" && management?.selected && (
                   <>
                     <StudentNameButton student={management.selected} locale={locale} />
+                    <StudentActivityButton student={management.selected} locale={locale} />
                     <StudentCourseEnrollmentButton
                       management={management}
                       courses={courses}

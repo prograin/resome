@@ -34,8 +34,10 @@ export async function checkAdminCourseWorkflow({ page, origin, student, studentI
   await page.getByRole("button", { name: "افزودن شاگرد", exact: true }).click();
   const add = page
     .locator("form")
-    .filter({ has: page.locator('button[data-select-name="studentId"]') });
-  await selectOption(add, "studentId", studentId);
+    .filter({ has: page.locator('button[data-multi-select-name="studentIds"]') });
+  await add.locator('[data-multi-select-name="studentIds"]').click();
+  await page.locator(`input[type="checkbox"][data-select-value="${studentId}"]`).check();
+  await page.getByRole("button", { name: "تأیید انتخاب", exact: true }).click();
   await add.getByRole("button", { name: "افزودن شاگرد", exact: true }).click();
   await enrollment.waitFor({ state: "hidden" });
   const row = page

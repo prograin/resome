@@ -15,6 +15,7 @@ export const users = pgTable("student_user", {
   ...timestamps(),
   username: text().unique(),
   displayUsername: text(),
+  academyActive: boolean("academy_active").notNull().default(true),
   firstName: text().notNull().default(""),
   lastName: text().notNull().default(""),
   github: text().notNull().default(""),

@@ -31,11 +31,12 @@ export async function readAcademyAdmin(db, admin, input = {}) {
   const pages = Math.max(1, Math.ceil(total / pageSize));
   const page = Math.min(requestedPage, pages);
   const ranked = studentRankings(db, admin).as("directory_scores");
+  const studentCourses = db.$count(courses, eq(courses.studentId, users.id));
   const fields = {
     created: users.createdAt,
     name: users.name,
     username: users.username,
-    courseCount: ranked.courseCount,
+    courseCount: studentCourses,
     average: ranked.average,
     rank: ranked.overallRank,
   };
@@ -46,7 +47,8 @@ export async function readAcademyAdmin(db, admin, input = {}) {
       name: users.name,
       username: users.username,
       email: users.email,
-      courseCount: ranked.courseCount,
+      academyActive: users.academyActive,
+      courseCount: studentCourses,
       average: ranked.average,
       rank: ranked.overallRank,
     })

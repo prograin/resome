@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { notifications } from "../db/schema/index.js";
+import { notifications, users } from "../db/schema/index.js";
 import { claimDeliveries, finishDelivery } from "./delivery-claims.js";
 import { deliveryBatchSize, deliveryCounts } from "./delivery-policy.js";
 import { deliverAwardEmail } from "./delivery-email.js";
@@ -11,6 +11,11 @@ async function deliver(db, job, now, sendEmail, sendPush) {
     .from(notifications)
     .where(eq(notifications.id, job.notificationId));
   if (!notification || notification.kind !== "award") return { status: "skipped" };
+  const [user] = await db
+    .select({ active: users.academyActive })
+    .from(users)
+    .where(eq(users.id, notification.studentId));
+  if (!user?.active) return { status: "skipped" };
   if (job.channel === "email") return deliverAwardEmail(db, job, notification, now, sendEmail);
   if (job.channel === "push") return deliverBrowserPush(db, job, notification, sendPush);
   return { status: "skipped" };

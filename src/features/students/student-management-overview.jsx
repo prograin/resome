@@ -4,6 +4,7 @@ import { studentPaths } from "../../lib/student-auth/paths";
 import { ProgressMetrics } from "./progress-metrics";
 import { ProgressManagement } from "./progress-management";
 import { DashboardGoals } from "./dashboard-goals";
+import { StudentCoursesTable } from "../academy-admin/student-courses-table";
 
 export function StudentManagementOverview({ management, progress, copy, locale }) {
   const query = `?student=${encodeURIComponent(management.selected.id)}`;
@@ -37,6 +38,7 @@ export function StudentManagementOverview({ management, progress, copy, locale }
           key={management.selected.id}
         />
       </div>
+      <StudentCoursesTable courses={progress?.courses ?? []} locale={locale} />
     </div>
   );
 }

@@ -15,6 +15,7 @@ export function RosterForm({
   hideSaved = false,
   onSaved,
   dialog = false,
+  submitDisabled = false,
 }) {
   const [status, action, pending, formProps] = useSavedAction(
     updateAdminCourse.bind(null, definitionId, operation, assignmentId),
@@ -26,9 +27,9 @@ export function RosterForm({
         className={dialog ? "academy-admin__enrollment-fields" : "academy-admin__roster-fields"}
         disabled={pending}
       >
-        {children}
+        {typeof children === "function" ? children(pending) : children}
         {!dialog && (
-          <Button type="submit" variant="soft" disabled={pending}>
+          <Button type="submit" variant="soft" disabled={pending || submitDisabled}>
             {pending ? copy.pending : label}
           </Button>
         )}
@@ -38,6 +39,7 @@ export function RosterForm({
           pending={pending}
           submitLabel={pending ? copy.pending : label}
           variant="soft"
+          submitDisabled={submitDisabled}
         />
       )}
       <FormFeedback copy={copy} status={status} hideSaved={hideSaved} />

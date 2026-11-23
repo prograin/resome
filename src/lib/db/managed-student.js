@@ -12,6 +12,7 @@ export async function readManagedStudent(db, studentId, admin) {
       firstName: users.firstName,
       lastName: users.lastName,
       username: users.username,
+      academyActive: users.academyActive,
     })
     .from(users)
     .where(and(eq(users.id, studentId), eligibleStudent(admin)))

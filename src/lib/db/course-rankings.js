@@ -1,6 +1,6 @@
 import { and, avg, count, eq, gt, lte, sql } from "drizzle-orm";
 import { awards, courses, users } from "./schema/index.js";
-import { eligibleStudent } from "./ranking-filters.js";
+import { rankedStudent } from "./ranking-filters.js";
 import { scoreTime } from "./score-time.js";
 export function courseRankings(db, admin, now) {
   const totals = db.$with("course_totals").as(
@@ -21,7 +21,7 @@ export function courseRankings(db, admin, now) {
           lte(awards.recordedAt, scoreTime(now)),
         ),
       )
-      .where(eligibleStudent(admin))
+      .where(rankedStudent(admin))
       .groupBy(courses.id)
       .having(gt(count(awards.id), 0)),
   );

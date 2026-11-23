@@ -2,7 +2,8 @@ import { and, asc, eq, getTableColumns, notExists, sql } from "drizzle-orm";
 import { courseDefinitions, courses, users } from "./schema/index.js";
 import { eligibleStudent, courseRankings } from "./rankings.js";
 import { attachDefinitionVideos } from "./admin-course-content.js";
-import { addStudentAward, addStudentCourse } from "./student-records.js";
+import { addStudentAward } from "./student-records.js";
+import { enrollCourseStudents } from "./course-enrollments.js";
 
 export async function readAdminCourses(db, admin) {
   const definitions = await db
@@ -79,6 +80,13 @@ export async function readAdminCourse(db, admin, definitionId, gradesOnly = fals
 }
 
 export function writeAdminCourse(db, admin, definitionId, operation, assignmentId, values) {
+  if (operation === "enroll" || operation === "enrollMany")
+    return enrollCourseStudents(
+      db,
+      admin,
+      definitionId,
+      operation === "enroll" ? [values.studentId] : values.studentIds,
+    );
   return db.transaction(async (tx) => {
     const [definition] = await tx
       .select()
@@ -86,20 +94,6 @@ export function writeAdminCourse(db, admin, definitionId, operation, assignmentI
       .where(eq(courseDefinitions.id, definitionId))
       .for("no key update");
     if (!definition) return "invalid";
-    if (operation === "enroll") {
-      const [student] = await tx
-        .select({ id: users.id })
-        .from(users)
-        .where(and(eq(users.id, values.studentId), eligibleStudent(admin)))
-        .for("update");
-      if (!student) return "invalid";
-      const assignment = await addStudentCourse(tx, {
-        studentId: student.id,
-        definitionId,
-        title: definition.title,
-      });
-      return assignment ? "saved" : "duplicateEnrollment";
-    }
     const [assignment] = await tx
       .select({ id: courses.id, studentId: courses.studentId, status: courses.status })
       .from(courses)

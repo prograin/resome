@@ -16,7 +16,7 @@ const difficultyClass = {
   advanced: "student-course--advanced",
 };
 
-function CourseCard({ course, labels, copy, numbers, studentId }) {
+function CourseCard({ course, labels, copy, numbers, studentId, statisticsVisible }) {
   const { open, close } = useDetailsDialog();
   function show(title, content) {
     open({ kind: "academy", title, kicker: course.title, content });
@@ -42,18 +42,22 @@ function CourseCard({ course, labels, copy, numbers, studentId }) {
       <p className="student-course__difficulty">
         {labels.difficulty} <span>{labels.levels[course.difficulty] ?? labels.unknown}</span>
       </p>
-      <p>
-        {labels.yourPoints}:{" "}
-        <strong>
-          <bdi>{course.average == null ? "—" : numbers.format(Number(course.average))}</bdi>
-        </strong>
-      </p>
-      <p>
-        {labels.yourRank}:{" "}
-        <strong>
-          <bdi>{course.rank ? numbers.format(BigInt(course.rank)) : "—"}</bdi>
-        </strong>
-      </p>
+      {statisticsVisible && (
+        <>
+          <p>
+            {labels.yourPoints}:{" "}
+            <strong>
+              <bdi>{course.average == null ? "—" : numbers.format(Number(course.average))}</bdi>
+            </strong>
+          </p>
+          <p>
+            {labels.yourRank}:{" "}
+            <strong>
+              <bdi>{course.rank ? numbers.format(BigInt(course.rank)) : "—"}</bdi>
+            </strong>
+          </p>
+        </>
+      )}
       <div className="student-course__links">
         {course.github && (
           <CourseLink href={course.github} icon="github">
@@ -108,7 +112,7 @@ function CourseCard({ course, labels, copy, numbers, studentId }) {
   );
 }
 
-export function ProgressCourses({ courses, copy, locale, studentId }) {
+export function ProgressCourses({ courses, copy, locale, studentId, statisticsVisible = true }) {
   const numbers = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
   if (!courses.length) return <p>{copy.noCourses}</p>;
 
@@ -122,6 +126,7 @@ export function ProgressCourses({ courses, copy, locale, studentId }) {
           copy={copy}
           numbers={numbers}
           studentId={studentId}
+          statisticsVisible={statisticsVisible}
         />
       ))}
     </ul>

@@ -9,6 +9,7 @@ import { databaseId, parseForm } from "../../lib/validation/forms";
 import {
   adminCourseInput,
   enrollmentInput,
+  enrollmentBatchInput,
   enrollmentStatusInput,
 } from "../../lib/validation/admin";
 import { progressInputs } from "../../lib/validation/progress";
@@ -72,6 +73,7 @@ export async function updateAdminCourse(definitionId, operation, assignmentId, _
     return "invalid";
   const schema = {
     enroll: enrollmentInput,
+    enrollMany: enrollmentBatchInput,
     status: enrollmentStatusInput,
     grade: progressInputs.award,
   };

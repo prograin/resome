@@ -21,7 +21,10 @@ export async function GET(request) {
   if (access instanceof Response) return access;
   const parsed = parseQuery(notificationQueryInput, new URL(request.url).searchParams);
   if (!parsed) return studentApiJson({ error: "Invalid cursor" }, 400);
-  return studentApiJson(await readStudentNotifications(access.db, access.user.id, parsed.before));
+  const result = await readStudentNotifications(access.db, access.user.id, parsed.before);
+  if (access.user.academyActive === false)
+    result.items = result.items.map((item) => ({ ...item, points: null }));
+  return studentApiJson(result);
 }
 
 export async function PATCH(request) {

@@ -32,6 +32,7 @@ export function StudentDirectory({
     { key: "courseCount", label: copy.courseCount },
     { key: "average", label: copy.average },
     { key: "rank", label: copy.rank },
+    { label: copy.academyStatus },
     { label: copy.actions },
   ];
   return (
@@ -105,6 +106,9 @@ export function StudentDirectory({
                   </td>
                   <td data-label={copy.rank}>
                     {student.rank == null ? "—" : numbers.format(student.rank)}
+                  </td>
+                  <td data-label={copy.academyStatus}>
+                    {student.academyActive ? copy.active : copy.inactive}
                   </td>
                   <td data-label={copy.actions}>
                     <Button

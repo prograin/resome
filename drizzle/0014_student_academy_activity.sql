@@ -1,0 +1,1 @@
+ALTER TABLE "student_user" ADD COLUMN "academy_active" boolean DEFAULT true NOT NULL;

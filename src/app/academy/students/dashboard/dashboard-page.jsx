@@ -4,19 +4,12 @@ import { notFound, redirect } from "next/navigation";
 import { studentPaths } from "../../../../lib/student-auth/paths";
 import { StudentDashboard } from "../../../../features/students/student-dashboard";
 import { requireStudentSession } from "../../../../lib/student-auth/session";
-import { readStudentGoals } from "../../../../lib/student-goals";
-import { readWeeklyStats } from "../../../../lib/student-weekly";
 import { getStudentRuntime } from "../../../../lib/student-auth/server";
 import { listCourseDefinitions } from "../../../../lib/db/course-definitions";
 import { readStudentLinksPage } from "../../../../lib/db/student-links";
 import { readManagedStudent } from "../../../../lib/db/managed-student";
-import {
-  adminUsername,
-  isStudentAdmin,
-  readStudentCourses,
-  readStudentHistory,
-  readStudentProgress,
-} from "../../../../lib/student-progress";
+import { adminUsername, isStudentAdmin } from "../../../../lib/student-progress";
+import { readDashboardProgress } from "../../../../lib/student-dashboard-data";
 
 export async function DashboardPage({ searchParams, view = "overview" }) {
   const rawParams = (await searchParams) ?? {};
@@ -28,6 +21,7 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
     }[view],
   );
   const admin = isStudentAdmin(user);
+  const statisticsVisible = admin || user.academyActive !== false;
   const studentView =
     admin &&
     !["profile", "password", "links", "notifications"].includes(view) &&
@@ -41,21 +35,7 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
   const definitions =
     admin && view === "overview" ? await listCourseDefinitions(getStudentRuntime().db) : [];
   const studentId = studentView ? selected?.id : user.id;
-  const read = {
-    overview: readStudentProgress,
-    chart: readStudentProgress,
-    history: readStudentHistory,
-    courses: readStudentCourses,
-    goals: readStudentGoals,
-  }[view];
-  const progress = studentId && read ? await read(studentId) : null;
-  if (progress && (view === "chart" || view === "overview")) {
-    progress.courses = (await readStudentCourses(studentId)).courses;
-    progress.weekly = await readWeeklyStats(getStudentRuntime().db, studentId, adminUsername());
-  }
-  if (progress && view === "overview") {
-    progress.goals = (await readStudentGoals(studentId)).goals;
-  }
+  const progress = await readDashboardProgress(studentId, view, statisticsVisible);
   const page = {
     overview: "academy-dashboard",
     chart: "academy-chart",
@@ -74,6 +54,7 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
         key={user.id}
         userId={user.id}
         username={user.username}
+        statisticsVisible={statisticsVisible}
         profile={
           view === "profile"
             ? {
