@@ -70,6 +70,12 @@
 .student-weekly-leaders__tab-list .ui-button {
   padding-inline: var(--ui-space-2);
   font-size: var(--ui-font-caption);
+  outline: none;
+}
+
+.student-weekly-leaders__tab-list .ui-button:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
 }
 
 .student-weekly-leaders__tab-list .ui-button[data-state="inactive"] {
