@@ -20,7 +20,9 @@ export async function updateProgress(studentId, operation, _previous, form) {
   if (!values) return "invalid";
 
   try {
-    if (!(await writeStudentProgress(studentId, operation, values))) return "invalid";
+    const result = await writeStudentProgress(studentId, operation, values);
+    if (result === "scoringDisabled") return result;
+    if (!result) return "invalid";
   } catch (error) {
     console.error("Student progress write failed", error.cause?.code ?? error.code);
     return "failed";

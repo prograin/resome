@@ -41,7 +41,7 @@ export async function checkAdministration({
     ]);
     await form.locator('button[type="submit"]:not(:disabled)').waitFor();
   };
-  await page.getByRole("button", { name: "افزودن به دوره", exact: true }).click();
+  await page.getByRole("button", { name: "دوره", exact: true }).click();
   const enrollmentDialog = page.getByRole("dialog", { name: "افزودن به دوره", exact: true });
   const enrollment = enrollmentDialog.locator("form");
   assert.equal(await page.locator('input[name="title"], select[name="status"]').count(), 0);

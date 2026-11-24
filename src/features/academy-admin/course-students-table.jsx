@@ -1,15 +1,20 @@
+import { useState } from "react";
+import { matchesSearchText } from "../../lib/search-text";
 import {
   SortableTableHeader,
   TableSortControls,
   useTableSorting,
+  TableFilterDivider,
 } from "../../components/ui/sortable-table";
 import { adminCopy } from "./copy";
 import { adminCourseCopy } from "./course-copy";
 import { RosterForm } from "./course-roster-form";
 import { CourseEnrollmentStatus } from "./course-enrollment-status";
 import { CourseGradeButton } from "./course-grade-button";
+import { canRecordStudentScores, studentAccountStatus } from "../../lib/student-account";
 
 export function CourseStudentsTable({ course, locale }) {
+  const [query, setQuery] = useState("");
   const copy = adminCourseCopy[locale];
   const labels = adminCopy[locale];
   const numbers = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
@@ -35,25 +40,40 @@ export function CourseStudentsTable({ course, locale }) {
     fullName: [student.firstName, student.lastName].filter(Boolean).join(" ") || student.name,
   }));
   const { rows, sorting, onSort } = useTableSorting(
-    data,
+    data.filter((student) => matchesSearchText(student.fullName, query)),
     columns,
     { key: "name", direction: "asc" },
     locale,
   );
-  if (!rows.length)
+  if (!data.length)
     return <p className="student-progress__card academy-admin__empty">{copy.emptyRoster}</p>;
   return (
     <section
       className="student-progress__card student-progress__section academy-admin__course-table"
       aria-label={copy.manage}
     >
-      <TableSortControls
-        columns={columns}
-        sorting={sorting}
-        onSort={onSort}
-        locale={locale}
-        label={locale === "fa" ? "مرتب‌سازی" : "Sort"}
-      />
+      <div className="academy-admin__course-tools">
+        <div className="student-panel__form academy-admin__course-filter">
+          <input
+            type="search"
+            aria-label={copy.filterName}
+            placeholder={copy.filterName}
+            value={query}
+            maxLength={100}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </div>
+        <TableSortControls
+          columns={columns}
+          sorting={sorting}
+          onSort={onSort}
+          locale={locale}
+          label={locale === "fa" ? "مرتب‌سازی" : "Sort"}
+          divider={false}
+        />
+      </div>
+      <TableFilterDivider />
+      {!rows.length && <p role="status">{copy.noMatches}</p>}
       <table className="student-table student-table--stacked">
         <SortableTableHeader columns={columns} sorting={sorting} onSort={onSort} locale={locale} />
         <tbody>
@@ -61,6 +81,9 @@ export function CourseStudentsTable({ course, locale }) {
             <tr key={student.id}>
               <th scope="row" data-label={labels.name}>
                 <bdi>{student.fullName}</bdi>
+                {!canRecordStudentScores(student) && (
+                  <small> · {labels[studentAccountStatus(student)]}</small>
+                )}
               </th>
               <td data-label={labels.username} className="academy-admin__username-column">
                 <bdi>{student.username}</bdi>

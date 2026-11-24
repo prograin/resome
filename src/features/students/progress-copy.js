@@ -1,6 +1,7 @@
 export const progressCopy = {
   fa: {
     overview: "نمای کلی",
+    scoringDisabled: "حساب شاگرد غیرفعال یا بن‌شده است و امتیاز جدیدی برای او ثبت نمی‌شود.",
     goals: "هدف‌ها",
     links: "لینک‌های معرفی",
     expandMenu: "باز کردن منوی داشبورد",
@@ -61,6 +62,7 @@ export const progressCopy = {
   },
   en: {
     overview: "Overview",
+    scoringDisabled: "New scores cannot be recorded for an inactive or banned student account.",
     goals: "Goals",
     links: "Student links",
     expandMenu: "Expand dashboard menu",

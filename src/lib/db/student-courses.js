@@ -4,9 +4,9 @@ import { courseRankings } from "./rankings.js";
 import { attachSharedCourseContent, writeSharedCourseContent } from "./shared-course-content.js";
 import { scoreTime } from "./score-time.js";
 
-export async function readCourses(db, studentId, admin, now) {
+async function readScoredCourses(db, studentId, admin, now) {
   const { totals, ranks } = courseRankings(db, admin, now);
-  const rows = await db
+  return db
     .with(totals, ranks)
     .select({
       ...getTableColumns(courses),
@@ -27,6 +27,16 @@ export async function readCourses(db, studentId, admin, now) {
     .where(eq(courses.studentId, studentId))
     .groupBy(courses.id, ranks.rank)
     .orderBy(desc(courses.id));
+}
+
+export async function readCourses(db, studentId, admin, now, { statisticsEnabled = true } = {}) {
+  const rows = statisticsEnabled
+    ? await readScoredCourses(db, studentId, admin, now)
+    : await db
+        .select()
+        .from(courses)
+        .where(eq(courses.studentId, studentId))
+        .orderBy(desc(courses.id));
   if (!rows.length) return { courses: [] };
   const resources = await db
     .select()

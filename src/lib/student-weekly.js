@@ -4,6 +4,7 @@ import { repeatableTransaction } from "./db/transaction.js";
 import { weeklyRuns, weeklyStats } from "./db/schema/index.js";
 import { previousStudentWeek } from "./db/weekly-calendar.js";
 import { readStudentLeaders } from "./db/student-leaders.js";
+import { readCurrentCourseLeaders } from "./db/course-leaders.js";
 import { rankingPolicy } from "./scoring/policy.js";
 export { captureWeeklyStats } from "./db/capture-weekly.js";
 export function readWeeklyStats(db, studentId, admin = null, now) {
@@ -11,13 +12,14 @@ export function readWeeklyStats(db, studentId, admin = null, now) {
     db,
     async (tx) => {
       const leaders = await readStudentLeaders(tx, admin, now);
+      const courseLeaders = await readCurrentCourseLeaders(tx, studentId, admin, now);
       const [run] = await tx
         .select()
         .from(weeklyRuns)
         .where(eq(weeklyRuns.policyVersion, rankingPolicy.version))
         .orderBy(desc(weeklyRuns.week))
         .limit(1);
-      if (!run) return { stats: null, leaders };
+      if (!run) return { stats: null, leaders, courseLeaders };
       const previous = alias(weeklyStats, "previous");
       const [stats] = await tx
         .select({
@@ -52,7 +54,7 @@ export function readWeeklyStats(db, studentId, admin = null, now) {
             eq(weeklyStats.studentId, studentId),
           ),
         );
-      return { stats: stats ?? null, leaders };
+      return { stats: stats ?? null, leaders, courseLeaders };
     },
     { accessMode: "read only" },
   );

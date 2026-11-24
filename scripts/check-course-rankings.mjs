@@ -66,7 +66,15 @@ try {
     (await readCourses(db, "a", null)).courses.find((course) => course.id === a.id);
   const before = await readA();
   assert.equal(before.total, "1");
-  assert.equal(before.rank, 3);
+  assert.equal(
+    before.rank,
+    null,
+    "an older repeated enrollment keeps its scores but not a duplicate rank",
+  );
+  assert.equal(
+    (await readCourses(db, "a", null)).courses.find((course) => course.id === repeated.id).rank,
+    1,
+  );
   assert.equal((await db.select().from(courseDefinitions)).length, 1);
   assert.equal((await db.select().from(awards)).length, 3);
   const updated = courseInput.parse({ title: "Renamed", definitionId: "999" });

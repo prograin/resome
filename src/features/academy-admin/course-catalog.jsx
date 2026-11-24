@@ -17,9 +17,12 @@ export function AdminCourseCatalog({ courses, locale }) {
               id={`course-${course.id}`}
               className="student-progress__card academy-admin__course"
             >
-              <h2>
-                <bdi>{course.title}</bdi>
-              </h2>
+              <div className="academy-admin__course-heading">
+                <h2>
+                  <bdi>{course.title}</bdi>
+                </h2>
+                <AdminCourseButton course={course} locale={locale} iconOnly />
+              </div>
               <p className="academy-admin__course-stats">
                 <span>
                   {numbers.format(course.active)} {copy.activeCount}
@@ -29,7 +32,6 @@ export function AdminCourseCatalog({ courses, locale }) {
                 </span>
               </p>
               <div className="student-course__links">
-                <AdminCourseButton course={course} locale={locale} />
                 <Button
                   as={Link}
                   variant="soft"
@@ -42,7 +44,7 @@ export function AdminCourseCatalog({ courses, locale }) {
                   variant="soft"
                   href={`${studentPaths.adminCourses}${course.id}/students/`}
                 >
-                  {copy.manage}
+                  {copy.students}
                 </Button>
               </div>
             </li>

@@ -23,6 +23,7 @@ import { notificationCopy } from "../notifications/copy";
 import { passwordCopy } from "./password-copy";
 import { StudentNameButton } from "../academy-admin/student-name";
 import { StudentActivityButton } from "../academy-admin/student-activity";
+import { AccountNotice } from "./account-notice";
 
 export function StudentDashboard(props) {
   const {
@@ -103,7 +104,7 @@ export function StudentDashboard(props) {
                   </Button>
                 )}
                 {view === "admin-directory" && <StudentCreateButton copy={adminCopy[locale]} />}
-                {view === "admin-courses" && <AdminCourseButton locale={locale} />}
+                {view === "admin-courses" && <AdminCourseButton locale={locale} iconOnly />}
                 {view === "admin-students" && (
                   <CourseEnrollmentButton course={adminCourse} locale={locale} />
                 )}
@@ -115,6 +116,9 @@ export function StudentDashboard(props) {
                 )}
               </div>
             </header>
+            {!statisticsVisible && ["history", "courses"].includes(view) && (
+              <AccountNotice locale={locale} />
+            )}
             <DashboardContent
               {...props}
               copy={copy}

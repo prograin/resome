@@ -18,7 +18,10 @@ export async function seedWeeklyChanges(db, fixture) {
     );
   const definitions = await db
     .insert(courseDefinitions)
-    .values([{ title: "Foundation" }, { title: "Current course" }])
+    .values([
+      { title: "Foundation", difficulty: "intermediate", sharedContent: true },
+      { title: "Current course", difficulty: "advanced", sharedContent: true },
+    ])
     .returning();
   const current = [];
   for (const [index, studentId] of ids.entries()) {

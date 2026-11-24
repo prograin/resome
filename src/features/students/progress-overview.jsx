@@ -3,7 +3,7 @@ import { ProgressCourses } from "./progress-courses";
 import { DashboardGoals } from "./dashboard-goals";
 import { dashboardCopy } from "./dashboard-copy";
 import { currentStudentCourse } from "../../lib/student-current-course";
-import { StatisticsUnavailable } from "./statistics-unavailable";
+import { AccountNotice } from "./account-notice";
 
 export function ProgressOverview({ progress, copy, locale, management, statisticsVisible = true }) {
   const course = currentStudentCourse(progress.courses);
@@ -14,7 +14,7 @@ export function ProgressOverview({ progress, copy, locale, management, statistic
         {statisticsVisible ? (
           <ProgressChart progress={progress} copy={copy} locale={locale} />
         ) : (
-          <StatisticsUnavailable locale={locale} />
+          <AccountNotice locale={locale} />
         )}
       </section>
       <div className="student-summary">

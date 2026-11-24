@@ -44,6 +44,7 @@ export async function checkSecurity({ page, origin, profile, username }) {
     if (index === 20) assert.ok(Number(attempt.headers()["retry-after"]) > 0);
   }
   assert.equal((await page.request.get(origin + "/api/cron/student-weekly/")).status(), 401);
+  assert.equal((await page.request.get(origin + "/api/cron/student-inactivity/")).status(), 401);
   assert.equal(
     (
       await page.request.post(origin + "/api/auth/sign-in/username/", {

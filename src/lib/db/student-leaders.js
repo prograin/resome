@@ -10,7 +10,7 @@ export function readStudentLeaders(db, admin, now) {
     .select({
       username: users.username,
       overallRank,
-      average: ranked.average,
+      average: ranked.overallAverage,
       previousRank: weeklyStats.overallRank,
     })
     .from(ranked)

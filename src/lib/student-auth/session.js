@@ -6,6 +6,7 @@ import { getStudentAuth } from "./server";
 import { cache } from "react";
 import { studentAuthPolicy } from "./config";
 import { notificationReturnTo } from "../notifications/targets";
+import { isStudentBanned } from "../student-account";
 
 export const readStudentSession = cache(async () => {
   const requestHeaders = await headers();
@@ -19,6 +20,7 @@ export const readStudentSession = cache(async () => {
 
 export async function requireStudentSession(returnTo) {
   const session = await readStudentSession();
+  if (session && isStudentBanned(session.user)) redirect(`${studentPaths.signIn}?notice=banned`);
   if (!session) {
     const target = notificationReturnTo(returnTo);
     redirect(

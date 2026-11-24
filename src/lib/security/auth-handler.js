@@ -7,6 +7,8 @@ import { apiJson, rateLimitResponse } from "./api-response.js";
 import { consumeRateLimit } from "./mutation-limit.js";
 import { parseQuery } from "../validation/forms.js";
 import { serviceDiagnostic } from "./service-diagnostic.js";
+import { isStudentBanned } from "../student-account.js";
+import { bannedAccountResponse } from "./account-response.js";
 
 const flag = z.enum(["true", "false"]).optional();
 const sessionQuery = z.strictObject({ disableCookieCache: flag, disableRefresh: flag });
@@ -32,18 +34,28 @@ export async function handleAuthRequest(request, endpoint) {
     const validated =
       request.method === "GET" ? request : await validateAuthRequest(request, endpoint);
     if (validated instanceof Response) return validated;
-    if (endpoint === "change-password") {
+    if (
+      endpoint === "change-password" ||
+      (endpoint === "get-session" && request.method === "POST")
+    ) {
       const session = await runtime.auth.api.getSession({
         headers: request.headers,
         query: { disableRefresh: true },
       });
-      if (!session) return apiJson({ error: "Unauthorized" }, 401);
-      const passwordLimit = rateLimitResponse(
-        await consumeRateLimit(runtime.limits.passwordChange, session.user.id),
-      );
-      if (passwordLimit) return passwordLimit;
+      if (session && isStudentBanned(session.user)) return bannedAccountResponse();
+      if (endpoint === "change-password") {
+        if (!session) return apiJson({ error: "Unauthorized" }, 401);
+        const passwordLimit = rateLimitResponse(
+          await consumeRateLimit(runtime.limits.passwordChange, session.user.id),
+        );
+        if (passwordLimit) return passwordLimit;
+      }
     }
     const response = await runtime.auth.handler(validated);
+    if (endpoint === "get-session" && response.ok) {
+      const session = await response.clone().json();
+      if (session && isStudentBanned(session.user)) return bannedAccountResponse();
+    }
     response.headers.set("Cache-Control", "private, no-store");
     const retryAfter = response.headers.get("X-Retry-After");
     if (response.status === 429 && retryAfter) response.headers.set("Retry-After", retryAfter);

@@ -3,6 +3,7 @@ import { useSavedAction } from "./use-saved-action";
 import { FormFeedback } from "./form-feedback";
 import { Button } from "../../components/ui/button";
 import { updateProgress } from "./progress-actions";
+import { canRecordStudentScores } from "../../lib/student-account";
 
 function CourseSelect({ courses, copy, optional = false }) {
   return (
@@ -26,6 +27,13 @@ export function ProgressManagement({ management, courses, copy }) {
     updateProgress.bind(null, studentId, "award"),
   );
   if (!studentId) return <p>{copy.noStudents}</p>;
+  if (!canRecordStudentScores(management.selected))
+    return (
+      <section className="student-progress__card">
+        <h3>{copy.award}</h3>
+        <p>{copy.scoringDisabled}</p>
+      </section>
+    );
   return (
     <form
       {...formProps}

@@ -109,6 +109,22 @@ try {
             await changes.first().evaluate((node) => getComputedStyle(node).whiteSpace),
             "nowrap",
           );
+          const leaders = page.locator(".student-weekly-leaders");
+          const courseTab = leaders.getByRole("tab", {
+            name: locale === "fa" ? "دورهٔ فعلی" : "Current course",
+            exact: true,
+          });
+          await courseTab.click();
+          assert.equal(await courseTab.getAttribute("aria-selected"), "true");
+          assert.equal(await leaders.getByRole("tabpanel").count(), 1);
+          assert.equal(await leaders.locator("tbody tr:visible").count(), 4);
+          await leaders
+            .getByRole("tab", {
+              name: locale === "fa" ? "۱۰ نفر برتر کلی" : "Overall top 10",
+              exact: true,
+            })
+            .click();
+          assert.equal(await courseTab.getAttribute("aria-selected"), "false");
           const audit = await new AxeBuilder({ page })
             .include("main")
             .withTags(["wcag2a", "wcag2aa"])
@@ -121,9 +137,6 @@ try {
             [],
             `${locale} ${theme} ${width}`,
           );
-          await page
-            .locator(".student-chart__metrics:visible")
-            .screenshot({ path: `.backup/weekly-kpi-${locale}-${theme}-${width}.png` });
         }
       } finally {
         await context.close();

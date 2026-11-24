@@ -31,7 +31,7 @@ export async function checkStudentReview({
   assert.equal(metrics[3], "۳");
   // The scratch database can contain other students from previous runs.
   assert.match(metrics[1], /^[۰-۹]+$/);
-  assert.equal(metrics[2], "—");
+  assert.match(metrics[2], /^[۰-۹]+$/, "the first advanced course qualifies for overall ranking");
   assert.equal(await page.locator("#progress-history").count(), 0);
   assert.equal(await page.getByText("Updated goal description", { exact: true }).count(), 0);
   const goalSummary = page.locator(".student-dashboard-goals tbody tr");

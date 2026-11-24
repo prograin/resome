@@ -85,7 +85,7 @@ export function StudentCourseEnrollmentButton({ management, courses, locale }) {
       }
     >
       <Icon name="plus" />
-      <span dir="auto">{title}</span>
+      <span dir="auto">{locale === "fa" ? "دوره" : "Course"}</span>
     </Button>
   );
 }

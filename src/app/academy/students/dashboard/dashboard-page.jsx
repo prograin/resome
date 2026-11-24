@@ -10,6 +10,7 @@ import { readStudentLinksPage } from "../../../../lib/db/student-links";
 import { readManagedStudent } from "../../../../lib/db/managed-student";
 import { adminUsername, isStudentAdmin } from "../../../../lib/student-progress";
 import { readDashboardProgress } from "../../../../lib/student-dashboard-data";
+import { canRecordStudentScores } from "../../../../lib/student-account";
 
 export async function DashboardPage({ searchParams, view = "overview" }) {
   const rawParams = (await searchParams) ?? {};
@@ -21,7 +22,7 @@ export async function DashboardPage({ searchParams, view = "overview" }) {
     }[view],
   );
   const admin = isStudentAdmin(user);
-  const statisticsVisible = admin || user.academyActive !== false;
+  const statisticsVisible = admin || canRecordStudentScores(user);
   const studentView =
     admin &&
     !["profile", "password", "links", "notifications"].includes(view) &&

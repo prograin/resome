@@ -51,8 +51,6 @@ import {
   Sun,
   Tag,
   UserRound,
-  UserX,
-  UserCheck,
   Users,
   X,
 } from "lucide";
@@ -112,8 +110,6 @@ export const iconNodes = {
   sun: Sun,
   tag: Tag,
   "user-round": UserRound,
-  "user-x": UserX,
-  "user-check": UserCheck,
   users: Users,
   x: X,
 };

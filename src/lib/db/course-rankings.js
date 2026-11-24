@@ -1,8 +1,10 @@
-import { and, avg, count, eq, gt, lte, sql } from "drizzle-orm";
+import { and, avg, count, eq, gt, lte, notExists, sql } from "drizzle-orm";
+import { alias } from "drizzle-orm/pg-core";
 import { awards, courses, users } from "./schema/index.js";
 import { rankedStudent } from "./ranking-filters.js";
 import { scoreTime } from "./score-time.js";
 export function courseRankings(db, admin, now) {
+  const newer = alias(courses, "newer_course");
   const totals = db.$with("course_totals").as(
     db
       .select({
@@ -30,11 +32,25 @@ export function courseRankings(db, admin, now) {
       .select({
         studentId: totals.studentId,
         courseId: totals.courseId,
-        rank: sql`rank() over (partition by ${totals.definitionId} order by ${totals.average} desc)`
+        rank: sql`row_number() over (partition by ${totals.definitionId} order by ${totals.average} desc, ${totals.studentId} asc, ${totals.courseId} asc)`
           .mapWith(Number)
           .as("course_rank"),
       })
-      .from(totals),
+      .from(totals)
+      .where(
+        notExists(
+          db
+            .select({ id: newer.id })
+            .from(newer)
+            .where(
+              and(
+                eq(newer.studentId, totals.studentId),
+                eq(newer.definitionId, totals.definitionId),
+                gt(newer.id, totals.courseId),
+              ),
+            ),
+        ),
+      ),
   );
   return { totals, ranks };
 }

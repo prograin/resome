@@ -1,6 +1,6 @@
 import { and, asc, gt, isNotNull } from "drizzle-orm";
 import { users } from "./schema/auth.js";
-import { eligibleStudent } from "./ranking-filters.js";
+import { usableStudent } from "./ranking-filters.js";
 import { profileLinkFields } from "../profile-links.js";
 import { profileLinksInput } from "../validation/profile-links.js";
 import { formatGithubProfile } from "../github-profile.js";
@@ -16,7 +16,7 @@ export async function readStudentLinks(db, admin, { after, limit } = {}) {
     .from(users)
     .where(
       and(
-        eligibleStudent(admin),
+        usableStudent(admin),
         isNotNull(users.username),
         after ? gt(users.username, after) : undefined,
       ),

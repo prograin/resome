@@ -10,10 +10,11 @@ import { readAuthEnvironment } from "../security/environment.js";
 import { createMutationLimits } from "../security/mutation-limit.js";
 import { loginRateLimit } from "./login-limit.js";
 import { profileEmailOTP } from "./email-otp.js";
+import { accountSessionPolicy } from "./account-policy.js";
 
 let runtime;
 const authVersion =
-  "email-otp-3:github-url-1:links-page-1:notifications-1:request-guards-2:password-1:activity-1";
+  "email-otp-3:github-url-1:links-page-1:notifications-1:request-guards-2:password-1:activity-2";
 const developmentRuntime = Symbol.for("prograin.student-auth.runtime");
 
 export function createStudentAuth({ provision = false, database, sendVerificationOTP } = {}) {
@@ -47,6 +48,9 @@ export function createStudentAuth({ provision = false, database, sendVerificatio
       additionalFields: {
         ...profileFields,
         academyActive: { type: "boolean", required: false, defaultValue: true, input: false },
+        academyBanned: { type: "boolean", required: false, defaultValue: false, input: false },
+        academyInactiveReason: { type: "string", required: false, input: false },
+        academyInactiveAt: { type: "date", required: false, input: false },
       },
       changeEmail: { enabled: false },
     },
@@ -54,6 +58,7 @@ export function createStudentAuth({ provision = false, database, sendVerificatio
     session: {
       modelName: "student_session",
       deferSessionRefresh: true,
+      cookieCache: { enabled: false },
       expiresIn: 60 * 60 * 24 * 7,
       updateAge: 60 * 60 * 24,
       freshAge: 60 * 15,
@@ -68,6 +73,7 @@ export function createStudentAuth({ provision = false, database, sendVerificatio
       customRules: { "/sign-in/username": { window: 10, max: 3 } },
     },
     database: drizzleAdapter(db, { provider: "pg", schema: authSchema, transaction: true }),
+    databaseHooks: { session: accountSessionPolicy(db) },
     hooks: { before: loginRateLimit(limits, BETTER_AUTH_SECRET) },
     plugins: [
       profileEmailOTP(sendVerificationOTP),

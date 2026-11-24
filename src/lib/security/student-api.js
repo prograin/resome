@@ -6,6 +6,8 @@ import { apiJson, rateLimitResponse } from "./api-response.js";
 import { trustedRequestOrigin } from "./request-origin.js";
 import { limitBackendRequest } from "./request-limit.js";
 import { serviceDiagnostic } from "./service-diagnostic.js";
+import { isStudentBanned } from "../student-account.js";
+import { bannedAccountResponse } from "./account-response.js";
 
 export { apiJson as studentApiJson } from "./api-response.js";
 export { readJsonRequest as studentApiBody } from "./json-request.js";
@@ -24,6 +26,7 @@ export async function authorizeStudentApi(request, scope) {
       query: { disableRefresh: true },
     });
     if (!session) return apiJson({ error: "Unauthorized" }, 401);
+    if (isStudentBanned(session.user)) return bannedAccountResponse();
     const limited = await consumeRateLimit(runtime.limits[scope], session.user.id);
     if (limited.status) return rateLimitResponse(limited);
     return { ...runtime, user: session.user };

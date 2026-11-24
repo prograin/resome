@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import AxeBuilder from "@axe-core/playwright";
 import { studentPaths } from "../../src/lib/student-auth/paths.js";
+import { adminCourseCopy } from "../../src/features/academy-admin/course-copy.js";
 import { selectOption } from "../lib/select-option.mjs";
 import {
   checkAdminCourseResources,
@@ -24,7 +25,7 @@ export async function checkAdminCourseWorkflow({ page, origin, student, studentI
     .getByRole("listitem")
     .filter({ has: page.getByRole("heading", { name: "Roster fixture course", exact: true }) });
   await checkAdminCourseResources({ page, card, student, origin });
-  await card.getByRole("link", { name: "مدیریت شاگردها" }).click();
+  await card.getByRole("link", { name: "شاگردها", exact: true }).click();
   await page.waitForURL(/\/admin\/courses\/\d+\/students\/$/);
   const manageUrl = page.url();
   await page.getByRole("button", { name: "افزودن شاگرد", exact: true }).click();
@@ -36,8 +37,8 @@ export async function checkAdminCourseWorkflow({ page, origin, student, studentI
     .locator("form")
     .filter({ has: page.locator('button[data-multi-select-name="studentIds"]') });
   await add.locator('[data-multi-select-name="studentIds"]').click();
-  await page.locator(`input[type="checkbox"][data-select-value="${studentId}"]`).check();
-  await page.getByRole("button", { name: "تأیید انتخاب", exact: true }).click();
+  await page.locator(`button[data-select-value="${studentId}"]`).click();
+  await page.keyboard.press("Escape");
   await add.getByRole("button", { name: "افزودن شاگرد", exact: true }).click();
   await enrollment.waitFor({ state: "hidden" });
   const row = page
@@ -48,12 +49,23 @@ export async function checkAdminCourseWorkflow({ page, origin, student, studentI
   await page.goto(manageUrl.replace(/students\/$/, "grades/"));
   await page.waitForURL(/\/admin\/courses\/\d+\/grades\/$/);
   const gradesUrl = page.url();
+  assert.equal(await row.getByText(adminCourseCopy.fa.scoredToday, { exact: true }).count(), 0);
   await row.locator('[name="points"]').fill("5");
   await row.locator('[name="note"]').fill("Roster note");
+  const nameFilter = page.getByRole("searchbox", { name: adminCourseCopy.fa.filterName });
+  await nameFilter.fill("no matching student");
+  assert.equal(await row.isVisible(), false);
+  await page.getByText(adminCourseCopy.fa.noMatches, { exact: true }).waitFor();
+  await nameFilter.fill((await row.locator("h2").textContent()).trim());
+  assert.equal(await row.isVisible(), true);
+  assert.equal(await row.locator('[name="points"]').inputValue(), "5");
+  assert.equal(await row.locator('[name="note"]').inputValue(), "Roster note");
+  await nameFilter.fill("");
   const posted = page.waitForRequest((r) => r.method() === "POST" && r.url() === gradesUrl);
   await row.getByRole("button", { name: "ثبت", exact: true }).click();
   const request = await posted;
   await row.getByRole("status").waitFor();
+  await row.getByText(adminCourseCopy.fa.scoredToday, { exact: true }).waitFor();
   const denied = await student.request.post(gradesUrl, {
     headers: {
       Origin: origin,
@@ -89,7 +101,7 @@ export async function checkAdminCourseWorkflow({ page, origin, student, studentI
   await row.getByRole("button", { name: "فعال‌کردن دوباره", exact: true }).waitFor();
   assert.equal(await row.getByRole("status").count(), 0);
   await page.goto(gradesUrl);
-  await page.getByText("این دوره شاگرد فعالی ندارد.", { exact: true }).waitFor();
+  await page.getByText(adminCourseCopy.fa.emptyActive, { exact: true }).waitFor();
   const studentPage = await student.newPage();
   await studentPage.goto(origin + studentPaths.courses);
   await studentPage.getByRole("heading", { name: "Roster fixture course", exact: true }).waitFor();

@@ -54,7 +54,7 @@ export function writeProgress(db, studentId, admin, operation, values) {
       if (!course) return false;
       title = course.title;
     }
-    await addStudentAward(
+    const award = await addStudentAward(
       tx,
       {
         studentId,
@@ -65,6 +65,6 @@ export function writeProgress(db, studentId, admin, operation, values) {
       },
       title,
     );
-    return true;
+    return award ? true : "scoringDisabled";
   });
 }

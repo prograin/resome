@@ -2,6 +2,22 @@
   --student-table-align: center;
 }
 
+.academy-admin__course-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ui-space-3);
+}
+
+.academy-admin__course-filter {
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+
+.academy-admin__course-filter input {
+  width: 100%;
+}
+
 .academy-admin__course-table :is(th, td) {
   border-block-end: 1px solid var(--ui-line);
 }

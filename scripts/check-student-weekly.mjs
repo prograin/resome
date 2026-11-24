@@ -14,6 +14,7 @@ import { captureWeeklyStats, readWeeklyStats } from "../src/lib/student-weekly.j
 import { rankingPolicy } from "../src/lib/scoring/policy.js";
 import { weeklyChange } from "../src/features/students/weekly-copy.js";
 import { currentStudentCourse } from "../src/lib/student-current-course.js";
+import { checkCourseLeaders } from "./students/course-leaders-data.mjs";
 import { previousStudentWeek, startOfStudentWeek } from "../src/lib/db/weekly-calendar.js";
 
 const { db, close } = await createTestDatabase("weekly");
@@ -31,7 +32,10 @@ try {
   ]);
   const [definitionA, definitionB] = await db
     .insert(courseDefinitions)
-    .values([{ title: "A" }, { title: "B" }])
+    .values([
+      { title: "A", difficulty: "intermediate", sharedContent: true },
+      { title: "B", difficulty: "advanced", sharedContent: true },
+    ])
     .returning();
   const [a, b, c] = await db
     .insert(courses)
@@ -54,11 +58,14 @@ try {
     ]).flat(),
   ]);
   await db.insert(awards).values(
-    Array.from({ length: 10 }, (_, index) => ({
-      studentId: String(index + 3),
-      points: 1,
-      kind: "other",
-    })),
+    (await db.select().from(courses))
+      .filter((row) => !["1", "2"].includes(row.studentId) && row.definitionId === definitionB.id)
+      .map((row) => ({
+        studentId: row.studentId,
+        courseId: row.id,
+        points: 1,
+        kind: "other",
+      })),
   );
   const concurrent = await Promise.all([
     captureWeeklyStats(db, "teacher"),
@@ -73,6 +80,10 @@ try {
   assert.equal(result.stats.courseRank, 2);
   assert.equal(result.stats.courseId, b.id);
   assert.equal(result.leaders.length, 10);
+  assert.deepEqual(
+    result.leaders.map((row) => row.overallRank),
+    Array.from({ length: 10 }, (_, index) => index + 1),
+  );
   assert.deepEqual((await readWeeklyStats(db, "2")).leaders, result.leaders);
   assert.deepEqual((await readWeeklyStats(db, "1")).leaders, result.leaders);
   assert.ok(result.leaders.every((row) => Object.keys(row).length === 4));
@@ -120,6 +131,7 @@ try {
   );
   await assert.rejects(captureWeeklyStats(db, "teacher"));
   assert.equal((await db.select({ value: count() }).from(weeklyRuns))[0].value, 1);
+  await checkCourseLeaders(db);
   console.log(
     "PASS ORM fresh migrations, ranking, student isolation, weekly history, Tehran calendar, idempotency and atomic rollback.",
   );

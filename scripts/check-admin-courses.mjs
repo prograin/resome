@@ -9,6 +9,7 @@ import {
   writeAdminCourse,
 } from "../src/lib/db/admin-courses.js";
 import { readCourses } from "../src/lib/db/student-courses.js";
+import { hasCourseScoreToday } from "../src/lib/db/course-score-today.js";
 
 const { db, close } = await createTestDatabase("admin_courses");
 try {
@@ -37,6 +38,10 @@ try {
   assert.deepEqual(results.sort(), ["duplicateEnrollment", "saved"]);
   const [assignment] = await db.select().from(courses).where(eq(courses.studentId, "alice"));
   assert.equal((await readAdminCourse(db, "teacher", a.id, true)).enrollments.length, 1);
+  assert.equal(
+    (await readAdminCourse(db, "teacher", a.id, true)).enrollments[0].scoredToday,
+    false,
+  );
   assert.deepEqual(
     (await readAdminCourse(db, "teacher", a.id)).candidates.map((s) => s.id),
     ["bob"],
@@ -49,6 +54,7 @@ try {
   const graded = (await readAdminCourse(db, "teacher", a.id)).enrollments[0];
   assert.equal(Number(graded.average), 4);
   assert.equal(graded.rank, 1);
+  assert.equal(graded.scoredToday, true);
   let history = await db.select().from(awards);
   assert.equal(history.length, 1);
   assert.equal(history[0].studentId, "alice");
@@ -88,6 +94,19 @@ try {
   const ranked = (await readAdminCourse(db, "teacher", a.id)).enrollments;
   assert.equal(ranked.find((row) => row.studentId === "bob").rank, 1);
   assert.equal(ranked.find((row) => row.studentId === "alice").rank, 2);
+  for (const [recordedAt, expected] of [
+    ["2026-11-23T20:29:59Z", false],
+    ["2026-11-23T20:30:00Z", true],
+    ["2026-11-24T12:00:00Z", true],
+    ["2026-11-24T20:30:00Z", false],
+  ]) {
+    await db.update(awards).set({ recordedAt }).where(eq(awards.studentId, "alice"));
+    const [result] = await db
+      .select({ recorded: hasCourseScoreToday(db, new Date("2026-11-24T20:29:59Z")) })
+      .from(courses)
+      .where(eq(courses.id, assignment.id));
+    assert.equal(result.recorded, expected, `Tehran day boundary: ${recordedAt}`);
+  }
   console.log(
     "PASS concurrent enrollment, active-only grading, completed-course visibility, preserved grades, reactivation, course isolation and teacher exclusion.",
   );

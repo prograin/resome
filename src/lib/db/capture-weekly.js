@@ -14,7 +14,7 @@ export function captureWeeklyStats(db, admin = null, now) {
       .returning();
     if (!inserted.length) return { created: false };
     const ranked = await studentRankings(tx, admin, now);
-    const records = ranked.map(({ overallEligible, ...score }) => ({
+    const records = ranked.map(({ overallEligible, overallAverage, ...score }) => ({
       week,
       policyVersion,
       ...score,

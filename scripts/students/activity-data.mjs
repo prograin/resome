@@ -21,7 +21,12 @@ export async function seedActivityData(db, fixture) {
   for (const title of ["Activity first course", "Activity second course"]) {
     const [definition] = await db
       .insert(courseDefinitions)
-      .values({ title, github: "https://github.com/octocat", sharedContent: true })
+      .values({
+        title,
+        difficulty: "intermediate",
+        github: "https://github.com/octocat",
+        sharedContent: true,
+      })
       .returning();
     for (const id of [studentId, otherId]) {
       await writeProgress(db, id, admin, "course", {
@@ -66,14 +71,15 @@ export async function checkInactiveActivityData(db, fixture) {
   });
   assert.equal(deliveries.skipped, 2);
   const before = (await db.select().from(notificationDeliveries)).length;
-  await writeProgress(db, studentId, admin, "award", {
+  const result = await writeProgress(db, studentId, admin, "award", {
     courseId: null,
     points: 5,
     kind: "followup",
     note: "Hidden follow-up",
   });
+  assert.equal(result, "scoringDisabled");
   assert.equal((await db.select().from(notificationDeliveries)).length, before);
-  assert.equal((await db.select().from(awards).where(eq(awards.studentId, studentId))).length, 3);
+  assert.equal((await db.select().from(awards).where(eq(awards.studentId, studentId))).length, 2);
   assert.ok(
     (await db.select().from(courses).where(eq(courses.studentId, studentId))).every(
       (course) => course.status === "active",

@@ -1,0 +1,2 @@
+ALTER TABLE "student_user" ADD COLUMN "academy_banned" boolean DEFAULT false NOT NULL;--> statement-breakpoint
+ALTER TABLE "student_user" ADD CONSTRAINT "student_user_account_status_check" CHECK (not ("student_user"."academy_active" and "student_user"."academy_banned"));

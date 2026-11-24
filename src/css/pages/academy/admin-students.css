@@ -1,3 +1,20 @@
+.academy-admin__roster-row[hidden] {
+  display: none;
+}
+
+.academy-admin__score-today {
+  display: inline-flex;
+  justify-self: start;
+  grid-column: 1 / -1;
+  max-width: 100%;
+  padding: var(--ui-space-1) var(--ui-space-2);
+  border-radius: var(--ui-control-radius);
+  background: color-mix(in srgb, var(--academy-color-green) 12%, var(--academy-surface));
+  color: var(--academy-color-green);
+  font-size: var(--ui-font-small);
+  line-height: 1.6;
+}
+
 .academy-admin__roster-row {
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
   align-items: center;
@@ -6,8 +23,15 @@
 
 .academy-admin__student-identity {
   display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
   gap: var(--ui-space-1);
   min-width: 0;
+}
+
+.academy-admin__student-identity > .academy-admin__score-today {
+  grid-column: auto;
+  white-space: nowrap;
 }
 
 .student-progress .academy-admin__student-identity h2 {
@@ -29,8 +53,7 @@
 
 @media (width >= 48rem) {
   .academy-admin__student-identity {
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    align-items: center;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) auto;
     gap: var(--ui-space-4);
   }
 

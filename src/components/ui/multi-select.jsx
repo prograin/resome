@@ -5,9 +5,7 @@ import * as Popover from "@radix-ui/react-popover";
 import { ChevronDown } from "lucide-react";
 import { Button } from "./button";
 import { usePreferences } from "../preferences";
-
-const normalize = (value) =>
-  value.normalize("NFKC").replace(/[يى]/g, "ی").replace(/ك/g, "ک").toLowerCase().trim();
+import { normalizeSearchText as normalize } from "../../lib/search-text";
 
 export function MultiSelect({
   name,
@@ -82,48 +80,49 @@ export function MultiSelect({
             />
             <div className="ui-multi-select__options" role="group" aria-label={label}>
               {visible.map((option) => (
-                <label
+                <button
+                  type="button"
                   className="ui-multi-select__option"
                   key={option.value}
-                  data-checked={selected.has(option.value)}
+                  aria-pressed={selected.has(option.value)}
+                  disabled={
+                    disabled || (!selected.has(option.value) && selected.size >= maxSelected)
+                  }
+                  data-select-value={option.value}
+                  onClick={() =>
+                    onValueChange(
+                      selected.has(option.value)
+                        ? value.filter((item) => item !== option.value)
+                        : [...value, option.value],
+                    )
+                  }
                 >
-                  <input
-                    type="checkbox"
-                    checked={selected.has(option.value)}
-                    disabled={
-                      disabled || (!selected.has(option.value) && selected.size >= maxSelected)
-                    }
-                    data-select-value={option.value}
-                    onChange={(event) =>
-                      onValueChange(
-                        event.target.checked
-                          ? [...value, option.value]
-                          : value.filter((item) => item !== option.value),
-                      )
-                    }
-                  />
-                  <span>
-                    <strong>{option.label}</strong>
-                    {option.description && <small dir="ltr">{option.description}</small>}
+                  <span className="ui-multi-select__identity">
+                    <strong dir="auto">{option.label}</strong>
+                    {option.description && (
+                      <bdi
+                        className="ui-multi-select__username"
+                        dir="ltr"
+                        title={option.description}
+                      >
+                        {option.description}
+                      </bdi>
+                    )}
                   </span>
-                </label>
+                </button>
               ))}
               {!visible.length && <p role="status">{copy.noMatches}</p>}
             </div>
             <div className="ui-multi-select__actions">
-              <Button
-                className="academy-neo"
-                variant="soft"
+              <small role="status">{summary}</small>
+              <button
+                type="button"
+                className="ui-multi-select__clear"
                 onClick={() => onValueChange([])}
                 disabled={disabled || !value.length}
               >
                 {copy.clearSelection}
-              </Button>
-              <Popover.Close asChild>
-                <Button variant="soft" className="academy-neo">
-                  {copy.done}
-                </Button>
-              </Popover.Close>
+              </button>
             </div>
           </Popover.Content>
         </Popover.Portal>

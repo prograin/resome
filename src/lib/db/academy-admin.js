@@ -48,6 +48,7 @@ export async function readAcademyAdmin(db, admin, input = {}) {
       username: users.username,
       email: users.email,
       academyActive: users.academyActive,
+      academyBanned: users.academyBanned,
       courseCount: studentCourses,
       average: ranked.average,
       rank: ranked.overallRank,

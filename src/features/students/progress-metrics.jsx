@@ -1,5 +1,4 @@
 import { weeklyBaseline } from "../../lib/scoring/weekly-baseline";
-import { rankingPolicy } from "../../lib/scoring/policy";
 import { weeklyChange } from "./weekly-copy";
 import { WeeklyChange } from "./weekly-change";
 import { currentStudentCourse } from "../../lib/student-current-course";
@@ -35,7 +34,6 @@ export function ProgressMetrics({ progress, copy, locale }) {
     },
   ];
   const numbers = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
-  const penalty = Number(progress.score?.inactivityPenalty ?? 0);
   return (
     <div className="student-chart__metrics">
       {metrics.map(({ label, value, previous, kind }) => {
@@ -56,27 +54,19 @@ export function ProgressMetrics({ progress, copy, locale }) {
             <WeeklyChange change={change} iconOnly className="student-chart__trend" />
             <p>
               {label}{" "}
-              {label === copy.rank &&
-                (progress.score?.courseCount ?? 0) < rankingPolicy.minimumCourses && (
-                  <small>
-                    {". "}
-                    {locale === "fa"
-                      ? "ورود به رتبه‌بندی از دورهٔ دوم"
-                      : "Overall ranking starts with your second course"}
-                  </small>
-                )}
+              {label === copy.rank && !progress.score?.overallEligible && (
+                <small>
+                  {". "}
+                  {locale === "fa"
+                    ? "ویژهٔ امتیازهای دوره‌های متوسط و سخت"
+                    : "Intermediate and advanced course scores only"}
+                </small>
+              )}
             </p>
             <bdi className="student-chart__average-value">
               {value == null ? "—" : numbers.format(Number(value))}
             </bdi>
             <WeeklyChange change={change} showIcon={false} />
-            {kind === "average" && penalty > 0 && (
-              <small>
-                {locale === "fa"
-                  ? `میانگین خام: ${numbers.format(Number(progress.score.rawAverage))}؛ کسر عدم فعالیت: ${numbers.format(penalty)}`
-                  : `Raw average: ${numbers.format(Number(progress.score.rawAverage))}; inactivity deduction: ${numbers.format(penalty)}`}
-              </small>
-            )}
           </div>
         );
       })}

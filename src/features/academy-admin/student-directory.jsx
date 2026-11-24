@@ -10,6 +10,7 @@ import {
 } from "../../components/ui/sortable-table";
 import { nextTableSort } from "../../lib/table-sorting";
 import { StudentCreateButton } from "./student-create";
+import { studentAccountStatus } from "../../lib/student-account";
 
 export function StudentDirectory({
   directory,
@@ -107,9 +108,7 @@ export function StudentDirectory({
                   <td data-label={copy.rank}>
                     {student.rank == null ? "—" : numbers.format(student.rank)}
                   </td>
-                  <td data-label={copy.academyStatus}>
-                    {student.academyActive ? copy.active : copy.inactive}
-                  </td>
+                  <td data-label={copy.academyStatus}>{copy[studentAccountStatus(student)]}</td>
                   <td data-label={copy.actions}>
                     <Button
                       as={Link}

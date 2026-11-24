@@ -14,8 +14,8 @@ export function isStudentAdmin(user) {
   return Boolean(adminUsername() && user.username === adminUsername());
 }
 
-export function readStudentCourses(studentId) {
-  return readCourses(getStudentRuntime().db, studentId, adminUsername());
+export function readStudentCourses(studentId, options) {
+  return readCourses(getStudentRuntime().db, studentId, adminUsername(), undefined, options);
 }
 
 export async function readStudentProgress(studentId) {

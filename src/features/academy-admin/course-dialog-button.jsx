@@ -4,8 +4,9 @@ import { adminCourseCopy } from "./course-copy";
 import { courseCopy } from "../students/course-copy";
 import { AdminCourseEditor } from "./course-editor";
 import { AdminCourseVideos } from "./course-videos";
+import { Icon } from "../../components/icon";
 
-export function AdminCourseButton({ course, locale }) {
+export function AdminCourseButton({ course, locale, iconOnly = false }) {
   const copy = adminCourseCopy[locale];
   const labels = courseCopy[locale];
   const { open, close } = useDetailsDialog();
@@ -13,6 +14,11 @@ export function AdminCourseButton({ course, locale }) {
   return (
     <Button
       variant="soft"
+      className={
+        iconOnly ? (course ? "academy-admin__course-edit" : "academy-admin__course-add") : undefined
+      }
+      aria-label={iconOnly ? title : undefined}
+      title={iconOnly ? title : undefined}
       aria-haspopup="dialog"
       onClick={() =>
         open({
@@ -32,7 +38,7 @@ export function AdminCourseButton({ course, locale }) {
         })
       }
     >
-      {title}
+      {iconOnly ? <Icon name={course ? "pencil" : "plus"} /> : title}
     </Button>
   );
 }

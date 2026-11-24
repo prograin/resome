@@ -1,4 +1,14 @@
-import { bigint, boolean, integer, pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
+import {
+  bigint,
+  boolean,
+  check,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  index,
+} from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 const date = (name) => timestamp(name, { withTimezone: true });
 const timestamps = () => ({
@@ -6,23 +16,35 @@ const timestamps = () => ({
   updatedAt: date("updatedAt").notNull().defaultNow(),
 });
 
-export const users = pgTable("student_user", {
-  id: text().primaryKey(),
-  name: text().notNull(),
-  email: text().notNull().unique(),
-  emailVerified: boolean().notNull().default(false),
-  image: text(),
-  ...timestamps(),
-  username: text().unique(),
-  displayUsername: text(),
-  academyActive: boolean("academy_active").notNull().default(true),
-  firstName: text().notNull().default(""),
-  lastName: text().notNull().default(""),
-  github: text().notNull().default(""),
-  telegram: text().notNull().default(""),
-  linkedin: text().notNull().default(""),
-  website: text().notNull().default(""),
-});
+export const users = pgTable(
+  "student_user",
+  {
+    id: text().primaryKey(),
+    name: text().notNull(),
+    email: text().notNull().unique(),
+    emailVerified: boolean().notNull().default(false),
+    image: text(),
+    ...timestamps(),
+    username: text().unique(),
+    displayUsername: text(),
+    academyActive: boolean("academy_active").notNull().default(true),
+    academyBanned: boolean("academy_banned").notNull().default(false),
+    academyInactiveReason: text("academy_inactive_reason"),
+    academyInactiveAt: date("academy_inactive_at"),
+    firstName: text().notNull().default(""),
+    lastName: text().notNull().default(""),
+    github: text().notNull().default(""),
+    telegram: text().notNull().default(""),
+    linkedin: text().notNull().default(""),
+    website: text().notNull().default(""),
+  },
+  (table) => [
+    check(
+      "student_user_account_status_check",
+      sql`not (${table.academyActive} and ${table.academyBanned})`,
+    ),
+  ],
+);
 
 export const sessions = pgTable(
   "student_session",

@@ -1,8 +1,16 @@
 import { awards, courses } from "./schema/learning.js";
-import { and, inArray } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
+import { users } from "./schema/auth.js";
+import { canRecordStudentScores } from "../student-account.js";
 import { createStudentNotification, createCourseNotifications } from "../notifications/create.js";
 
 export async function addStudentAward(tx, values, courseTitle = null) {
+  const [student] = await tx
+    .select({ academyActive: users.academyActive, academyBanned: users.academyBanned })
+    .from(users)
+    .where(eq(users.id, values.studentId))
+    .for("update");
+  if (!student || !canRecordStudentScores(student)) return null;
   const [award] = await tx.insert(awards).values(values).returning({ id: awards.id });
   await createStudentNotification(tx, {
     studentId: values.studentId,

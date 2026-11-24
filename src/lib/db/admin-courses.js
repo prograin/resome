@@ -4,6 +4,8 @@ import { eligibleStudent, courseRankings } from "./rankings.js";
 import { attachDefinitionVideos } from "./admin-course-content.js";
 import { addStudentAward } from "./student-records.js";
 import { enrollCourseStudents } from "./course-enrollments.js";
+import { rankedStudent } from "./ranking-filters.js";
+import { hasCourseScoreToday } from "./course-score-today.js";
 
 export async function readAdminCourses(db, admin) {
   const definitions = await db
@@ -42,9 +44,12 @@ export async function readAdminCourse(db, admin, definitionId, gradesOnly = fals
       firstName: users.firstName,
       lastName: users.lastName,
       username: users.username,
+      academyActive: users.academyActive,
+      academyBanned: users.academyBanned,
       status: courses.status,
       average: totals.average,
       rank: ranks.rank,
+      scoredToday: hasCourseScoreToday(db),
     })
     .from(courses)
     .innerJoin(users, and(eq(users.id, courses.studentId), eligibleStudent(admin)))
@@ -53,7 +58,7 @@ export async function readAdminCourse(db, admin, definitionId, gradesOnly = fals
     .where(
       and(
         eq(courses.definitionId, definitionId),
-        gradesOnly ? eq(courses.status, "active") : undefined,
+        gradesOnly ? and(eq(courses.status, "active"), rankedStudent(admin)) : undefined,
       ),
     )
     .orderBy(courses.status, asc(users.name), courses.id);
@@ -98,15 +103,25 @@ export function writeAdminCourse(db, admin, definitionId, operation, assignmentI
       .select({ id: courses.id, studentId: courses.studentId, status: courses.status })
       .from(courses)
       .innerJoin(users, and(eq(users.id, courses.studentId), eligibleStudent(admin)))
-      .where(and(eq(courses.id, assignmentId), eq(courses.definitionId, definitionId)))
-      .for("update", { of: courses });
+      .where(and(eq(courses.id, assignmentId), eq(courses.definitionId, definitionId)));
     if (!assignment) return "invalid";
+    await tx
+      .select({ id: users.id })
+      .from(users)
+      .where(eq(users.id, assignment.studentId))
+      .for("update");
+    const [current] = await tx
+      .select({ status: courses.status })
+      .from(courses)
+      .where(eq(courses.id, assignment.id))
+      .for("update");
+    if (!current) return "invalid";
     if (operation === "status") {
       await tx.update(courses).set({ status: values.status }).where(eq(courses.id, assignment.id));
       return "saved";
     }
-    if (operation !== "grade" || assignment.status !== "active") return "inactiveEnrollment";
-    await addStudentAward(
+    if (operation !== "grade" || current.status !== "active") return "inactiveEnrollment";
+    const award = await addStudentAward(
       tx,
       {
         studentId: assignment.studentId,
@@ -117,6 +132,6 @@ export function writeAdminCourse(db, admin, definitionId, operation, assignmentI
       },
       definition.title,
     );
-    return "saved";
+    return award ? "saved" : "scoringDisabled";
   });
 }

@@ -1,11 +1,8 @@
 import { Button } from "../../components/ui/button";
 import { SiteLink } from "../../components/site-link";
 import { dashboardHref } from "./api";
-import { studentAuth } from "../../lib/student-auth/client";
 
 export function NotificationList({ notifications, copy, locale, preview = false, onNavigate }) {
-  const { data } = studentAuth.useSession();
-  const statisticsVisible = data?.user?.academyActive !== false;
   const number = new Intl.NumberFormat(locale);
   const items = preview ? notifications.items.slice(0, 5) : notifications.items;
   return (
@@ -33,7 +30,7 @@ export function NotificationList({ notifications, copy, locale, preview = false,
                     aria-label={copy.unread}
                   />
                 )}
-                {statisticsVisible && item.points !== null && (
+                {item.points !== null && (
                   <span>
                     {number.format(item.points)} {copy.points}
                   </span>

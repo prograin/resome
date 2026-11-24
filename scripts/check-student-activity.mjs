@@ -11,6 +11,8 @@ import { studentRankings } from "../src/lib/db/rankings.js";
 import { legacyUsers, migrateBefore } from "./lib/previous-schema.mjs";
 import { migrateStudentDatabase } from "../src/lib/db/migrate.js";
 import { createDatabase } from "../src/lib/db/client.js";
+import { selectAccountStatus } from "./students/account-status.mjs";
+import { accountCopy } from "../src/features/students/account-copy.js";
 
 const database = await createTestDatabase("student_activity");
 let fixture, studentContext;
@@ -51,12 +53,7 @@ try {
   await studentPage.locator(".student-chart__metrics").waitFor();
   await login(context, admin);
   await page.goto(origin + studentPaths.dashboard + "?student=" + studentId);
-  const capture = page.waitForRequest(
-    (request) => request.method() === "POST" && Boolean(request.headers()["next-action"]),
-  );
-  await page.getByRole("button", { name: "غیرفعال‌کردن شاگرد", exact: true }).click();
-  const request = await capture;
-  await page.getByRole("button", { name: "فعال‌کردن شاگرد", exact: true }).waitFor();
+  const request = await selectAccountStatus(page, "inactive");
   await page.screenshot({ path: ".backup/admin-inactive-student.png" });
   assert.equal(
     (await db.select().from(users).where(eq(users.id, studentId)))[0].academyActive,
@@ -76,7 +73,8 @@ try {
   await studentPage.waitForURL(origin + studentPaths.courses);
   await studentPage.locator(".student-course").first().waitFor();
   await studentPage.locator(`#student-dashboard-nav a[href="${studentPaths.dashboard}"]`).click();
-  const notice = "نمایش آمار برای حساب شما غیرفعال است.";
+  await studentPage.locator('[data-page="academy-dashboard"] .student-dashboard__main').waitFor();
+  const notice = accountCopy.fa.inactiveDescription;
   await studentPage.getByText(notice, { exact: true }).waitFor();
   await studentPage.screenshot({ path: ".backup/student-inactive-dashboard.png" });
   assert.equal(
@@ -86,11 +84,7 @@ try {
     0,
   );
   assert.equal(
-    await studentPage
-      .locator(
-        `#student-dashboard-nav a[href="${studentPaths.history}"], #student-dashboard-nav a[href="${studentPaths.chart}"]`,
-      )
-      .count(),
+    await studentPage.locator(`#student-dashboard-nav a[href="${studentPaths.chart}"]`).count(),
     0,
   );
   for (const width of [390, 1440]) {
@@ -108,13 +102,22 @@ try {
       [],
     );
   }
-  for (const path of [studentPaths.chart, studentPaths.history]) {
+  for (const path of [studentPaths.chart]) {
     const response = await studentPage.goto(origin + path);
     assert.equal(response.status(), 200);
     await studentPage.getByText(notice, { exact: true }).waitFor();
     assert.ok(!(await response.text()).includes("Private activity score note"));
     assert.equal(await studentPage.locator(".student-chart, .student-history").count(), 0);
   }
+  await studentPage.goto(origin + studentPaths.history);
+  await studentPage.locator(".student-history").waitFor();
+  assert.ok((await studentPage.locator(".student-history").innerText()).includes("۵"));
+  await studentPage.getByRole("button", { name: "نمایش توضیحات", exact: true }).first().click();
+  await studentPage
+    .getByRole("dialog")
+    .getByText("Private activity score note", { exact: true })
+    .waitFor();
+  await studentPage.keyboard.press("Escape");
   await studentPage.goto(origin + studentPaths.goals);
   await studentPage.getByRole("button", { name: "افزودن هدف", exact: true }).click();
   const dialog = studentPage.getByRole("dialog");
@@ -142,14 +145,13 @@ try {
   const inbox = await (
     await studentContext.request.get(origin + "/api/students/notifications/")
   ).json();
-  assert.ok(inbox.items.every((item) => item.points === null));
+  assert.ok(inbox.items.some((item) => item.points === 5));
   await login(studentContext, username);
   for (const path of [studentPaths.links, studentPaths.password]) {
     await studentPage.goto(origin + path);
     await studentPage.locator(".student-dashboard__main").waitFor();
   }
-  await page.getByRole("button", { name: "فعال‌کردن شاگرد", exact: true }).click();
-  await page.getByRole("button", { name: "غیرفعال‌کردن شاگرد", exact: true }).waitFor();
+  await selectAccountStatus(page, "active");
   assert.equal(
     (await studentRankings(db, admin)).find((row) => row.studentId === studentId).overallRank,
     1,
@@ -158,7 +160,7 @@ try {
   await studentPage.locator(".student-chart__metrics").waitFor();
   await studentPage.screenshot({ path: ".backup/student-reactivated.png" });
   console.log(
-    "PASS global activity: admin-only toggle, course/overall ranks, hidden statistics, retained accounts/resources/goals, redacted notifications and reversible activation",
+    "PASS inactive accounts: retained history/resources/features, no new scores/snapshots/ranks, clear notices and reversible activation",
   );
 } finally {
   await studentContext?.close();

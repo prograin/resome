@@ -31,13 +31,13 @@ export async function checkBatchEnrollmentUI(fixture, db, context, locale, engin
   const search = popup.getByRole("searchbox");
   await search.fill("علي");
   const alice = popup.locator('[data-select-value="batch_alice"]');
-  await alice.check();
+  await alice.click();
   await search.fill("batch_bob");
   const bob = popup.locator('[data-select-value="batch_bob"]');
-  await bob.check();
+  await bob.click();
   await bob.focus();
   await bob.press("Space");
-  assert.equal(await bob.isChecked(), false);
+  assert.equal(await bob.getAttribute("aria-pressed"), "false");
   await bob.press("Space");
   assert.deepEqual(JSON.parse(await form.locator('[name="studentIds"]').inputValue()), [
     "batch_alice",
@@ -46,6 +46,25 @@ export async function checkBatchEnrollmentUI(fixture, db, context, locale, engin
   await search.fill("not-present");
   await popup.getByText(copy.noMatches, { exact: true }).waitFor();
   await search.fill("");
+  assert.equal(await popup.getByRole("button", { name: /^(تأیید انتخاب|Done)$/ }).count(), 0);
+  const identity = popup.locator(".ui-multi-select__option").filter({ hasText: "batch_alice" });
+  const usernameStyle = await identity.locator(".ui-multi-select__username").evaluate((node) => ({
+    direction: getComputedStyle(node).direction,
+    align: getComputedStyle(node).textAlign,
+  }));
+  assert.deepEqual(usernameStyle, { direction: "ltr", align: locale === "fa" ? "left" : "right" });
+  assert.equal(await popup.getByRole("checkbox").count(), 0);
+  assert.equal(await alice.getAttribute("aria-pressed"), "true");
+  const nameBox = await identity.locator("strong").boundingBox();
+  const usernameBox = await identity.locator(".ui-multi-select__username").boundingBox();
+  assert.ok(Math.abs(nameBox.y + nameBox.height / 2 - usernameBox.y - usernameBox.height / 2) < 2);
+  if (locale === "fa") {
+    assert.ok(usernameBox.x + usernameBox.width <= nameBox.x);
+    assert.equal(
+      await identity.locator("strong").evaluate((node) => getComputedStyle(node).direction),
+      "rtl",
+    );
+  }
   const accessibility = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
   assert.deepEqual(
     accessibility.violations.map((issue) => ({
@@ -55,7 +74,6 @@ export async function checkBatchEnrollmentUI(fixture, db, context, locale, engin
     [],
   );
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-  await page.screenshot({ path: `.backup/batch-enrollment-${engine}.png` });
   await search.press("Escape");
   await popup.waitFor({ state: "hidden" });
   assert.equal(await dialog.isVisible(), true, "Escape closes only the nested dropdown");

@@ -11,7 +11,7 @@ import { ProgressCourses } from "./progress-courses";
 import { ProgressChart } from "./progress-chart";
 import { ProgressHistory } from "./progress-history";
 import { ProgressOverview } from "./progress-overview";
-import { StatisticsUnavailable } from "./statistics-unavailable";
+import { AccountNotice } from "./account-notice";
 
 export function DashboardContent({
   userId,
@@ -28,8 +28,7 @@ export function DashboardContent({
   locale,
   statisticsVisible = true,
 }) {
-  if (!statisticsVisible && ["chart", "history"].includes(view))
-    return <StatisticsUnavailable locale={locale} />;
+  if (!statisticsVisible && view === "chart") return <AccountNotice locale={locale} />;
   if (view === "notifications") return <NotificationInbox userId={userId} locale={locale} />;
   if (view === "links") return <StudentLinks initialPage={studentsLinks} locale={locale} />;
   if (view === "admin-courses")

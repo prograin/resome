@@ -43,7 +43,7 @@ export function DashboardSidebar({
       : []),
     ...(!management
       ? studentNavigation(copy, null, locale)
-          .filter(([, , , target]) => statisticsVisible || !["chart", "history"].includes(target))
+          .filter(([, , , target]) => statisticsVisible || target !== "chart")
           .map(([href, icon, label, target]) => [href, icon, label, view === target])
       : []),
     [studentPaths.notifications, "bell", notificationCopy[locale].title, view === "notifications"],

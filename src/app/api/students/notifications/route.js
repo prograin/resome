@@ -22,8 +22,6 @@ export async function GET(request) {
   const parsed = parseQuery(notificationQueryInput, new URL(request.url).searchParams);
   if (!parsed) return studentApiJson({ error: "Invalid cursor" }, 400);
   const result = await readStudentNotifications(access.db, access.user.id, parsed.before);
-  if (access.user.academyActive === false)
-    result.items = result.items.map((item) => ({ ...item, points: null }));
   return studentApiJson(result);
 }
 

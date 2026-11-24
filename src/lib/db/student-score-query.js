@@ -1,10 +1,11 @@
-import { and, avg, count, eq, lte, max, sql } from "drizzle-orm";
-import { awards, courses, users } from "./schema/index.js";
+import { and, avg, count, eq, inArray, lte, max, sql } from "drizzle-orm";
+import { awards, courses, users, courseDefinitions } from "./schema/index.js";
 import { rankedStudent } from "./ranking-filters.js";
-import { inactivityScore } from "./inactivity-score.js";
+import { courseDifficulty } from "./course-difficulty.js";
 import { rankingPolicy } from "../scoring/policy.js";
 import { scoreTime } from "./score-time.js";
 export function studentScoreQuery(db, admin, now) {
+  const eligiblePoints = sql`case when ${inArray(courseDifficulty(), rankingPolicy.overallLevels)} then ${awards.points} end`;
   const courseCounts = db.$with("course_counts").as(
     db
       .select({
@@ -20,8 +21,9 @@ export function studentScoreQuery(db, admin, now) {
       .select({
         studentId: users.id,
         rawAverage: avg(awards.points).as("raw_average"),
+        overallAverage: avg(eligiblePoints).as("overall_average"),
+        qualifyingAssessments: count(eligiblePoints).as("qualifying_assessments"),
         assessments: count(awards.id).as("assessments"),
-        lastAssessment: max(awards.recordedAt).as("last_assessment"),
         courseCount: sql`coalesce(${courseCounts.courseCount}, 0)`
           .mapWith(Number)
           .as("course_count"),
@@ -29,6 +31,8 @@ export function studentScoreQuery(db, admin, now) {
       })
       .from(users)
       .leftJoin(awards, and(eq(awards.studentId, users.id), lte(awards.recordedAt, scoreTime(now))))
+      .leftJoin(courses, and(eq(courses.id, awards.courseId), eq(courses.studentId, users.id)))
+      .leftJoin(courseDefinitions, eq(courseDefinitions.id, courses.definitionId))
       .leftJoin(courseCounts, eq(courseCounts.studentId, users.id))
       .where(rankedStudent(admin))
       .groupBy(users.id, courseCounts.courseCount, courseCounts.courseId),
@@ -40,11 +44,14 @@ export function studentScoreQuery(db, admin, now) {
         assessments: raw.assessments,
         courseCount: raw.courseCount,
         courseId: raw.courseId,
-        ...inactivityScore(raw.rawAverage, raw.lastAssessment, now),
-        overallEligible:
-          sql`${raw.courseCount} >= ${rankingPolicy.minimumCourses} and ${raw.assessments} > 0`
-            .mapWith(Boolean)
-            .as("overall_eligible"),
+        rawAverage: raw.rawAverage,
+        average: sql`${raw.rawAverage}`.mapWith(String).as("adjusted_average"),
+        overallAverage: raw.overallAverage,
+        inactivityPenalty: sql`0::numeric`.mapWith(String).as("inactivity_penalty"),
+        inactiveMonths: sql`0::integer`.mapWith(Number).as("inactive_months"),
+        overallEligible: sql`${raw.qualifyingAssessments} > 0`
+          .mapWith(Boolean)
+          .as("overall_eligible"),
       })
       .from(raw),
   );
@@ -52,7 +59,9 @@ export function studentScoreQuery(db, admin, now) {
     db
       .select({
         studentId: scores.studentId,
-        rank: sql`rank() over (order by ${scores.average} desc)`.mapWith(Number).as("overall_rank"),
+        rank: sql`row_number() over (order by ${scores.overallAverage} desc, ${scores.studentId} asc)`
+          .mapWith(Number)
+          .as("overall_rank"),
       })
       .from(scores)
       .where(eq(scores.overallEligible, true)),

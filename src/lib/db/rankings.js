@@ -13,6 +13,7 @@ export function studentRankings(db, admin, now) {
     .select({
       studentId: scores.studentId,
       average: scores.average,
+      overallAverage: scores.overallAverage,
       rawAverage: scores.rawAverage,
       inactivityPenalty: scores.inactivityPenalty,
       inactiveMonths: scores.inactiveMonths,

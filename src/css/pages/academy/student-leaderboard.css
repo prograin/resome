@@ -39,8 +39,39 @@
   overflow-x: auto;
 }
 
+.student-weekly-leaders__tabs,
+.student-weekly-leaders__panel[data-state="active"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-space-3);
+  min-height: 0;
+  flex: 1;
+}
+
+.student-weekly-leaders__tab-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ui-space-2);
+  flex: none;
+}
+
+.student-weekly-leaders__tab-list .ui-button {
+  padding-inline: var(--ui-space-2);
+  font-size: var(--ui-font-caption);
+}
+
+.student-weekly-leaders__tab-list [data-state="active"] {
+  color: var(--ui-accent);
+  background: color-mix(in srgb, var(--academy-surface), var(--ui-accent) 12%);
+  box-shadow: var(--academy-shadow-inset);
+}
+
 .student-weekly-leaders tbody tr:not(:last-child) > td {
   border-block-end: 1px solid var(--ui-line);
+}
+
+.student-weekly-leaders .student-table [aria-sort] .student-table__sort {
+  color: color-mix(in srgb, var(--ui-accent) 70%, var(--ui-text));
 }
 
 .student-weekly-leaders__scroll:focus-visible {
