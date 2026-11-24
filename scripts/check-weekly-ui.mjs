@@ -7,6 +7,46 @@ import { seedWeeklyChanges } from "./students/weekly-fixture.mjs";
 import { checkAcademyDepth } from "./lib/academy-depth.mjs";
 import { weeklyStats } from "../src/lib/db/schema/index.js";
 
+async function checkLeaderboardLayout(page) {
+  const card = page.locator(".student-weekly-leaders");
+  const issues = await card.evaluate((node) => {
+    const bounds = node.getBoundingClientRect();
+    return [
+      ...node.querySelectorAll(
+        ".student-weekly-leaders__tabs, .student-weekly-leaders__panel[data-state='active'], .student-weekly-leaders__scroll",
+      ),
+    ]
+      .filter((child) => {
+        const box = child.getBoundingClientRect();
+        return (
+          box.left < bounds.left - 1 ||
+          box.right > bounds.right + 1 ||
+          box.bottom > bounds.bottom + 1
+        );
+      })
+      .map((child) => {
+        const box = child.getBoundingClientRect();
+        return {
+          className: child.className,
+          viewport: innerWidth,
+          left: box.left,
+          right: box.right,
+          bottom: box.bottom,
+          card: { left: bounds.left, right: bounds.right, bottom: bounds.bottom },
+        };
+      });
+  });
+  assert.deepEqual(issues, [], "leaderboard controls and scroll area must remain inside the card");
+  await page.waitForFunction(() => {
+    const node = document.querySelector(".student-weekly-leaders__scroll");
+    if (!node) return true;
+    return (
+      node.classList.contains("student-weekly-leaders__scroll--more") ===
+      node.scrollWidth - node.clientWidth - Math.abs(node.scrollLeft) > 1
+    );
+  });
+}
+
 const database = await createTestDatabase("weekly_ui");
 let fixture;
 try {
@@ -30,7 +70,7 @@ try {
       });
       try {
         const page = await context.newPage();
-        for (const width of [360, 1440]) {
+        for (const width of [360, 768, 1024, 1440]) {
           await page.setViewportSize({ width, height: 960 });
           await page.goto(fixture.dashboard);
           await page.waitForLoadState("networkidle");
@@ -110,6 +150,7 @@ try {
             "nowrap",
           );
           const leaders = page.locator(".student-weekly-leaders");
+          await checkLeaderboardLayout(page);
           const courseTab = leaders.getByRole("tab", {
             name: locale === "fa" ? "دورهٔ فعلی" : "Current course",
             exact: true,
@@ -118,9 +159,10 @@ try {
           assert.equal(await courseTab.getAttribute("aria-selected"), "true");
           assert.equal(await leaders.getByRole("tabpanel").count(), 1);
           assert.equal(await leaders.locator("tbody tr:visible").count(), 4);
+          await checkLeaderboardLayout(page);
           await leaders
             .getByRole("tab", {
-              name: locale === "fa" ? "۱۰ نفر برتر کلی" : "Overall top 10",
+              name: locale === "fa" ? "کل" : "Overall",
               exact: true,
             })
             .click();

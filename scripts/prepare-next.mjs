@@ -30,6 +30,7 @@ async function compileStyles(stylesheet, content, version) {
     content,
     css: [{ raw: stylesheet }],
     keyframes: true,
+    dynamicAttributes: ["data-state"],
     defaultExtractor: (value) => value.match(/[\w\-/:.\[\]%#()]+/g) || [],
     safelist: {
       standard: [/\[/, "dark", "rtl", "hidden", "flex", "is-bg-ready", "site-update-open"],

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { weeklyChange, weeklyCopy } from "./weekly-copy";
 import { WeeklyChange } from "./weekly-change";
 import { SortableTableHeader, useTableSorting } from "../../components/ui/sortable-table";
@@ -6,7 +6,23 @@ import { SortableTableHeader, useTableSorting } from "../../components/ui/sortab
 const podiumMedals = { 1: "🥇", 2: "🥈", 3: "🥉" };
 
 export function LeaderboardTable({ leaders = [], locale }) {
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
+  const scroll = useRef(null);
+  useEffect(() => {
+    const node = scroll.current;
+    if (!node) return;
+    const update = () =>
+      setHasMore(node.scrollWidth - node.clientWidth - Math.abs(node.scrollLeft) > 1);
+    const observer = new ResizeObserver(update);
+    observer.observe(node);
+    observer.observe(node.firstElementChild);
+    node.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => {
+      observer.disconnect();
+      node.removeEventListener("scroll", update);
+    };
+  }, [leaders.length]);
   const copy = weeklyCopy[locale];
   const numbers = new Intl.NumberFormat(locale, { maximumFractionDigits: 2 });
   const columns = [
@@ -34,13 +50,8 @@ export function LeaderboardTable({ leaders = [], locale }) {
     <>
       {leaders.length ? (
         <div
+          ref={scroll}
           className={`student-weekly-leaders__scroll${hasMore ? " student-weekly-leaders__scroll--more" : ""}`}
-          onScroll={({ currentTarget }) =>
-            setHasMore(
-              Math.abs(currentTarget.scrollLeft) + currentTarget.clientWidth <
-                currentTarget.scrollWidth - 1,
-            )
-          }
           role="region"
           aria-label={copy.leaders}
           tabIndex={0}

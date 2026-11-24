@@ -36,6 +36,8 @@
 }
 
 .student-weekly-leaders__scroll {
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
 }
 
@@ -45,6 +47,8 @@
   flex-direction: column;
   gap: var(--ui-space-3);
   min-height: 0;
+  min-width: 0;
+  max-width: 100%;
   flex: 1;
 }
 
