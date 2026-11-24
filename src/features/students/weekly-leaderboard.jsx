@@ -17,13 +17,15 @@ export function WeeklyLeaderboard({ weekly, locale }) {
         dir={locale === "fa" ? "rtl" : "ltr"}
         className="student-weekly-leaders__tabs"
       >
-        <Tabs.List className="student-weekly-leaders__tab-list" aria-label={copy.leaders}>
-          {tabs.map(({ key, label }) => (
-            <Tabs.Trigger key={key} value={key} asChild>
-              <Button variant="soft">{label}</Button>
-            </Tabs.Trigger>
-          ))}
-        </Tabs.List>
+        <div className="academy-neo student-weekly-leaders__tab-bar">
+          <Tabs.List className="student-weekly-leaders__tab-list" aria-label={copy.leaders}>
+            {tabs.map(({ key, label }) => (
+              <Tabs.Trigger key={key} value={key} asChild>
+                <Button variant="soft">{label}</Button>
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+        </div>
         {tabs.map(({ key, rows }) => (
           <Tabs.Content key={key} value={key} className="student-weekly-leaders__panel">
             <LeaderboardTable leaders={rows} locale={locale} />

@@ -52,11 +52,19 @@
   flex: 1;
 }
 
+.student-weekly-leaders__tab-bar {
+  flex: none;
+  min-width: 0;
+  padding: var(--ui-space-1);
+  border-radius: var(--ui-control-radius);
+  background: var(--academy-surface);
+  box-shadow: var(--academy-neo-shadow, var(--academy-shadow-inset));
+}
+
 .student-weekly-leaders__tab-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--ui-space-2);
-  flex: none;
+  gap: var(--ui-space-1);
 }
 
 .student-weekly-leaders__tab-list .ui-button {
@@ -64,10 +72,16 @@
   font-size: var(--ui-font-caption);
 }
 
-.student-weekly-leaders__tab-list [data-state="active"] {
-  color: var(--ui-accent);
+.student-weekly-leaders__tab-list .ui-button[data-state="inactive"] {
+  background: transparent;
+  box-shadow: none;
+}
+
+.student-weekly-leaders__tab-list .ui-button[data-state="active"] {
+  color: color-mix(in srgb, var(--ui-accent) 70%, var(--ui-text));
   background: color-mix(in srgb, var(--academy-surface), var(--ui-accent) 12%);
-  box-shadow: var(--academy-shadow-inset);
+  box-shadow: var(--academy-neo-shadow, var(--academy-shadow-inset));
+  font-weight: var(--ui-weight-heading);
 }
 
 .student-weekly-leaders tbody tr:not(:last-child) > td {
